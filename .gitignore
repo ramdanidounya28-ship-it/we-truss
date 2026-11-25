@@ -1,0 +1,9 @@
+# Local tools used to preview the site on one laptop (not part of the website)
+.claude/
+
+# Old manual-upload copy for Netlify Drop; Netlify now publishes straight from GitHub
+truss-site/
+
+# Windows clutter
+Thumbs.db
+desktop.ini

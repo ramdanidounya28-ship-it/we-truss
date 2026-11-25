@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TRUSS — style options</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#2a2a2a;font-family:Inter,system-ui,sans-serif;color:#fff;padding:24px}
+.lbl{font:700 15px Inter;margin:28px 0 10px;color:#fff}.lbl span{color:#bbb;font-weight:500}
+.frame{width:100%;max-width:1200px;aspect-ratio:16/8;border-radius:14px;overflow:hidden;position:relative}
+.nav{position:absolute;top:0;left:0;right:0;display:flex;align-items:center;gap:26px;padding:22px 40px;font-size:14px;z-index:3}
+.nav .lg{font-weight:800;letter-spacing:.16em;font-size:17px;margin-right:auto}
+.nav .cta{padding:9px 18px;border-radius:999px;font-weight:600}
+/* A */
+.a{background:url(https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=1600&q=75) center/cover}
+.a::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,12,6,.92) 0%,rgba(20,12,6,.65) 45%,rgba(20,12,6,.15) 100%)}
+.a .nav{color:#f5ead9}.a .nav .cta{border:1px solid #f2a97e;color:#f2a97e}
+.a .tx{position:absolute;left:40px;top:120px;max-width:620px;z-index:2;color:#f5ead9}
+.a .eb{color:#f2a97e;font:700 12px Manrope;letter-spacing:.2em}
+.a h1{font:800 76px/1 Manrope;margin:16px 0 18px;letter-spacing:-.02em}
+.a p{font-size:18px;line-height:1.5;opacity:.85}
+.a .b1{display:inline-block;background:#f2a97e;color:#2a160a;padding:15px 26px;border-radius:12px;font-weight:700;margin-right:12px}
+.a .b2{display:inline-block;padding:15px 22px;font-weight:600}
+/* B */
+.b{background:#0f1b2c;color:#f3ecdf}
+.b .nav .cta{background:#d9a85b;color:#1d1406}
+.b .tx{position:absolute;left:40px;top:120px;width:48%}
+.b .eb{color:#d9a85b;font:600 12px Inter;letter-spacing:.2em}
+.b h1{font:400 84px/.98 'Instrument Serif',Georgia,serif;margin:16px 0 18px}.b h1 i{color:#d9a85b}
+.b p{font-size:18px;line-height:1.5;color:#c9c3b8}
+.b .b1{display:inline-block;background:#d9a85b;color:#1d1406;padding:15px 26px;border-radius:999px;font-weight:700;margin-right:12px}
+.b .b2{display:inline-block;padding:15px 22px;border:1px solid #3b4a61;border-radius:999px}
+.b .ph{position:absolute;right:40px;top:96px;width:40%;height:74%;border-radius:22px;background:url(https://images.unsplash.com/photo-1552422535-c45813c61732?w=1000&q=75) center/cover}
+.b .chip{position:absolute;right:300px;bottom:44px;background:#16263c;border:1px solid #2c3d57;border-radius:16px;padding:14px 18px;font-size:14px;z-index:2}
+.b .chip b{display:block;color:#d9a85b;font-size:12px;letter-spacing:.12em;margin-bottom:4px}
+/* C */
+.c{background:#17302a;color:#f4efe4}
+.c .nav .cta{background:#f4efe4;color:#17302a}
+.c .tx{position:absolute;left:40px;top:120px;width:46%}
+.c .eb{color:#f0b35e;font:700 12px Manrope;letter-spacing:.2em}
+.c h1{font:800 72px/1.02 Manrope;margin:16px 0 18px;letter-spacing:-.02em}.c h1 span{color:#f0b35e}
+.c p{font-size:18px;line-height:1.5;color:#cbd5cd}
+.c .b1{display:inline-block;background:#f0b35e;color:#2b1a04;padding:15px 26px;border-radius:12px;font-weight:700;margin-right:12px}
+.c .b2{display:inline-block;padding:15px 22px;border:1px solid #3c5a51;border-radius:12px}
+.c .col{position:absolute;right:40px;top:96px;width:44%;height:76%;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:12px}
+.c .col div{border-radius:18px;background-size:cover;background-position:center}
+.c .col div:first-child{grid-row:span 2}
+</style></head><body>
+
+<div class="lbl">A · Night show <span>— warm concert photo full-screen, dark overlay, bold sans, peach accent (closest to launchcrew.be)</span></div>
+<div class="frame a"><div class="nav"><span class="lg">TRUSS.</span><span>Home</span><span>For every stage</span><span>How it works</span><span>Profiles</span><span>Contact</span><span class="cta">Log in</span></div>
+<div class="tx"><div class="eb">EVENT COORDINATION · BELGIUM</div><h1>The structure behind every event.</h1><p>One shared space where promoters, artists and suppliers see exactly what concerns them.</p><br><span class="b1">Try the demo →</span><span class="b2">How it works</span></div></div>
+
+<div class="lbl">B · Concert hall <span>— midnight blue, elegant serif, warm gold accent, piano photo</span></div>
+<div class="frame b"><div class="nav"><span class="lg">TRUSS.</span><span>Home</span><span>For every stage</span><span>How it works</span><span>Profiles</span><span>Contact</span><span class="cta">Log in</span></div>
+<div class="tx"><div class="eb">EVENT COORDINATION · BELGIUM</div><h1>The <i>structure</i> behind every event.</h1><p>From a grand piano to a festival field: every detail agreed, confirmed and known by everyone who needs it.</p><br><span class="b1">Try the demo →</span><span class="b2">How it works</span></div>
+<div class="ph"></div><div class="chip"><b>RIDER CONFIRMED</b>Grand piano tuned at 15:00 ✓</div></div>
+
+<div class="lbl">C · Green room <span>— deep green, cream text, amber accent, photo collage of different artists</span></div>
+<div class="frame c"><div class="nav"><span class="lg">TRUSS.</span><span>Home</span><span>For every stage</span><span>How it works</span><span>Profiles</span><span>Contact</span><span class="cta">Log in</span></div>
+<div class="tx"><div class="eb">EVENT COORDINATION · BELGIUM</div><h1>The <span>structure</span> behind every event.</h1><p>Pianists, bands, DJs and festival crews — all on the same page, without the WhatsApp chaos.</p><br><span class="b1">Try the demo →</span><span class="b2">How it works</span></div>
+<div class="col"><div style="background-image:url(https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=800&q=75)"></div><div style="background-image:url(https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=75)"></div><div style="background-image:url(https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?w=800&q=75)"></div></div></div>
+</body></html>

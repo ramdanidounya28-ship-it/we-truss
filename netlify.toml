@@ -1,0 +1,3 @@
+# Netlify settings: no build step, publish the project folder as it is (index.html is the website)
+[build]
+  publish = "."

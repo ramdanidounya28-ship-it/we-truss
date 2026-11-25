@@ -614,6 +614,53 @@ svg,.ring,.truss-ic,.brand-big{filter:none !important}
 .brand-img{width:min(560px,86vw);height:auto;display:block;margin:0 auto}
 @media (max-width:420px){ .logo-img{height:20px} }
 
+/* ---------- Ratings ---------- */
+.stars{display:inline-flex;gap:2px;font-size:16px;line-height:1;color:var(--line2)}
+.stars i{font-style:normal}
+.stars i.on{color:var(--accent)}
+.stars.sm{font-size:13px}
+.score{display:inline-flex;align-items:center;gap:4px;margin-top:6px;font-size:12px;color:var(--muted)}
+.score b{color:var(--accent);font-family:var(--mono);font-weight:700}
+.score.none{color:var(--dim)}
+.rate-card{display:flex;flex-direction:column;gap:14px}
+.rate-hd{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:flex-end}
+.rate-hd .nm{font:800 20px/1.2 var(--head);margin-top:8px}
+.rate-hd .vn{color:var(--muted);font-size:13px}
+.rate-hd p{max-width:420px;margin:0;font-size:14px}
+.rate-list{display:flex;flex-direction:column}
+.rate-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 0;border-top:1px solid var(--line)}
+.rate-who{display:flex;flex-direction:column;min-width:0}
+.rate-who b{font-size:16px}
+.rate-who small{color:var(--muted);font-size:12.5px}
+.rate-row .done{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.rate-row .done small{color:var(--dim);font-size:12px}
+.rate-modal{border-color:var(--line2)}
+.stars-in{display:flex;align-items:center;gap:4px;margin:6px 0 18px;flex-wrap:wrap}
+.stars-in button{background:none;border:0;padding:0 2px;font-size:40px;line-height:1;color:var(--line2);transition:transform .1s,color .15s}
+.stars-in button:hover{transform:scale(1.12)}
+.stars-in button.on{color:var(--accent)}
+.stars-lbl{margin-left:10px;color:var(--muted);font-size:14px;font-weight:600}
+.tagopt input:checked + span{border-color:var(--accent);background:var(--accent-soft);color:var(--text);font-weight:600}
+.tagopt.neg input:checked + span{border-color:var(--red);background:rgba(240,132,115,.14)}
+.my-rating{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:start}
+.big-score{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 18px 8px 4px;border-right:1px solid var(--line)}
+.big-score .v{font-size:44px;font-weight:700;color:var(--accent);line-height:1}
+.big-score .stars{font-size:18px}
+.big-score small{color:var(--muted);font-size:12px}
+.reviews{display:flex;flex-direction:column;gap:12px;min-width:0}
+.review{padding-bottom:12px;border-bottom:1px solid var(--line)}
+.review:last-child{border-bottom:0;padding-bottom:0}
+.rv-hd{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12.5px;color:var(--dim)}
+.rv-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.rv-tags span{font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid var(--line2);color:var(--muted)}
+.rv-tags span.neg{border-color:rgba(240,132,115,.45);color:var(--red)}
+.review p{margin:6px 0 0;font-size:14px}
+@media (max-width:560px){
+  .my-rating{grid-template-columns:1fr}
+  .big-score{border-right:0;border-bottom:1px solid var(--line);padding:0 0 14px;flex-direction:row;justify-content:center;gap:12px}
+  .rate-row{flex-wrap:wrap}
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width:980px){
   .ev-cards{grid-template-columns:1fr 1fr}
@@ -831,6 +878,57 @@ const EVENTS = [
 ];
 
 /* ---------------- state ---------------- */
+/* ---------------- ratings ----------------
+   PAST_EVENTS: shows the promoter already played; after the show they rate each artist.
+   REVIEWS: every artist's ratings (from other promoters too, all fictional). The average
+   is shown to promoters on the artist's card and to the artist in their own view. */
+const PAST_EVENTS = [
+  {
+    id:'p1', name:'Nachtwerk Sessions #5', kind:'Club night & live acts', date:'2026-11-14',
+    venue:'Club Kelderman', city:'Antwerpen',
+    artists:[
+      { name:'NØRA',              sub:'Peak-time techno · hybrid live set', set:'01:00 – 03:00', rating:null },
+      { name:'Les Ombres Douces', sub:'Dream-pop duo · opening set',        set:'22:30 – 23:15', rating:null },
+      { name:'DJ BRIKKE',         sub:'Closing set',                        set:'03:00 – 06:00',
+        rating:{ stars:3, tags:['Great set','Arrived late'], note:'Strong closing set, but arrived 40 minutes late.', date:'Sun 15 Nov' } }
+    ]
+  }
+];
+
+const RATING_TAGS = { good:['On time','Great set','Easy to work with','Professional','Crowd loved it'], bad:['Arrived late','Rider issues','Hard to reach'] };
+
+const REVIEWS = {
+  'NØRA': [
+    { stars:5, by:'Kraak Collective · Gent',   date:'Sat 24 Oct', tags:['On time','Crowd loved it'], note:'Packed floor from the first track. Easy to work with.' },
+    { stars:5, by:'Vooruit Nights · Gent',     date:'Fri 9 Oct',  tags:['Professional'],            note:'Sent the rider early, everything ran smoothly.' },
+    { stars:4, by:'Lumière Club · Brussel',    date:'Sat 19 Sep', tags:['Great set'],               note:'Great set, soundcheck ran a bit long.' },
+    { stars:5, by:'Havenfest · Antwerpen',     date:'Sat 22 Aug', tags:['On time','Great set'],     note:'' }
+  ],
+  'KOBE b2b YASMINE': [
+    { stars:4, by:'Kraak Collective · Gent',   date:'Fri 30 Oct', tags:['Great set'], note:'' },
+    { stars:5, by:'Nachtwerk Collective',      date:'Sat 10 Oct', tags:['On time','Easy to work with'], note:'Perfect warm-up.' }
+  ],
+  'DJ BRIKKE': [
+    { stars:3, by:'Nachtwerk Collective',      date:'Sun 15 Nov', tags:['Great set','Arrived late'], note:'Strong closing set, but arrived 40 minutes late.' },
+    { stars:4, by:'Bunker 22 · Leuven',        date:'Sat 17 Oct', tags:['Crowd loved it'], note:'' },
+    { stars:5, by:'Lumière Club · Brussel',    date:'Sat 26 Sep', tags:['Great set','Professional'], note:'' }
+  ],
+  'Mira Solis': [
+    { stars:5, by:'Zaal Lumière · Brussel',    date:'Fri 6 Nov',  tags:['Professional','Crowd loved it'], note:'Sold out, flawless show.' },
+    { stars:5, by:'Leiewind Festival',         date:'Sat 27 Jun', tags:['On time'], note:'' }
+  ],
+  'Les Ombres Douces': [
+    { stars:4, by:'Café Charlatan · Gent',     date:'Thu 22 Oct', tags:['Easy to work with'], note:'' }
+  ],
+  'Bram & The Static': [
+    { stars:4, by:'Het Depot · Leuven',        date:'Sat 3 Oct',  tags:['Great set'], note:'' },
+    { stars:3, by:'Rock Zottegem',             date:'Sat 11 Jul', tags:['Rider issues'], note:'Backline list changed last minute.' }
+  ],
+  'Ines Moreau': [
+    { stars:5, by:'Ancienne Belgique · Club',  date:'Wed 21 Oct', tags:['Crowd loved it'], note:'Beautiful, intimate set.' }
+  ]
+};
+
 const S = { page:'landing', role:null, screen:'home', id:null };  // page: 'landing' (public website) or 'login' (role picker)
 
 /* ---------------- helpers ---------------- */
@@ -877,6 +975,20 @@ function agreed(p){
   return p.info || [];
 }
 function daysToGo(e){ const n = daysUntil(e.date); return n === 0 ? 'today' : n === 1 ? 'tomorrow' : `in ${n} days`; }
+
+/* ratings helpers */
+function artistScore(name){
+  const r = REVIEWS[name] || [];
+  if (!r.length) return { avg:0, count:0 };
+  return { avg: r.reduce((n,x) => n + x.stars, 0) / r.length, count: r.length };
+}
+function starsHtml(n, cls){ return `<span class="stars ${cls||''}" aria-label="${n} out of 5 stars">${[1,2,3,4,5].map(i => `<i class="${i <= Math.round(n) ? 'on' : ''}">★</i>`).join('')}</span>`; }
+function scoreChip(name){
+  const s = artistScore(name);
+  if (!s.count) return '<span class="score none">No ratings yet</span>';
+  return `<span class="score" title="Average of ${s.count} rating${s.count>1?'s':''} from promoters"><b>★ ${s.avg.toFixed(1)}</b> · ${s.count} review${s.count>1?'s':''}</span>`;
+}
+function toRate(){ return PAST_EVENTS.reduce((n,pe) => n + pe.artists.filter(a => !a.rating).length, 0); }
 
 /* ---------------- icons ---------------- */
 const I = {
@@ -1170,6 +1282,25 @@ function promoterHome(){
       }).join('')}
     </div>
 
+    ${PAST_EVENTS.map(pe => {
+      const left = pe.artists.filter(a => !a.rating).length;
+      return `<h2 class="sec">Rate your artists ${left ? `<span class="badge">${left}</span>` : ''}</h2>
+      <div class="card rate-card">
+        <div class="rate-hd">
+          <div><div class="tag">Past event · ${esc(pe.kind)}</div>
+            <div class="nm">${esc(pe.name)}</div>
+            <div class="vn">${fmtDate(pe.date)} · ${esc(pe.venue)}, ${esc(pe.city)}</div></div>
+          <p class="muted">How did it go? Your rating helps other promoters book reliable artists, and gives the artist feedback.</p>
+        </div>
+        <div class="rate-list">${pe.artists.map((a,i) => `<div class="rate-row">
+          <div class="rate-who"><b>${esc(a.name)}</b><small>${esc(a.sub)} · <span class="mono">${esc(a.set)}</span></small>${scoreChip(a.name)}</div>
+          ${a.rating
+            ? `<div class="done">${starsHtml(a.rating.stars)}<small>You rated · ${esc(a.rating.date)}</small></div>`
+            : `<button class="btn solid sm" data-act="rate" data-id="${pe.id}:${i}">★ Rate</button>`}
+        </div>`).join('')}</div>
+      </div>`;
+    }).join('')}
+
     <div class="two" style="margin-top:28px">
       <div class="card">
         <h3>Needs attention <span class="count pill ${all.length?'bad':'ok'}">${all.length} open</span></h3>
@@ -1222,7 +1353,7 @@ function partyCard(e,p){
   const cls = s.cls + (p.flash ? ' flash' : '');
   return `<div class="party ${cls}" id="pc-${p.id}">
     <div class="party-hd">
-      <div><div class="ptype">${TYPE_LABEL[p.type]}</div><div class="pname">${esc(p.name)}</div><div class="psub">${esc(p.sub)}</div></div>
+      <div><div class="ptype">${TYPE_LABEL[p.type]}</div><div class="pname">${esc(p.name)}</div><div class="psub">${esc(p.sub)}</div>${p.type==='artist' ? scoreChip(p.name) : ''}</div>
       <div class="pstat">${pill(p.status)}
         <select data-change="status" data-id="${p.id}" aria-label="Change status">
           <option value="">Set status…</option>
@@ -1312,12 +1443,26 @@ function promoterEvent(e){
 }
 
 /* ---------------- views: artist & supplier ---------------- */
+function myRating(name){
+  const s = artistScore(name), r = REVIEWS[name] || [];
+  if (!s.count) return '';
+  return `<h2 class="sec">Your rating from promoters</h2>
+  <div class="card my-rating">
+    <div class="big-score"><div class="v mono">${s.avg.toFixed(1)}</div>${starsHtml(s.avg)}<small>${s.count} review${s.count>1?'s':''}</small></div>
+    <div class="reviews">${r.slice(0,3).map(x => `<div class="review ${x.fresh?'fresh':''}">
+      <div class="rv-hd">${starsHtml(x.stars,'sm')}<span>${esc(x.by)} · ${esc(x.date)}</span>${x.fresh?'<span class="newtag">NEW</span>':''}</div>
+      ${x.tags.length ? `<div class="rv-tags">${x.tags.map(t => `<span class="${RATING_TAGS.bad.includes(t)?'neg':''}">${esc(t)}</span>`).join('')}</div>` : ''}
+      ${x.note ? `<p>${esc(x.note)}</p>` : ''}
+    </div>`).join('')}</div>
+  </div>`;
+}
 function myHome(role){
   const list = myParties(role), isA = role === 'artist';
   const c = isA ? 'var(--mag)' : 'var(--acid)';
   return `<main class="wrap" style="max-width:760px">
     <section class="hello"><h1>Hey ${USERS[role].first} — your upcoming ${isA?'gigs':'jobs'}</h1>
       <p>${esc(USERS[role].org)}</p></section>
+    ${isA ? myRating(USERS.artist.name) : ''}
     <h2 class="sec">My upcoming ${isA?'gigs':'jobs'} · ${list.length}</h2>
     <div class="mine">
       ${list.map(({e,p}) => {
@@ -1501,6 +1646,28 @@ function openProblemModal(pid){
 }
 function closeModal(){ $('#modal').innerHTML = ''; }
 
+function openRateModal(key){
+  const [peId, idx] = key.split(':'), pe = PAST_EVENTS.find(x => x.id === peId), a = pe.artists[+idx];
+  S.rateStars = 0;
+  const tag = (t, neg) => `<label class="opt tagopt ${neg?'neg':''}"><input type="checkbox" name="rtag" value="${esc(t)}"><span>${esc(t)}</span></label>`;
+  $('#modal').innerHTML = `<div class="modal-bg" data-act="close-modal">
+    <div class="modal rate-modal" role="dialog" aria-modal="true">
+      <h3>Rate ${esc(a.name)}</h3>
+      <p class="sub">${esc(pe.name)} · ${fmtDate(pe.date)} · set <span class="mono">${esc(a.set)}</span></p>
+      <div class="stars-in" role="radiogroup" aria-label="Stars">
+        ${[1,2,3,4,5].map(n => `<button type="button" data-act="rate-star" data-id="${n}" aria-label="${n} star${n>1?'s':''}">★</button>`).join('')}
+        <span class="stars-lbl" id="stars-lbl">Tap the stars</span>
+      </div>
+      <div class="lblrow"><span>What stood out? <small class="muted">(optional)</small></span></div>
+      <div class="opts">${RATING_TAGS.good.map(t => tag(t)).join('')}${RATING_TAGS.bad.map(t => tag(t, true)).join('')}</div>
+      <textarea id="rate-note" placeholder="A short note for other promoters (optional) — e.g. Great set, very professional."></textarea>
+      <div class="row">
+        <button class="btn ghost" data-act="close-modal">Cancel</button>
+        <button class="btn solid" data-act="submit-rate" data-id="${key}">Save rating</button>
+      </div>
+    </div></div>`;
+}
+
 /* ---------------- actions ---------------- */
 const ACTIONS = {
   login(id){ S.role = id; go('home'); },
@@ -1562,6 +1729,24 @@ const ACTIONS = {
     toast(`✓ Confirmed! ${USERS.promoter.first} (promoter) sees this right away.`, 'ok');
   },
   problem(pid){ openProblemModal(pid); },
+  rate(key){ openRateModal(key); },
+  'rate-star'(n){
+    S.rateStars = +n;
+    const words = ['', 'Poor', 'Below expectations', 'OK', 'Good', 'Excellent'];
+    document.querySelectorAll('.stars-in button').forEach((b,i) => b.classList.toggle('on', i < S.rateStars));
+    $('#stars-lbl').textContent = `${S.rateStars}/5 · ${words[S.rateStars]}`;
+  },
+  'submit-rate'(key){
+    if (!S.rateStars){ toast('★ Pick 1 to 5 stars first.', 'bad'); return; }
+    const [peId, idx] = key.split(':'), pe = PAST_EVENTS.find(x => x.id === peId), a = pe.artists[+idx];
+    const tags = [...document.querySelectorAll('input[name=rtag]:checked')].map(c => c.value);
+    const note = $('#rate-note').value.trim();
+    a.rating = { stars:S.rateStars, tags, note, date:'Today' };
+    (REVIEWS[a.name] = REVIEWS[a.name] || []).unshift({ stars:S.rateStars, by:'Nachtwerk Collective', date:'Today', tags, note, fresh:true });
+    closeModal(); render();
+    const s = artistScore(a.name);
+    toast(`★ Rating saved. ${esc(a.name)} now has ★ ${s.avg.toFixed(1)} from ${s.count} review${s.count>1?'s':''}.`, 'ok');
+  },
   'close-modal'(){ closeModal(); },
   'submit-problem'(pid){
     const { e, p } = findParty(pid);

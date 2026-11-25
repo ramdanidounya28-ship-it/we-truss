@@ -365,7 +365,6 @@ h2.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(
 .lp-hero .lead{font-size:clamp(16px,1.6vw,19px);color:var(--muted);margin:22px 0 28px;max-width:560px}
 .lp-ctas{display:flex;gap:12px;flex-wrap:wrap}
 .lp-big{padding:15px 24px;font-size:16px;border-radius:14px}
-.lp-for{margin-top:26px;font-size:12px;color:var(--dim);letter-spacing:.04em}
 .lp-truss{width:100%;height:auto;display:block}
 .lp-truss .frame path{stroke:#d5dbe6;stroke-width:2;fill:none;opacity:.85;filter:drop-shadow(0 0 3px rgba(255,255,255,.25))}
 .lp-truss .beam{transform-box:view-box;animation:sway 6s ease-in-out infinite alternate;transform:rotate(var(--r))}
@@ -539,7 +538,6 @@ svg,.ring,.truss-ic,.brand-big{filter:none !important}
 .lp-hero h1{font-size:clamp(46px,7vw,92px);line-height:1}
 .lp-hero .lead{color:#e8dac6}
 .lp-genres span{background:rgba(26,18,12,.55);border-color:rgba(246,236,220,.22);color:#efe2cf;backdrop-filter:blur(4px)}
-.lp-for{color:#c9b8a0}
 .lp-h2{font-size:clamp(36px,5vw,62px);line-height:1.02}
 .lp-strip{background:var(--bg)}
 .lp-strip-in b{color:var(--accent) !important}
@@ -1290,7 +1288,6 @@ const TR_ROWS = [
  'Ein gemeinsamer Raum pro Veranstaltung, in dem Veranstalter, Künstler und Dienstleister jeweils ihren eigenen Zugang haben — und genau sehen, was sie betrifft. Schluss mit verstreuten WhatsApps, E-Mails, DMs und Excel-Tabellen.'],
 ['Try the demo →','Probeer de demo →','Essayer la démo →','Demo testen →'],['Classical & piano','Klassiek & piano','Classique & piano','Klassik & Klavier'],['Bands','Bands','Groupes','Bands'],
 ['Singer-songwriters','Singer-songwriters','Auteurs-compositeurs','Singer-Songwriter'],['Theatre & comedy','Theater & comedy','Théâtre & humour','Theater & Comedy'],
-['For independent promoters of concerts, club nights and small festivals · 100–1,000 visitors','Voor onafhankelijke organisatoren van concerten, clubavonden en kleine festivals · 100–1.000 bezoekers','Pour les organisateurs indépendants de concerts, soirées club et petits festivals · 100–1 000 visiteurs','Für unabhängige Veranstalter von Konzerten, Clubnächten und kleinen Festivals · 100–1.000 Besucher'],
 ['shared space per event','gedeelde ruimte per evenement','espace partagé par événement','gemeinsamer Raum pro Veranstaltung'],['roles, each with their own view','rollen, elk met een eigen weergave','rôles, chacun avec sa propre vue','Rollen, jede mit eigener Ansicht'],
 ['changes lost in group chats','wijzigingen verloren in groepschats','changements perdus dans les groupes','Änderungen, die in Gruppenchats untergehen'],['1 tap','1 tik','1 clic','1 Tipp'],
 ['to confirm or report a problem','om te bevestigen of een probleem te melden','pour confirmer ou signaler un problème','zum Bestätigen oder Melden eines Problems'],
@@ -1380,7 +1377,7 @@ const TR_ROWS = [
 ['My rating','Mijn beoordeling','Ma note','Meine Bewertung'],['Set your free days','Stel je vrije dagen in','Indiquez vos jours libres','Freie Tage eintragen'],['All up to date','Alles up-to-date','Tout est à jour','Alles aktuell'],
 ['A student startup project from Belgium — built for the independent promoters, artists and crews behind every concert, club night, festival and stage.','Een studentenstartup uit België — gebouwd voor de onafhankelijke organisatoren, artiesten en crews achter elk concert, elke clubavond, elk festival en elk podium.','Un projet de startup étudiante belge — conçu pour les organisateurs, artistes et équipes indépendants derrière chaque concert, soirée club, festival et scène.','Ein studentisches Startup-Projekt aus Belgien — gebaut für die unabhängigen Veranstalter, Künstler und Crews hinter jedem Konzert, jeder Clubnacht, jedem Festival und jeder Bühne.'],
 ['Run your next','Organiseer je volgende','Organisez votre prochain','Organisiere deine nächste'],['show on we.TRUSS.','show op we.TRUSS.','spectacle sur we.TRUSS.','Show mit we.TRUSS.'],
-['We’re looking for Belgian promoters (100–1,000 visitors) to test we.TRUSS on a real event.','We zoeken Belgische organisatoren (100–1.000 bezoekers) om we.TRUSS te testen op een echt evenement.','Nous cherchons des organisateurs belges (100–1 000 visiteurs) pour tester we.TRUSS sur un vrai événement.','Wir suchen belgische Veranstalter (100–1.000 Besucher), die we.TRUSS bei einer echten Veranstaltung testen.'],
+['We’re looking for Belgian promoters to test we.TRUSS on a real event.','We zoeken Belgische organisatoren om we.TRUSS te testen op een echt evenement.','Nous cherchons des organisateurs belges pour tester we.TRUSS sur un vrai événement.','Wir suchen belgische Veranstalter, die we.TRUSS bei einer echten Veranstaltung testen.'],
 ['Your name','Je naam','Votre nom','Dein Name'],['Collective / event','Collectief / evenement','Collectif / événement','Kollektiv / Veranstaltung'],['Join the pilot','Doe mee aan de pilot','Rejoindre le pilote','Am Pilot teilnehmen'],
 ['Prototype — nothing is sent or stored.','Prototype — er wordt niets verzonden of opgeslagen.','Prototype — rien n’est envoyé ni enregistré.','Prototyp — nichts wird gesendet oder gespeichert.'],
 ['© 2026 we.TRUSS · student prototype · all data fictional','© 2026 we.TRUSS · studentenprototype · alle gegevens fictief','© 2026 we.TRUSS · prototype étudiant · données fictives','© 2026 we.TRUSS · Studentenprototyp · alle Daten fiktiv'],
@@ -1895,7 +1892,6 @@ function landingView(){
           <button class="btn ghost lp-big" data-act="nav" data-id="how">How it works</button>
         </div>
         <div class="lp-genres"><span>Classical &amp; piano</span><span>Bands</span><span>Singer-songwriters</span><span>Jazz</span><span>DJs</span><span>Hip-hop</span><span>Theatre &amp; comedy</span><span>Festivals</span></div>
-        <div class="lp-for">For independent promoters of concerts, club nights and small festivals · 100–1,000 visitors</div>
       </div>
     </div></section>
 
@@ -1987,7 +1983,7 @@ function landingView(){
       <div>
         <div class="lp-eyebrow">Contact</div>
         <h2 class="lp-h2">Run your next<br>show on we.TRUSS.</h2>
-        <p class="lp-intro">We’re looking for Belgian promoters (100–1,000 visitors) to test we.TRUSS on a real event.</p>
+        <p class="lp-intro">We’re looking for Belgian promoters to test we.TRUSS on a real event.</p>
       </div>
       <div class="lp-form reveal">
         <label for="wl-name">Your name</label><input id="wl-name" placeholder="e.g. Lotte">

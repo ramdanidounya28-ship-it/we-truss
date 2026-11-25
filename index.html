@@ -905,6 +905,12 @@ select.field{appearance:auto}
 .doc-r{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .modal.wide{max-width:780px;max-height:92vh;overflow:auto}
 .modal .row{flex-wrap:wrap}
+.nc-list{display:flex;flex-direction:column;gap:8px;margin-bottom:6px;max-height:44vh;overflow:auto}
+.nc-item{display:flex;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--line2);border-radius:12px;background:var(--inset);cursor:pointer}
+.nc-item input{width:18px;height:18px;flex:none;accent-color:var(--accent)}
+.nc-item small{display:block;color:var(--muted);font-size:12px;margin-top:1px}
+.nc-item.dis{opacity:.5;cursor:default}
+.doc-r .newtag{margin-right:2px}
 .up-lbl{display:block;font:600 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:4px 0 6px}
 .contract{background:#fbf7f0;color:#221a12;border-radius:12px;padding:28px 30px;font:14px/1.55 var(--sans)}
 .contract h4{font-size:21px;font-weight:800;margin:0 0 2px;color:#221a12}
@@ -1299,18 +1305,24 @@ const CONVOS = [
 const CONTRACT_STATE = {   // party id: [status, date sent, date signed]
   'e1-nora':['sent','2026-11-18'], 'e1-kobe':['signed','2026-11-10','2026-11-12'], 'e1-brikke':['sent','2026-11-16'],
   'e1-venue':['signed','2026-10-28','2026-10-30'], 'e1-lumen':['sent','2026-11-19'],
-  'e2-mira':['signed','2026-10-20','2026-10-24'], 'e2-ombres':['signed','2026-11-02','2026-11-03'],
-  'e2-venue':['signed','2026-10-15','2026-10-16'], 'e2-lumen':['signed','2026-11-04','2026-11-06'],
+  // Mira Solis — Live (e2) has no contracts yet: Lotte sets them up with "+ New contracts"
   'e3-nora':['draft','2026-11-24'], 'e3-bram':['sent','2026-11-21'], 'e3-ines':['draft','2026-11-22'],
   'e3-venue':['sent','2026-11-12'], 'e3-lumen':['draft','2026-11-23']
 };
-const DOCS = Object.entries(CONTRACT_STATE).map(([pid, [status, date, signed]]) => ({ id:'k-'+pid, kind:'contract', pid, status, date, signed:signed || null }));
+const CONTRACT_TYPES = ['artist','supplier','venue'];
+// doc fields: kind 'contract'|'file' · eid event (null = not linked to an event) · pid the party it's shared with
+// private:true + owner role = only the owner sees it · unseen:{role:true} = shows NEW and counts in the tab badge
+const DOCS = Object.entries(CONTRACT_STATE).map(([pid, [status, date, signed]]) => ({ id:'k-'+pid, kind:'contract', eid:pid.split('-')[0], pid, status, date, signed:signed || null }));
 DOCS.push(
-  { id:'f1', kind:'file', pid:'e1-nora',  name:'NORA_technical_rider_2026.pdf',             size:'240 KB', by:'artist',   date:'2026-11-20' },
-  { id:'f2', kind:'file', pid:'e1-lumen', name:'Kelderman_floor_plan_main_room.pdf',        size:'1.1 MB', by:'promoter', date:'2026-11-19' },
-  { id:'f3', kind:'file', pid:'e1-lumen', name:'LumenSound_insurance_certificate_2026.pdf', size:'380 KB', by:'supplier', date:'2026-11-21' },
-  { id:'f4', kind:'file', pid:'e3-lumen', name:'Quote_Leiewind_stage_roof_and_power.pdf',   size:'620 KB', by:'supplier', date:'2026-11-23' },
-  { id:'f5', kind:'file', pid:'e2-mira',  name:'Mira_Solis_piano_requirements.pdf',         size:'150 KB', by:'promoter', date:'2026-11-08' }
+  { id:'f1', kind:'file', eid:'e1', pid:'e1-nora',  name:'NORA_technical_rider_2026.pdf',             size:'240 KB', by:'artist',   date:'2026-11-20' },
+  { id:'f2', kind:'file', eid:'e1', pid:'e1-lumen', name:'Kelderman_floor_plan_main_room.pdf',        size:'1.1 MB', by:'promoter', date:'2026-11-19' },
+  { id:'f3', kind:'file', eid:'e1', pid:'e1-lumen', name:'LumenSound_insurance_certificate_2026.pdf', size:'380 KB', by:'supplier', date:'2026-11-21' },
+  { id:'f4', kind:'file', eid:'e3', pid:'e3-lumen', name:'Quote_Leiewind_stage_roof_and_power.pdf',   size:'620 KB', by:'supplier', date:'2026-11-23' },
+  { id:'f5', kind:'file', eid:'e2', pid:'e2-mira',  name:'Mira_Solis_piano_requirements.pdf',         size:'150 KB', by:'promoter', date:'2026-11-08' },
+  { id:'p1', kind:'file', eid:null, private:true, owner:'promoter', by:'promoter', name:'Nachtwerk_budget_2027.xlsx',         size:'48 KB',  date:'2026-11-22' },
+  { id:'p2', kind:'file', eid:'e2', private:true, owner:'promoter', by:'promoter', name:'Notes_fee_negotiation_Mira.pdf',      size:'90 KB',  date:'2026-11-09' },
+  { id:'p3', kind:'file', eid:null, private:true, owner:'artist',   by:'artist',   name:'NORA_invoice_template.docx',          size:'35 KB',  date:'2026-11-02' },
+  { id:'p4', kind:'file', eid:null, private:true, owner:'supplier', by:'supplier', name:'LumenSound_price_list_2027.pdf',      size:'210 KB', date:'2026-11-15' }
 );
 
 const S = { page:'landing', role:null, screen:'home', id:null };  // page: 'landing' (public website) or 'login' (role picker)
@@ -1586,11 +1598,28 @@ const TR_ROWS = [
 ['Add the date first.','Voeg eerst de datum toe.','Ajoutez d’abord la date.','Füge zuerst das Datum hinzu.'],['Add the doors time first.','Voeg eerst het deurenuur toe.','Ajoutez d’abord l’heure d’ouverture.','Füge zuerst die Einlasszeit hinzu.'],
 ['Add the venue first.','Voeg eerst de zaal toe.','Ajoutez d’abord la salle.','Füge zuerst die Location hinzu.'],['Add the city first.','Voeg eerst de stad toe.','Ajoutez d’abord la ville.','Füge zuerst die Stadt hinzu.'],
 ['Pick a date in the future.','Kies een datum in de toekomst.','Choisissez une date future.','Wähle ein Datum in der Zukunft.'],['Capacity should be a number, e.g. 450.','Capaciteit moet een getal zijn, bv. 450.','La capacité doit être un nombre, ex. 450.','Kapazität muss eine Zahl sein, z. B. 450.'],
+['🔒 Private','🔒 Privé','🔒 Privé','🔒 Privat'],['Only you','Alleen jij','Vous seul','Nur du'],
+['🔒 Private files — not linked to an event','🔒 Privébestanden — niet gekoppeld aan een evenement','🔒 Fichiers privés — sans événement','🔒 Private Dateien — ohne Veranstaltung'],
+['General — no event','Algemeen — geen evenement','Général — sans événement','Allgemein — ohne Veranstaltung'],['🔒 Only me (private)','🔒 Alleen ik (privé)','🔒 Moi seul (privé)','🔒 Nur ich (privat)'],
+['Share with','Delen met','Partager avec','Teilen mit'],['Share with Lotte (promoter)','Delen met Lotte (organisator)','Partager avec Lotte (organisatrice)','Mit Lotte teilen (Veranstalterin)'],
+['Choose who can see it: only you, or one person for a specific event.','Kies wie het kan zien: alleen jij, of één persoon voor een bepaald evenement.','Choisissez qui peut le voir : vous seul, ou une personne pour un événement précis.','Wähle, wer es sehen kann: nur du oder eine Person für eine bestimmte Veranstaltung.'],
+['Who can see it?','Wie kan het zien?','Qui peut le voir ?','Wer kann es sehen?'],['＋ New contracts','＋ Nieuwe contracten','＋ Nouveaux contrats','＋ Neue Verträge'],
+['Pick the event and who gets a contract. It’s filled in from the booking (fee, times, rider or equipment) — they get a notification and find it under Documents.','Kies het evenement en wie een contract krijgt. Het wordt ingevuld met de boekingsgegevens (vergoeding, uren, rider of materiaal) — zij krijgen een melding en vinden het onder Documenten.','Choisissez l’événement et qui reçoit un contrat. Il est rempli à partir de la réservation (cachet, horaires, rider ou matériel) — chacun reçoit une notification et le retrouve dans Documents.','Wähle die Veranstaltung und wer einen Vertrag bekommt. Er wird aus der Buchung befüllt (Gage, Zeiten, Rider oder Equipment) — alle bekommen eine Benachrichtigung und finden ihn unter Dokumente.'],
+['Contract with','Contract met','Contrat avec','Vertrag mit'],['Contract exists','Contract bestaat al','Contrat existant','Vertrag vorhanden'],
+['Save as drafts','Opslaan als concept','Enregistrer comme brouillons','Als Entwürfe speichern'],['Create & send','Aanmaken & versturen','Créer & envoyer','Erstellen & senden'],
+['☐ Select at least one person.','☐ Kies minstens één persoon.','☐ Sélectionnez au moins une personne.','☐ Wähle mindestens eine Person.'],
+['📄 Contracts sent — they get a notification and find them under Documents.','📄 Contracten verstuurd — zij krijgen een melding en vinden ze onder Documenten.','📄 Contrats envoyés — chacun reçoit une notification et les retrouve dans Documents.','📄 Verträge gesendet — alle bekommen eine Benachrichtigung und finden sie unter Dokumente.'],
+['✓ Drafts saved — only you can see them until you send them.','✓ Concepten opgeslagen — alleen jij ziet ze tot je ze verstuurt.','✓ Brouillons enregistrés — vous seul les voyez jusqu’à l’envoi.','✓ Entwürfe gespeichert — nur du siehst sie, bis du sie sendest.'],
+['New contract from Lotte — please check and sign it under Documents.','Nieuw contract van Lotte — bekijk en onderteken het onder Documenten.','Nouveau contrat de Lotte — vérifiez-le et signez-le dans Documents.','Neuer Vertrag von Lotte — bitte prüfen und unter Dokumente unterschreiben.'],
+['New document from Lotte — you’ll find it under Documents.','Nieuw document van Lotte — je vindt het onder Documenten.','Nouveau document de Lotte — vous le trouverez dans Documents.','Neues Dokument von Lotte — du findest es unter Dokumente.'],
+['shared a document.','heeft een document gedeeld.','a partagé un document.','hat ein Dokument geteilt.'],
+['🔒 Saved privately — only you can see it.','🔒 Privé opgeslagen — alleen jij kunt het zien.','🔒 Enregistré en privé — vous seul pouvez le voir.','🔒 Privat gespeichert — nur du kannst es sehen.'],
+['✓ Shared with Lotte — she gets a notification.','✓ Gedeeld met Lotte — zij krijgt een melding.','✓ Partagé avec Lotte — elle reçoit une notification.','✓ Mit Lotte geteilt — sie bekommt eine Benachrichtigung.'],
 ['Documents','Documenten','Documents','Dokumente'],['Contracts','Contracten','Contrats','Verträge'],['Other files','Andere bestanden','Autres fichiers','Andere Dateien'],
 ['Not signed yet','Nog niet ondertekend','Pas encore signé','Noch nicht unterschrieben'],['To sign','Te ondertekenen','À signer','Zu unterschreiben'],
 ['⬆ Upload document','⬆ Document uploaden','⬆ Importer un document','⬆ Dokument hochladen'],
-['Contracts and files for all your events. Each artist and supplier only sees their own.','Contracten en bestanden voor al je evenementen. Elke artiest en leverancier ziet alleen de eigen documenten.','Contrats et fichiers pour tous vos événements. Chaque artiste et prestataire ne voit que les siens.','Verträge und Dateien für alle deine Veranstaltungen. Jeder Künstler und Dienstleister sieht nur seine eigenen.'],
-['Your contracts and files with the promoter. Only you and Lotte can see them.','Je contracten en bestanden met de organisator. Alleen jij en Lotte kunnen ze zien.','Vos contrats et fichiers avec l’organisatrice. Seuls vous et Lotte pouvez les voir.','Deine Verträge und Dateien mit der Veranstalterin. Nur du und Lotte könnt sie sehen.'],
+['Contracts and files for all your events. Artists and suppliers only see what’s shared with them — private files only you.','Contracten en bestanden voor al je evenementen. Artiesten en leveranciers zien alleen wat met hen gedeeld is — privébestanden alleen jij.','Contrats et fichiers pour tous vos événements. Artistes et prestataires ne voient que ce qui est partagé avec eux — les fichiers privés, vous seul.','Verträge und Dateien für alle deine Veranstaltungen. Künstler und Dienstleister sehen nur, was mit ihnen geteilt ist — private Dateien nur du.'],
+['Your contracts and files. Shared files are visible to you and Lotte, private ones only to you.','Je contracten en bestanden. Gedeelde bestanden zien jij en Lotte, privébestanden alleen jij.','Vos contrats et fichiers. Les fichiers partagés sont visibles par vous et Lotte, les fichiers privés par vous seul.','Deine Verträge und Dateien. Geteilte Dateien sehen du und Lotte, private nur du.'],
 ['No documents here yet.','Hier zijn nog geen documenten.','Aucun document pour l’instant.','Hier gibt es noch keine Dokumente.'],
 ['Prototype — uploaded files stay in your browser and are gone after a reload.','Prototype — geüploade bestanden blijven in je browser en verdwijnen na herladen.','Prototype — les fichiers importés restent dans votre navigateur et disparaissent au rechargement.','Prototyp — hochgeladene Dateien bleiben in deinem Browser und sind nach dem Neuladen weg.'],
 ['Signed','Ondertekend','Signé','Unterschrieben'],['Draft','Concept','Brouillon','Entwurf'],['Awaiting signature','Wacht op handtekening','En attente de signature','Wartet auf Unterschrift'],
@@ -1618,9 +1647,9 @@ const TR_ROWS = [
 ['Belgian law applies.','Het Belgisch recht is van toepassing.','Le droit belge est applicable.','Es gilt belgisches Recht.'],
 ['Signed in we.TRUSS','Ondertekend in we.TRUSS','Signé dans we.TRUSS','In we.TRUSS unterschrieben'],
 ['Print / save as PDF','Afdrukken / opslaan als pdf','Imprimer / enregistrer en PDF','Drucken / als PDF speichern'],['✍ Sign contract','✍ Contract ondertekenen','✍ Signer le contrat','✍ Vertrag unterschreiben'],
-['Only you and the person you pick will see this file.','Alleen jij en de gekozen persoon zien dit bestand.','Seuls vous et la personne choisie verrez ce fichier.','Nur du und die gewählte Person sehen diese Datei.'],
-['Only you and Lotte (promoter) will see this file.','Alleen jij en Lotte (organisator) zien dit bestand.','Seuls vous et Lotte (organisatrice) verrez ce fichier.','Nur du und Lotte (Veranstalterin) sehen diese Datei.'],
-['Event & person','Evenement & persoon','Événement & personne','Veranstaltung & Person'],['File','Bestand','Fichier','Datei'],['Upload','Uploaden','Importer','Hochladen'],
+
+
+['File','Bestand','Fichier','Datei'],['Upload','Uploaden','Importer','Hochladen'],
 ['signed the contract.','heeft het contract ondertekend.','a signé le contrat.','hat den Vertrag unterschrieben.'],
 ['✓ Contract signed — Lotte sees it right away.','✓ Contract ondertekend — Lotte ziet het meteen.','✓ Contrat signé — Lotte le voit immédiatement.','✓ Vertrag unterschrieben — Lotte sieht es sofort.'],
 ['✓ Contract sent for signature.','✓ Contract ter ondertekening verstuurd.','✓ Contrat envoyé pour signature.','✓ Vertrag zur Unterschrift gesendet.'],
@@ -1640,6 +1669,8 @@ const DUE = s => {
   return s;
 };
 const PATTERNS = [
+  [/^✓ Shared with (.+) — they get a notification\.$/, m => L(`✓ Gedeeld met ${m[1]} — zij krijgen een melding.`, `✓ Partagé avec ${m[1]} — notification envoyée.`, `✓ Mit ${m[1]} geteilt — Benachrichtigung gesendet.`)],
+  [/^✉ (.+) (?:isn|aren)’t on we\.TRUSS yet — it goes out by email\.$/, m => L(`✉ Nog niet op we.TRUSS: ${m[1]} — het gaat per e-mail.`, `✉ Pas encore sur we.TRUSS : ${m[1]} — envoi par e-mail.`, `✉ Noch nicht auf we.TRUSS: ${m[1]} — es geht per E-Mail raus.`)],
   [/^Reminder sent to (.+)\.$/, m => L(`Herinnering verstuurd naar ${m[1]}.`, `Rappel envoyé à ${m[1]}.`, `Erinnerung an ${m[1]} gesendet.`)],
   [/^✓ (.+) uploaded\.$/, m => L(`✓ ${m[1]} geüpload.`, `✓ ${m[1]} importé.`, `✓ ${m[1]} hochgeladen.`)],
   [/^Nachtwerk Collective · (\d+) upcoming events?$/, m => `Nachtwerk Collective · ${m[1]} ` + L(pl(m[1],'komend evenement','komende evenementen'), pl(m[1],'événement à venir','événements à venir'), pl(m[1],'anstehende Veranstaltung','anstehende Veranstaltungen'))],
@@ -1800,8 +1831,8 @@ function pill(status){ const s = STATUS[status]; return `<span class="pill ${s.c
 function unreadUpdates(e,p){ return e.updates.filter(u => u.affects.includes(p.id) && !u.seenBy[p.id]); }
 function myParties(role){ const out = []; EVENTS.forEach(e => e.parties.forEach(p => { if (p.user === role) out.push({ e, p }); })); return out.sort((a,b) => a.e.date.localeCompare(b.e.date)); }
 function roleUnread(role){
-  if (role === 'promoter') return EVENTS.reduce((n,e) => n + e.activity.filter(a => !a.read).length, 0) + msgUnread(role);
-  return myParties(role).reduce((n,x) => n + unreadUpdates(x.e, x.p).length, 0) + msgUnread(role) + docsToSign(role);
+  if (role === 'promoter') return EVENTS.reduce((n,e) => n + e.activity.filter(a => !a.read).length, 0) + msgUnread(role) + docsBadge(role);
+  return myParties(role).reduce((n,x) => n + unreadUpdates(x.e, x.p).length, 0) + msgUnread(role) + docsBadge(role);
 }
 /* availability helpers */
 function bookingOn(pid, date){ const d = profile(pid); return EVENTS.find(e => e.date === date && e.parties.some(p => p.name === d.name)); }
@@ -1889,8 +1920,8 @@ function header(){
   };
   const tab = (screens, act, label, n) => `<button class="${screens.includes(S.screen)?'on':''}" data-act="${act}">${label}${n?`<span class="badge">${n}</span>`:''}</button>`;
   const tabs = S.role === 'promoter'
-    ? tab(['home','event','new-event'],'home','Events') + tab(['network'],'network','Network') + tab(['messages'],'messages','Messages', msgUnread('promoter')) + tab(['docs'],'docs','Documents')
-    : tab(['home','mine'],'home', S.role === 'artist' ? 'My gigs' : 'My jobs') + tab(['messages'],'messages','Messages', msgUnread(S.role)) + tab(['docs'],'docs','Documents', docsToSign(S.role));
+    ? tab(['home','event','new-event'],'home','Events') + tab(['network'],'network','Network') + tab(['messages'],'messages','Messages', msgUnread('promoter')) + tab(['docs'],'docs','Documents', docsBadge('promoter'))
+    : tab(['home','mine'],'home', S.role === 'artist' ? 'My gigs' : 'My jobs') + tab(['messages'],'messages','Messages', msgUnread(S.role)) + tab(['docs'],'docs','Documents', docsBadge(S.role));
   return `<header class="top"><div class="wrap top-in">
     <button class="logo" data-act="home"><img class="logo-img" src="${LOGO}" alt="we.TRUSS"></button>
     <nav class="apptabs" aria-label="Sections">${tabs}</nav>
@@ -2520,15 +2551,30 @@ function messagesView(){
 }
 
 /* ---------------- views: documents & contracts (all roles) ---------------- */
+function docParty(d){ return d.pid ? findParty(d.pid).p : null; }
+function contractOf(pid){ return DOCS.find(d => d.kind === 'contract' && d.pid === pid); }
 function docsFor(role){
   return DOCS.filter(d => {
-    const { p } = findParty(d.pid);
+    if (d.private) return d.owner === role;                       // private = only the person who uploaded it
+    const p = docParty(d);
     if (!p) return false;
     if (role === 'promoter') return true;
     return p.user === role && !(d.kind === 'contract' && d.status === 'draft');   // drafts stay with the promoter
   });
 }
-function docsToSign(role){ return role === 'promoter' ? 0 : docsFor(role).filter(d => d.kind === 'contract' && d.status === 'sent').length; }
+function isNewDoc(d, role){ return !!(d.unseen && d.unseen[role]); }
+function notifyDoc(d, role){ if (role) d.unseen = Object.assign({}, d.unseen, { [role]:true }); }
+function docsBadge(role){ return docsFor(role).filter(d => isNewDoc(d, role) || (role !== 'promoter' && d.kind === 'contract' && d.status === 'sent')).length; }
+function docsToSign(role){ return docsBadge(role); }
+// promoter sends a contract: the artist/supplier gets a NEW document + an update in their gig/job. false = no login yet
+function sendContract(d){
+  const { e, p } = findParty(d.pid);
+  d.status = 'sent'; d.date = '2026-11-25';
+  if (!p.user) return false;
+  notifyDoc(d, p.user);
+  e.updates.unshift({ id:'u' + Date.now() + p.id, text:'New contract from Lotte — please check and sign it under Documents.', time:nowStr(), affects:[p.id], seenBy:{} });
+  return true;
+}
 function contractTitle(p){ return p.type === 'artist' ? 'Artist performance agreement' : p.type === 'supplier' ? 'Supplier service agreement' : 'Venue rental agreement'; }
 const SIGNER = { artist:'Noor Vandamme', supplier:'Pieter Claes' };
 function signerName(p){
@@ -2572,12 +2618,13 @@ function contractHtml(d){
   </article>`;
 }
 function docRow(d, role){
-  const { p } = findParty(d.pid), isC = d.kind === 'contract';
+  const p = docParty(d), isC = d.kind === 'contract';
   const ext = isC ? 'PDF' : (d.name.split('.').pop() || 'FILE').slice(0, 4).toUpperCase();
-  const pill = !isC ? '' : d.status === 'signed' ? '<span class="pill ok">Signed</span>'
+  const pill = d.private ? '<span class="pill off">🔒 Private</span>'
+    : !isC ? '' : d.status === 'signed' ? '<span class="pill ok">Signed</span>'
     : d.status === 'draft' ? '<span class="pill off">Draft</span>'
     : role === 'promoter' ? '<span class="pill wait">Awaiting signature</span>' : '<span class="pill wait">Please sign</span>';
-  const who = isC ? 'Contract' : d.by === role ? 'Uploaded by you' : 'Shared with you';
+  const who = d.private ? 'Only you' : isC ? 'Contract' : d.by === role ? 'Uploaded by you' : 'Shared with you';
   const btns = !isC ? `<button class="btn sm ghost" data-act="doc-file" data-id="${d.id}">Open</button>`
     : `<button class="btn sm ghost" data-act="doc-open" data-id="${d.id}">View</button>`
       + (d.status === 'sent' && role !== 'promoter' ? `<button class="btn sm solid" data-act="doc-open" data-id="${d.id}">✍ Sign</button>` : '')
@@ -2586,30 +2633,36 @@ function docRow(d, role){
   return `<div class="doc-row">
     <span class="doc-ic" data-notr>${esc(ext)}</span>
     <div class="doc-tx">${isC ? `<b>${contractTitle(p)}</b>` : `<b data-notr>${esc(d.name)}</b>`}
-      <small>${role === 'promoter' ? `<span data-notr>${esc(p.name)}</span> · ` : ''}<span>${who}</span> · <span data-notr>${fmtShort(d.date)}${d.size ? ' · ' + esc(d.size) : ''}</span></small></div>
-    <div class="doc-r">${pill}${btns}</div>
+      <small>${role === 'promoter' && p ? `<span data-notr>${esc(p.name)}</span> · ` : ''}<span>${who}</span> · <span data-notr>${fmtShort(d.date)}${d.size ? ' · ' + esc(d.size) : ''}</span></small></div>
+    <div class="doc-r">${isNewDoc(d, role) ? '<span class="newtag">NEW</span>' : ''}${pill}${btns}</div>
   </div>`;
 }
 function docsView(){
   const role = S.role, f = S.docF || 'all', all = docsFor(role);
   const isOpen = d => d.kind === 'contract' && d.status !== 'signed';
-  const match = d => f === 'all' || (f === 'contracts' && d.kind === 'contract') || (f === 'open' && isOpen(d)) || (f === 'files' && d.kind === 'file');
+  const match = d => f === 'all' || (f === 'contracts' && d.kind === 'contract') || (f === 'open' && isOpen(d))
+    || (f === 'files' && d.kind === 'file' && !d.private) || (f === 'private' && d.private);
   const nOpen = all.filter(isOpen).length;
   const chip = (id, label, n) => `<button class="fchip ${f===id?'on':''}" data-act="doc-filter" data-id="${id}">${label}${n ? `<span class="mono"> ${n}</span>` : ''}</button>`;
   const order = (a, b) => a.kind === b.kind ? b.date.localeCompare(a.date) : a.kind === 'contract' ? -1 : 1;
+  const list = (items) => `<div class="doc-list">${items.sort(order).map(d => docRow(d, role)).join('')}</div>`;
+  // one group per event ("name · date"), then the private files that aren't linked to an event
   const groups = EVENTS.slice().sort((a, b) => a.date.localeCompare(b.date)).map(e => {
-    const list = all.filter(d => match(d) && findParty(d.pid).e === e).sort(order);
-    return list.length ? `<h2 class="sec" data-notr>${esc(e.name)} · ${fmtShort(e.date)}</h2><div class="doc-list">${list.map(d => docRow(d, role)).join('')}</div>` : '';
+    const items = all.filter(d => match(d) && d.eid === e.id);
+    return items.length ? `<h2 class="sec" data-notr>${esc(e.name)} · ${fmtShort(e.date)}</h2>${list(items)}` : '';
   }).join('');
+  const loose = all.filter(d => match(d) && !d.eid);
+  const general = loose.length ? `<h2 class="sec">🔒 Private files — not linked to an event</h2>${list(loose)}` : '';
   return `<main class="wrap" style="max-width:860px">
     <section class="hello"><h1>Documents</h1><p>${role === 'promoter'
-      ? 'Contracts and files for all your events. Each artist and supplier only sees their own.'
-      : 'Your contracts and files with the promoter. Only you and Lotte can see them.'}</p></section>
+      ? 'Contracts and files for all your events. Artists and suppliers only see what’s shared with them — private files only you.'
+      : 'Your contracts and files. Shared files are visible to you and Lotte, private ones only to you.'}</p></section>
     <div class="doc-tools">
-      <div class="fchips">${chip('all', 'All')}${chip('contracts', 'Contracts')}${chip('open', role === 'promoter' ? 'Not signed yet' : 'To sign', nOpen)}${chip('files', 'Other files')}</div>
-      <button class="btn solid" data-act="doc-upload">⬆ Upload document</button>
+      <div class="fchips">${chip('all', 'All')}${chip('contracts', 'Contracts')}${chip('open', role === 'promoter' ? 'Not signed yet' : 'To sign', nOpen)}${chip('files', 'Other files')}${chip('private', '🔒 Private')}</div>
+      <div class="doc-r">${role === 'promoter' ? '<button class="btn" data-act="new-contract">＋ New contracts</button>' : ''}
+        <button class="btn solid" data-act="doc-upload">⬆ Upload document</button></div>
     </div>
-    ${groups || '<div class="empty">No documents here yet.</div>'}
+    ${groups + general || '<div class="empty">No documents here yet.</div>'}
     <p class="muted" style="font-size:13px;margin-top:22px">Prototype — uploaded files stay in your browser and are gone after a reload.</p>
     <div class="spacer"></div>
   </main>`;
@@ -2626,22 +2679,52 @@ function openContract(id){
       </div>
     </div></div>`;
 }
+// one dropdown: "only me" (private) or share with one person, grouped per event.  value = "eventId|partyId|private"
 function openUploadModal(){
-  const role = S.role;
-  const opts = role === 'promoter'
-    ? EVENTS.flatMap(e => e.parties.filter(p => ['artist', 'supplier', 'venue'].includes(p.type)).map(p => [p.id, `${e.name} · ${p.name}`]))
-    : myParties(role).map(({ e, p }) => [p.id, `${e.name} · ${fmtShort(e.date)}`]);
+  const role = S.role, me = ['', tr('🔒 Only me (private)')];
+  const opt = ([v, l]) => `<option value="${esc(v)}">${esc(l)}</option>`;
+  const grp = (label, opts) => `<optgroup label="${esc(label)}">${opts.map(opt).join('')}</optgroup>`;
+  const evs = EVENTS.slice().sort((a, b) => a.date.localeCompare(b.date));
+  const groups = [grp(tr('General — no event'), [['||1', me[1]]])];
+  if (role === 'promoter') evs.forEach(e => groups.push(grp(`${e.name} · ${fmtShort(e.date)}`,
+    [[`${e.id}||1`, me[1]], ...e.parties.map(p => [`${e.id}|${p.id}|0`, `${tr('Share with')} ${p.name}`])])));
+  else myParties(role).forEach(({ e, p }) => groups.push(grp(`${e.name} · ${fmtShort(e.date)}`,
+    [[`${e.id}||1`, me[1]], [`${e.id}|${p.id}|0`, tr('Share with Lotte (promoter)')]])));
   $('#modal').innerHTML = `<div class="modal-bg" data-act="close-modal">
     <div class="modal" role="dialog" aria-modal="true">
       <h3>⬆ Upload document</h3>
-      <p class="sub">${role === 'promoter' ? 'Only you and the person you pick will see this file.' : 'Only you and Lotte (promoter) will see this file.'}</p>
-      <label class="up-lbl" for="up-party">${role === 'promoter' ? 'Event & person' : 'Event'}</label>
-      <select id="up-party" data-notr>${opts.map(([id, l]) => `<option value="${id}">${esc(l)}</option>`).join('')}</select>
+      <p class="sub">Choose who can see it: only you, or one person for a specific event.</p>
+      <label class="up-lbl" for="up-to">Who can see it?</label>
+      <select id="up-to" data-notr>${groups.join('')}</select>
       <label class="up-lbl" for="up-file">File</label>
-      <input id="up-file" class="field" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+      <input id="up-file" class="field" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png">
       <div class="row">
         <button class="btn ghost" data-act="close-modal">Cancel</button>
         <button class="btn solid" data-act="doc-upload-submit">Upload</button>
+      </div>
+    </div></div>`;
+}
+// promoter: create contracts for an event from the booking data
+function openNewContract(eid){
+  const evs = EVENTS.slice().sort((a, b) => a.date.localeCompare(b.date));
+  const e = findEvent(eid) || evs.find(x => x.parties.some(p => CONTRACT_TYPES.includes(p.type) && !contractOf(p.id))) || evs[0];
+  const items = e.parties.filter(p => CONTRACT_TYPES.includes(p.type)).map(p => {
+    const has = !!contractOf(p.id);
+    return `<label class="nc-item ${has ? 'dis' : ''}"><input type="checkbox" name="nc" value="${p.id}" ${has ? 'disabled' : 'checked'}>
+      <span><b data-notr>${esc(p.name)}</b><small><span>${TYPE_LABEL[p.type]}</span>${has ? ' · <span>Contract exists</span>' : !p.user ? ' · <span>Not on we.TRUSS yet</span>' : ''}</small></span></label>`;
+  }).join('');
+  $('#modal').innerHTML = `<div class="modal-bg" data-act="close-modal">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h3>＋ New contracts</h3>
+      <p class="sub">Pick the event and who gets a contract. It’s filled in from the booking (fee, times, rider or equipment) — they get a notification and find it under Documents.</p>
+      <label class="up-lbl" for="nc-event">Event</label>
+      <select id="nc-event" data-change="nc-event" data-notr>${evs.map(x => `<option value="${x.id}" ${x === e ? 'selected' : ''}>${esc(x.name)} · ${fmtShort(x.date)}</option>`).join('')}</select>
+      <label class="up-lbl">Contract with</label>
+      <div class="nc-list">${items}</div>
+      <div class="row">
+        <button class="btn ghost" data-act="close-modal">Cancel</button>
+        <button class="btn" data-act="nc-create" data-id="draft">Save as drafts</button>
+        <button class="btn solid" data-act="nc-create" data-id="send">Create &amp; send</button>
       </div>
     </div></div>`;
 }
@@ -2854,6 +2937,8 @@ function render(){
     body = newEventView();
   } else if (S.screen === 'docs'){
     body = docsView();
+    const role = S.role;
+    after.push(() => docsFor(role).forEach(d => { if (d.unseen) d.unseen[role] = false; }));
   } else if (S.screen === 'messages'){
     body = messagesView();
     const role = S.role, list = convosFor(role);
@@ -3244,19 +3329,57 @@ const ACTIONS = {
   'doc-sign'(id){
     const d = DOCS.find(x => x.id === id), { e, p } = findParty(d.pid);
     d.status = 'signed'; d.signed = '2026-11-25';
+    notifyDoc(d, 'promoter');
     e.activity.unshift({ partyId:p.id, kind:'confirm', text:'signed the contract.', time:nowStr(), read:false });
     closeModal(); render(); toast('✓ Contract signed — Lotte sees it right away.', 'ok');
   },
-  'doc-send'(id){ const d = DOCS.find(x => x.id === id); d.status = 'sent'; d.date = '2026-11-25'; render(); toast('✓ Contract sent for signature.', 'ok'); },
-  'doc-remind'(id){ const { p } = findParty(DOCS.find(x => x.id === id).pid); toast(`Reminder sent to ${esc(p.name)}.`); },
+  'doc-send'(id){
+    const d = DOCS.find(x => x.id === id), p = docParty(d);
+    const app = sendContract(d); render();
+    toast(app ? `✓ Shared with ${esc(p.name)} — they get a notification.` : `✉ ${esc(p.name)} isn’t on we.TRUSS yet — it goes out by email.`, 'ok');
+  },
+  'doc-remind'(id){ const p = docParty(DOCS.find(x => x.id === id)); toast(`Reminder sent to ${esc(p.name)}.`); },
   'doc-file'(id){ const d = DOCS.find(x => x.id === id); if (d.url) window.open(d.url, '_blank'); else toast('Demo file — there’s no real document behind it.'); },
   'doc-upload'(){ openUploadModal(); },
   'doc-upload-submit'(){
     const f = $('#up-file').files[0];
     if (!f){ toast('Choose a file first.'); return; }
+    const [eid, pid, priv] = $('#up-to').value.split('|'), role = S.role;
     const size = f.size > 1048576 ? (f.size / 1048576).toFixed(1) + ' MB' : Math.max(1, Math.round(f.size / 1024)) + ' KB';
-    DOCS.push({ id:'u' + Date.now(), kind:'file', pid:$('#up-party').value, name:f.name, size, by:S.role, date:'2026-11-25', url:URL.createObjectURL(f) });
-    closeModal(); S.docF = 'all'; render(); toast(`✓ ${esc(f.name)} uploaded.`, 'ok');
+    const d = { id:'u' + Date.now(), kind:'file', eid:eid || null, pid:pid || null, private:priv === '1', owner:role, by:role,
+                name:f.name, size, date:'2026-11-25', url:URL.createObjectURL(f) };
+    DOCS.push(d);
+    closeModal(); S.docF = 'all';
+    if (d.private){ render(); toast('🔒 Saved privately — only you can see it.', 'ok'); return; }
+    const { e, p } = findParty(pid);
+    if (role === 'promoter'){
+      if (p.user){
+        notifyDoc(d, p.user);
+        e.updates.unshift({ id:'u' + Date.now(), text:'New document from Lotte — you’ll find it under Documents.', time:nowStr(), affects:[p.id], seenBy:{} });
+      }
+      render();
+      toast(p.user ? `✓ Shared with ${esc(p.name)} — they get a notification.` : `✉ ${esc(p.name)} isn’t on we.TRUSS yet — it goes out by email.`, 'ok');
+    } else {
+      notifyDoc(d, 'promoter');
+      e.activity.unshift({ partyId:p.id, kind:'confirm', text:'shared a document.', time:nowStr(), read:false });
+      render(); toast('✓ Shared with Lotte — she gets a notification.', 'ok');
+    }
+  },
+  'new-contract'(){ openNewContract(); },
+  'nc-create'(mode){
+    const e = findEvent($('#nc-event').value);
+    const ids = [...document.querySelectorAll('input[name=nc]:checked')].map(c => c.value);
+    if (!ids.length){ toast('☐ Select at least one person.', 'bad'); return; }
+    const offline = [];
+    ids.forEach(pid => {
+      const d = { id:'k-' + pid, kind:'contract', eid:e.id, pid, status:'draft', date:'2026-11-25', signed:null };
+      DOCS.push(d);
+      if (mode === 'send' && !sendContract(d)) offline.push(e.parties.find(x => x.id === pid).name);
+    });
+    closeModal(); S.docF = 'all'; render();
+    if (mode !== 'send'){ toast('✓ Drafts saved — only you can see them until you send them.', 'ok'); return; }
+    toast('📄 Contracts sent — they get a notification and find them under Documents.', 'ok');
+    if (offline.length) toast(`✉ ${esc(offline.join(', '))} ${offline.length > 1 ? 'aren’t' : 'isn’t'} on we.TRUSS yet — it goes out by email.`);
   },
   messages(){ go('messages'); },
   message(pid){
@@ -3320,6 +3443,7 @@ window.addEventListener('afterprint', () => document.body.classList.remove('prin
 document.addEventListener('change', ev => {
   const t = ev.target;
   if (t.dataset.change === 'lang'){ setLang(t.value); return; }
+  if (t.dataset.change === 'nc-event'){ openNewContract(t.value); return; }
   if (t.dataset.change === 'status' && t.value){
     const { p } = findParty(t.dataset.id);
     p.status = t.value;

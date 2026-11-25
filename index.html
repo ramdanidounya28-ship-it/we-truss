@@ -348,6 +348,7 @@ h2.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(
 .lp-nav-in{display:flex;align-items:center;gap:18px;height:64px}
 .lp-links{display:flex;gap:4px;margin-left:auto}
 .lp-links button,.lp-mobile button:not(.btn),.lp-foot-links button{background:none;border:0;color:var(--muted);font:600 14px var(--sans);padding:8px 10px;border-radius:8px;transition:color .15s}
+.lp-links button.on{color:var(--accent)}
 .lp-links button:hover,.lp-mobile button:not(.btn):hover,.lp-foot-links button:hover{color:var(--cyan);text-shadow:0 0 10px rgba(167,139,250,.6)}
 .lp-nav-r{display:flex;align-items:center;gap:10px}
 .lp-burger{display:none;width:40px;height:40px;border-radius:10px;border:1px solid var(--line2);background:var(--panel);flex-direction:column;align-items:center;justify-content:center;gap:4px}
@@ -1830,18 +1831,24 @@ function loginView(){
 }
 
 /* ---------------- views: public website (landing) ---------------- */
-const NAV = [ ['home','Home'], ['stages','For every stage'], ['how','How it works'], ['profiles','Profiles'], ['features','Features'], ['about','About'], ['contact','Contact'] ];
+const NAV = [ ['home','Home'], ['stages','For every stage'], ['how','How it works'], ['features','Features'], ['about','About'], ['contact','Contact'] ];
 
+// "Profiles" in the menu opens the page where you pick a profile (the same page you see after logging out)
+function navBtn([id, l]){
+  return id === 'profiles'
+    ? `<button class="${S.page === 'login' ? 'on' : ''}" data-act="to-login">${l}</button>`
+    : `<button data-act="nav" data-id="${id}">${l}</button>`;
+}
 function siteNav(){
   return `<nav class="lp-nav"><div class="wrap lp-nav-in">
     <button class="logo" data-act="nav" data-id="home"><img class="logo-img" src="${LOGO}" alt="we.TRUSS"></button>
-    <div class="lp-links">${NAV.map(([id,l]) => `<button data-act="nav" data-id="${id}">${l}</button>`).join('')}</div>
+    <div class="lp-links">${NAV.map(navBtn).join('')}</div>
     <div class="lp-nav-r">
       ${langSelect()}<button class="btn sm solid" data-act="to-login">Log in</button>
       <button class="lp-burger" data-act="menu" aria-label="Menu"><i></i><i></i><i></i></button>
     </div>
   </div>
-  <div class="lp-mobile">${NAV.map(([id,l]) => `<button data-act="nav" data-id="${id}">${l}</button>`).join('')}
+  <div class="lp-mobile">${NAV.map(navBtn).join('')}
     <button class="btn solid full" data-act="to-login" style="margin-top:8px">Log in to the demo</button></div>
   </nav>`;
 }
@@ -1945,21 +1952,7 @@ function landingView(){
       </div>
     </div></section>
 
-    <section class="lp-sec alt" id="sec-profiles"><div class="wrap">
-      <div class="lp-eyebrow">Profiles</div>
-      <h2 class="lp-h2">Know who sees what.</h2>
-      <p class="lp-intro">Three kinds of access, one shared event. Pick a profile to step straight into the demo.</p>
-      <div class="lp-grid3">
-        ${prof('promoter','01','Promoter','The organiser · full overview',[
-          'Dashboard with readiness score per event','Every party, every agreement, every status','Open items sorted by urgency','Post updates to exactly the right people','Change log with “seen by” receipts'],'Enter as promoter')}
-        ${prof('artist','02','Artist','Bands · singers · DJs · performers',[
-          'Stage time, fee, arrival &amp; parking','Rider status: what’s confirmed','Your contact person, one tap to call','Latest updates that concern you','Big “Confirm I’ll be there” button'],'Enter as artist')}
-        ${prof('supplier','03','Supplier','Sound &amp; light · venue · bar · security',[
-          'Agreed equipment list with quantities','Load-in &amp; load-out times','Site access &amp; on-site contact','Latest updates that concern you','Confirm the job or flag “item unavailable”'],'Enter as supplier')}
-      </div>
-    </div></section>
-
-    <section class="lp-sec" id="sec-features"><div class="wrap">
+    <section class="lp-sec alt" id="sec-features"><div class="wrap">
       <div class="lp-eyebrow">Features</div>
       <h2 class="lp-h2">Everything that holds<br>the show together.</h2>
       <div class="lp-grid3">
@@ -1972,7 +1965,7 @@ function landingView(){
       </div>
     </div></section>
 
-    <section class="lp-sec alt" id="sec-about"><div class="wrap lp-about">
+    <section class="lp-sec" id="sec-about"><div class="wrap lp-about">
       <div>
         <div class="lp-eyebrow">About the name</div>
         <h2 class="lp-h2">Why <span class="grad">we.TRUSS</span>?</h2>
@@ -1990,7 +1983,7 @@ function landingView(){
       </div>
     </div></section>
 
-    <section class="lp-sec" id="sec-contact"><div class="wrap lp-contact">
+    <section class="lp-sec alt" id="sec-contact"><div class="wrap lp-contact">
       <div>
         <div class="lp-eyebrow">Contact</div>
         <h2 class="lp-h2">Run your next<br>show on we.TRUSS.</h2>
@@ -2006,7 +1999,7 @@ function landingView(){
 
     <footer class="lp-foot"><div class="wrap lp-foot-in">
       <div><div class="logo"><img class="logo-img" src="${LOGO}" alt="we.TRUSS"></div><div class="muted" style="margin-top:6px">The backbone of every event.</div></div>
-      <div class="lp-foot-links">${NAV.map(([id,l]) => `<button data-act="nav" data-id="${id}">${l}</button>`).join('')}<button data-act="to-login">Log in</button></div>
+      <div class="lp-foot-links">${NAV.map(navBtn).join('')}<button data-act="to-login">Log in</button></div>
       <div class="muted" style="font-size:13px">© 2026 we.TRUSS · student prototype · all data fictional</div>
     </div></footer>
   </main>`;

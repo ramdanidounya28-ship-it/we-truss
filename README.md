@@ -2,7 +2,6 @@
 
 Clickable prototype of **we.TRUSS**: one shared space per event where the promoter, the artists and the suppliers each see exactly what concerns them.
 
-Live site: https://ubiquitous-chebakia-0c4571.netlify.app/
 
 ## What's in this folder
 

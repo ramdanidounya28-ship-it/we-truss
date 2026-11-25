@@ -661,6 +661,240 @@ svg,.ring,.truss-ic,.brand-big{filter:none !important}
   .rate-row{flex-wrap:wrap}
 }
 
+.lang-sel{background:var(--panel);color:var(--text);border:1px solid var(--line2);border-radius:10px;padding:6px 6px;font:700 12px var(--sans);cursor:pointer}
+.lp-nav-r .lang-sel{margin-right:2px}
+
+/* ---------- Viewing-as strip + dashboard tiles ---------- */
+.viewas{border-top:1px solid var(--line);background:rgba(37,26,18,.92)}
+.viewas-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:8px;padding-bottom:8px;flex-wrap:wrap}
+.va-who{display:flex;align-items:center;gap:10px}
+.va-who > span:last-child{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.va-who small{color:var(--dim);font-size:12px}
+.va-who b{font-size:15px}
+.va-who em{font-style:normal;font-size:12px;font-weight:700;color:var(--accent-ink);background:var(--accent);padding:2px 9px;border-radius:999px;letter-spacing:.04em}
+.rswitch{display:flex;align-items:center;gap:6px}
+.rs-hint{font-size:12px;color:var(--dim);margin-right:2px}
+.rs-btn{position:relative;display:inline-flex;align-items:center;gap:7px;padding:4px 12px 4px 4px;border-radius:999px;border:1px solid var(--line2);background:var(--panel);color:var(--muted);font:600 13px var(--sans)}
+.rs-btn .av{width:26px;height:26px;font-size:10px}
+.rs-btn:hover{border-color:var(--accent);color:var(--text)}
+.rs-btn.on{border-color:var(--accent);background:var(--accent-soft);color:var(--text)}
+.rs-btn .badge{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;font-size:10px}
+.dtiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:22px 0 8px}
+.dtile{position:relative;display:flex;align-items:center;gap:12px;text-align:left;padding:14px 16px;border-radius:16px;border:1px solid var(--line2);background:var(--panel);color:var(--text);transition:border-color .15s,transform .15s}
+.dtile:hover{border-color:var(--accent);transform:translateY(-1px)}
+.dtile.on{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 -3px 0 var(--accent) !important}
+.dt-ico{flex:none;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-size:18px;background:var(--inset);border:1px solid var(--line)}
+.dtile.on .dt-ico{border-color:var(--accent)}
+.dt-tx{flex:1;min-width:0;display:flex;flex-direction:column}
+.dt-tx b{font-size:14.5px;line-height:1.25}
+.dt-tx small{color:var(--muted);font-size:12.5px}
+.dt-n{flex:none;font:700 18px var(--mono);color:var(--text)}
+.dt-n.bad{color:var(--red)} .dt-n.new{color:var(--accent)} .dt-n.ok{color:var(--acid)}
+.dash-section{animation:fade .2s}
+@media (max-width:760px){
+  .viewas-in{gap:8px}
+  .rs-hint{display:none}
+  .rs-btn{padding:3px}
+  .rs-btn .rs-lbl{display:none}
+  .rs-btn.on .rs-lbl{display:inline;padding-right:8px}
+  .dtiles{grid-template-columns:1fr 1fr;gap:8px}
+  .dtile{padding:10px;gap:8px}
+  .dt-ico{width:30px;height:30px;font-size:15px}
+  .dt-tx b{font-size:13px}
+  .dt-tx small{font-size:11.5px}
+}
+
+/* ---------- Simpler screens: user chip, tabs, compact party lines ---------- */
+.me{display:flex;align-items:center;gap:8px;padding:3px 12px 3px 3px;border:1px solid var(--line2);border-radius:999px}
+.me .av{width:30px;height:30px;font-size:11px}
+.me-tx{display:flex;flex-direction:column;line-height:1.15}
+.me-tx b{font-size:13px}
+.me-tx em{font-style:normal;font-size:11px;color:var(--accent);font-weight:700}
+.dash-hint{color:var(--dim);font-size:14px;text-align:center;margin:26px 0}
+.dtiles{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.dtile{padding:18px}
+.evtabs{display:flex;gap:6px;flex-wrap:wrap;margin:18px 0 14px;padding:6px;border:1px solid var(--line);border-radius:14px;background:var(--panel)}
+.evt{display:inline-flex;align-items:center;gap:8px;background:none;border:0;color:var(--muted);font:600 14px var(--sans);padding:9px 14px;border-radius:10px}
+.evt:hover{color:var(--text);background:var(--panel2)}
+.evt.on{color:var(--accent-ink);background:var(--accent)}
+.evt-n{font:700 12px var(--mono);padding:1px 7px;border-radius:999px;background:var(--inset);color:var(--muted)}
+.evt.on .evt-n{background:rgba(0,0,0,.15);color:var(--accent-ink)}
+.evt-n.bad{color:var(--red)} .evt-n.new{color:var(--accent)}
+.ev-tip{font-size:13.5px;margin:0 0 10px}
+.plist{display:flex;flex-direction:column;gap:8px}
+.prow-wrap{border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
+.prow-wrap.bad{border-color:rgba(240,132,115,.45)}
+.prow-wrap.open{border-color:var(--accent)}
+.prow{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:0;color:var(--text);padding:12px 14px}
+.prow:hover{background:var(--panel2)}
+.prow-id{flex:1;min-width:0;display:flex;flex-direction:column}
+.prow-id b{font-size:15px}
+.prow-id small{color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prow-chev{color:var(--dim);font-size:14px;width:14px;text-align:center}
+.prow-detail{padding:0 12px 12px}
+.prow-detail .party{box-shadow:none !important;border-color:var(--line)}
+@media (max-width:760px){ .me-tx{display:none} .me{padding:3px} .evt{padding:8px 10px;font-size:13px} .dtile{padding:12px} }
+
+/* ---------- Availability ---------- */
+.pill.last{color:var(--accent);border-color:rgba(242,169,126,.45);background:var(--accent-soft) !important}
+.net-status{display:flex;flex-wrap:wrap;gap:6px}
+.net-avail{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:-6px 0 18px;padding:12px 14px;border:1px dashed var(--line2);border-radius:14px}
+.net-avail .lbl{font:600 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.net-avail .field{width:auto;margin:0;padding:8px 10px;min-width:180px}
+.net-avail .muted{font-size:13px}
+.ne-av:empty{display:none}
+.ev-opt .pill{margin-left:auto}
+.cal-hd{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px}
+.cal-hd b{font:800 18px var(--head)}
+.cal-help{font-size:13.5px;margin:0 0 14px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.cal-w{font:600 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);text-align:center;padding-bottom:4px}
+.cal-day{min-height:62px;border-radius:12px;border:1px solid var(--line);background:var(--inset);color:var(--text);display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;padding:7px 8px;text-align:left;transition:border-color .15s,transform .1s;overflow:hidden}
+.cal-day:hover:not([disabled]){border-color:var(--accent);transform:translateY(-1px)}
+.cal-day b{font:700 14px var(--mono)}
+.cal-day small{font-size:10.5px;line-height:1.2;color:var(--muted);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cal-day.free{border-color:rgba(143,214,165,.25)}
+.cal-day.busy{background:rgba(240,132,115,.1);border-color:rgba(240,132,115,.4)}
+.cal-day.busy small{color:var(--red)}
+.cal-day.last{background:var(--accent-soft);border-color:var(--accent)}
+.cal-day.last small{color:var(--accent);font-size:13px}
+.cal-day.booked{background:var(--panel2);border-color:var(--line2);cursor:default}
+.cal-day.booked small{color:var(--text);font-weight:600}
+.cal-day.past{opacity:.35;cursor:default}
+.cal-blank{min-height:62px}
+.cal-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;font-size:12.5px;color:var(--muted)}
+.cal-legend .lg::before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px;border:1px solid}
+.lg.free::before{border-color:rgba(143,214,165,.6)}
+.lg.busy::before{background:rgba(240,132,115,.3);border-color:var(--red)}
+.lg.last::before{background:var(--accent-soft);border-color:var(--accent)}
+.lg.booked::before{background:var(--panel2);border-color:var(--line2)}
+.replace-btn{margin-top:10px;display:flex}
+.rep-list{display:flex;flex-direction:column;gap:2px;max-height:52vh;overflow:auto}
+.rep-row{display:flex;align-items:center;gap:12px;padding:10px 4px;border-top:1px solid var(--line)}
+.rep-row:first-child{border-top:0}
+.rep-id{flex:1;min-width:0;display:flex;flex-direction:column}
+.rep-id small{color:var(--muted);font-size:12.5px}
+.rep-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:5px}
+.rep-meta .score{margin-top:0}
+@media (max-width:560px){ .cal-day{min-height:46px;padding:5px} .cal-day small{display:none} .cal-day.last small,.cal-day.busy small{display:block;font-size:10px} .cal-grid{gap:4px} }
+
+/* ---------- New event form ---------- */
+.sec-row{display:flex;align-items:center;gap:12px}
+.sec-row h2.sec{flex:1}
+.sec-row .btn{margin-top:14px}
+.ne-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;align-items:start;margin-top:18px}
+.ne-main{display:flex;flex-direction:column;gap:16px}
+.ne-side{position:sticky;top:84px}
+.ne-f{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;min-width:0}
+.ne-f label{font:600 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ne-f small{color:var(--dim);font-size:12px;margin-top:-4px}
+.ne-f .field{margin-bottom:0}
+.ne-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ne-row.three{grid-template-columns:1fr 1fr 1fr}
+.ne-check{display:flex;gap:8px;align-items:center;padding:11px 12px;border:1px solid var(--line2);border-radius:12px;font-size:14px;cursor:pointer}
+.ne-check input{accent-color:var(--accent);width:16px;height:16px}
+.field[type=date],.field[type=time]{color-scheme:dark}
+select.field{appearance:auto}
+.pick-grp{margin-bottom:12px}
+.pick{border:1px solid var(--line);border-radius:14px;margin-bottom:8px;transition:border-color .15s}
+.pick-hd{display:flex;align-items:center;gap:10px;padding:10px 12px;cursor:pointer}
+.pick-hd input{accent-color:var(--accent);width:17px;height:17px;flex:none}
+.pick-id{flex:1;min-width:0;display:flex;flex-direction:column}
+.pick-id b{font-size:14.5px}
+.pick-id small{color:var(--muted);font-size:12.5px}
+.pick-hd .score{margin-top:0}
+.pick-fields{display:none;gap:8px;padding:0 12px 12px 39px}
+.pick-fields .field{margin-bottom:0}
+.pick:has(input[name=ne-book]:checked){border-color:var(--accent);background:var(--accent-soft)}
+.pick:has(input[name=ne-book]:checked) .pick-fields{display:flex}
+.ev-desc{margin:0 0 10px;color:var(--muted);max-width:640px}
+@media (max-width:900px){ .ne-grid{grid-template-columns:1fr} .ne-side{position:static} }
+@media (max-width:560px){ .ne-row,.ne-row.three{grid-template-columns:1fr} .pick-fields{flex-direction:column;padding-left:12px} .pick-hd .score{display:none} }
+
+/* ---------- App tabs (Events / Network / Messages) ---------- */
+.apptabs{display:flex;gap:4px;margin-left:18px}
+.apptabs button{position:relative;background:none;border:0;color:var(--muted);font:600 14px var(--sans);padding:8px 12px;border-radius:10px}
+.apptabs button:hover{color:var(--text);background:var(--panel2)}
+.apptabs button.on{color:var(--text);background:var(--panel2);box-shadow:inset 0 -2px 0 var(--accent) !important}
+.apptabs .badge{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;font-size:10px}
+.hide{display:none !important}
+.mobile-only{display:none}
+
+/* ---------- Network ---------- */
+.net-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:22px 0 18px}
+.net-tools input{flex:1;min-width:220px;background:var(--inset);border:1px solid var(--line2);border-radius:12px;padding:12px 14px;color:var(--text);font:15px var(--sans);outline:none}
+.net-tools input:focus{border-color:var(--accent)}
+.fchips{display:flex;gap:6px;flex-wrap:wrap}
+.fchip{background:var(--panel);border:1px solid var(--line2);color:var(--muted);border-radius:999px;padding:8px 14px;font:600 13px var(--sans)}
+.fchip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.net-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.net-card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:10px;box-shadow:var(--shadow) !important}
+.net-top{display:flex;gap:12px;align-items:center}
+.av.big{width:46px;height:46px;font-size:14px;flex:none}
+.net-id{display:flex;flex-direction:column;min-width:0}
+.net-id b{font-size:16px;line-height:1.2}
+.net-id small{color:var(--muted);font-size:12.5px}
+.net-meta{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--muted)}
+.net-meta span{display:inline-flex;align-items:center;gap:4px}
+.net-tags{display:flex;flex-wrap:wrap;gap:5px}
+.net-tags span{font-size:11.5px;padding:2px 8px;border-radius:999px;border:1px solid var(--line2);color:var(--muted)}
+.net-status:empty{display:none}
+.pill.off{color:var(--dim);border-color:var(--line2);background:transparent}
+.net-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.net-actions .btn{flex:1}
+.field{width:100%;background:var(--inset);border:1px solid var(--line2);border-radius:12px;padding:11px 12px;color:var(--text);font:14px var(--sans);margin-bottom:10px;outline:none}
+.field:focus{border-color:var(--accent)}
+.ev-pick{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.ev-opt{display:flex;gap:10px;align-items:center;padding:10px 12px;border:1px solid var(--line2);border-radius:12px;cursor:pointer}
+.ev-opt input{accent-color:var(--accent)}
+.ev-opt span{display:flex;flex-direction:column}
+.ev-opt small{color:var(--muted);font-size:12px}
+.ev-opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.ev-opt.dis{opacity:.5;cursor:default}
+
+/* ---------- Messages ---------- */
+.msg-layout{display:grid;grid-template-columns:320px 1fr;gap:16px;margin-top:20px;min-height:520px}
+.msg-layout.single{grid-template-columns:1fr;max-width:760px}
+.conv-list{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:8px;display:flex;flex-direction:column;gap:2px;overflow:auto;max-height:640px}
+.conv{display:flex;gap:10px;align-items:center;text-align:left;background:none;border:0;color:var(--text);padding:10px;border-radius:12px;width:100%}
+.conv:hover{background:var(--panel2)}
+.conv.on{background:var(--panel2);box-shadow:inset 3px 0 0 var(--accent) !important}
+.conv .av{flex:none}
+.conv-tx{flex:1;min-width:0;display:flex;flex-direction:column}
+.conv-tx b{font-size:14px}
+.conv-tx small{color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.conv-r{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex:none}
+.conv-r small{color:var(--dim);font-size:11px}
+.thread{background:var(--panel);border:1px solid var(--line);border-radius:18px;display:flex;flex-direction:column;min-height:520px;overflow:hidden}
+.empty-thread{align-items:center;justify-content:center;color:var(--muted);padding:24px;text-align:center}
+.thread-hd{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.thread-hd > div{display:flex;flex-direction:column;flex:1;min-width:0}
+.thread-hd small{color:var(--muted);font-size:12.5px}
+.thread-hd .score{margin-top:0}
+.thread-hd .back{padding:0}
+.bubbles{flex:1;overflow:auto;padding:18px 16px;display:flex;flex-direction:column;gap:10px;max-height:460px}
+.bubble{max-width:78%;padding:10px 14px;border-radius:16px;background:var(--panel2);align-self:flex-start;border-bottom-left-radius:4px}
+.bubble.me{align-self:flex-end;background:var(--accent);color:var(--accent-ink);border-bottom-left-radius:16px;border-bottom-right-radius:4px}
+.bubble p{margin:0;font-size:14.5px}
+.bubble small{display:block;margin-top:4px;font-size:11px;opacity:.7}
+.bubble.typing p{color:var(--muted);font-style:italic}
+.quick{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
+.composer{display:flex;gap:10px;padding:12px 16px 16px;border-top:1px solid var(--line);align-items:flex-end}
+.composer textarea{flex:1;min-height:46px;max-height:140px;resize:vertical;background:var(--inset);color:var(--text);border:1px solid var(--line2);border-radius:12px;padding:11px 12px;font:14.5px/1.4 var(--sans);outline:none}
+.composer textarea:focus{border-color:var(--accent)}
+@media (max-width:1100px){ .apptabs{margin-left:8px} .apptabs button{padding:8px 9px;font-size:13px} .who{display:none} }
+@media (max-width:760px){
+  .top-in{flex-wrap:wrap;height:auto;padding-top:10px;padding-bottom:6px;row-gap:6px}
+  .apptabs{order:3;width:100%;margin-left:0;justify-content:space-between}
+  .apptabs button{flex:1}
+  .msg-layout{grid-template-columns:1fr;min-height:0}
+  .msg-layout.has-thread .conv-list{display:none}
+  .msg-layout:not(.has-thread) .thread{display:none}
+  .mobile-only{display:inline-flex}
+  .bubbles{max-height:52vh}
+  .thread-hd .score{display:none}
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width:980px){
   .ev-cards{grid-template-columns:1fr 1fr}
@@ -890,12 +1124,17 @@ const PAST_EVENTS = [
       { name:'NØRA',              sub:'Peak-time techno · hybrid live set', set:'01:00 – 03:00', rating:null },
       { name:'Les Ombres Douces', sub:'Dream-pop duo · opening set',        set:'22:30 – 23:15', rating:null },
       { name:'DJ BRIKKE',         sub:'Closing set',                        set:'03:00 – 06:00',
-        rating:{ stars:3, tags:['Great set','Arrived late'], note:'Strong closing set, but arrived 40 minutes late.', date:'Sun 15 Nov' } }
+        rating:{ stars:3, tags:['Great set','Arrived late'], note:'Strong closing set, but arrived 40 minutes late.', date:'Sun 15 Nov' } },
+      { kind:'supplier', name:'LumenSound BV', sub:'Sound & light · incl. operator', set:'Load-in 16:00', rating:null },
+      { kind:'supplier', name:'Bar Kolibri',   sub:'Bar & artist catering',          set:'Bar 22:00 – 05:30', rating:null }
     ]
   }
 ];
 
 const RATING_TAGS = { good:['On time','Great set','Easy to work with','Professional','Crowd loved it'], bad:['Arrived late','Rider issues','Hard to reach'] };
+const SUPPLIER_TAGS = { good:['On time','Equipment as agreed','Professional','Easy to work with','Great crew'], bad:['Late load-in','Missing equipment','Hard to reach'] };
+function tagsFor(kind){ return kind === 'supplier' ? SUPPLIER_TAGS : RATING_TAGS; }
+const BAD_TAGS = [...RATING_TAGS.bad, ...SUPPLIER_TAGS.bad];
 
 const REVIEWS = {
   'NØRA': [
@@ -926,25 +1165,536 @@ const REVIEWS = {
   ],
   'Ines Moreau': [
     { stars:5, by:'Ancienne Belgique · Club',  date:'Wed 21 Oct', tags:['Crowd loved it'], note:'Beautiful, intimate set.' }
+  ],
+  'Elise Verhaegen': [
+    { stars:5, by:'Handelsbeurs · Gent',       date:'Sun 8 Nov',  tags:['Professional','Crowd loved it'], note:'Breathtaking solo piano evening.' },
+    { stars:5, by:'Flagey · Brussel',          date:'Thu 15 Oct', tags:['On time'], note:'' }
+  ],
+  'Blue Leie Trio': [
+    { stars:4, by:'Hot Club de Gand',          date:'Fri 13 Nov', tags:['Great set','Easy to work with'], note:'' }
+  ],
+  'MC Driss': [
+    { stars:4, by:'Recyclart · Brussel',       date:'Sat 31 Oct', tags:['Crowd loved it'], note:'Huge energy.' },
+    { stars:3, by:'Bunker 22 · Leuven',        date:'Fri 2 Oct',  tags:['Arrived late'], note:'' }
+  ],
+  'LumenSound BV': [
+    { stars:5, by:'Zaal Lumière · Brussel',    date:'Fri 6 Nov',  tags:['Equipment as agreed','Great crew'], note:'Flawless sound for a sold-out show.' },
+    { stars:4, by:'Kraak Collective · Gent',   date:'Sat 24 Oct', tags:['Professional'], note:'' },
+    { stars:4, by:'Havenfest · Antwerpen',     date:'Sat 22 Aug', tags:['On time'], note:'' }
+  ],
+  'Bar Kolibri': [
+    { stars:4, by:'Kraak Collective · Gent',   date:'Sat 24 Oct', tags:['Easy to work with'], note:'' }
+  ],
+  'NightGuard BV': [
+    { stars:3, by:'Bunker 22 · Leuven',        date:'Fri 30 Oct', tags:['Hard to reach'], note:'Fine on the night, slow to answer before.' },
+    { stars:4, by:'Havenfest · Antwerpen',     date:'Sat 22 Aug', tags:['Professional'], note:'' }
+  ],
+  'Kapitaal Audio': [
+    { stars:5, by:'Leiewind Festival',         date:'Sat 27 Jun', tags:['Equipment as agreed','Great crew'], note:'' },
+    { stars:4, by:'Gentse Feesten · stage 4',  date:'Sat 25 Jul', tags:['On time'], note:'' }
+  ],
+  'StageCraft Rigging': [
+    { stars:5, by:'Rock Zottegem',             date:'Sat 11 Jul', tags:['Professional'], note:'Stage roof up in record time.' }
+  ],
+  'Gentse Foodtruck Kollectief': [
+    { stars:5, by:'Leiewind Festival',         date:'Sat 27 Jun', tags:['Great crew'], note:'' }
   ]
 };
 
+/* ---------------- network & messages ----------------
+   DIRECTORY: artists and suppliers a promoter can find, add to their network, message or invite.
+   onPlatform:false = not on we.TRUSS yet -> the promoter sends a platform invite instead of a message.
+   user: links a profile to a demo login (NØRA = artist role, LumenSound = supplier role). */
+const DIRECTORY = [
+  { id:'nora',       kind:'artist',   name:'NØRA',               sub:'Techno · hybrid live set',            city:'Antwerpen', price:'€ 1.000 – 1.800', tags:['Techno','Live act'],     inNetwork:true,  onPlatform:true, user:'artist' },
+  { id:'kobe',       kind:'artist',   name:'KOBE b2b YASMINE',   sub:'Hard groove · b2b DJ set',            city:'Gent',      price:'€ 600 – 900',     tags:['Techno','DJ'],          inNetwork:true,  onPlatform:true },
+  { id:'brikke',     kind:'artist',   name:'DJ BRIKKE',          sub:'Closing sets · Berlin & Brussels',    city:'Brussel',   price:'€ 1.200 – 1.500', tags:['Techno','DJ'],          inNetwork:true,  onPlatform:true },
+  { id:'mira',       kind:'artist',   name:'Mira Solis',         sub:'Indie-soul · 4-piece band',           city:'Brussel',   price:'€ 2.000 – 3.000', tags:['Band','Soul'],          inNetwork:true,  onPlatform:true },
+  { id:'ombres',     kind:'artist',   name:'Les Ombres Douces',  sub:'Dream-pop duo',                       city:'Liège',     price:'€ 300 – 500',     tags:['Pop','Duo'],            inNetwork:true,  onPlatform:true },
+  { id:'ines',       kind:'artist',   name:'Ines Moreau',        sub:'Singer-songwriter',                   city:'Gent',      price:'€ 900 – 1.200',   tags:['Singer-songwriter'],    inNetwork:true,  onPlatform:true },
+  { id:'elise',      kind:'artist',   name:'Elise Verhaegen',    sub:'Classical pianist · solo & chamber',  city:'Gent',      price:'€ 800 – 1.500',   tags:['Classical','Piano'],    inNetwork:false, onPlatform:true },
+  { id:'blueleie',   kind:'artist',   name:'Blue Leie Trio',     sub:'Jazz trio · standards & originals',   city:'Gent',      price:'€ 900 – 1.400',   tags:['Jazz','Trio'],          inNetwork:false, onPlatform:true },
+  { id:'driss',      kind:'artist',   name:'MC Driss',           sub:'Hip-hop · live with DJ',              city:'Brussel',   price:'€ 700 – 1.200',   tags:['Hip-hop','Live act'],   inNetwork:false, onPlatform:true },
+  { id:'zoe',        kind:'artist',   name:'Zoë Claes',          sub:'Folk singer · acoustic guitar',       city:'Leuven',    price:'€ 400 – 700',     tags:['Folk','Acoustic'],      inNetwork:false, onPlatform:false },
+  { id:'lumen',      kind:'supplier', name:'LumenSound BV',      sub:'Sound & light rental · with operator',city:'Antwerpen', price:'From € 1.500 / night', tags:['Sound','Light'],     inNetwork:true,  onPlatform:true, user:'supplier' },
+  { id:'kolibri',    kind:'supplier', name:'Bar Kolibri',        sub:'Bar & artist catering',               city:'Antwerpen', price:'35% margin share', tags:['Bar','Catering'],       inNetwork:true,  onPlatform:true },
+  { id:'nightguard', kind:'supplier', name:'NightGuard BV',      sub:'Door & floor security',               city:'Antwerpen', price:'€ 38 / guard / hour', tags:['Security'],          inNetwork:true,  onPlatform:true },
+  { id:'kapitaal',   kind:'supplier', name:'Kapitaal Audio',     sub:'Sound rental · festivals & open air', city:'Gent',      price:'From € 2.000 / day', tags:['Sound','Festival'],   inNetwork:false, onPlatform:true },
+  { id:'stagecraft', kind:'supplier', name:'StageCraft Rigging', sub:'Truss, stages & roofs',               city:'Mechelen',  price:'On quote',        tags:['Stage','Truss'],        inNetwork:false, onPlatform:true },
+  { id:'foodtruck',  kind:'supplier', name:'Gentse Foodtruck Kollectief', sub:'Food trucks & bars',        city:'Gent',      price:'€ 250 pitch + 15%', tags:['Food','Bar'],         inNetwork:true,  onPlatform:true },
+  { id:'beamteam',   kind:'supplier', name:'BeamTeam Lighting',  sub:'Lighting design & operators',         city:'Kortrijk',  price:'On quote',        tags:['Light'],                inNetwork:false, onPlatform:false }
+];
+
+/* ---------------- availability ----------------
+   Each artist/supplier keeps a calendar. Days not set = available. 'busy' = not available,
+   'last' = available AND open to last-minute requests. Days they're booked in an event are filled in automatically. */
+const AVAIL = {
+  nora:       { '2026-12-19':'last', '2026-12-31':'busy', '2027-01-09':'last', '2027-01-23':'busy' },
+  kobe:       { '2026-12-31':'busy' },
+  brikke:     { '2026-12-19':'busy', '2026-12-26':'busy' },
+  mira:       { '2026-12-12':'busy', '2026-12-13':'busy' },
+  ombres:     { '2026-12-12':'last' },
+  ines:       { '2026-12-12':'busy', '2027-02-13':'last' },
+  elise:      { '2026-12-12':'last', '2026-12-20':'busy' },
+  blueleie:   { '2026-12-12':'last', '2027-01-22':'busy', '2027-02-13':'last' },
+  driss:      { '2026-12-12':'last', '2027-02-13':'busy' },
+  lumen:      { '2026-12-19':'busy' },
+  kapitaal:   { '2026-12-12':'last', '2027-01-22':'last' },
+  stagecraft: { '2026-12-12':'busy' },
+  kolibri:    { '2027-01-22':'last' }
+};
+
+// messages: from 'me' = the promoter (Lotte), from 'them' = the contact. read = seen by the person it was sent to.
+const CONVOS = [
+  { id:'c-brikke', with:'brikke', msgs:[
+    { from:'them', text:'Hi Lotte, my flight lands at 01:40 on the 12th. Could you arrange a taxi from Zaventem?', time:'Mon 23 Nov · 21:20', read:false } ] },
+  { id:'c-lumen', with:'lumen', msgs:[
+    { from:'me',   text:'Hi Pieter, can you double-check the 4 CDJ-3000s for 12 December?', time:'Mon 23 Nov · 11:15', read:true },
+    { from:'them', text:'Checking our stock tomorrow morning, I’ll come back to you.',       time:'Mon 23 Nov · 16:48', read:false } ] },
+  { id:'c-nora', with:'nora', msgs:[
+    { from:'them', text:'Hi Lotte! Is a hotel night included for PULSE//NACHT 07?', time:'Tue 24 Nov · 19:02', read:true },
+    { from:'me',   text:'Hi Noor! Still checking with Hotel Scheldezicht, I’ll confirm by Friday.', time:'Tue 24 Nov · 19:40', read:false } ] }
+];
+
 const S = { page:'landing', role:null, screen:'home', id:null };  // page: 'landing' (public website) or 'login' (role picker)
 
+/* =========================================================
+   LANGUAGES: EN · NL · FR · DE
+   The screens are written in English. After anything is drawn, translateDom() swaps every
+   interface text for the chosen language (exact matches from TR, then the number/name
+   phrases in PATTERNS). Names, events and messages are data and stay as typed.
+   ========================================================= */
+const LANGS = ['en','nl','fr','de'];
+S.lang = (() => { try { const l = localStorage.getItem('wetruss-lang'); return LANGS.includes(l) ? l : 'en'; } catch(e){ return 'en'; } })();
+const L = (nl, fr, de) => ({ nl, fr, de })[S.lang];
+const pl = (n, one, many) => +n === 1 ? one : many;
+
+const D_SHORT = { en:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'], nl:['zo','ma','di','wo','do','vr','za'], fr:['dim.','lun.','mar.','mer.','jeu.','ven.','sam.'], de:['So','Mo','Di','Mi','Do','Fr','Sa'] };
+const M_SHORT = { en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], nl:['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'],
+  fr:['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'], de:['Jan.','Feb.','März','Apr.','Mai','Juni','Juli','Aug.','Sep.','Okt.','Nov.','Dez.'] };
+const M_LONG = { en:['January','February','March','April','May','June','July','August','September','October','November','December'],
+  nl:['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'],
+  fr:['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'],
+  de:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'] };
+
+// [English, Nederlands, Français, Deutsch]
+const TR_ROWS = [
+['Home','Home','Accueil','Start'],['For every stage','Voor elk podium','Pour chaque scène','Für jede Bühne'],['How it works','Hoe het werkt','Comment ça marche','So funktioniert’s'],
+['Profiles','Profielen','Profils','Profile'],['Features','Functies','Fonctionnalités','Funktionen'],['About','Over ons','À propos','Über uns'],['Contact','Contact','Contact','Kontakt'],
+['Log in','Inloggen','Se connecter','Anmelden'],['Log in to the demo','Inloggen in de demo','Accéder à la démo','Zur Demo anmelden'],['Menu','Menu','Menu','Menü'],
+['Event coordination platform · Belgium','Platform voor eventcoördinatie · België','Plateforme de coordination d’événements · Belgique','Plattform für Eventkoordination · Belgien'],
+['One shared space per event where the promoter, the artists and the suppliers each have their own access — and see exactly what concerns them. No more scattered WhatsApps, emails, DMs and Excel sheets.',
+ 'Eén gedeelde ruimte per evenement waar de organisator, de artiesten en de leveranciers elk hun eigen toegang hebben — en precies zien wat hen aangaat. Geen verspreide WhatsApps, mails, DM’s en Excel-bestanden meer.',
+ 'Un espace partagé par événement où l’organisateur, les artistes et les prestataires ont chacun leur propre accès — et voient exactement ce qui les concerne. Fini les WhatsApp, e-mails, DM et fichiers Excel éparpillés.',
+ 'Ein gemeinsamer Raum pro Veranstaltung, in dem Veranstalter, Künstler und Dienstleister jeweils ihren eigenen Zugang haben — und genau sehen, was sie betrifft. Schluss mit verstreuten WhatsApps, E-Mails, DMs und Excel-Tabellen.'],
+['Try the demo →','Probeer de demo →','Essayer la démo →','Demo testen →'],['Classical & piano','Klassiek & piano','Classique & piano','Klassik & Klavier'],['Bands','Bands','Groupes','Bands'],
+['Singer-songwriters','Singer-songwriters','Auteurs-compositeurs','Singer-Songwriter'],['Theatre & comedy','Theater & comedy','Théâtre & humour','Theater & Comedy'],
+['For independent promoters of concerts, club nights and small festivals · 100–1,000 visitors','Voor onafhankelijke organisatoren van concerten, clubavonden en kleine festivals · 100–1.000 bezoekers','Pour les organisateurs indépendants de concerts, soirées club et petits festivals · 100–1 000 visiteurs','Für unabhängige Veranstalter von Konzerten, Clubnächten und kleinen Festivals · 100–1.000 Besucher'],
+['shared space per event','gedeelde ruimte per evenement','espace partagé par événement','gemeinsamer Raum pro Veranstaltung'],['roles, each with their own view','rollen, elk met een eigen weergave','rôles, chacun avec sa propre vue','Rollen, jede mit eigener Ansicht'],
+['changes lost in group chats','wijzigingen verloren in groepschats','changements perdus dans les groupes','Änderungen, die in Gruppenchats untergehen'],['1 tap','1 tik','1 clic','1 Tipp'],
+['to confirm or report a problem','om te bevestigen of een probleem te melden','pour confirmer ou signaler un problème','zum Bestätigen oder Melden eines Problems'],
+['See it in action','Zie het in actie','Voir en action','In Aktion sehen'],['Everyone on','Iedereen op','Tout le monde','Alle auf'],['the same page.','dezelfde lijn.','sur la même longueur d’onde.','demselben Stand.'],
+['The promoter sees the whole event at a glance. The artist sees their set time, their rider and the latest changes — on their phone. When someone confirms, everyone knows.',
+ 'De organisator ziet het hele evenement in één oogopslag. De artiest ziet settijd, rider en de laatste wijzigingen — op de gsm. Als iemand bevestigt, weet iedereen het.',
+ 'L’organisateur voit tout l’événement d’un coup d’œil. L’artiste voit son horaire, son rider et les derniers changements — sur son téléphone. Quand quelqu’un confirme, tout le monde le sait.',
+ 'Der Veranstalter sieht die ganze Veranstaltung auf einen Blick. Künstler sehen Set-Zeit, Rider und die neuesten Änderungen — auf dem Handy. Wenn jemand bestätigt, wissen es alle.'],
+['Promoter view','Organisatorweergave','Vue organisateur','Veranstalter-Ansicht'],['Artist','Artiest','Artiste','Künstler'],['Confirmed','Bevestigd','Confirmé','Bestätigt'],['Venue','Zaal','Salle','Location'],
+['Sound & light','Geluid & licht','Son & lumière','Ton & Licht'],['Your set','Jouw set','Ton set','Dein Set'],['NEW UPDATE','NIEUWE UPDATE','NOUVELLE MISE À JOUR','NEUES UPDATE'],
+['Grand piano tuned on the day','Vleugel gestemd op de dag zelf','Piano à queue accordé le jour même','Flügel am Tag gestimmt'],
+['✓ Confirm I’ll be there','✓ Ik bevestig dat ik er ben','✓ Je confirme ma présence','✓ Ich bestätige meine Teilnahme'],
+['✓ Les Ombres Douces confirmed — the promoter sees it instantly','✓ Les Ombres Douces bevestigde — de organisator ziet het meteen','✓ Les Ombres Douces a confirmé — l’organisateur le voit aussitôt','✓ Les Ombres Douces hat bestätigt — der Veranstalter sieht es sofort'],
+['The problem','Het probleem','Le problème','Das Problem'],['Scattered chats.','Verspreide chats.','Des discussions éparpillées.','Verstreute Chats.'],['Broken nights.','Mislukte avonden.','Des soirées ratées.','Verpatzte Nächte.'],
+['Independent promoters in Belgium organise everything through WhatsApp, email, Instagram DMs and Excel. Nobody has one overview of what’s agreed, changes don’t reach everyone — and it shows on the night.',
+ 'Onafhankelijke organisatoren in België regelen alles via WhatsApp, e-mail, Instagram-DM’s en Excel. Niemand heeft één overzicht van wat is afgesproken, wijzigingen bereiken niet iedereen — en dat merk je op de avond zelf.',
+ 'En Belgique, les organisateurs indépendants gèrent tout via WhatsApp, e-mail, DM Instagram et Excel. Personne n’a de vue d’ensemble de ce qui est convenu, les changements n’atteignent pas tout le monde — et ça se voit le soir même.',
+ 'Unabhängige Veranstalter in Belgien organisieren alles über WhatsApp, E-Mail, Instagram-DMs und Excel. Niemand hat einen Überblick über das Vereinbarte, Änderungen erreichen nicht alle — und das merkt man am Abend selbst.'],
+['✕ Artist no-shows','✕ Artiesten die niet opdagen','✕ Artistes absents','✕ Künstler, die nicht auftauchen'],
+['A stage time changed in one chat, but the artist only saw the old message.','Een speeltijd veranderde in één chat, maar de artiest zag alleen het oude bericht.','Un horaire a changé dans un chat, mais l’artiste n’a vu que l’ancien message.','Eine Auftrittszeit wurde in einem Chat geändert, aber der Künstler sah nur die alte Nachricht.'],
+['✕ Wrong equipment','✕ Verkeerde apparatuur','✕ Mauvais matériel','✕ Falsches Equipment'],
+['The band’s rider asked for a drum kit and four monitors. The supplier’s Excel said two.','De rider van de band vroeg een drumstel en vier monitors. In de Excel van de leverancier stonden er twee.','Le rider du groupe demandait une batterie et quatre retours. L’Excel du prestataire en indiquait deux.','Der Rider der Band verlangte ein Schlagzeug und vier Monitore. In der Excel-Liste des Dienstleisters standen zwei.'],
+['✕ Unclear arrival times','✕ Onduidelijke aankomsttijden','✕ Heures d’arrivée floues','✕ Unklare Ankunftszeiten'],
+['Load-in, doors, soundcheck — five versions in five inboxes.','Load-in, deuren, soundcheck — vijf versies in vijf inboxen.','Montage, portes, balances — cinq versions dans cinq boîtes mail.','Aufbau, Einlass, Soundcheck — fünf Versionen in fünf Postfächern.'],
+['Made for every stage','Gemaakt voor elk podium','Conçu pour chaque scène','Für jede Bühne gemacht'],['From a grand piano','Van een vleugel','D’un piano à queue','Vom Konzertflügel'],['to a festival field.','tot een festivalweide.','à un champ de festival.','bis zur Festivalwiese.'],
+['Every artist needs different things to give their best performance. we.TRUSS makes sure those details are agreed, confirmed and known by everyone who needs to know.',
+ 'Elke artiest heeft iets anders nodig voor een topoptreden. we.TRUSS zorgt dat die details afgesproken, bevestigd en gekend zijn door iedereen die ze moet kennen.',
+ 'Chaque artiste a besoin de choses différentes pour donner le meilleur. we.TRUSS veille à ce que ces détails soient convenus, confirmés et connus de tous ceux qui doivent les connaître.',
+ 'Jeder Künstler braucht etwas anderes für den besten Auftritt. we.TRUSS sorgt dafür, dass diese Details vereinbart, bestätigt und allen bekannt sind, die sie kennen müssen.'],
+['The pianist','De pianist','Le pianiste','Der Pianist'],['A tuned grand piano at 15:00.','Een gestemde vleugel om 15:00.','Un piano à queue accordé à 15 h.','Ein gestimmter Flügel um 15:00.'],
+['A quiet dressing room, a piano tuner booked, and a 20:30 start. Agreed in writing, in one place.','Een rustige kleedkamer, een pianostemmer geboekt en een start om 20:30. Schriftelijk afgesproken, op één plek.','Une loge calme, un accordeur réservé et un début à 20 h 30. Convenu par écrit, au même endroit.','Eine ruhige Garderobe, ein gebuchter Klavierstimmer und Beginn um 20:30. Schriftlich vereinbart, an einem Ort.'],
+['✓ Rider confirmed by the promoter','✓ Rider bevestigd door de organisator','✓ Rider confirmé par l’organisateur','✓ Rider vom Veranstalter bestätigt'],
+['The band','De band','Le groupe','Die Band'],['Five musicians, one van.','Vijf muzikanten, één busje.','Cinq musiciens, un van.','Fünf Musiker, ein Bus.'],
+['Backline, parking for the van and a soundcheck slot. Everyone sees the same load-in time.','Backline, parking voor het busje en een soundcheckslot. Iedereen ziet hetzelfde load-in-uur.','Backline, parking pour le van et un créneau de balances. Tout le monde voit la même heure de montage.','Backline, Parkplatz für den Bus und ein Soundcheck-Slot. Alle sehen dieselbe Aufbauzeit.'],
+['✓ Load-in time seen by all','✓ Load-in-uur door iedereen gezien','✓ Heure de montage vue par tous','✓ Aufbauzeit von allen gesehen'],
+['The DJ','De dj','Le DJ','Der DJ'],['Set time, decks, taxi.','Settijd, decks, taxi.','Horaire, platines, taxi.','Set-Zeit, Decks, Taxi.'],
+['The equipment, the late-night slot and the ride home. No more digging through DMs.','De apparatuur, het late slot en de rit naar huis. Niet meer zoeken in DM’s.','Le matériel, le créneau tardif et le retour. Fini de fouiller dans les DM.','Das Equipment, der späte Slot und die Fahrt nach Hause. Kein Suchen mehr in DMs.'],
+['✓ Equipment list confirmed','✓ Materiaallijst bevestigd','✓ Liste du matériel confirmée','✓ Equipment-Liste bestätigt'],
+['The festival crew','De festivalcrew','L’équipe du festival','Die Festival-Crew'],['Roof, power, access.','Dak, stroom, toegang.','Toit, électricité, accès.','Dach, Strom, Zufahrt.'],
+['Stage roof, generator and site access. Changes reach the crew before the trucks leave.','Podiumdak, generator en toegang tot het terrein. Wijzigingen bereiken de crew voor de vrachtwagens vertrekken.','Toit de scène, groupe électrogène et accès au site. Les changements arrivent à l’équipe avant le départ des camions.','Bühnendach, Generator und Geländezufahrt. Änderungen erreichen die Crew, bevor die LKWs losfahren.'],
+['✓ Update delivered to 4 parties','✓ Update bezorgd aan 4 partijen','✓ Mise à jour envoyée à 4 parties','✓ Update an 4 Parteien zugestellt'],
+['One event.','Eén evenement.','Un événement.','Eine Veranstaltung.'],['One source of truth.','Eén bron van waarheid.','Une seule source de vérité.','Eine einzige Quelle der Wahrheit.'],
+['Set up the event','Zet het evenement op','Créez l’événement','Veranstaltung anlegen'],
+['The promoter adds the venue, artists, sound & light, bar and security — with what’s agreed: fees, set times, riders, equipment, arrival times.','De organisator voegt de zaal, artiesten, geluid & licht, bar en security toe — met wat is afgesproken: gages, settijden, riders, apparatuur, aankomsttijden.','L’organisateur ajoute la salle, les artistes, le son & la lumière, le bar et la sécurité — avec ce qui est convenu : cachets, horaires, riders, matériel, heures d’arrivée.','Der Veranstalter fügt Location, Künstler, Ton & Licht, Bar und Security hinzu — mit allem Vereinbarten: Gagen, Set-Zeiten, Rider, Equipment, Ankunftszeiten.'],
+['Everyone gets their own view','Iedereen krijgt een eigen weergave','Chacun a sa propre vue','Alle bekommen ihre eigene Ansicht'],
+['Artists see their gig. Suppliers see their job. Nobody drowns in information that isn’t theirs — and everyone confirms with one tap.','Artiesten zien hun optreden. Leveranciers zien hun opdracht. Niemand verdrinkt in informatie die niet voor hen is — en iedereen bevestigt met één tik.','Les artistes voient leur date. Les prestataires voient leur mission. Personne ne se noie dans des infos qui ne le concernent pas — et chacun confirme en un clic.','Künstler sehen ihren Gig. Dienstleister sehen ihren Auftrag. Niemand ertrinkt in Infos, die ihn nicht betreffen — und alle bestätigen mit einem Tipp.'],
+['Push changes, see who’s seen them','Stuur wijzigingen, zie wie ze gezien heeft','Envoyez les changements, voyez qui les a vus','Änderungen senden, sehen, wer sie gesehen hat'],
+['“Doors move to 23:00” goes only to the parties it affects. The change log shows who has read it — and who still hasn’t.','„Deuren naar 23:00” gaat alleen naar de betrokken partijen. Het wijzigingslog toont wie het gelezen heeft — en wie nog niet.','« Portes à 23 h » ne va qu’aux parties concernées. L’historique montre qui l’a lu — et qui pas encore.','„Einlass um 23:00“ geht nur an die Betroffenen. Das Änderungsprotokoll zeigt, wer es gelesen hat — und wer noch nicht.'],
+['Know who sees what.','Weet wie wat ziet.','Sachez qui voit quoi.','Wissen, wer was sieht.'],
+['Three kinds of access, one shared event. Pick a profile to step straight into the demo.','Drie soorten toegang, één gedeeld evenement. Kies een profiel om meteen de demo in te stappen.','Trois types d’accès, un événement partagé. Choisissez un profil pour entrer directement dans la démo.','Drei Zugangsarten, eine gemeinsame Veranstaltung. Wähle ein Profil und steig direkt in die Demo ein.'],
+['Promoter','Organisator','Organisateur','Veranstalter'],['The organiser · full overview','De organisator · volledig overzicht','L’organisateur · vue d’ensemble','Der Veranstalter · voller Überblick'],
+['Dashboard with readiness score per event','Dashboard met gereedheidsscore per evenement','Tableau de bord avec score de préparation par événement','Dashboard mit Bereitschafts-Score pro Veranstaltung'],
+['Every party, every agreement, every status','Elke partij, elke afspraak, elke status','Chaque partie, chaque accord, chaque statut','Jede Partei, jede Vereinbarung, jeder Status'],
+['Open items sorted by urgency','Openstaande punten volgens dringendheid','Points ouverts triés par urgence','Offene Punkte nach Dringlichkeit'],
+['Post updates to exactly the right people','Stuur updates naar precies de juiste mensen','Envoyez des mises à jour aux bonnes personnes','Updates genau an die richtigen Leute'],
+['Change log with “seen by” receipts','Wijzigingslog met „gezien door”','Historique avec accusés « vu par »','Änderungsprotokoll mit „gesehen von“'],
+['Enter as promoter →','Ga verder als organisator →','Entrer comme organisateur →','Als Veranstalter eintreten →'],['Bands · singers · DJs · performers','Bands · zangers · dj’s · performers','Groupes · chanteurs · DJ · performers','Bands · Sänger · DJs · Performer'],
+['Stage time, fee, arrival & parking','Speeltijd, gage, aankomst & parking','Horaire, cachet, arrivée & parking','Auftrittszeit, Gage, Ankunft & Parken'],['Rider status: what’s confirmed','Riderstatus: wat bevestigd is','Statut du rider : ce qui est confirmé','Rider-Status: was bestätigt ist'],
+['Your contact person, one tap to call','Je contactpersoon, één tik om te bellen','Votre contact, un clic pour appeler','Deine Kontaktperson, ein Tipp zum Anrufen'],['Latest updates that concern you','Laatste updates die jou aangaan','Dernières mises à jour qui vous concernent','Neueste Updates, die dich betreffen'],
+['Big “Confirm I’ll be there” button','Grote knop „Ik bevestig dat ik er ben”','Gros bouton « Je confirme ma présence »','Großer Button „Ich bestätige meine Teilnahme“'],['Enter as artist →','Ga verder als artiest →','Entrer comme artiste →','Als Künstler eintreten →'],
+['Supplier','Leverancier','Prestataire','Dienstleister'],['Sound & light · venue · bar · security','Geluid & licht · zaal · bar · security','Son & lumière · salle · bar · sécurité','Ton & Licht · Location · Bar · Security'],
+['Agreed equipment list with quantities','Afgesproken materiaallijst met aantallen','Liste du matériel convenu avec quantités','Vereinbarte Equipment-Liste mit Mengen'],['Load-in & load-out times','Load-in- en load-outuren','Heures de montage et démontage','Auf- und Abbauzeiten'],
+['Site access & on-site contact','Toegang & contact ter plaatse','Accès au site & contact sur place','Zufahrt & Kontakt vor Ort'],['Confirm the job or flag “item unavailable”','Bevestig de opdracht of meld „item niet beschikbaar”','Confirmez la mission ou signalez « matériel indisponible »','Auftrag bestätigen oder „Artikel nicht verfügbar“ melden'],
+['Enter as supplier →','Ga verder als leverancier →','Entrer comme prestataire →','Als Dienstleister eintreten →'],['Everything that holds','Alles wat de show','Tout ce qui fait','Alles, was die Show'],['the show together.','overeind houdt.','tenir le spectacle.','zusammenhält.'],
+['Readiness score','Gereedheidsscore','Score de préparation','Bereitschafts-Score'],['See at a glance how much of each event is confirmed.','Zie in één oogopslag hoeveel van elk evenement bevestigd is.','Voyez d’un coup d’œil ce qui est confirmé pour chaque événement.','Auf einen Blick sehen, wie viel jeder Veranstaltung bestätigt ist.'],
+['Open items by urgency','Openstaande punten volgens dringendheid','Points ouverts par urgence','Offene Punkte nach Dringlichkeit'],['Problems first, then the nearest deadline. Nothing slips through.','Eerst de problemen, dan de dichtste deadline. Niets glipt erdoor.','D’abord les problèmes, puis l’échéance la plus proche. Rien n’échappe.','Erst Probleme, dann die nächste Frist. Nichts rutscht durch.'],
+['Targeted updates','Gerichte updates','Mises à jour ciblées','Gezielte Updates'],['Choose which parties a change affects. Only they get notified.','Kies welke partijen een wijziging aangaat. Alleen zij krijgen een melding.','Choisissez quelles parties sont concernées. Seules elles sont notifiées.','Wähle, wen eine Änderung betrifft. Nur sie werden benachrichtigt.'],
+['Seen receipts','Leesbevestigingen','Accusés de lecture','Lesebestätigungen'],['Know exactly who has read a change — and who to call.','Weet precies wie een wijziging gelezen heeft — en wie je moet bellen.','Sachez exactement qui a lu un changement — et qui appeler.','Wisse genau, wer eine Änderung gelesen hat — und wen du anrufen musst.'],
+['One-tap confirm','Bevestigen met één tik','Confirmation en un clic','Bestätigen mit einem Tipp'],['Artists and suppliers confirm or report a problem in seconds.','Artiesten en leveranciers bevestigen of melden een probleem in enkele seconden.','Artistes et prestataires confirment ou signalent un problème en quelques secondes.','Künstler und Dienstleister bestätigen oder melden ein Problem in Sekunden.'],
+['Phone first','Eerst voor de gsm','Pensé pour le mobile','Smartphone zuerst'],['Built for the people who are on the road, not behind a desk.','Gemaakt voor mensen die onderweg zijn, niet achter een bureau.','Conçu pour ceux qui sont sur la route, pas derrière un bureau.','Gemacht für Leute, die unterwegs sind, nicht am Schreibtisch.'],
+['About the name','Over de naam','À propos du nom','Über den Namen'],['Why','Waarom','Pourquoi','Warum'],['A','Een','Un','Ein'],
+['is the metal frame that holds the lights and sound above a stage.','is het metalen frame dat licht en geluid boven een podium draagt.','est la structure métallique qui porte la lumière et le son au-dessus d’une scène.','ist das Metallgerüst, das Licht und Ton über einer Bühne trägt.'],
+['It carries the whole event','Het draagt het hele evenement','Il porte tout l’événement','Es trägt die ganze Veranstaltung,'],['without anyone noticing','zonder dat iemand het merkt','sans que personne ne le remarque','ohne dass es jemand merkt'],
+['— just like our platform.','— net als ons platform.','— comme notre plateforme.','— genau wie unsere Plattform.'],['The name reflects our core theme:','De naam weerspiegelt ons kernthema:','Le nom reflète notre thème central :','Der Name spiegelt unser Kernthema wider:'],
+['structure','structuur','la structure','Struktur'],['And','En','Et','Und'],
+['because no event is a one-person job: the promoter, the artists and the crew build it','omdat geen evenement een eenmansklus is: de organisator, de artiesten en de crew bouwen het','parce qu’aucun événement n’est l’affaire d’une seule personne : l’organisateur, les artistes et l’équipe le construisent','weil keine Veranstaltung ein Ein-Personen-Job ist: Veranstalter, Künstler und Crew bauen sie'],
+['together','samen','ensemble','gemeinsam'],
+['Tap a tile to see the details.','Tik op een tegel om de details te zien.','Touchez une tuile pour voir les détails.','Tippe auf eine Kachel, um die Details zu sehen.'],
+['Parties','Partijen','Parties','Parteien'],['Activity','Activiteit','Activité','Aktivität'],
+['Tap someone to see what’s agreed with them.','Tik op iemand om te zien wat met hen is afgesproken.','Touchez une personne pour voir ce qui est convenu.','Tippe auf jemanden, um zu sehen, was vereinbart ist.'],
+// the slogan "The backbone of every event" is the brand line and stays in English in every language
+['Viewing as','Je bekijkt als','Vous êtes','Ansicht als'],['Switch to','Wissel naar','Passer à','Wechseln zu'],['Log out','Uitloggen','Se déconnecter','Abmelden'],
+['Latest from parties','Laatste van partijen','Nouvelles des parties','Neues von Parteien'],['Rate artists & suppliers','Beoordeel artiesten & leveranciers','Évaluer artistes & prestataires','Künstler & Dienstleister bewerten'],
+['All on track','Alles op schema','Tout est en ordre','Alles im Plan'],['Nothing new','Niets nieuws','Rien de nouveau','Nichts Neues'],['All rated','Alles beoordeeld','Tout est évalué','Alles bewertet'],
+['Open items across all events','Openstaande punten over alle evenementen','Points ouverts de tous les événements','Offene Punkte aller Veranstaltungen'],
+['My upcoming gigs','Mijn komende optredens','Mes prochaines dates','Meine nächsten Gigs'],['My upcoming jobs','Mijn komende opdrachten','Mes prochaines missions','Meine nächsten Aufträge'],
+['My rating','Mijn beoordeling','Ma note','Meine Bewertung'],['Set your free days','Stel je vrije dagen in','Indiquez vos jours libres','Freie Tage eintragen'],['All up to date','Alles up-to-date','Tout est à jour','Alles aktuell'],
+['A student startup project from Belgium — built for the independent promoters, artists and crews behind every concert, club night, festival and stage.','Een studentenstartup uit België — gebouwd voor de onafhankelijke organisatoren, artiesten en crews achter elk concert, elke clubavond, elk festival en elk podium.','Un projet de startup étudiante belge — conçu pour les organisateurs, artistes et équipes indépendants derrière chaque concert, soirée club, festival et scène.','Ein studentisches Startup-Projekt aus Belgien — gebaut für die unabhängigen Veranstalter, Künstler und Crews hinter jedem Konzert, jeder Clubnacht, jedem Festival und jeder Bühne.'],
+['Run your next','Organiseer je volgende','Organisez votre prochain','Organisiere deine nächste'],['show on we.TRUSS.','show op we.TRUSS.','spectacle sur we.TRUSS.','Show mit we.TRUSS.'],
+['We’re looking for Belgian promoters (100–1,000 visitors) to test we.TRUSS on a real event.','We zoeken Belgische organisatoren (100–1.000 bezoekers) om we.TRUSS te testen op een echt evenement.','Nous cherchons des organisateurs belges (100–1 000 visiteurs) pour tester we.TRUSS sur un vrai événement.','Wir suchen belgische Veranstalter (100–1.000 Besucher), die we.TRUSS bei einer echten Veranstaltung testen.'],
+['Your name','Je naam','Votre nom','Dein Name'],['Collective / event','Collectief / evenement','Collectif / événement','Kollektiv / Veranstaltung'],['Join the pilot','Doe mee aan de pilot','Rejoindre le pilote','Am Pilot teilnehmen'],
+['Prototype — nothing is sent or stored.','Prototype — er wordt niets verzonden of opgeslagen.','Prototype — rien n’est envoyé ni enregistré.','Prototyp — nichts wird gesendet oder gespeichert.'],
+['© 2026 we.TRUSS · student prototype · all data fictional','© 2026 we.TRUSS · studentenprototype · alle gegevens fictief','© 2026 we.TRUSS · prototype étudiant · données fictives','© 2026 we.TRUSS · Studentenprototyp · alle Daten fiktiv'],
+['Preview of the we.TRUSS app','Voorbeeld van de we.TRUSS-app','Aperçu de l’app we.TRUSS','Vorschau der we.TRUSS-App'],['Readiness: % of parties confirmed','Gereedheid: % bevestigde partijen','Préparation : % de parties confirmées','Bereitschaft: % bestätigte Parteien'],
+// login
+['One shared space per event. Promoter, artists and suppliers each see exactly what concerns them — no more scattered WhatsApps, mails and DMs.','Eén gedeelde ruimte per evenement. Organisator, artiesten en leveranciers zien elk precies wat hen aangaat — geen verspreide WhatsApps, mails en DM’s meer.','Un espace partagé par événement. Organisateur, artistes et prestataires voient chacun ce qui les concerne — fini les WhatsApp, mails et DM éparpillés.','Ein gemeinsamer Raum pro Veranstaltung. Veranstalter, Künstler und Dienstleister sehen genau, was sie betrifft — Schluss mit verstreuten WhatsApps, Mails und DMs.'],
+['Choose a role to log in (demo — no password needed)','Kies een rol om in te loggen (demo — geen wachtwoord nodig)','Choisissez un rôle pour vous connecter (démo — sans mot de passe)','Wähle eine Rolle zum Anmelden (Demo — kein Passwort nötig)'],
+['Plan your events, see who confirmed, and push changes to exactly the right people.','Plan je evenementen, zie wie bevestigd heeft en stuur wijzigingen naar precies de juiste mensen.','Planifiez vos événements, voyez qui a confirmé et envoyez les changements aux bonnes personnes.','Plane deine Veranstaltungen, sieh, wer bestätigt hat, und schicke Änderungen genau an die Richtigen.'],
+['ENTER AS PROMOTER →','GA VERDER ALS ORGANISATOR →','ENTRER COMME ORGANISATEUR →','ALS VERANSTALTER EINTRETEN →'],
+['For bands, singers, DJs and performers: your gigs, stage times, rider status and the latest changes — on your phone.','Voor bands, zangers, dj’s en performers: je optredens, speeltijden, riderstatus en de laatste wijzigingen — op je gsm.','Pour groupes, chanteurs, DJ et performers : vos dates, horaires, statut du rider et derniers changements — sur votre téléphone.','Für Bands, Sänger, DJs und Performer: deine Gigs, Auftrittszeiten, Rider-Status und die neuesten Änderungen — auf dem Handy.'],
+['ENTER AS ARTIST →','GA VERDER ALS ARTIEST →','ENTRER COMME ARTISTE →','ALS KÜNSTLER EINTRETEN →'],
+['Your jobs, equipment lists, load-in times and site access in one place.','Je opdrachten, materiaallijsten, load-inuren en toegang op één plek.','Vos missions, listes de matériel, heures de montage et accès au site au même endroit.','Deine Aufträge, Equipment-Listen, Aufbauzeiten und Zufahrt an einem Ort.'],
+['ENTER AS SUPPLIER →','GA VERDER ALS LEVERANCIER →','ENTRER COMME PRESTATAIRE →','ALS DIENSTLEISTER EINTRETEN →'],['← Back to the website','← Terug naar de website','← Retour au site','← Zurück zur Website'],
+['· Prototype · all names, venues and data are fictional ·','· Prototype · alle namen, zalen en gegevens zijn fictief ·','· Prototype · noms, salles et données fictifs ·','· Prototyp · alle Namen, Locations und Daten sind fiktiv ·'],['Reset demo data','Demogegevens resetten','Réinitialiser la démo','Demo-Daten zurücksetzen'],
+// app shell
+['Events','Evenementen','Événements','Veranstaltungen'],['Network','Netwerk','Réseau','Netzwerk'],['Messages','Berichten','Messages','Nachrichten'],['Switch','Wissel','Changer','Wechsel'],['role','van rol','de rôle','der Rolle'],
+['Sections','Secties','Sections','Bereiche'],['Quick role switch','Snel van rol wisselen','Changer de rôle rapidement','Schneller Rollenwechsel'],['Language','Taal','Langue','Sprache'],
+// promoter dashboard + event
+['Hi Lotte, here’s your season.','Hoi Lotte, dit is je seizoen.','Salut Lotte, voici ta saison.','Hi Lotte, hier ist deine Saison.'],['Upcoming events','Komende evenementen','Événements à venir','Anstehende Veranstaltungen'],
+['Avg. readiness','Gem. gereedheid','Préparation moy.','Ø Bereitschaft'],['Problems','Problemen','Problèmes','Probleme'],['New from parties','Nieuw van partijen','Nouveautés des parties','Neu von Parteien'],
+['+ New event','+ Nieuw evenement','+ Nouvel événement','+ Neue Veranstaltung'],['Readiness','Gereedheid','Préparation','Bereitschaft'],['All confirmed','Alles bevestigd','Tout confirmé','Alles bestätigt'],['Open →','Openen →','Ouvrir →','Öffnen →'],
+['Techno club night','Techno-clubavond','Soirée club techno','Techno-Clubnacht'],['Indoor concert','Indoorconcert','Concert en salle','Indoor-Konzert'],['Open-air summer festival','Openlucht zomerfestival','Festival d’été en plein air','Open-Air-Sommerfestival'],
+['Club night & live acts','Clubavond & live acts','Soirée club & live','Clubnacht & Live-Acts'],
+['Rate your artists & suppliers','Beoordeel je artiesten & leveranciers','Évaluez vos artistes & prestataires','Bewerte deine Künstler & Dienstleister'],
+['How did it go? Your rating helps other promoters book reliable artists, and gives the artist feedback.','Hoe ging het? Je beoordeling helpt andere organisatoren betrouwbare artiesten te boeken en geeft de artiest feedback.','Comment ça s’est passé ? Votre évaluation aide d’autres organisateurs à réserver des artistes fiables et donne un retour à l’artiste.','Wie lief es? Deine Bewertung hilft anderen Veranstaltern, zuverlässige Künstler zu buchen, und gibt dem Künstler Feedback.'],
+['★ Rate','★ Beoordeel','★ Évaluer','★ Bewerten'],['Needs attention','Vraagt aandacht','À traiter','Braucht Aufmerksamkeit'],['View','Bekijk','Voir','Ansehen'],
+['Latest from your parties','Laatste van je partijen','Dernières nouvelles de vos parties','Neues von deinen Parteien'],['NEW','NIEUW','NOUVEAU','NEU'],
+['confirmed they’ll be there.','bevestigde aanwezig te zijn.','a confirmé sa présence.','hat die Teilnahme bestätigt.'],['confirmed the job and equipment list.','bevestigde de opdracht en materiaallijst.','a confirmé la mission et la liste du matériel.','hat Auftrag und Equipment-Liste bestätigt.'],
+['No activity yet.','Nog geen activiteit.','Pas encore d’activité.','Noch keine Aktivität.'],['Nothing open — everything is confirmed ✓','Niets open — alles is bevestigd ✓','Rien d’ouvert — tout est confirmé ✓','Nichts offen — alles bestätigt ✓'],
+['All events','Alle evenementen','Tous les événements','Alle Veranstaltungen'],['cap','cap.','places','Plätze'],['Waiting','Wachtend','En attente','Ausstehend'],['Problem','Probleem','Problème','Problem'],
+['Set status…','Status instellen…','Définir le statut…','Status setzen…'],['Change status','Status wijzigen','Changer le statut','Status ändern'],
+['Set time','Settijd','Horaire du set','Set-Zeit'],['Stage','Podium','Scène','Bühne'],['Fee','Gage','Cachet','Gage'],['Arrival','Aankomst','Arrivée','Ankunft'],['Main room','Grote zaal','Salle principale','Hauptraum'],['Main stage','Hoofdpodium','Scène principale','Hauptbühne'],
+['To agree','Af te spreken','À convenir','Nach Absprache'],['On quote','Op offerte','Sur devis','Auf Anfrage'],
+['● Using we.TRUSS','● Gebruikt we.TRUSS','● Utilise we.TRUSS','● Nutzt we.TRUSS'],['Invited · artist access','Uitgenodigd · artiestentoegang','Invité · accès artiste','Eingeladen · Künstlerzugang'],['Invited · supplier access','Uitgenodigd · leverancierstoegang','Invité · accès prestataire','Eingeladen · Dienstleisterzugang'],
+['no updates yet','nog geen updates','pas encore de mises à jour','noch keine Updates'],['⚡ Find a replacement','⚡ Zoek een vervanger','⚡ Trouver un remplaçant','⚡ Ersatz finden'],
+['Rental','Huur','Location','Miete'],['Building open','Gebouw open','Ouverture du bâtiment','Gebäude offen'],['Doors','Deuren','Portes','Einlass'],['Curfew','Sluitingsuur','Couvre-feu','Sperrstunde'],
+['Load-in','Load-in','Montage','Aufbau'],['Soundcheck','Soundcheck','Balances','Soundcheck'],['Load-out','Load-out','Démontage','Abbau'],['Equipment','Materiaal','Matériel','Equipment'],
+['Bar & catering','Bar & catering','Bar & restauration','Bar & Catering'],['Bar staff','Barpersoneel','Personnel de bar','Barpersonal'],['Bar open','Bar open','Bar ouvert','Bar geöffnet'],['Payment','Betaling','Paiement','Zahlung'],
+['Backstage fridge','Backstagefrigo','Frigo backstage','Backstage-Kühlschrank'],['Deal','Deal','Accord','Deal'],['Security','Security','Sécurité','Security'],['Guards','Bewakers','Agents','Sicherheitskräfte'],
+['On duty','Van dienst','En service','Im Dienst'],['Rate','Tarief','Tarif','Tarif'],['Ends','Einde','Fin','Ende'],['Capacity','Capaciteit','Capacité','Kapazität'],['Tickets','Tickets','Billets','Tickets'],['Address','Adres','Adresse','Adresse'],
+['Open items','Openstaande punten','Points ouverts','Offene Punkte'],['sorted by urgency','volgens dringendheid','par urgence','nach Dringlichkeit'],['Post an update','Plaats een update','Publier une mise à jour','Update posten'],
+['Who does this affect?','Wie gaat dit aan?','Qui est concerné ?','Wen betrifft das?'],['Select all','Alles selecteren','Tout sélectionner','Alle auswählen'],['Send update to selected parties','Stuur update naar geselecteerde partijen','Envoyer aux parties sélectionnées','Update an ausgewählte Parteien senden'],
+['Activity from parties','Activiteit van partijen','Activité des parties','Aktivität der Parteien'],['No confirmations or problems reported yet.','Nog geen bevestigingen of problemen gemeld.','Aucune confirmation ni problème signalé pour l’instant.','Noch keine Bestätigungen oder Probleme gemeldet.'],
+['Change log','Wijzigingslog','Historique','Änderungsprotokoll'],['No updates posted yet.','Nog geen updates geplaatst.','Aucune mise à jour publiée.','Noch keine Updates gepostet.'],['Not seen yet','Nog niet gezien','Pas encore vu','Noch nicht gesehen'],
+['Doors move from 22:00 to 23:00','Deuren verschuiven van 22:00 naar 23:00','Ouverture des portes déplacée de 22 h à 23 h','Einlass verschoben von 22:00 auf 23:00'],
+['Backstage entrance is now via the side gate (Werfkaai 14)','Backstage-ingang is nu via de zijpoort (Werfkaai 14)','L’entrée backstage se fait par la porte latérale (Werfkaai 14)','Backstage-Eingang jetzt über das Seitentor (Werfkaai 14)'],
+['Sold out! Expect full capacity (600) from midnight','Uitverkocht! Verwacht volle capaciteit (600) vanaf middernacht','Complet ! Salle pleine (600) attendue dès minuit','Ausverkauft! Ab Mitternacht volle Kapazität (600)'],
+['Soundcheck starts 30 min later (17:00)','Soundcheck start 30 min later (17:00)','Les balances commencent 30 min plus tard (17 h)','Soundcheck beginnt 30 Min. später (17:00)'],['Support set shortened to 30 minutes','Voorprogramma ingekort tot 30 minuten','Première partie réduite à 30 minutes','Support-Set auf 30 Minuten gekürzt'],
+['Doors move from 19:30 to 20:00','Deuren verschuiven van 19:30 naar 20:00','Ouverture des portes déplacée de 19 h 30 à 20 h','Einlass verschoben von 19:30 auf 20:00'],
+['Artist parking moves to field C (next to the river)','Artiestenparking verhuist naar veld C (naast de rivier)','Le parking artistes passe au champ C (près de la rivière)','Künstlerparkplatz zieht auf Feld C (am Fluss)'],
+['Rain plan: stage roof is confirmed as mandatory','Regenplan: podiumdak is verplicht','Plan pluie : le toit de scène est obligatoire','Regenplan: Bühnendach ist Pflicht'],['Gates open one hour earlier: 12:00','Poorten gaan een uur vroeger open: 12:00','Ouverture une heure plus tôt : 12 h','Tore öffnen eine Stunde früher: 12:00'],
+['Doors open 30 minutes later than planned','Deuren gaan 30 minuten later open dan gepland','Ouverture des portes 30 minutes plus tard que prévu','Einlass 30 Minuten später als geplant'],['Set times are now final','Settijden zijn nu definitief','Les horaires sont désormais définitifs','Set-Zeiten sind jetzt final'],
+['Load-in starts one hour earlier','Load-in start een uur vroeger','Le montage commence une heure plus tôt','Aufbau beginnt eine Stunde früher'],
+['Booking request sent — waiting for their reply.','Boekingsaanvraag verstuurd — wacht op antwoord.','Demande envoyée — en attente de réponse.','Buchungsanfrage gesendet — warte auf Antwort.'],['Venue booking not confirmed yet.','Boeking van de zaal nog niet bevestigd.','Réservation de la salle pas encore confirmée.','Buchung der Location noch nicht bestätigt.'],
+['Waiting for confirmation.','Wacht op bevestiging.','En attente de confirmation.','Warte auf Bestätigung.'],['Marked as a problem by the promoter.','Door de organisator als probleem gemarkeerd.','Marqué comme problème par l’organisateur.','Vom Veranstalter als Problem markiert.'],
+// network
+['Your network','Je netwerk','Votre réseau','Dein Netzwerk'],['All','Alle','Tous','Alle'],['Artists','Artiesten','Artistes','Künstler'],['Suppliers','Leveranciers','Prestataires','Dienstleister'],['In my network','In mijn netwerk','Dans mon réseau','In meinem Netzwerk'],
+['✉ Invite someone new','✉ Nodig iemand nieuw uit','✉ Inviter quelqu’un','✉ Jemand Neues einladen'],['Check availability for','Beschikbaarheid checken voor','Vérifier la disponibilité pour','Verfügbarkeit prüfen für'],
+['— pick one of your events —','— kies een van je evenementen —','— choisissez un de vos événements —','— wähle eine deiner Veranstaltungen —'],['or a date','of een datum','ou une date','oder ein Datum'],
+['In your network','In je netwerk','Dans votre réseau','In deinem Netzwerk'],['Open chat','Chat openen','Ouvrir le chat','Chat öffnen'],['Book for event','Boeken voor evenement','Réserver pour un événement','Für Veranstaltung buchen'],['Message','Bericht','Message','Nachricht'],
+['+ Add to network','+ Toevoegen aan netwerk','+ Ajouter au réseau','+ Zum Netzwerk hinzufügen'],['No ratings yet','Nog geen beoordelingen','Pas encore d’avis','Noch keine Bewertungen'],['Not on we.TRUSS yet','Nog niet op we.TRUSS','Pas encore sur we.TRUSS','Noch nicht auf we.TRUSS'],
+['✉ Invite to we.TRUSS','✉ Uitnodigen voor we.TRUSS','✉ Inviter sur we.TRUSS','✉ Zu we.TRUSS einladen'],['Invite sent','Uitnodiging verstuurd','Invitation envoyée','Einladung gesendet'],['✓ Invite sent','✓ Uitnodiging verstuurd','✓ Invitation envoyée','✓ Einladung gesendet'],
+['No one matches your search. Invite them to we.TRUSS with the button above.','Niemand komt overeen met je zoekopdracht. Nodig ze uit met de knop hierboven.','Personne ne correspond. Invitez-les sur we.TRUSS avec le bouton ci-dessus.','Niemand passt zu deiner Suche. Lade sie mit dem Button oben ein.'],
+['Search by name, genre, service or city…','Zoek op naam, genre, dienst of stad…','Rechercher par nom, genre, service ou ville…','Nach Name, Genre, Leistung oder Stadt suchen…'],['✓ Available on that date','✓ Beschikbaar op die datum','✓ Disponible à cette date','✓ An diesem Datum verfügbar'],
+['Clear','Wissen','Effacer','Löschen'],['Booked','Geboekt','Réservé','Gebucht'],['Busy','Bezet','Occupé','Belegt'],['⚡ Last-minute OK','⚡ Last-minute OK','⚡ Dernière minute OK','⚡ Last-Minute OK'],['Last-minute OK','Last-minute OK','Dernière minute OK','Last-Minute OK'],
+['No calendar yet','Nog geen agenda','Pas encore d’agenda','Noch kein Kalender'],['Available','Beschikbaar','Disponible','Verfügbar'],
+['Live act','Liveact','Live','Live-Act'],['Classical','Klassiek','Classique','Klassik'],['Acoustic','Akoestisch','Acoustique','Akustisch'],['Sound','Geluid','Son','Ton'],['Light','Licht','Lumière','Licht'],['Food','Eten','Restauration','Essen'],['New','Nieuw','Nouveau','Neu'],
+// messages
+['Talk one-to-one with your artists and suppliers.','Praat één-op-één met je artiesten en leveranciers.','Discutez en direct avec vos artistes et prestataires.','Sprich direkt mit deinen Künstlern und Dienstleistern.'],['All chats','Alle chats','Tous les chats','Alle Chats'],
+['Are you available on that date?','Ben je beschikbaar op die datum?','Es-tu disponible à cette date ?','Bist du an dem Datum verfügbar?'],['Can you send me your rider?','Kun je me je rider sturen?','Peux-tu m’envoyer ton rider ?','Kannst du mir deinen Rider schicken?'],
+['Great, it’s confirmed!','Top, het is bevestigd!','Super, c’est confirmé !','Super, es ist bestätigt!'],['What’s your fee for a 90-minute set?','Wat is je gage voor een set van 90 minuten?','Quel est ton cachet pour un set de 90 minutes ?','Was ist deine Gage für ein 90-Minuten-Set?'],
+['Yes, I’m available!','Ja, ik ben beschikbaar!','Oui, je suis disponible !','Ja, ich bin verfügbar!'],['I’ll send my rider today.','Ik stuur mijn rider vandaag.','J’envoie mon rider aujourd’hui.','Ich schicke meinen Rider heute.'],['Thanks, see you there!','Bedankt, tot dan!','Merci, à bientôt !','Danke, bis dann!'],
+['Yes, we can do that.','Ja, dat kunnen we doen.','Oui, c’est possible.','Ja, das können wir machen.'],['I’ll send a quote today.','Ik stuur vandaag een offerte.','J’envoie un devis aujourd’hui.','Ich schicke heute ein Angebot.'],['All equipment is confirmed.','Alle apparatuur is bevestigd.','Tout le matériel est confirmé.','Das ganze Equipment ist bestätigt.'],
+['Send','Verstuur','Envoyer','Senden'],['Write a message…','Schrijf een bericht…','Écrire un message…','Nachricht schreiben…'],['Select a conversation, or find someone in your','Kies een gesprek of zoek iemand in je','Choisissez une conversation ou trouvez quelqu’un dans votre','Wähle ein Gespräch oder finde jemanden in deinem'],
+['network','netwerk','réseau','Netzwerk'],['to message.','om een bericht te sturen.','pour lui écrire.','zum Schreiben.'],['No conversations yet.','Nog geen gesprekken.','Pas encore de conversations.','Noch keine Gespräche.'],['New conversation','Nieuw gesprek','Nouvelle conversation','Neues Gespräch'],
+['Your conversations with promoters.','Je gesprekken met organisatoren.','Vos conversations avec les organisateurs.','Deine Gespräche mit Veranstaltern.'],['typing…','typt…','écrit…','schreibt…'],
+// new event
+['Create a new event','Nieuw evenement aanmaken','Créer un nouvel événement','Neue Veranstaltung erstellen'],
+['Fill in the details once. Everyone you book gets their own view with only what concerns them.','Vul de details één keer in. Iedereen die je boekt krijgt een eigen weergave met alleen wat hen aangaat.','Remplissez les détails une fois. Chaque personne réservée a sa propre vue avec ce qui la concerne.','Gib die Details einmal ein. Alle, die du buchst, bekommen eine eigene Ansicht mit nur dem, was sie betrifft.'],
+['1 · The basics','1 · De basis','1 · L’essentiel','1 · Die Basics'],['Event name *','Naam van het evenement *','Nom de l’événement *','Name der Veranstaltung *'],['Type of event','Soort evenement','Type d’événement','Art der Veranstaltung'],
+['Club night','Clubavond','Soirée club','Clubnacht'],['Concert','Concert','Concert','Konzert'],['Open-air event','Openluchtevenement','Événement en plein air','Open-Air-Event'],['Theatre / comedy','Theater / comedy','Théâtre / humour','Theater / Comedy'],
+['Private event','Privé-evenement','Événement privé','Private Veranstaltung'],['Other','Andere','Autre','Andere'],['Capacity *','Capaciteit *','Capacité *','Kapazität *'],['Expected visitors','Verwachte bezoekers','Visiteurs attendus','Erwartete Besucher'],
+['Short description','Korte beschrijving','Courte description','Kurzbeschreibung'],['Shown to everyone you book','Zichtbaar voor iedereen die je boekt','Visible par les personnes réservées','Für alle sichtbar, die du buchst'],
+['2 · Date & times','2 · Datum & uren','2 · Date & horaires','2 · Datum & Zeiten'],['Date *','Datum *','Date *','Datum *'],['Doors open *','Deuren open *','Ouverture des portes *','Einlass *'],['Ends at','Eindigt om','Fin à','Ende um'],
+['Confirm everyone by','Iedereen bevestigt tegen','Confirmation de tous avant le','Alle bestätigen bis'],
+['Deadline for artists and suppliers to confirm (used for the open items list)','Deadline voor artiesten en leveranciers om te bevestigen (voor de openstaande punten)','Date limite de confirmation pour artistes et prestataires (pour les points ouverts)','Frist zum Bestätigen für Künstler und Dienstleister (für die offenen Punkte)'],
+['3 · Venue & tickets','3 · Zaal & tickets','3 · Salle & billets','3 · Location & Tickets'],['Venue *','Zaal *','Salle *','Location *'],['City *','Stad *','Ville *','Stadt *'],
+['Shared with artists and suppliers for arrival and load-in','Gedeeld met artiesten en leveranciers voor aankomst en load-in','Partagée avec artistes et prestataires pour l’arrivée et le montage','Wird mit Künstlern und Dienstleistern für Ankunft und Aufbau geteilt'],
+['Ticket price','Ticketprijs','Prix du billet','Ticketpreis'],['Venue status','Status van de zaal','Statut de la salle','Status der Location'],['Venue is booked and confirmed','Zaal is geboekt en bevestigd','La salle est réservée et confirmée','Location ist gebucht und bestätigt'],
+['4 · Line-up & suppliers','4 · Line-up & leveranciers','4 · Programmation & prestataires','4 · Line-up & Dienstleister'],['optional — you can add more later','optioneel — je kunt later meer toevoegen','facultatif — vous pourrez en ajouter plus tard','optional — du kannst später mehr hinzufügen'],
+['Tick who you want to book. They get a booking request in their messages and appear in the event as','Vink aan wie je wilt boeken. Ze krijgen een boekingsaanvraag in hun berichten en verschijnen in het evenement als','Cochez qui vous voulez réserver. Ils reçoivent une demande dans leurs messages et apparaissent dans l’événement comme','Hake an, wen du buchen willst. Sie bekommen eine Buchungsanfrage in ihren Nachrichten und erscheinen in der Veranstaltung als'],
+['until they confirm.','tot ze bevestigen.','jusqu’à leur confirmation.','bis sie bestätigen.'],['Not in the list? Add them from your','Niet in de lijst? Voeg ze eerst via je','Pas dans la liste ? Ajoutez-les via votre','Nicht in der Liste? Füge sie zuerst über dein'],['first.','toe.','d’abord.','hinzu.'],
+['Ready?','Klaar?','Prêt ?','Bereit?'],['Fields marked * are required. You can change everything later from the event page.','Velden met * zijn verplicht. Je kunt alles later aanpassen op de evenementpagina.','Les champs marqués * sont obligatoires. Vous pourrez tout modifier depuis la page de l’événement.','Felder mit * sind Pflicht. Du kannst später alles auf der Veranstaltungsseite ändern.'],
+['Create event','Evenement aanmaken','Créer l’événement','Veranstaltung erstellen'],['Cancel','Annuleren','Annuler','Abbrechen'],
+['e.g. An intimate night with a live jazz trio and a late DJ set.','bv. Een intieme avond met een live jazztrio en een late dj-set.','ex. Une soirée intime avec un trio de jazz live et un DJ set tardif.','z. B. Ein intimer Abend mit einem Live-Jazztrio und einem späten DJ-Set.'],
+['Set time — e.g. 22:00 – 23:30','Settijd — bv. 22:00 – 23:30','Horaire — ex. 22:00 – 23:30','Set-Zeit — z. B. 22:00 – 23:30'],['Agreed fee — e.g. € 900','Afgesproken gage — bv. € 900','Cachet convenu — ex. 900 €','Vereinbarte Gage — z. B. 900 €'],
+['Load-in — e.g. 14:00 – 17:00','Load-in — bv. 14:00 – 17:00','Montage — ex. 14:00 – 17:00','Aufbau — z. B. 14:00 – 17:00'],['e.g. € 15 presale · € 18 door','bv. € 15 voorverkoop · € 18 aan de deur','ex. 15 € prévente · 18 € sur place','z. B. 15 € VVK · 18 € AK'],
+['e.g. Doors move from 22:00 to 23:00','bv. Deuren verschuiven van 22:00 naar 23:00','ex. Portes déplacées de 22 h à 23 h','z. B. Einlass verschoben von 22:00 auf 23:00'],
+// artist & supplier
+['My gigs','Mijn optredens','Mes dates','Meine Gigs'],['My jobs','Mijn opdrachten','Mes missions','Meine Aufträge'],['Hey Noor — your upcoming gigs','Hoi Noor — je komende optredens','Salut Noor — tes prochaines dates','Hey Noor — deine nächsten Gigs'],
+['Hey Pieter — your upcoming jobs','Hoi Pieter — je komende opdrachten','Salut Pieter — tes prochaines missions','Hey Pieter — deine nächsten Aufträge'],['Your rating from promoters','Jouw beoordeling door organisatoren','Ta note par les organisateurs','Deine Bewertung von Veranstaltern'],
+['On time','Op tijd','À l’heure','Pünktlich'],['Crowd loved it','Publiek was laaiend','Le public a adoré','Publikum begeistert'],['Professional','Professioneel','Professionnel','Professionell'],['Great set','Sterke set','Super set','Starkes Set'],
+['Easy to work with','Fijne samenwerking','Facile à travailler','Angenehme Zusammenarbeit'],['Arrived late','Te laat','Arrivé en retard','Zu spät'],['Rider issues','Riderproblemen','Problèmes de rider','Rider-Probleme'],['Hard to reach','Moeilijk bereikbaar','Difficile à joindre','Schwer erreichbar'],
+['Equipment as agreed','Materiaal zoals afgesproken','Matériel conforme','Equipment wie vereinbart'],['Great crew','Topcrew','Super équipe','Tolle Crew'],['Late load-in','Late load-in','Montage en retard','Später Aufbau'],['Missing equipment','Ontbrekend materiaal','Matériel manquant','Fehlendes Equipment'],
+['My availability','Mijn beschikbaarheid','Mes disponibilités','Meine Verfügbarkeit'],['Tap a day to switch between','Tik op een dag om te wisselen tussen','Touchez un jour pour basculer entre','Tippe auf einen Tag zum Wechseln zwischen'],
+['. Promoters see this before they book you, and last-minute days put you first when they need a replacement.','. Organisatoren zien dit voor ze je boeken, en last-minute-dagen zetten je bovenaan als ze een vervanger zoeken.','. Les organisateurs le voient avant de vous réserver, et les jours « dernière minute » vous placent en tête quand ils cherchent un remplaçant.','. Veranstalter sehen das vor der Buchung, und Last-Minute-Tage bringen dich nach oben, wenn Ersatz gesucht wird.'],
+['Booked gig','Geboekt optreden','Date réservée','Gebuchter Gig'],['Please confirm','Graag bevestigen','À confirmer','Bitte bestätigen'],['Problem reported','Probleem gemeld','Problème signalé','Problem gemeldet'],['Up to date','Up-to-date','À jour','Aktuell'],
+['You only see the events you’re booked for — and only the information that concerns you.','Je ziet alleen de evenementen waarvoor je geboekt bent — en alleen de info die jou aangaat.','Vous ne voyez que les événements où vous êtes réservé — et seulement ce qui vous concerne.','Du siehst nur die Veranstaltungen, für die du gebucht bist — und nur, was dich betrifft.'],
+['You confirmed this gig. The promoter can see it.','Je hebt dit optreden bevestigd. De organisator ziet het.','Vous avez confirmé cette date. L’organisateur le voit.','Du hast diesen Gig bestätigt. Der Veranstalter sieht es.'],
+['You confirmed this job. The promoter can see it.','Je hebt deze opdracht bevestigd. De organisator ziet het.','Vous avez confirmé cette mission. L’organisateur le voit.','Du hast diesen Auftrag bestätigt. Der Veranstalter sieht es.'],
+['The promoter is waiting for your confirmation.','De organisator wacht op je bevestiging.','L’organisateur attend ta confirmation.','Der Veranstalter wartet auf deine Bestätigung.'],
+['✓ You’re confirmed','✓ Je bent bevestigd','✓ Vous êtes confirmé','✓ Du bist bestätigt'],['⚠ Report a problem','⚠ Meld een probleem','⚠ Signaler un problème','⚠ Problem melden'],['⚠ Flag a problem','⚠ Meld een probleem','⚠ Signaler un problème','⚠ Problem melden'],
+['Latest updates for you','Laatste updates voor jou','Dernières mises à jour pour vous','Neueste Updates für dich'],['No updates yet. Changes from the promoter will appear here.','Nog geen updates. Wijzigingen van de organisator verschijnen hier.','Pas encore de mises à jour. Les changements de l’organisateur apparaîtront ici.','Noch keine Updates. Änderungen des Veranstalters erscheinen hier.'],
+['Your gig details','Details van je optreden','Détails de ta date','Details zu deinem Gig'],['Parking','Parking','Parking','Parken'],['On-site contact','Contact ter plaatse','Contact sur place','Kontakt vor Ort'],
+['Rider status · confirmed by promoter','Riderstatus · bevestigd door organisator','Statut du rider · confirmé par l’organisateur','Rider-Status · vom Veranstalter bestätigt'],['Pending','In behandeling','En attente','Offen'],['Not possible','Niet mogelijk','Impossible','Nicht möglich'],
+['✓ Confirm this job','✓ Bevestig deze opdracht','✓ Confirmer cette mission','✓ Diesen Auftrag bestätigen'],['✓ Job confirmed','✓ Opdracht bevestigd','✓ Mission confirmée','✓ Auftrag bestätigt'],
+['Agreed equipment list','Afgesproken materiaallijst','Liste du matériel convenue','Vereinbarte Equipment-Liste'],['Agreed','Afgesproken','Convenu','Vereinbart'],['Unavailable','Niet beschikbaar','Indisponible','Nicht verfügbar'],
+['Times & access','Uren & toegang','Horaires & accès','Zeiten & Zufahrt'],['Site access','Toegang tot de locatie','Accès au site','Zufahrt'],['Agreed fee','Afgesproken prijs','Tarif convenu','Vereinbarter Preis'],
+['Lotte (promoter) sees this immediately in her event overview.','Lotte (organisator) ziet dit meteen in het evenementoverzicht.','Lotte (organisation) le voit immédiatement dans l’aperçu de l’événement.','Lotte (Veranstaltung) sieht das sofort in der Veranstaltungsübersicht.'],
+['I can’t make it','Ik kan niet komen','Je ne peux pas venir','Ich kann nicht kommen'],['Travel delay','Reisvertraging','Retard de voyage','Reiseverspätung'],['Set time conflict','Conflict met settijd','Conflit d’horaire','Konflikt mit Set-Zeit'],['Rider issue','Riderprobleem','Problème de rider','Rider-Problem'],
+['Item unavailable','Item niet beschikbaar','Matériel indisponible','Artikel nicht verfügbar'],['Load-in time not possible','Load-in-uur niet mogelijk','Heure de montage impossible','Aufbauzeit nicht möglich'],['Crew / vehicle issue','Probleem met crew / voertuig','Problème d’équipe / véhicule','Problem mit Crew / Fahrzeug'],['Price change','Prijswijziging','Changement de prix','Preisänderung'],
+['Which item? (optional)','Welk item? (optioneel)','Quel matériel ? (facultatif)','Welcher Artikel? (optional)'],['Send to promoter','Naar organisator sturen','Envoyer à l’organisateur','An Veranstalter senden'],
+['e.g. My train is cancelled, I’ll arrive around 01:00.','bv. Mijn trein is afgeschaft, ik kom rond 01:00 aan.','ex. Mon train est annulé, j’arrive vers 1 h.','z. B. Mein Zug fällt aus, ich komme gegen 01:00 an.'],
+['e.g. Only 3 CDJ-3000s available that weekend — can offer a CDJ-2000NXS2 as 4th.','bv. Dat weekend maar 3 CDJ-3000’s — kan een CDJ-2000NXS2 als 4de aanbieden.','ex. Seulement 3 CDJ-3000 dispo ce week-end — CDJ-2000NXS2 possible en 4e.','z. B. Nur 3 CDJ-3000 verfügbar — kann einen CDJ-2000NXS2 als 4. anbieten.'],
+// rating, booking, invite, replace
+['Tap the stars','Tik op de sterren','Touchez les étoiles','Tippe auf die Sterne'],['What stood out?','Wat viel op?','Qu’est-ce qui ressortait ?','Was ist aufgefallen?'],['(optional)','(optioneel)','(facultatif)','(optional)'],
+['Save rating','Beoordeling opslaan','Enregistrer l’évaluation','Bewertung speichern'],['Stars','Sterren','Étoiles','Sterne'],
+['A short note for other promoters (optional) — e.g. Great set, very professional.','Een korte notitie voor andere organisatoren (optioneel) — bv. Sterke set, heel professioneel.','Une courte note pour d’autres organisateurs (facultatif) — ex. Super set, très pro.','Eine kurze Notiz für andere Veranstalter (optional) — z. B. Starkes Set, sehr professionell.'],
+['Poor','Zwak','Faible','Schwach'],['Below expectations','Onder verwachting','En dessous des attentes','Unter den Erwartungen'],['OK','Oké','Correct','Okay'],['Good','Goed','Bien','Gut'],['Excellent','Uitstekend','Excellent','Ausgezeichnet'],
+['Send booking request','Boekingsaanvraag sturen','Envoyer la demande','Buchungsanfrage senden'],
+['Add a personal note (optional) — e.g. We’d love a 90-minute set around midnight.','Persoonlijke notitie (optioneel) — bv. Graag een set van 90 minuten rond middernacht.','Note personnelle (facultatif) — ex. Nous aimerions un set de 90 minutes vers minuit.','Persönliche Notiz (optional) — z. B. Gern ein 90-Minuten-Set um Mitternacht.'],
+['✉ Invite someone to we.TRUSS','✉ Nodig iemand uit voor we.TRUSS','✉ Inviter quelqu’un sur we.TRUSS','✉ Jemanden zu we.TRUSS einladen'],
+['They get a link to join for free. Once they’re in, you can message them and book them for your events.','Ze krijgen een link om gratis lid te worden. Daarna kun je ze berichten sturen en boeken voor je evenementen.','Ils reçoivent un lien pour s’inscrire gratuitement. Ensuite, vous pouvez leur écrire et les réserver.','Sie bekommen einen Link, um kostenlos beizutreten. Danach kannst du ihnen schreiben und sie buchen.'],
+['Send invite','Uitnodiging sturen','Envoyer l’invitation','Einladung senden'],['Name — e.g. The Velvet Owls','Naam — bv. The Velvet Owls','Nom — ex. The Velvet Owls','Name — z. B. The Velvet Owls'],
+['What they do — e.g. Funk band, 6 musicians','Wat ze doen — bv. Funkband, 6 muzikanten','Activité — ex. Groupe funk, 6 musiciens','Was sie machen — z. B. Funkband, 6 Musiker'],['Email or phone number','E-mail of telefoonnummer','E-mail ou numéro de téléphone','E-Mail oder Telefonnummer'],
+['Personal message (optional)','Persoonlijk bericht (optioneel)','Message personnel (facultatif)','Persönliche Nachricht (optional)'],['Book','Boeken','Réserver','Buchen'],['Close','Sluiten','Fermer','Schließen'],
+['. Showing artists who are available that day, last-minute first.','. Artiesten die die dag beschikbaar zijn, last-minute eerst.','. Artistes disponibles ce jour-là, dernière minute en premier.','. Künstler, die an dem Tag verfügbar sind, Last-Minute zuerst.'],
+['. Showing suppliers who are available that day, last-minute first.','. Leveranciers die die dag beschikbaar zijn, last-minute eerst.','. Prestataires disponibles ce jour-là, dernière minute en premier.','. Dienstleister, die an dem Tag verfügbar sind, Last-Minute zuerst.'],
+['No one is available that day. Try inviting someone new from your Network.','Niemand is die dag beschikbaar. Nodig iemand nieuw uit vanuit je Netwerk.','Personne n’est disponible ce jour-là. Invitez quelqu’un depuis votre Réseau.','An dem Tag ist niemand verfügbar. Lade jemand Neues über dein Netzwerk ein.'],
+// toasts
+['✓ Confirmed! Lotte (promoter) sees this right away.','✓ Bevestigd! Lotte (organisator) ziet dit meteen.','✓ Confirmé ! Lotte (organisation) le voit tout de suite.','✓ Bestätigt! Lotte (Veranstaltung) sieht es sofort.'],
+['⚠ Sent to Lotte. The promoter’s view is updated.','⚠ Verstuurd naar Lotte. De weergave van de organisator is bijgewerkt.','⚠ Envoyé à Lotte. La vue de l’organisateur est mise à jour.','⚠ An Lotte gesendet. Die Veranstalter-Ansicht ist aktualisiert.'],
+['✎ Write the change first (or tap a suggestion).','✎ Schrijf eerst de wijziging (of tik op een suggestie).','✎ Écrivez d’abord le changement (ou touchez une suggestion).','✎ Schreib zuerst die Änderung (oder tippe auf einen Vorschlag).'],
+['☐ Select at least one party this affects.','☐ Selecteer minstens één betrokken partij.','☐ Sélectionnez au moins une partie concernée.','☐ Wähle mindestens eine betroffene Partei.'],['★ Pick 1 to 5 stars first.','★ Kies eerst 1 tot 5 sterren.','★ Choisissez d’abord 1 à 5 étoiles.','★ Wähle zuerst 1 bis 5 Sterne.'],
+['✎ Write a message first.','✎ Schrijf eerst een bericht.','✎ Écrivez d’abord un message.','✎ Schreib zuerst eine Nachricht.'],['Pick an event first.','Kies eerst een evenement.','Choisissez d’abord un événement.','Wähle zuerst eine Veranstaltung.'],
+['Add their name first.','Voeg eerst hun naam toe.','Ajoutez d’abord le nom.','Füge zuerst den Namen hinzu.'],['Add an email or phone number.','Voeg een e-mail of telefoonnummer toe.','Ajoutez un e-mail ou un numéro.','Füge eine E-Mail oder Telefonnummer hinzu.'],
+['Add an event name first.','Voeg eerst een naam toe.','Ajoutez d’abord un nom.','Füge zuerst einen Namen hinzu.'],['Add the capacity first.','Voeg eerst de capaciteit toe.','Ajoutez d’abord la capacité.','Füge zuerst die Kapazität hinzu.'],
+['Add the date first.','Voeg eerst de datum toe.','Ajoutez d’abord la date.','Füge zuerst das Datum hinzu.'],['Add the doors time first.','Voeg eerst het deurenuur toe.','Ajoutez d’abord l’heure d’ouverture.','Füge zuerst die Einlasszeit hinzu.'],
+['Add the venue first.','Voeg eerst de zaal toe.','Ajoutez d’abord la salle.','Füge zuerst die Location hinzu.'],['Add the city first.','Voeg eerst de stad toe.','Ajoutez d’abord la ville.','Füge zuerst die Stadt hinzu.'],
+['Pick a date in the future.','Kies een datum in de toekomst.','Choisissez une date future.','Wähle ein Datum in der Zukunft.'],['Capacity should be a number, e.g. 450.','Capaciteit moet een getal zijn, bv. 450.','La capacité doit être un nombre, ex. 450.','Kapazität muss eine Zahl sein, z. B. 450.']
+];
+const TR = {};
+TR_ROWS.forEach(r => { TR[r[0]] = { nl:r[1], fr:r[2], de:r[3] }; });
+
+// phrases with numbers / names in them
+const DUE = s => {
+  let m;
+  if (s === 'Due today') return L('Vandaag','Aujourd’hui','Heute fällig');
+  if ((m = s.match(/^Due tomorrow · (.+)$/))) return L('Morgen · ','Demain · ','Morgen · ') + m[1];
+  if ((m = s.match(/^Due in (\d+) days · (.+)$/))) return L(`Over ${m[1]} dagen · `,`Dans ${m[1]} jours · `,`In ${m[1]} Tagen · `) + m[2];
+  if ((m = s.match(/^Overdue by (\d+) days? · was due (.+)$/))) return L(`${m[1]} dag(en) te laat · was ${m[2]}`,`En retard de ${m[1]} j · prévu ${m[2]}`,`${m[1]} Tag(e) überfällig · war ${m[2]}`);
+  return s;
+};
+const PATTERNS = [
+  [/^Nachtwerk Collective · (\d+) upcoming events?$/, m => `Nachtwerk Collective · ${m[1]} ` + L(pl(m[1],'komend evenement','komende evenementen'), pl(m[1],'événement à venir','événements à venir'), pl(m[1],'anstehende Veranstaltung','anstehende Veranstaltungen'))],
+  [/^(\d+) of (\d+) parties confirmed$/, m => L(`${m[1]} van ${m[2]} partijen bevestigd`,`${m[1]} parties sur ${m[2]} confirmées`,`${m[1]} von ${m[2]} Parteien bestätigt`)],
+  [/^(\d+) problems?$/, m => `${m[1]} ` + L(pl(m[1],'probleem','problemen'), pl(m[1],'problème','problèmes'), pl(m[1],'Problem','Probleme'))],
+  [/^(\d+) waiting$/, m => `${m[1]} ` + L('wachtend','en attente','ausstehend')],
+  [/^(\d+) open$/, m => `${m[1]} ` + L('open', pl(m[1],'ouvert','ouverts'), 'offen')],
+  [/^(PROBLEM|WAITING) · (.+)$/, m => (m[1] === 'PROBLEM' ? L('PROBLEEM','PROBLÈME','PROBLEM') : L('WACHTEND','EN ATTENTE','AUSSTEHEND')) + ' · ' + DUE(m[2])],
+  [/^(.*)· in (\d+) days$/, m => m[1] + '· ' + L(`over ${m[2]} dagen`,`dans ${m[2]} jours`,`in ${m[2]} Tagen`)],
+  [/^(.*)· (today|tomorrow)$/, m => m[1] + '· ' + (m[2] === 'today' ? L('vandaag','aujourd’hui','heute') : L('morgen','demain','morgen'))],
+  [/^Everyone involved · (\d+) parties$/, m => L(`Alle betrokkenen · ${m[1]} partijen`,`Tous les intervenants · ${m[1]} parties`,`Alle Beteiligten · ${m[1]} Parteien`)],
+  [/^updates seen (\d+)\/(\d+)$/, m => L('updates gezien ','mises à jour vues ','Updates gesehen ') + `${m[1]}/${m[2]}`],
+  [/^(\d+)\/(\d+) seen$/, m => `${m[1]}/${m[2]} ` + L('gezien','vus','gesehen')],
+  [/^(\d+) updates?$/, m => `${m[1]} ` + L(pl(m[1],'update','updates'), pl(m[1],'mise à jour','mises à jour'), pl(m[1],'Update','Updates'))],
+  [/^(.*) · by Lotte$/, m => m[1] + ' · ' + L('door Lotte','par Lotte','von Lotte')],
+  [/^(· )?(\d+) reviews?$/, m => (m[1] || '') + `${m[2]} ` + L(pl(m[2],'beoordeling','beoordelingen'),'avis', pl(m[2],'Bewertung','Bewertungen'))],
+  [/^You rated · (.+)$/, m => L('Jouw beoordeling','Votre note','Deine Bewertung') + ' · ' + m[1]],
+  [/^Past event · (.+)$/, m => L('Voorbij evenement','Événement passé','Vergangene Veranstaltung') + ' · ' + tr(m[1])],
+  [/^Artist view · (.+)$/, m => L('Artiestenweergave','Vue artiste','Künstler-Ansicht') + ' · ' + m[1]],
+  [/^Venue · (\d+) capacity$/, m => L(`Zaal · ${m[1]} capaciteit`,`Salle · ${m[1]} places`,`Location · ${m[1]} Plätze`)],
+  [/^(Artist|Supplier|Promoter|Venue|Sound & light|Bar & catering|Security) · (.+)$/, m => tr(m[1]) + ' · ' + tr(m[2])],
+  [/^reported a problem: (.+)$/, m => L('meldde een probleem: ','a signalé un problème : ','hat ein Problem gemeldet: ') + m[1]],
+  [/^(\d+) new$/, m => `${m[1]} ` + L('nieuw','nouveau','neu')],
+  [/^(\d+) unread$/, m => `${m[1]} ` + L('ongelezen','non lu','ungelesen')],
+  [/^Average of (\d+) ratings? from promoters$/, m => L(`Gemiddelde van ${m[1]} beoordeling(en) van organisatoren`,`Moyenne de ${m[1]} avis d’organisateurs`,`Durchschnitt aus ${m[1]} Bewertung(en) von Veranstaltern`)],
+  [/^([\d.]+) out of 5 stars$/, m => `${Math.round(m[1] * 10) / 10} ` + L('op 5 sterren','sur 5 étoiles','von 5 Sternen')],
+  [/^(\d) stars?$/, m => `${m[1]} ` + L(pl(m[1],'ster','sterren'), pl(m[1],'étoile','étoiles'), pl(m[1],'Stern','Sterne'))],
+  [/^Seen (.+)$/, m => L('Gezien ','Vu ','Gesehen ') + m[1]],
+  [/^Switch to (.+)$/, m => L('Wissel naar ','Passer à ','Wechseln zu ') + tr(m[1])],
+  [/^Find artists and suppliers, add them to your network, message them or book them for an event\. (\d+) contacts in your network\.$/, m => L(
+    `Vind artiesten en leveranciers, voeg ze toe aan je netwerk, stuur ze een bericht of boek ze voor een evenement. ${m[1]} contacten in je netwerk.`,
+    `Trouvez des artistes et prestataires, ajoutez-les à votre réseau, écrivez-leur ou réservez-les pour un événement. ${m[1]} contacts dans votre réseau.`,
+    `Finde Künstler und Dienstleister, füge sie deinem Netzwerk hinzu, schreib ihnen oder buche sie für eine Veranstaltung. ${m[1]} Kontakte in deinem Netzwerk.`)],
+  [/^My upcoming (gigs|jobs) · (\d+)$/, m => (m[1] === 'gigs' ? L('Mijn komende optredens','Mes prochaines dates','Meine nächsten Gigs') : L('Mijn komende opdrachten','Mes prochaines missions','Meine nächsten Aufträge')) + ' · ' + m[2]],
+  [/^Load-in (\d.+|Fri.+|To agree)$/, m => L('Load-in ','Montage ','Aufbau ') + tr(m[1])],
+  [/^● (\d+) new updates?$/, m => `● ${m[1]} ` + L(pl(m[1],'nieuwe update','nieuwe updates'), pl(m[1],'nouvelle mise à jour','nouvelles mises à jour'), pl(m[1],'neues Update','neue Updates'))],
+  [/^The promoter is waiting for your confirmation \(by (.+)\)\.$/, m => L(`De organisator wacht op je bevestiging (tegen ${m[1]}).`,`L’organisateur attend ta confirmation (avant le ${m[1]}).`,`Der Veranstalter wartet auf deine Bestätigung (bis ${m[1]}).`)],
+  [/^Problem reported: (.+)$/, m => L('Probleem gemeld: ','Problème signalé : ','Problem gemeldet: ') + m[1]],
+  [/^(.*) · from Lotte \(promoter\)$/, m => m[1] + ' · ' + L('van Lotte (organisator)','de Lotte (organisation)','von Lotte (Veranstaltung)')],
+  [/^(.*) · (Sent|Seen)$/, m => m[1] + ' · ' + (m[2] === 'Sent' ? L('Verzonden','Envoyé','Gesendet') : L('Gezien','Vu','Gesehen'))],
+  [/^You: (.+)$/, m => L('Jij: ','Vous : ','Du: ') + m[1]],
+  [/^Rate (.+)$/, m => L('Beoordeel ','Évaluer ','Bewerte ') + m[1]],
+  [/^Book (.+) for an event$/, m => L(`Boek ${m[1]} voor een evenement`,`Réserver ${m[1]} pour un événement`,`${m[1]} für eine Veranstaltung buchen`)],
+  [/^(.*)\. They get the request in their messages and appear in your event as$/, m => m[1] + '. ' + L('Ze krijgen de aanvraag in hun berichten en verschijnen in je evenement als','La demande arrive dans leurs messages et ils apparaissent dans votre événement comme','Sie bekommen die Anfrage in ihren Nachrichten und erscheinen in deiner Veranstaltung als')],
+  [/^(.*) · already in this event$/, m => m[1] + ' · ' + L('al in dit evenement','déjà dans cet événement','bereits in dieser Veranstaltung')],
+  [/^✉ Invite (.+) to we\.TRUSS$/, m => L(`✉ Nodig ${m[1]} uit voor we.TRUSS`,`✉ Inviter ${m[1]} sur we.TRUSS`,`✉ ${m[1]} zu we.TRUSS einladen`)],
+  [/^Hi( .+)?! I’m organising my next events on we\.TRUSS: one place for set times, riders and updates\. Join for free so we can work together\. — Lotte, Nachtwerk Collective$/, m => L(
+    `Hoi${m[1] || ''}! Ik organiseer mijn volgende evenementen op we.TRUSS: één plek voor settijden, riders en updates. Word gratis lid zodat we kunnen samenwerken. — Lotte, Nachtwerk Collective`,
+    `Salut${m[1] || ''} ! J’organise mes prochains événements sur we.TRUSS : un seul endroit pour les horaires, riders et mises à jour. Inscris-toi gratuitement pour qu’on travaille ensemble. — Lotte, Nachtwerk Collective`,
+    `Hi${m[1] || ''}! Ich organisiere meine nächsten Veranstaltungen auf we.TRUSS: ein Ort für Set-Zeiten, Rider und Updates. Tritt kostenlos bei, damit wir zusammenarbeiten können. — Lotte, Nachtwerk Collective`)],
+  [/^⚡ Replace (.+)$/, m => L('⚡ Vervang ','⚡ Remplacer ','⚡ Ersetze ') + m[1]],
+  [/^(.*) · (set|load-in)$/, m => m[1] + ' · ' + (m[2] === 'set' ? L('set','set','Set') : L('load-in','montage','Aufbau'))],
+  [/^(\d+) other contacts? (?:are|is) busy or booked that day, so they’re hidden\.$/, m => L(`${m[1]} andere contact(en) zijn die dag bezet of geboekt en worden verborgen.`,`${m[1]} autre(s) contact(s) occupé(s) ou réservé(s) ce jour-là sont masqués.`,`${m[1]} weitere Kontakt(e) sind an dem Tag belegt oder gebucht und ausgeblendet.`)],
+  [/^(.+) · Booked: (.+)$/, m => m[1] + ' · ' + L('Geboekt','Réservé','Gebucht') + ': ' + m[2]],
+  [/^(.+) · (Available|Busy|Last-minute OK|No calendar yet|Booked)$/, m => m[1] + ' · ' + tr(m[2])],
+  [/^Last-minute request sent — replacing (.+)\.$/, m => L(`Last-minute aanvraag verstuurd — vervangt ${m[1]}.`,`Demande de dernière minute envoyée — remplace ${m[1]}.`,`Last-Minute-Anfrage gesendet — ersetzt ${m[1]}.`)],
+  [/^Status of (.+) set to (.+)\.$/, m => L(`Status van ${m[1]} ingesteld op ${tr(m[2])}.`,`Statut de ${m[1]} : ${tr(m[2])}.`,`Status von ${m[1]} auf ${tr(m[2])} gesetzt.`)],
+  [/^(\d)\/5 · (.+)$/, m => `${m[1]}/5 · ` + tr(m[2])],
+  [/^📣 Update sent to (\d+) part(?:y|ies) — they get a notification in their own view\.$/, m => L(`📣 Update verstuurd naar ${m[1]} partij(en) — ze krijgen een melding in hun eigen weergave.`,`📣 Mise à jour envoyée à ${m[1]} partie(s) — notifiées dans leur propre vue.`,`📣 Update an ${m[1]} Partei(en) gesendet — sie werden in ihrer Ansicht benachrichtigt.`)],
+  [/^★ Rating saved\. (.+) now has ★ ([\d.]+) from (\d+) reviews?\.$/, m => L(`★ Beoordeling opgeslagen. ${m[1]} heeft nu ★ ${m[2]} uit ${m[3]} beoordeling(en).`,`★ Évaluation enregistrée. ${m[1]} a maintenant ★ ${m[2]} sur ${m[3]} avis.`,`★ Bewertung gespeichert. ${m[1]} hat jetzt ★ ${m[2]} aus ${m[3]} Bewertung(en).`)],
+  [/^✓ (.+) added to your network\.$/, m => L(`✓ ${m[1]} toegevoegd aan je netwerk.`,`✓ ${m[1]} ajouté à votre réseau.`,`✓ ${m[1]} zu deinem Netzwerk hinzugefügt.`)],
+  [/^📩 Booking request sent to (.+)\. They’re now in (.+) as “Waiting”\.$/, m => L(`📩 Boekingsaanvraag verstuurd naar ${m[1]}. Nu in ${m[2]} als „Wachtend”.`,`📩 Demande envoyée à ${m[1]}. Désormais dans ${m[2]} comme « En attente ».`,`📩 Buchungsanfrage an ${m[1]} gesendet. Jetzt in ${m[2]} als „Ausstehend“.`)],
+  [/^✉ Invite sent to (.+)\.$/, m => L(`✉ Uitnodiging verstuurd naar ${m[1]}.`,`✉ Invitation envoyée à ${m[1]}.`,`✉ Einladung an ${m[1]} gesendet.`)],
+  [/^🎉 (.+) joined we\.TRUSS and is now in your network\. You can message them\.$/, m => L(`🎉 ${m[1]} is lid van we.TRUSS en zit nu in je netwerk. Je kunt een bericht sturen.`,`🎉 ${m[1]} a rejoint we.TRUSS et fait partie de votre réseau. Vous pouvez lui écrire.`,`🎉 ${m[1]} ist jetzt auf we.TRUSS und in deinem Netzwerk. Du kannst schreiben.`)],
+  [/^💬 New message from (.+)\.$/, m => L(`💬 Nieuw bericht van ${m[1]}.`,`💬 Nouveau message de ${m[1]}.`,`💬 Neue Nachricht von ${m[1]}.`)],
+  [/^✓ (.+) replied and confirmed for (.+)\.$/, m => L(`✓ ${m[1]} antwoordde en bevestigde voor ${m[2]}.`,`✓ ${m[1]} a répondu et confirmé pour ${m[2]}.`,`✓ ${m[1]} hat geantwortet und für ${m[2]} bestätigt.`)],
+  [/^✓ (.+) confirmed for (.+)\.$/, m => L(`✓ ${m[1]} bevestigd voor ${m[2]}.`,`✓ ${m[1]} confirmé pour ${m[2]}.`,`✓ ${m[1]} für ${m[2]} bestätigt.`)],
+  [/^⚡ Last-minute request sent to (.+)\. They’re in (.+) as “Waiting”\.$/, m => L(`⚡ Last-minute aanvraag verstuurd naar ${m[1]}. In ${m[2]} als „Wachtend”.`,`⚡ Demande de dernière minute envoyée à ${m[1]}. Dans ${m[2]} comme « En attente ».`,`⚡ Last-Minute-Anfrage an ${m[1]} gesendet. In ${m[2]} als „Ausstehend“.`)],
+  [/^🎉 (.+) created(?: · booking request sent to (\d+) (?:people|person))?\.$/, m => L(
+    `🎉 ${m[1]} aangemaakt` + (m[2] ? ` · boekingsaanvraag verstuurd naar ${m[2]} ${pl(m[2],'persoon','personen')}` : '') + '.',
+    `🎉 ${m[1]} créé` + (m[2] ? ` · demande envoyée à ${m[2]} personne(s)` : '') + '.',
+    `🎉 ${m[1]} erstellt` + (m[2] ? ` · Buchungsanfrage an ${m[2]} Person(en) gesendet` : '') + '.')],
+  [/^🙌 Thanks( .+)?! \(Prototype — nothing was sent\.\) Try the demo via “Log in”\.$/, m => L(`🙌 Bedankt${m[1] || ''}! (Prototype — er werd niets verzonden.) Probeer de demo via „Inloggen”.`,`🙌 Merci${m[1] || ''} ! (Prototype — rien n’a été envoyé.) Essayez la démo via « Se connecter ».`,`🙌 Danke${m[1] || ''}! (Prototyp — nichts wurde gesendet.) Teste die Demo über „Anmelden“.`)],
+  [/^Avg\. readiness (\d+)%$/, m => L(`Gem. gereedheid ${m[1]}%`,`Préparation moy. ${m[1]} %`,`Ø Bereitschaft ${m[1]} %`)],
+  [/^(\d+) to rate$/, m => `${m[1]} ` + L('te beoordelen','à évaluer','zu bewerten')],
+  [/^(\d+) to confirm$/, m => `${m[1]} ` + L('te bevestigen','à confirmer','zu bestätigen')],
+  [/^(\d+) new updates?$/, m => `${m[1]} ` + L(pl(m[1],'nieuwe update','nieuwe updates'), pl(m[1],'nouvelle mise à jour','nouvelles mises à jour'), pl(m[1],'neues Update','neue Updates'))],
+  [/^(\d+) last-minute days?$/, m => `${m[1]} ` + L(pl(m[1],'last-minute dag','last-minute dagen'), pl(m[1],'jour dernière minute','jours dernière minute'), pl(m[1],'Last-Minute-Tag','Last-Minute-Tage'))],
+  [/^👀 Now viewing as (.+) · (.+)$/, m => L('👀 Je bekijkt nu als ','👀 Vous êtes maintenant ','👀 Ansicht jetzt als ') + m[1] + ' · ' + tr(m[2])],
+  [/^e\.g\. (.+)$/, m => L('bv. ','ex. ','z. B. ') + m[1]]
+];
+// English dates inside data (activity times, reviews, chats) -> chosen language
+const EN_D = D_SHORT.en, EN_M = M_SHORT.en;
+function localDates(s){
+  return s.replace(/\b(Sun|Mon|Tue|Wed|Thu|Fri|Sat) (\d{1,2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\b/g,
+      (all, d, n, mo) => S.lang === 'de' ? `${D_SHORT.de[EN_D.indexOf(d)]}, ${n}. ${M_SHORT.de[EN_M.indexOf(mo)]}` : `${D_SHORT[S.lang][EN_D.indexOf(d)]} ${n} ${M_SHORT[S.lang][EN_M.indexOf(mo)]}`)
+    .replace(/\bToday\b/g, L('Vandaag','Aujourd’hui','Heute'));
+}
+function tr(s){
+  if (S.lang === 'en' || !s) return s;
+  const hit = TR[s];
+  if (hit) return hit[S.lang];
+  for (const [re, fn] of PATTERNS){ const m = s.match(re); if (m) return localDates(fn(m)); }
+  return localDates(s);
+}
+function translateText(n){
+  if (!n.parentElement || n.parentElement.closest('script,style,[data-notr]')) return;
+  const raw = n.nodeValue, key = raw.replace(/\s+/g, ' ').trim();
+  if (!key || !/[A-Za-z]/.test(key)) return;
+  const v = tr(key);
+  if (v !== key) n.nodeValue = (/^\s/.test(raw) ? ' ' : '') + v + (/\s$/.test(raw) ? ' ' : '');
+}
+function translateDom(root){
+  if (!root || S.lang === 'en') return;
+  if (root.nodeType === 3){ translateText(root); return; }
+  if (root.nodeType !== 1) return;
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), list = [];
+  let n; while ((n = w.nextNode())) list.push(n);
+  list.forEach(translateText);
+  const attrs = el => ['placeholder','title','aria-label'].forEach(a => {
+    const v = el.getAttribute(a); if (!v) return;
+    const t = tr(v.replace(/\s+/g, ' ').trim()); if (t !== v) el.setAttribute(a, t);
+  });
+  if (root.hasAttribute && (root.hasAttribute('placeholder') || root.hasAttribute('title') || root.hasAttribute('aria-label'))) attrs(root);
+  root.querySelectorAll('[placeholder],[title],[aria-label]').forEach(attrs);
+}
+// anything added to the page (screens, pop-ups, toasts) gets translated before it's painted
+new MutationObserver(muts => { if (S.lang === 'en') return; muts.forEach(m => m.addedNodes.forEach(translateDom)); })
+  .observe(document.documentElement, { childList:true, subtree:true });
+function langSelect(){
+  return `<select class="lang-sel" data-change="lang" aria-label="Language">${LANGS.map(l => `<option value="${l}" ${S.lang === l ? 'selected' : ''}>${l.toUpperCase()}</option>`).join('')}</select>`;
+}
+function setLang(l){
+  S.lang = l;
+  try { localStorage.setItem('wetruss-lang', l); } catch(e){}
+  document.documentElement.lang = l;
+  document.title = tr('we.TRUSS — The backbone of every event');
+  closeModal(); render();
+}
+
 /* ---------------- helpers ---------------- */
-const DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function dparts(ds){ const x = new Date(ds+'T12:00:00'); return { dow:DAYS[x.getDay()], day:x.getDate(), mon:MONTHS[x.getMonth()], year:x.getFullYear() }; }
-function fmtDate(ds){ const p = dparts(ds); return `${p.dow} ${p.day} ${p.mon} ${p.year}`; }
-function fmtShort(ds){ const p = dparts(ds); return `${p.dow} ${p.day} ${p.mon}`; }
+function dparts(ds){ const x = new Date(ds+'T12:00:00'); return { dow:D_SHORT[S.lang][x.getDay()], day:x.getDate(), mon:M_SHORT[S.lang][x.getMonth()], year:x.getFullYear() }; }
+function fmtDate(ds){ const p = dparts(ds); return S.lang === 'de' ? `${p.dow}, ${p.day}. ${p.mon} ${p.year}` : `${p.dow} ${p.day} ${p.mon} ${p.year}`; }
+function fmtShort(ds){ const p = dparts(ds); return S.lang === 'de' ? `${p.dow}, ${p.day}. ${p.mon}` : `${p.dow} ${p.day} ${p.mon}`; }
 function daysUntil(ds){ return Math.round((new Date(ds+'T12:00:00') - DEMO_TODAY)/864e5); }
 function nowStr(){ const n = new Date(); return 'Today · ' + String(n.getHours()).padStart(2,'0') + ':' + String(n.getMinutes()).padStart(2,'0'); }
 function findEvent(id){ return EVENTS.find(e => e.id === id); }
 function findParty(id){ for (const e of EVENTS){ const p = e.parties.find(x => x.id === id); if (p) return { e, p }; } return {}; }
 function partyName(e,id){ const p = e.parties.find(x => x.id === id); return p ? p.name : id; }
-function readiness(e){ return Math.round(e.parties.filter(p => p.status === 'confirmed').length / e.parties.length * 100); }
+function readiness(e){ return e.parties.length ? Math.round(e.parties.filter(p => p.status === 'confirmed').length / e.parties.length * 100) : 0; }
+
+// a network contact booked for an event: added as "Waiting" until they confirm.
+// extra = details already known (set time, load-in, fee) from the New event form.
+function bookingParty(e, d, extra){
+  extra = extra || {};
+  const p = { id:e.id + '-' + d.id, name:d.name, sub:d.sub, user:d.user, status:'waiting', due:extra.due || '2026-12-02',
+    issue:'Booking request sent — waiting for their reply.', contact:PROMOTER_CONTACT, fee:extra.fee || d.price, flash:true };
+  if (d.kind === 'artist') Object.assign(p, { type:'artist', setTime:extra.time || 'To agree', stage:extra.stage || 'Main stage', arrival:'To agree', parking:'To agree', rider:[] });
+  else Object.assign(p, { type:'supplier', loadIn:extra.time || 'To agree', loadOut:'To agree', soundcheck:'To agree', access:'To agree', equipment:[] });
+  return p;
+}
 function countStatus(e,s){ return e.parties.filter(p => p.status === s).length; }
 function ringColor(r){ return r >= 80 ? 'var(--acid)' : r >= 50 ? 'var(--cyan)' : 'var(--mag)'; }
 function ring(r, big){ return `<div class="ring ${big?'big':''}" style="--p:${r};--c:${ringColor(r)}" title="Readiness: % of parties confirmed"><span>${r}%</span></div>`; }
@@ -952,9 +1702,36 @@ function pill(status){ const s = STATUS[status]; return `<span class="pill ${s.c
 function unreadUpdates(e,p){ return e.updates.filter(u => u.affects.includes(p.id) && !u.seenBy[p.id]); }
 function myParties(role){ const out = []; EVENTS.forEach(e => e.parties.forEach(p => { if (p.user === role) out.push({ e, p }); })); return out.sort((a,b) => a.e.date.localeCompare(b.e.date)); }
 function roleUnread(role){
-  if (role === 'promoter') return EVENTS.reduce((n,e) => n + e.activity.filter(a => !a.read).length, 0);
-  return myParties(role).reduce((n,x) => n + unreadUpdates(x.e, x.p).length, 0);
+  if (role === 'promoter') return EVENTS.reduce((n,e) => n + e.activity.filter(a => !a.read).length, 0) + msgUnread(role);
+  return myParties(role).reduce((n,x) => n + unreadUpdates(x.e, x.p).length, 0) + msgUnread(role);
 }
+/* availability helpers */
+function bookingOn(pid, date){ const d = profile(pid); return EVENTS.find(e => e.date === date && e.parties.some(p => p.name === d.name)); }
+function availOn(pid, date){
+  const d = profile(pid);
+  if (!d || !d.onPlatform) return 'unknown';
+  if (bookingOn(pid, date)) return 'booked';
+  return (AVAIL[pid] || {})[date] || 'free';
+}
+const AV_LABEL = { free:'Available', last:'Last-minute OK', busy:'Busy', booked:'Booked', unknown:'No calendar yet' };
+function isAvailable(s){ return s === 'free' || s === 'last'; }
+function availPill(pid, date){
+  const s = availOn(pid, date);
+  const cls = s === 'free' ? 'ok' : s === 'last' ? 'last' : s === 'unknown' ? 'off' : 'bad';
+  return `<span class="pill ${cls}" title="${fmtDate(date)}">${s === 'last' ? '⚡ ' : ''}${AV_LABEL[s]}</span>`;
+}
+
+/* messages helpers */
+function profile(id){ return DIRECTORY.find(d => d.id === id); }
+function profileByName(name){ return DIRECTORY.find(d => d.name === name); }
+function myProfileId(role){ const d = DIRECTORY.find(x => x.user === role); return d ? d.id : null; }
+// conversations visible to a role: the promoter sees all; an artist/supplier only their own
+function convosFor(role){ return role === 'promoter' ? CONVOS : CONVOS.filter(c => c.with === myProfileId(role)); }
+function isMine(role, m){ return role === 'promoter' ? m.from === 'me' : m.from === 'them'; }
+function convoUnread(role, c){ return c.msgs.filter(m => !isMine(role, m) && !m.read).length; }
+function msgUnread(role){ return convosFor(role).reduce((n,c) => n + convoUnread(role, c), 0); }
+function lastMsg(c){ return c.msgs[c.msgs.length - 1]; }
+function initials(name){ return name.replace(/[^A-Za-zÀ-ÿØø ]/g,'').split(' ').filter(Boolean).slice(0,2).map(w => w[0]).join('').toUpperCase() || name.slice(0,2).toUpperCase(); }
 function openItems(events){
   const items = [];
   events.forEach(e => e.parties.forEach(p => { if (p.status !== 'confirmed') items.push({ e, p }); }));
@@ -1008,17 +1785,21 @@ const I = {
 function header(){
   const u = USERS[S.role], unread = roleUnread(S.role);
   const roleBtn = r => {
-    const n = roleUnread(r);
-    return `<button class="${r} ${r===S.role?'on':''}" data-act="login" data-id="${r}" title="Switch to ${USERS[r].label}">
-      ${r==='promoter'?'P':r==='artist'?'A':'S'}<span class="lbl">&nbsp;${USERS[r].label}</span>${n?`<span class="badge">${n}</span>`:''}</button>`;
+    const n = r === S.role ? 0 : roleUnread(r);
+    return `<button class="rs-btn ${r===S.role?'on':''}" data-act="login" data-id="${r}" title="Switch to ${USERS[r].label}">
+      <span class="av ${r}">${USERS[r].initials}</span><span class="rs-lbl">${USERS[r].label}</span>${n?`<span class="badge">${n}</span>`:''}</button>`;
   };
+  const tab = (screens, act, label, n) => `<button class="${screens.includes(S.screen)?'on':''}" data-act="${act}">${label}${n?`<span class="badge">${n}</span>`:''}</button>`;
+  const tabs = S.role === 'promoter'
+    ? tab(['home','event','new-event'],'home','Events') + tab(['network'],'network','Network') + tab(['messages'],'messages','Messages', msgUnread('promoter'))
+    : tab(['home','mine'],'home', S.role === 'artist' ? 'My gigs' : 'My jobs') + tab(['messages'],'messages','Messages', msgUnread(S.role));
   return `<header class="top"><div class="wrap top-in">
     <button class="logo" data-act="home"><img class="logo-img" src="${LOGO}" alt="we.TRUSS"></button>
+    <nav class="apptabs" aria-label="Sections">${tabs}</nav>
     <div class="top-right">
-      <div class="rolebar" aria-label="Quick role switch">${['promoter','artist','supplier'].map(roleBtn).join('')}</div>
-      <button class="bell" data-act="home" title="${unread} unread">${I.bell}${unread?`<span class="badge">${unread}</span>`:''}</button>
-      <div class="who"><span class="av ${S.role}">${u.initials}</span><div><b>${esc(u.name)}</b><small>${u.label}</small></div></div>
-      <button class="btn sm mag" data-act="switch">${I.swap}<span>Switch<span class="full-lbl"> role</span></span></button>
+      ${langSelect()}
+      <div class="me"><span class="av ${S.role}">${u.initials}</span><span class="me-tx"><b>${esc(u.name)}</b><em>${u.label}</em></span></div>
+      <button class="btn sm ghost" data-act="switch">Log out</button>
     </div>
   </div></header>`;
 }
@@ -1056,7 +1837,7 @@ function siteNav(){
     <button class="logo" data-act="nav" data-id="home"><img class="logo-img" src="${LOGO}" alt="we.TRUSS"></button>
     <div class="lp-links">${NAV.map(([id,l]) => `<button data-act="nav" data-id="${id}">${l}</button>`).join('')}</div>
     <div class="lp-nav-r">
-      <button class="btn sm solid" data-act="to-login">Log in</button>
+      ${langSelect()}<button class="btn sm solid" data-act="to-login">Log in</button>
       <button class="lp-burger" data-act="menu" aria-label="Menu"><i></i><i></i><i></i></button>
     </div>
   </div>
@@ -1248,17 +2029,18 @@ function promoterHome(){
   EVENTS.forEach(e => e.activity.forEach(a => acts.push({ e, a })));
   acts.sort((x,y) => (x.a.read === y.a.read ? 0 : x.a.read ? 1 : -1));
 
-  return `<main class="wrap">
-    <section class="hello"><h1>Hi ${USERS.promoter.first}, here’s your season.</h1>
-      <p>Nachtwerk Collective · 3 upcoming events</p></section>
-    <div class="stats">
-      <div class="stat"><div class="v mono" style="color:var(--cyan)">${EVENTS.length}</div><div class="l">Upcoming events</div></div>
-      <div class="stat"><div class="v mono" style="color:${ringColor(avg)}">${avg}%</div><div class="l">Avg. readiness</div></div>
-      <div class="stat"><div class="v mono" style="color:var(--red)">${problems}</div><div class="l">Problems</div></div>
-      <div class="stat"><div class="v mono" style="color:var(--mag)">${unread}</div><div class="l">New from parties</div></div>
-    </div>
+  const toRateN = toRate(), actUnread = EVENTS.reduce((n,e) => n + e.activity.filter(a => !a.read).length, 0);
+  const tab = dashTab('promoter', 'events');
+  const tiles = dashTiles('promoter', tab, [
+    ['events',    '📅', 'Upcoming events',              `Avg. readiness ${avg}%`,                     EVENTS.length, ''],
+    ['attention', '⚠',  'Needs attention',              problems ? `${problems} problem${problems>1?'s':''}` : 'All on track', all.length, all.length ? 'bad' : 'ok'],
+    ['activity',  '💬', 'Latest from parties',          actUnread ? `${actUnread} new` : 'Nothing new', acts.length, actUnread ? 'new' : ''],
+    ['rate',      '★',  'Rate artists & suppliers',     toRateN ? `${toRateN} to rate` : 'All rated', toRateN, toRateN ? 'new' : 'ok']
+  ]);
 
-    <h2 class="sec">Upcoming events</h2>
+  let section = '';
+  if (tab === 'events') section = `
+    <div class="sec-row"><h2 class="sec">Upcoming events</h2><button class="btn solid sm" data-act="new-event">+ New event</button></div>
     <div class="ev-cards">
       ${EVENTS.map(e => {
         const d = dparts(e.date), r = readiness(e), pr = countStatus(e,'problem'), wt = countStatus(e,'waiting');
@@ -1280,11 +2062,12 @@ function promoterHome(){
           <div class="ev-foot"><span class="mono">${fmtDate(e.date)} · ${daysToGo(e)}</span><span style="color:var(--cyan);font-weight:700">Open →</span></div>
         </button>`;
       }).join('')}
-    </div>
+    </div>`;
 
+  if (tab === 'rate') section = `
     ${PAST_EVENTS.map(pe => {
       const left = pe.artists.filter(a => !a.rating).length;
-      return `<h2 class="sec">Rate your artists ${left ? `<span class="badge">${left}</span>` : ''}</h2>
+      return `<h2 class="sec">Rate your artists & suppliers ${left ? `<span class="badge">${left}</span>` : ''}</h2>
       <div class="card rate-card">
         <div class="rate-hd">
           <div><div class="tag">Past event · ${esc(pe.kind)}</div>
@@ -1293,26 +2076,46 @@ function promoterHome(){
           <p class="muted">How did it go? Your rating helps other promoters book reliable artists, and gives the artist feedback.</p>
         </div>
         <div class="rate-list">${pe.artists.map((a,i) => `<div class="rate-row">
-          <div class="rate-who"><b>${esc(a.name)}</b><small>${esc(a.sub)} · <span class="mono">${esc(a.set)}</span></small>${scoreChip(a.name)}</div>
+          <div class="rate-who"><span class="ptype">${a.kind === 'supplier' ? 'Supplier' : 'Artist'}</span><b>${esc(a.name)}</b><small>${esc(a.sub)} · <span class="mono">${esc(a.set)}</span></small>${scoreChip(a.name)}</div>
           ${a.rating
             ? `<div class="done">${starsHtml(a.rating.stars)}<small>You rated · ${esc(a.rating.date)}</small></div>`
             : `<button class="btn solid sm" data-act="rate" data-id="${pe.id}:${i}">★ Rate</button>`}
         </div>`).join('')}</div>
       </div>`;
-    }).join('')}
+    }).join('')}`;
 
-    <div class="two" style="margin-top:28px">
-      <div class="card">
-        <h3>Needs attention <span class="count pill ${all.length?'bad':'ok'}">${all.length} open</span></h3>
-        ${openList(all.slice(0,6), true)}
-      </div>
-      <div class="card">
-        <h3>Latest from your parties ${unread?`<span class="badge count">${unread}</span>`:''}</h3>
-        ${acts.length ? acts.slice(0,7).map(({e,a}) => activityRow(e,a,true)).join('') : '<div class="empty">No activity yet.</div>'}
-      </div>
-    </div>
+  if (tab === 'attention') section = `
+    <h2 class="sec">Needs attention</h2>
+    <div class="card">
+      <h3>Open items across all events <span class="count pill ${all.length?'bad':'ok'}">${all.length} open</span></h3>
+      ${openList(all, true)}
+    </div>`;
+
+  if (tab === 'activity') section = `
+    <h2 class="sec">Latest from your parties</h2>
+    <div class="card">
+      ${acts.length ? acts.map(({e,a}) => activityRow(e,a,true)).join('') : '<div class="empty">No activity yet.</div>'}
+    </div>`;
+
+  return `<main class="wrap">
+    <section class="hello"><h1>Hi ${USERS.promoter.first}, here’s your season.</h1>
+      <p>Nachtwerk Collective · ${EVENTS.length} upcoming event${EVENTS.length === 1 ? '' : 's'}</p></section>
+    ${tiles}
+    ${section ? `<div class="dash-section">${section}</div>` : dashHint()}
     <div class="spacer"></div>
   </main>`;
+}
+function dashHint(){ return `<p class="dash-hint">Tap a tile to see the details.</p>`; }
+
+/* dashboard tiles: a menu of sections, only the chosen one is shown in detail */
+function dashTab(role){ S.dash = S.dash || {}; return S.dash[role] || null; }   // nothing open until a tile is clicked
+function dashTiles(role, active, items){
+  return `<div class="dtiles" role="tablist">${items.map(([id, ico, title, hint, n, cls]) => `
+    <button class="dtile ${active === id ? 'on' : ''}" role="tab" aria-selected="${active === id}" data-act="dash" data-id="${role}:${id}">
+      <span class="dt-ico">${ico}</span>
+      <span class="dt-tx"><b>${title}</b><small>${hint}</small></span>
+      ${n !== null && n !== '' ? `<span class="dt-n ${cls}">${n}</span>` : ''}
+    </button>`).join('')}</div>`;
 }
 
 function openList(items, showEvent){
@@ -1353,20 +2156,35 @@ function partyCard(e,p){
   const cls = s.cls + (p.flash ? ' flash' : '');
   return `<div class="party ${cls}" id="pc-${p.id}">
     <div class="party-hd">
-      <div><div class="ptype">${TYPE_LABEL[p.type]}</div><div class="pname">${esc(p.name)}</div><div class="psub">${esc(p.sub)}</div>${p.type==='artist' ? scoreChip(p.name) : ''}</div>
+      <div><div class="ptype">${TYPE_LABEL[p.type]}</div><div class="pname">${esc(p.name)}</div><div class="psub">${esc(p.sub)}</div>${p.type !== 'venue' ? scoreChip(p.name) : ''}</div>
       <div class="pstat">${pill(p.status)}
         <select data-change="status" data-id="${p.id}" aria-label="Change status">
           <option value="">Set status…</option>
           <option value="confirmed">Confirmed</option><option value="waiting">Waiting</option><option value="problem">Problem</option>
         </select></div>
     </div>
-    ${p.status !== 'confirmed' && p.issue ? `<div class="issue ${s.cls}">${p.status==='problem'?'⚠ ':''}${esc(p.issue)}</div>` : ''}
+    ${p.status !== 'confirmed' && p.issue ? `<div class="issue ${s.cls}">${p.status==='problem'?'⚠ ':''}${esc(p.issue)}
+      ${p.status === 'problem' && (p.type === 'artist' || p.type === 'supplier') && !p.replacedBy ? `<button class="btn sm solid replace-btn" data-act="replace" data-id="${p.id}">⚡ Find a replacement</button>` : ''}</div>` : ''}
     <dl class="kv">${agreed(p).map(([k,v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
     ${list}
     <div class="pfoot">
       <span>${p.user ? `<span class="acc">● Using we.TRUSS</span>` : 'Invited · '+(p.type==='artist'?'artist access':'supplier access')}</span>
       <span class="mono">${affecting.length ? `updates seen ${seen}/${affecting.length}` : 'no updates yet'}</span>
     </div>
+  </div>`;
+}
+
+// one compact line per party; tap it to see the full card with everything agreed
+function partyRow(e, p){
+  const open = S.openParty === p.id, s = STATUS[p.status];
+  return `<div class="prow-wrap ${open ? 'open' : ''} ${s.cls}">
+    <button class="prow" data-act="party-toggle" data-id="${p.id}" aria-expanded="${open}">
+      <span class="av">${esc(initials(p.name))}</span>
+      <span class="prow-id"><b>${esc(p.name)}</b><small>${TYPE_LABEL[p.type]}${p.type === 'artist' && p.setTime ? ' · ' + esc(p.setTime) : p.loadIn ? ' · ' + esc(p.loadIn) : ''}</small></span>
+      ${pill(p.status)}
+      <span class="prow-chev">${open ? '▴' : '▾'}</span>
+    </button>
+    ${open ? `<div class="prow-detail">${partyCard(e, p)}</div>` : ''}
   </div>`;
 }
 
@@ -1380,11 +2198,13 @@ function promoterEvent(e){
       <div class="info">
         <span class="tag">${esc(e.kind)}</span>
         <h1>${esc(e.name)}</h1>
+        ${e.desc ? `<p class="ev-desc">${esc(e.desc)}</p>` : ''}
         <div class="meta">
           <span>${I.cal}<span><b class="mono">${fmtDate(e.date)}</b> · ${daysToGo(e)}</span></span>
           <span>${I.clock}<b class="mono">${esc(e.hours)}</b></span>
           <span>${I.pin}<span><b>${esc(e.venue)}</b>, ${esc(e.city)}</span></span>
           <span>${I.users}<span><b class="mono">${e.capacity}</b> cap</span></span>
+          ${e.ticket ? `<span>🎟<span><b>${esc(e.ticket)}</b></span></span>` : ''}
         </div>
       </div>
       <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
@@ -1397,34 +2217,29 @@ function promoterEvent(e){
       </div>
     </section>
 
-    <div class="ev-grid">
-      <section>
-        <h2 class="sec" style="margin-top:4px">Everyone involved · ${e.parties.length} parties</h2>
-        <div class="parties">${e.parties.map(p => partyCard(e,p)).join('')}</div>
-      </section>
-
-      <aside class="side">
-        <div class="card">
-          <h3>Open items <span class="count mono muted" style="font-size:12px">sorted by urgency</span></h3>
-          ${openList(items, false)}
-        </div>
-
-        <div class="card post">
+    ${(() => {
+      // one section at a time: pick it in the tab row
+      const t = S.evTab || 'parties', unreadAct = e.activity.filter(a => !a.read).length;
+      const tb = (id, label, n, cls) => `<button class="evt ${t === id ? 'on' : ''}" data-act="ev-tab" data-id="${id}">${label}${n ? `<span class="evt-n ${cls || ''}">${n}</span>` : ''}</button>`;
+      const tabsRow = `<div class="evtabs" role="tablist">
+        ${tb('parties', 'Parties', e.parties.length)}${tb('open', 'Open items', items.length, items.some(x => x.p.status === 'problem') ? 'bad' : '')}
+        ${tb('post', 'Post an update', 0)}${tb('activity', 'Activity', unreadAct, 'new')}${tb('log', 'Change log', e.updates.length)}</div>`;
+      let body = '';
+      if (t === 'parties') body = `<p class="muted ev-tip">Tap someone to see what’s agreed with them.</p>
+        <div class="plist">${e.parties.map(p => partyRow(e,p)).join('')}</div>`;
+      if (t === 'open') body = `<div class="card">${openList(items, false)}</div>`;
+      if (t === 'post') body = `<div class="card post">
           <h3>${I.send} Post an update</h3>
           <textarea id="upd-text" placeholder="e.g. Doors move from 22:00 to 23:00"></textarea>
-          <div class="tpls">${e.templates.map((t,i) => `<button class="tpl" data-act="tpl" data-id="${i}">${esc(t.t)}</button>`).join('')}</div>
+          <div class="tpls">${e.templates.map((tp,i) => `<button class="tpl" data-act="tpl" data-id="${i}">${esc(tp.t)}</button>`).join('')}</div>
           <div class="lblrow"><span>Who does this affect?</span><button class="linkbtn" data-act="selall">Select all</button></div>
           <div class="checks">${e.parties.map(p => `<label class="chk"><input type="checkbox" name="aff" value="${p.id}"><span>${esc(p.name)}<small>${TYPE_LABEL[p.type]}</small></span></label>`).join('')}</div>
           <button class="btn solid full" data-act="post" data-id="${e.id}">${I.send} Send update to selected parties</button>
-        </div>
-
-        <div class="card">
-          <h3>Activity from parties ${e.activity.some(a=>!a.read)?`<span class="badge count">${e.activity.filter(a=>!a.read).length}</span>`:''}</h3>
+        </div>`;
+      if (t === 'activity') body = `<div class="card">
           ${e.activity.length ? e.activity.map(a => activityRow(e,a,false)).join('') : '<div class="empty">No confirmations or problems reported yet.</div>'}
-        </div>
-
-        <div class="card">
-          <h3>Change log <span class="count mono muted" style="font-size:12px">${e.updates.length} update${e.updates.length===1?'':'s'}</span></h3>
+        </div>`;
+      if (t === 'log') body = `<div class="card">
           ${e.updates.length ? e.updates.map(u => {
             const n = u.affects.filter(id => u.seenBy[id]).length;
             return `<div class="log">
@@ -1435,11 +2250,212 @@ function promoterEvent(e){
                 : `<span title="Not seen yet">○ ${esc(partyName(e,id))}</span>`).join('')}</div>
             </div>`;
           }).join('') : '<div class="empty">No updates posted yet.</div>'}
+        </div>`;
+      return tabsRow + `<div class="dash-section">${body}</div>`;
+    })()}
+    <div class="spacer"></div>
+  </main>`;
+}
+
+/* ---------------- views: new event (promoter) ---------------- */
+const EVENT_KINDS = ['Club night','Concert','Festival','Open-air event','Theatre / comedy','Showcase','Private event','Other'];
+function newEventView(){
+  const people = DIRECTORY.filter(d => d.inNetwork && d.onPlatform);
+  const pick = d => `<div class="pick">
+      <label class="pick-hd"><input type="checkbox" name="ne-book" value="${d.id}">
+        <span class="av">${esc(initials(d.name))}</span>
+        <span class="pick-id"><b>${esc(d.name)}</b><small>${esc(d.sub)} · ${esc(d.price)}</small></span><span class="ne-av" data-av="${d.id}"></span>${scoreChip(d.name)}</label>
+      <div class="pick-fields">
+        <input class="field" data-ne-time="${d.id}" placeholder="${d.kind === 'artist' ? 'Set time — e.g. 22:00 – 23:30' : 'Load-in — e.g. 14:00 – 17:00'}">
+        <input class="field" data-ne-fee="${d.id}" placeholder="Agreed fee — e.g. € 900">
+      </div>
+    </div>`;
+  const f = (id, label, input, hint) => `<div class="ne-f"><label for="${id}">${label}</label>${input}${hint ? `<small>${hint}</small>` : ''}</div>`;
+  return `<main class="wrap ne">
+    <button class="back" data-act="home">${I.back} All events</button>
+    <section class="hello"><h1>Create a new event</h1>
+      <p>Fill in the details once. Everyone you book gets their own view with only what concerns them.</p></section>
+
+    <div class="ne-grid">
+      <div class="ne-main">
+        <div class="card"><h3>1 · The basics</h3>
+          ${f('ne-name', 'Event name *', '<input class="field" id="ne-name" placeholder="e.g. Nachtwerk Sessions #6">')}
+          <div class="ne-row">
+            ${f('ne-kind', 'Type of event', `<select class="field" id="ne-kind">${EVENT_KINDS.map(k => `<option>${k}</option>`).join('')}</select>`)}
+            ${f('ne-cap', 'Capacity *', '<input class="field" id="ne-cap" type="number" min="10" step="10" placeholder="e.g. 450">', 'Expected visitors')}
+          </div>
+          ${f('ne-desc', 'Short description', '<textarea class="field" id="ne-desc" rows="3" placeholder="e.g. An intimate night with a live jazz trio and a late DJ set."></textarea>', 'Shown to everyone you book')}
+        </div>
+
+        <div class="card"><h3>2 · Date & times</h3>
+          <div class="ne-row three">
+            ${f('ne-date', 'Date *', `<input class="field" id="ne-date" type="date" min="2026-11-25">`)}
+            ${f('ne-doors', 'Doors open *', '<input class="field" id="ne-doors" type="time" value="20:00">')}
+            ${f('ne-end', 'Ends at', '<input class="field" id="ne-end" type="time" value="02:00">')}
+          </div>
+          ${f('ne-due', 'Confirm everyone by', '<input class="field" id="ne-due" type="date" min="2026-11-25">', 'Deadline for artists and suppliers to confirm (used for the open items list)')}
+        </div>
+
+        <div class="card"><h3>3 · Venue & tickets</h3>
+          <div class="ne-row">
+            ${f('ne-venue', 'Venue *', '<input class="field" id="ne-venue" placeholder="e.g. De Kelder">')}
+            ${f('ne-city', 'City *', '<input class="field" id="ne-city" placeholder="e.g. Gent">')}
+          </div>
+          ${f('ne-addr', 'Address', '<input class="field" id="ne-addr" placeholder="e.g. Kraanlei 12, 9000 Gent">', 'Shared with artists and suppliers for arrival and load-in')}
+          <div class="ne-row">
+            ${f('ne-ticket', 'Ticket price', '<input class="field" id="ne-ticket" placeholder="e.g. € 15 presale · € 18 door">')}
+            <div class="ne-f"><label>Venue status</label>
+              <label class="ne-check"><input type="checkbox" id="ne-venue-ok"> Venue is booked and confirmed</label></div>
+          </div>
+        </div>
+
+        <div class="card"><h3>4 · Line-up & suppliers <span class="count muted" style="font-size:12px">optional — you can add more later</span></h3>
+          <p class="muted" style="margin:0 0 12px;font-size:14px">Tick who you want to book. They get a booking request in their messages and appear in the event as <b>Waiting</b> until they confirm.</p>
+          <div class="pick-grp"><div class="lblrow"><span>Artists</span></div>${people.filter(d => d.kind === 'artist').map(pick).join('')}</div>
+          <div class="pick-grp"><div class="lblrow"><span>Suppliers</span></div>${people.filter(d => d.kind === 'supplier').map(pick).join('')}</div>
+          <p class="muted" style="font-size:13px;margin:10px 0 0">Not in the list? Add them from your <button class="linkbtn" data-act="network">Network</button> first.</p>
+        </div>
+      </div>
+
+      <aside class="ne-side">
+        <div class="card ne-sum">
+          <h3>Ready?</h3>
+          <p class="muted" style="margin:0 0 14px;font-size:14px">Fields marked * are required. You can change everything later from the event page.</p>
+          <button class="btn solid full lp-big" data-act="create-event">Create event</button>
+          <button class="btn ghost full" style="margin-top:8px" data-act="home">Cancel</button>
         </div>
       </aside>
     </div>
     <div class="spacer"></div>
   </main>`;
+}
+
+/* ---------------- views: network (promoter) ---------------- */
+function netMatches(d){
+  const f = S.netF || 'all', q = (S.netQ || '').toLowerCase().trim();
+  if (f === 'artist' && d.kind !== 'artist') return false;
+  if (f === 'supplier' && d.kind !== 'supplier') return false;
+  if (f === 'mine' && !d.inNetwork) return false;
+  if (f === 'avail' && !(S.netDate && isAvailable(availOn(d.id, S.netDate)))) return false;
+  return !q || [d.name, d.sub, d.city, ...d.tags].join(' ').toLowerCase().includes(q);
+}
+function netCard(d){
+  const convo = CONVOS.find(c => c.with === d.id);
+  const status = !d.onPlatform
+    ? (d.invited ? '<span class="pill wait">Invite sent</span>' : '<span class="pill off">Not on we.TRUSS yet</span>')
+    : d.inNetwork ? '<span class="pill ok">In your network</span>' : '';
+  const actions = !d.onPlatform
+    ? `<button class="btn sm solid full" data-act="platform-invite" data-id="${d.id}" ${d.invited?'disabled':''}>${d.invited?'✓ Invite sent':'✉ Invite to we.TRUSS'}</button>`
+    : `${d.inNetwork ? '' : `<button class="btn sm" data-act="net-add" data-id="${d.id}">+ Add to network</button>`}
+       <button class="btn sm solid" data-act="message" data-id="${d.id}">${convo ? 'Open chat' : 'Message'}</button>
+       <button class="btn sm ghost" data-act="event-invite" data-id="${d.id}">Book for event</button>`;
+  return `<div class="net-card ${netMatches(d)?'':'hide'}" data-id="${d.id}" data-search="${esc([d.name,d.sub,d.city,...d.tags].join(' ').toLowerCase())}">
+    <div class="net-top"><span class="av big">${esc(initials(d.name))}</span>
+      <div class="net-id"><div class="ptype">${d.kind === 'artist' ? 'Artist' : 'Supplier'}</div><b>${esc(d.name)}</b><small>${esc(d.sub)}</small></div></div>
+    <div class="net-meta"><span>${I.pin} ${esc(d.city)}</span><span class="mono">${esc(d.price)}</span></div>
+    ${scoreChip(d.name)}
+    <div class="net-tags">${d.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div>
+    <div class="net-status">${status}${S.netDate ? availPill(d.id, S.netDate) : ''}</div>
+    <div class="net-actions">${actions}</div>
+  </div>`;
+}
+function networkView(){
+  const f = S.netF || 'all';
+  const count = DIRECTORY.filter(d => d.inNetwork).length;
+  const chip = (id, label) => `<button class="fchip ${f===id?'on':''}" data-act="net-filter" data-id="${id}">${label}</button>`;
+  return `<main class="wrap">
+    <section class="hello"><h1>Your network</h1>
+      <p>Find artists and suppliers, add them to your network, message them or book them for an event. ${count} contacts in your network.</p></section>
+    <div class="net-tools">
+      <input id="net-q" type="search" placeholder="Search by name, genre, service or city…" value="${esc(S.netQ||'')}" autocomplete="off">
+      <div class="fchips">${chip('all','All')}${chip('artist','Artists')}${chip('supplier','Suppliers')}${chip('mine','In my network')}${S.netDate ? chip('avail','✓ Available on that date') : ''}</div>
+      <button class="btn solid" data-act="new-invite">✉ Invite someone new</button>
+    </div>
+    <div class="net-avail">
+      <span class="lbl">Check availability for</span>
+      <select class="field" id="net-date-ev">
+        <option value="">— pick one of your events —</option>
+        ${EVENTS.map(e => `<option value="${e.date}" ${S.netDate === e.date ? 'selected' : ''}>${esc(e.name)} · ${fmtShort(e.date)}</option>`).join('')}
+      </select>
+      <span class="muted">or a date</span>
+      <input class="field" id="net-date" type="date" min="2026-11-25" value="${S.netDate || ''}">
+      ${S.netDate ? `<button class="linkbtn" data-act="net-date-clear">Clear</button>` : ''}
+    </div>
+    <div class="net-grid">${DIRECTORY.map(netCard).join('')}</div>
+    <div class="empty net-empty ${DIRECTORY.some(netMatches)?'hide':''}">No one matches your search. Invite them to we.TRUSS with the button above.</div>
+    <div class="spacer"></div>
+  </main>`;
+}
+
+/* ---------------- views: messages (all roles) ---------------- */
+function convoName(c, role){ return role === 'promoter' ? profile(c.with).name : 'Lotte Verbeke'; }
+function convoSub(c, role){ const d = profile(c.with); return role === 'promoter' ? (d.kind === 'artist' ? 'Artist' : 'Supplier') + ' · ' + d.sub : 'Promoter · Nachtwerk Collective'; }
+function messagesView(){
+  const role = S.role, list = convosFor(role).slice().sort((a,b) => convoUnread(role,b) - convoUnread(role,a));
+  const active = list.find(c => c.id === S.id) || (role !== 'promoter' ? list[0] : null);
+  const replies = role === 'promoter'
+    ? ['Are you available on that date?', 'Can you send me your rider?', 'Great, it’s confirmed!', 'What’s your fee for a 90-minute set?']
+    : role === 'artist' ? ['Yes, I’m available!', 'I’ll send my rider today.', 'Thanks, see you there!'] : ['Yes, we can do that.', 'I’ll send a quote today.', 'All equipment is confirmed.'];
+  const listHtml = list.length ? list.map(c => {
+    const n = active && active.id === c.id ? 0 : convoUnread(role, c), m = lastMsg(c);   // the open chat counts as read
+    return `<button class="conv ${active && active.id===c.id?'on':''}" data-act="open-convo" data-id="${c.id}">
+      <span class="av">${esc(initials(convoName(c,role)))}</span>
+      <span class="conv-tx"><b>${esc(convoName(c,role))}</b><small>${m ? (isMine(role,m)?'You: ':'') + esc(m.text) : 'New conversation'}</small></span>
+      <span class="conv-r"><small class="mono">${m ? esc(m.time.replace(/^.*· /,'')) : ''}</small>${n?`<span class="badge">${n}</span>`:''}</span>
+    </button>`;
+  }).join('') : '<div class="empty">No conversations yet.</div>';
+  const thread = active ? `<div class="thread">
+      <div class="thread-hd">
+        ${role === 'promoter' ? `<button class="back mobile-only" data-act="messages">${I.back} All chats</button>` : ''}
+        <span class="av">${esc(initials(convoName(active,role)))}</span>
+        <div><b>${esc(convoName(active,role))}</b><small>${esc(convoSub(active,role))}</small></div>
+        ${role === 'promoter' ? scoreChip(profile(active.with).name) : ''}
+      </div>
+      <div class="bubbles" id="bubbles">${active.msgs.map(m => `<div class="bubble ${isMine(role,m)?'me':'them'}">
+          <p>${esc(m.text)}</p><small>${esc(m.time)}${isMine(role,m) ? (m.read ? ' · Seen' : ' · Sent') : ''}</small></div>`).join('')}
+        ${active.typing ? '<div class="bubble them typing"><p>typing…</p></div>' : ''}</div>
+      <div class="quick">${replies.map(r => `<button class="tpl" data-act="quick-msg" data-id="${esc(r)}">${esc(r)}</button>`).join('')}</div>
+      <div class="composer">
+        <textarea id="msg-text" rows="2" placeholder="Write a message…"></textarea>
+        <button class="btn solid" data-act="send-msg" data-id="${active.id}">${I.send} Send</button>
+      </div>
+    </div>` : `<div class="thread empty-thread"><p>Select a conversation, or find someone in your <button class="linkbtn" data-act="network">network</button> to message.</p></div>`;
+  return `<main class="wrap">
+    <section class="hello"><h1>Messages</h1><p>${role === 'promoter' ? 'Talk one-to-one with your artists and suppliers.' : 'Your conversations with promoters.'}</p></section>
+    <div class="msg-layout ${active?'has-thread':''} ${role!=='promoter'?'single':''}">
+      ${role === 'promoter' ? `<div class="conv-list">${listHtml}</div>` : ''}
+      ${thread}
+    </div>
+    <div class="spacer"></div>
+  </main>`;
+}
+
+/* ---------------- views: availability calendar (artist & supplier) ---------------- */
+const CAL_MIN = '2026-11', CAL_MAX = '2027-07';
+const MONTH_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+function availabilitySection(pid){
+  if (!pid) return '';
+  const ym = S.calM || '2026-12', [y, m] = ym.split('-').map(Number);
+  const daysIn = new Date(y, m, 0).getDate(), offset = (new Date(y, m - 1, 1).getDay() + 6) % 7;   // weeks start on Monday
+  const cells = [];
+  for (let i = 0; i < offset; i++) cells.push('<span class="cal-blank"></span>');
+  for (let d = 1; d <= daysIn; d++){
+    const ds = `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const s = availOn(pid, ds), past = ds < '2026-11-25', ev = s === 'booked' ? bookingOn(pid, ds) : null;
+    cells.push(`<button class="cal-day ${s} ${past ? 'past' : ''}" data-act="cal-day" data-id="${ds}" ${past || ev ? 'disabled' : ''}
+      title="${fmtDate(ds)} · ${ev ? 'Booked: ' + esc(ev.name) : AV_LABEL[s]}"><b>${d}</b><small>${ev ? esc(ev.name) : s === 'last' ? '⚡' : s === 'busy' ? 'Busy' : ''}</small></button>`);
+  }
+  return `<h2 class="sec">My availability</h2>
+  <div class="card cal">
+    <div class="cal-hd">
+      <button class="btn sm ghost" data-act="cal-month" data-id="-1" ${ym <= CAL_MIN ? 'disabled' : ''}>${I.back}</button>
+      <b>${M_LONG[S.lang][m - 1]} ${y}</b>
+      <button class="btn sm ghost" data-act="cal-month" data-id="1" ${ym >= CAL_MAX ? 'disabled' : ''} style="transform:scaleX(-1)">${I.back}</button>
+    </div>
+    <p class="muted cal-help">Tap a day to switch between <b>Available</b> → <b>Busy</b> → <b>⚡ Last-minute OK</b>. Promoters see this before they book you, and last-minute days put you first when they need a replacement.</p>
+    <div class="cal-grid">${[1,2,3,4,5,6,0].map(i => D_SHORT[S.lang][i]).map(w => `<span class="cal-w">${w}</span>`).join('')}${cells.join('')}</div>
+    <div class="cal-legend"><span class="lg free">Available</span><span class="lg busy">Busy</span><span class="lg last">⚡ Last-minute OK</span><span class="lg booked">Booked gig</span></div>
+  </div>`;
 }
 
 /* ---------------- views: artist & supplier ---------------- */
@@ -1451,7 +2467,7 @@ function myRating(name){
     <div class="big-score"><div class="v mono">${s.avg.toFixed(1)}</div>${starsHtml(s.avg)}<small>${s.count} review${s.count>1?'s':''}</small></div>
     <div class="reviews">${r.slice(0,3).map(x => `<div class="review ${x.fresh?'fresh':''}">
       <div class="rv-hd">${starsHtml(x.stars,'sm')}<span>${esc(x.by)} · ${esc(x.date)}</span>${x.fresh?'<span class="newtag">NEW</span>':''}</div>
-      ${x.tags.length ? `<div class="rv-tags">${x.tags.map(t => `<span class="${RATING_TAGS.bad.includes(t)?'neg':''}">${esc(t)}</span>`).join('')}</div>` : ''}
+      ${x.tags.length ? `<div class="rv-tags">${x.tags.map(t => `<span class="${BAD_TAGS.includes(t)?'neg':''}">${esc(t)}</span>`).join('')}</div>` : ''}
       ${x.note ? `<p>${esc(x.note)}</p>` : ''}
     </div>`).join('')}</div>
   </div>`;
@@ -1459,10 +2475,31 @@ function myRating(name){
 function myHome(role){
   const list = myParties(role), isA = role === 'artist';
   const c = isA ? 'var(--mag)' : 'var(--acid)';
+  const myName = isA ? USERS.artist.name : 'LumenSound BV', sc = artistScore(myName);
+  const toConfirm = list.filter(x => x.p.status === 'waiting').length;
+  const newUpd = list.reduce((n,x) => n + unreadUpdates(x.e, x.p).length, 0);
+  const pid = myProfileId(role), cal = AVAIL[pid] || {};
+  const lastN = Object.values(cal).filter(v => v === 'last').length;
+  const tab = dashTab(role, 'gigs');
+  const tiles = dashTiles(role, tab, [
+    ['gigs',   isA ? '🎤' : '🔧', isA ? 'My upcoming gigs' : 'My upcoming jobs', toConfirm ? `${toConfirm} to confirm` : (newUpd ? `${newUpd} new update${newUpd>1?'s':''}` : 'All up to date'), list.length, toConfirm || newUpd ? 'new' : 'ok'],
+    ['avail',  '📅', 'My availability', lastN ? `${lastN} last-minute day${lastN>1?'s':''}` : 'Set your free days', null, ''],
+    ['rating', '★',  'My rating', sc.count ? `${sc.count} review${sc.count>1?'s':''}` : 'No ratings yet', sc.count ? sc.avg.toFixed(1) : '', 'ok']
+  ]);
+  if (tab === 'rating') return `<main class="wrap" style="max-width:760px">
+    <section class="hello"><h1>Hey ${USERS[role].first} — your upcoming ${isA?'gigs':'jobs'}</h1><p>${esc(USERS[role].org)}</p></section>
+    ${tiles}<div class="dash-section">${myRating(myName) || '<div class="empty">No ratings yet.</div>'}</div><div class="spacer"></div></main>`;
+  if (tab === 'avail') return `<main class="wrap" style="max-width:760px">
+    <section class="hello"><h1>Hey ${USERS[role].first} — your upcoming ${isA?'gigs':'jobs'}</h1><p>${esc(USERS[role].org)}</p></section>
+    ${tiles}<div class="dash-section">${availabilitySection(pid)}</div><div class="spacer"></div></main>`;
+  if (!tab) return `<main class="wrap" style="max-width:760px">
+    <section class="hello"><h1>Hey ${USERS[role].first} — your upcoming ${isA?'gigs':'jobs'}</h1><p>${esc(USERS[role].org)}</p></section>
+    ${tiles}${dashHint()}<div class="spacer"></div></main>`;
   return `<main class="wrap" style="max-width:760px">
     <section class="hello"><h1>Hey ${USERS[role].first} — your upcoming ${isA?'gigs':'jobs'}</h1>
       <p>${esc(USERS[role].org)}</p></section>
-    ${isA ? myRating(USERS.artist.name) : ''}
+    ${tiles}
+    <div class="dash-section">
     <h2 class="sec">My upcoming ${isA?'gigs':'jobs'} · ${list.length}</h2>
     <div class="mine">
       ${list.map(({e,p}) => {
@@ -1482,6 +2519,7 @@ function myHome(role){
       }).join('')}
     </div>
     <p class="muted" style="font-size:13px;margin-top:22px">You only see the events you’re booked for — and only the information that concerns you.</p>
+    </div>
     <div class="spacer"></div>
   </main>`;
 }
@@ -1594,7 +2632,17 @@ function render(){
   }
   let body = '';
   const after = [];
-  if (S.role === 'promoter'){
+  if (S.screen === 'network' && S.role === 'promoter'){
+    body = networkView();
+  } else if (S.screen === 'new-event' && S.role === 'promoter'){
+    body = newEventView();
+  } else if (S.screen === 'messages'){
+    body = messagesView();
+    const role = S.role, list = convosFor(role);
+    const active = list.find(c => c.id === S.id) || (role !== 'promoter' ? list[0] : null);
+    // opening a conversation = its incoming messages are now read
+    if (active) after.push(() => active.msgs.forEach(m => { if (!isMine(role, m)) m.read = true; }));
+  } else if (S.role === 'promoter'){
     if (S.screen === 'event'){
       const e = findEvent(S.id);
       body = promoterEvent(e);
@@ -1610,6 +2658,7 @@ function render(){
   }
   after.forEach(f => f());          // mark as seen/read AFTER building the body (so NEW tags still show once)…
   app.innerHTML = header() + body;  // …but BEFORE the header, so its badge counts are already up to date
+  const b = document.getElementById('bubbles'); if (b) b.scrollTop = b.scrollHeight;
 }
 
 function go(screen, id){ S.screen = screen; S.id = id || null; render(); window.scrollTo({ top:0 }); }
@@ -1646,6 +2695,120 @@ function openProblemModal(pid){
 }
 function closeModal(){ $('#modal').innerHTML = ''; }
 
+// promoter -> contact. Demo contacts without a login answer automatically after a moment;
+// NØRA and LumenSound have their own demo login, so you reply by switching role.
+function sendMessage(pid, text){
+  let c = CONVOS.find(x => x.with === pid);
+  if (!c){ c = { id:'c-' + pid, with:pid, msgs:[] }; CONVOS.unshift(c); }
+  c.msgs.push({ from:'me', text, time:nowStr(), read:false });
+  const d = profile(pid);
+  if (d.user) return;
+  c.typing = true;
+  setTimeout(() => {
+    c.typing = false;
+    c.msgs.forEach(m => { if (m.from === 'me') m.read = true; });
+    const reply = /book you|available/i.test(text)
+      ? (d.kind === 'artist' ? `Thanks Lotte! Yes, I’m available on that date. Fee as on my profile (${d.price}). I’ll send my rider.` : `Hi Lotte, thanks! We’re free on that date. I’ll send you a quote today.`)
+      : (d.kind === 'artist' ? 'Hi Lotte, thanks for your message! Happy to talk, what do you have in mind?' : 'Hi Lotte, thanks for reaching out. Send me the date and venue and I’ll make you a quote.');
+    c.msgs.push({ from:'them', text:reply, time:nowStr(), read:false });
+    // demo: saying yes to a booking or last-minute request confirms them in the event
+    let confirmedIn = null;
+    if (/book you|available/i.test(text)) EVENTS.forEach(e => e.parties.forEach(p => {
+      if (p.name === d.name && p.status === 'waiting' && /request sent/i.test(p.issue || '')){
+        p.status = 'confirmed'; p.issue = null; p.flash = true; confirmedIn = e;
+        e.activity.unshift({ partyId:p.id, kind:'confirm', text:'confirmed they’ll be there.', time:nowStr(), read:false });
+      }
+    }));
+    if (S.role === 'promoter' && (S.screen === 'messages' || (confirmedIn && S.screen === 'event' && S.id === confirmedIn.id))){
+      const t = $('#msg-text'), u = $('#upd-text');           // keep anything being typed
+      const draft = t ? t.value : '', upd = u ? u.value : '';
+      render();
+      if ($('#msg-text')) $('#msg-text').value = draft;
+      if ($('#upd-text')) $('#upd-text').value = upd;
+      if (S.screen !== 'messages' || S.id !== c.id) toast(confirmedIn ? `✓ ${esc(d.name)} confirmed for ${esc(confirmedIn.name)}.` : `💬 New message from ${esc(d.name)}.`, confirmedIn ? 'ok' : '');
+    } else if (confirmedIn && S.role === 'promoter'){
+      const h = document.querySelector('header.top'); if (h) h.outerHTML = header();
+      toast(`✓ ${esc(d.name)} replied and confirmed for ${esc(confirmedIn.name)}.`, 'ok');
+    } else {
+      const h = document.querySelector('header.top'); if (h && S.role) h.outerHTML = header();   // update badges only
+      toast(`💬 New message from ${esc(d.name)}.`);
+    }
+  }, 2200);
+}
+
+function openEventInvite(pid){
+  const d = profile(pid);
+  $('#modal').innerHTML = `<div class="modal-bg" data-act="close-modal">
+    <div class="modal rate-modal" role="dialog" aria-modal="true">
+      <h3>Book ${esc(d.name)} for an event</h3>
+      <p class="sub">${esc(d.sub)} · ${esc(d.price)}. They get the request in their messages and appear in your event as <b>Waiting</b>.</p>
+      <div class="ev-pick">${(() => {
+        // can't book: already in that event, or busy / booked elsewhere on that date
+        const blocked = e => e.parties.some(p => p.name === d.name) || !isAvailable(availOn(d.id, e.date)) && availOn(d.id, e.date) !== 'unknown';
+        const first = EVENTS.find(e => !blocked(e));
+        return EVENTS.map(e => {
+          const inEv = e.parties.some(p => p.name === d.name), no = blocked(e);
+          return `<label class="ev-opt ${no?'dis':''}"><input type="radio" name="inv-ev" value="${e.id}" ${no?'disabled':''} ${first && first.id === e.id ? 'checked' : ''}>
+            <span><b>${esc(e.name)}</b><small>${fmtDate(e.date)} · ${esc(e.venue)}, ${esc(e.city)}${inEv?' · already in this event':''}</small></span>
+            ${inEv ? '' : availPill(d.id, e.date)}</label>`;
+        }).join('');
+      })()}</div>
+      <textarea id="inv-msg" placeholder="Add a personal note (optional) — e.g. We’d love a 90-minute set around midnight."></textarea>
+      <div class="row">
+        <button class="btn ghost" data-act="close-modal">Cancel</button>
+        <button class="btn solid" data-act="send-event-invite" data-id="${pid}">Send booking request</button>
+      </div>
+    </div></div>`;
+}
+
+// candidates to replace a party with a problem: same kind, on we.TRUSS, not already in the event,
+// available that day — last-minute people first, then best rated
+function replacementCandidates(e, p){
+  const kind = p.type === 'artist' ? 'artist' : 'supplier';
+  const pool = DIRECTORY.filter(d => d.kind === kind && d.onPlatform && !e.parties.some(x => x.name === d.name));
+  const ok = pool.filter(d => isAvailable(availOn(d.id, e.date)))
+    .sort((a,b) => (availOn(b.id, e.date) === 'last') - (availOn(a.id, e.date) === 'last') || artistScore(b.name).avg - artistScore(a.name).avg);
+  return { ok, hidden: pool.length - ok.length };
+}
+function openReplace(partyId){
+  const { e, p } = findParty(partyId), { ok, hidden } = replacementCandidates(e, p);
+  const slot = p.type === 'artist' ? p.setTime : p.loadIn;
+  $('#modal').innerHTML = `<div class="modal-bg" data-act="close-modal">
+    <div class="modal rate-modal replace-modal" role="dialog" aria-modal="true">
+      <h3>⚡ Replace ${esc(p.name)}</h3>
+      <p class="sub">${esc(e.name)} · ${fmtDate(e.date)} · ${p.type === 'artist' ? 'set' : 'load-in'} <span class="mono">${esc(slot || 'to agree')}</span>.
+        Showing ${p.type === 'artist' ? 'artists' : 'suppliers'} who are available that day, last-minute first.</p>
+      <div class="rep-list">${ok.length ? ok.map(d => `<div class="rep-row">
+          <span class="av">${esc(initials(d.name))}</span>
+          <div class="rep-id"><b>${esc(d.name)}</b><small>${esc(d.sub)} · ${esc(d.price)}</small>
+            <span class="rep-meta">${availPill(d.id, e.date)}${scoreChip(d.name)}</span></div>
+          <button class="btn sm solid" data-act="replace-book" data-id="${p.id}|${d.id}">Book</button>
+        </div>`).join('') : '<div class="empty">No one is available that day. Try inviting someone new from your Network.</div>'}</div>
+      ${hidden ? `<p class="muted" style="font-size:13px;margin:10px 0 0">${hidden} other ${hidden > 1 ? 'contacts are' : 'contact is'} busy or booked that day, so they’re hidden.</p>` : ''}
+      <div class="row"><button class="btn ghost" data-act="close-modal">Close</button></div>
+    </div></div>`;
+}
+
+function openPlatformInvite(pid){
+  const d = pid ? profile(pid) : null;
+  $('#modal').innerHTML = `<div class="modal-bg" data-act="close-modal">
+    <div class="modal rate-modal" role="dialog" aria-modal="true">
+      <h3>✉ Invite ${d ? esc(d.name) : 'someone'} to we.TRUSS</h3>
+      <p class="sub">They get a link to join for free. Once they’re in, you can message them and book them for your events.</p>
+      ${d ? '' : `<div class="opts">
+          <label class="opt tagopt"><input type="radio" name="inv-kind" value="artist" checked><span>Artist</span></label>
+          <label class="opt tagopt"><input type="radio" name="inv-kind" value="supplier"><span>Supplier</span></label></div>
+        <input class="field" id="inv-name" placeholder="Name — e.g. The Velvet Owls">
+        <input class="field" id="inv-sub" placeholder="What they do — e.g. Funk band, 6 musicians">`}
+      <input class="field" id="inv-contact" placeholder="Email or phone number" ${d ? `value="${d.id}@example.com"` : ''}>
+      <textarea id="inv-note" placeholder="Personal message (optional)">Hi${d ? ' ' + esc(d.name) : ''}! I’m organising my next events on we.TRUSS: one place for set times, riders and updates. Join for free so we can work together. — Lotte, Nachtwerk Collective</textarea>
+      <div class="row">
+        <button class="btn ghost" data-act="close-modal">Cancel</button>
+        <button class="btn solid" data-act="send-platform-invite" data-id="${pid || ''}">Send invite</button>
+      </div>
+    </div></div>`;
+}
+
 function openRateModal(key){
   const [peId, idx] = key.split(':'), pe = PAST_EVENTS.find(x => x.id === peId), a = pe.artists[+idx];
   S.rateStars = 0;
@@ -1653,13 +2816,13 @@ function openRateModal(key){
   $('#modal').innerHTML = `<div class="modal-bg" data-act="close-modal">
     <div class="modal rate-modal" role="dialog" aria-modal="true">
       <h3>Rate ${esc(a.name)}</h3>
-      <p class="sub">${esc(pe.name)} · ${fmtDate(pe.date)} · set <span class="mono">${esc(a.set)}</span></p>
+      <p class="sub">${esc(pe.name)} · ${fmtDate(pe.date)} · <span class="mono">${esc(a.set)}</span></p>
       <div class="stars-in" role="radiogroup" aria-label="Stars">
         ${[1,2,3,4,5].map(n => `<button type="button" data-act="rate-star" data-id="${n}" aria-label="${n} star${n>1?'s':''}">★</button>`).join('')}
         <span class="stars-lbl" id="stars-lbl">Tap the stars</span>
       </div>
       <div class="lblrow"><span>What stood out? <small class="muted">(optional)</small></span></div>
-      <div class="opts">${RATING_TAGS.good.map(t => tag(t)).join('')}${RATING_TAGS.bad.map(t => tag(t, true)).join('')}</div>
+      <div class="opts">${tagsFor(a.kind).good.map(t => tag(t)).join('')}${tagsFor(a.kind).bad.map(t => tag(t, true)).join('')}</div>
       <textarea id="rate-note" placeholder="A short note for other promoters (optional) — e.g. Great set, very professional."></textarea>
       <div class="row">
         <button class="btn ghost" data-act="close-modal">Cancel</button>
@@ -1670,7 +2833,14 @@ function openRateModal(key){
 
 /* ---------------- actions ---------------- */
 const ACTIONS = {
-  login(id){ S.role = id; go('home'); },
+  login(id){
+    const was = S.role;
+    S.role = id; S.dash = {}; S.evTab = null; S.openParty = null; go('home');
+  },
+  // tiles: click opens that section, click again closes it
+  dash(key){ const [role, tab] = key.split(':'); S.dash = S.dash || {}; S.dash[role] = S.dash[role] === tab ? null : tab; render(); },
+  'ev-tab'(t){ S.evTab = t; render(); },
+  'party-toggle'(id){ S.openParty = S.openParty === id ? null : id; render(); },
   switch(){ S.role = null; S.page = 'login'; S.screen = 'home'; render(); window.scrollTo({ top:0 }); },
   'to-login'(){ S.role = null; S.page = 'login'; render(); window.scrollTo({ top:0 }); },
   'to-landing'(){ S.role = null; S.page = 'landing'; render(); window.scrollTo({ top:0 }); },
@@ -1689,11 +2859,12 @@ const ACTIONS = {
   },
   reset(){ location.reload(); },
   home(){ go('home'); },
-  'open-event'(id){ go('event', id); },
+  'open-event'(id){ S.evTab = null; S.openParty = null; go('event', id); },
   'open-mine'(id){ go('mine', id); },
   jump(id){
     const { e } = findParty(id);
-    if (S.screen !== 'event' || S.id !== e.id) go('event', e.id);
+    S.evTab = 'parties'; S.openParty = id;
+    if (S.screen !== 'event' || S.id !== e.id) go('event', e.id); else render();
     const el = document.getElementById('pc-' + id);
     if (el){
       el.scrollIntoView({ behavior:'smooth', block:'center' });
@@ -1702,7 +2873,7 @@ const ACTIONS = {
   },
   tpl(i){
     const e = findEvent(S.id), t = e.templates[+i];
-    $('#upd-text').value = t.t;
+    $('#upd-text').value = tr(t.t);
     document.querySelectorAll('input[name=aff]').forEach(cb => cb.checked = t.sel.includes(cb.value));
   },
   selall(){
@@ -1730,11 +2901,146 @@ const ACTIONS = {
   },
   problem(pid){ openProblemModal(pid); },
   rate(key){ openRateModal(key); },
+
+  /* ---- last-minute replacement ---- */
+  replace(partyId){ openReplace(partyId); },
+  'replace-book'(key){
+    const [partyId, pid] = key.split('|'), { e, p } = findParty(partyId), d = profile(pid);
+    const slot = p.type === 'artist' ? p.setTime : p.loadIn;
+    const np = bookingParty(e, d, { time: slot, fee:'', due: e.date });
+    np.issue = `Last-minute request sent — replacing ${p.name}.`;
+    e.parties.push(np);
+    p.replacedBy = d.name;
+    p.issue = `${p.issue} → Replacement asked: ${d.name}.`;
+    d.inNetwork = true;
+    sendMessage(d.id, `Hi ${d.name}! Last-minute request: ${p.name} can’t make it to ${e.name} on ${fmtDate(e.date)} at ${e.venue}, ${e.city}. Could you take the ${p.type === 'artist' ? 'set' : 'job'}${slot ? ' (' + slot + ')' : ''}? Are you available?`);
+    closeModal(); render();
+    S.evTab = 'parties'; S.openParty = np.id; render();
+    const el = document.getElementById('pc-' + np.id); if (el) el.scrollIntoView({ behavior:'smooth', block:'center' });
+    toast(`⚡ Last-minute request sent to ${esc(d.name)}. They’re in ${esc(e.name)} as “Waiting”.`, 'ok');
+  },
+
+  /* ---- availability ---- */
+  'cal-day'(ds){
+    const pid = myProfileId(S.role); if (!pid) return;
+    const cal = AVAIL[pid] = AVAIL[pid] || {};
+    const next = { free:'busy', busy:'last', last:'free' }[cal[ds] || 'free'];
+    if (next === 'free') delete cal[ds]; else cal[ds] = next;
+    render();
+  },
+  'cal-month'(step){
+    const [y, m] = (S.calM || '2026-12').split('-').map(Number), d = new Date(y, m - 1 + (+step), 1);
+    const ym = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2,'0')}`;
+    if (ym >= CAL_MIN && ym <= CAL_MAX){ S.calM = ym; render(); }
+  },
+
+  /* ---- new event ---- */
+  'new-event'(){ go('new-event'); },
+  'create-event'(){
+    const v = id => ($('#' + id).value || '').trim();
+    const name = v('ne-name'), kind = v('ne-kind'), cap = v('ne-cap'), desc = v('ne-desc'), date = v('ne-date'),
+          doors = v('ne-doors'), end = v('ne-end'), due = v('ne-due'), venue = v('ne-venue'), city = v('ne-city'),
+          addr = v('ne-addr'), ticket = v('ne-ticket'), venueOk = $('#ne-venue-ok').checked;
+    const need = [['ne-name', name, 'an event name'], ['ne-cap', cap, 'the capacity'], ['ne-date', date, 'the date'],
+                  ['ne-doors', doors, 'the doors time'], ['ne-venue', venue, 'the venue'], ['ne-city', city, 'the city']];
+    const miss = need.find(([, val]) => !val);
+    if (miss){ toast(`Add ${miss[2]} first.`, 'bad'); $('#' + miss[0]).focus(); return; }
+    if (date < '2026-11-25'){ toast('Pick a date in the future.', 'bad'); $('#ne-date').focus(); return; }
+    if (!(+cap > 0)){ toast('Capacity should be a number, e.g. 450.', 'bad'); $('#ne-cap').focus(); return; }
+
+    const e = { id:'e' + Date.now(), name, kind, date, doors, hours:`${doors} – ${end || 'late'}`, venue, city,
+                address: addr || city, capacity:+cap, ticket, desc, parties:[], updates:[], activity:[] };
+    e.parties.push({ id:e.id + '-venue', type:'venue', name:venue, sub:`Venue · ${cap} capacity`,
+      status: venueOk ? 'confirmed' : 'waiting', due: due || date, issue: venueOk ? null : 'Venue booking not confirmed yet.',
+      info:[ ['Address', addr || '—'], ['Doors', doors], ['Ends', end || '—'], ['Capacity', cap], ...(ticket ? [['Tickets', ticket]] : []) ] });
+
+    const booked = [...document.querySelectorAll('input[name=ne-book]:checked')].map(c => profile(c.value));
+    booked.forEach(d => {
+      const time = (document.querySelector(`[data-ne-time="${d.id}"]`).value || '').trim();
+      const fee  = (document.querySelector(`[data-ne-fee="${d.id}"]`).value || '').trim();
+      e.parties.push(bookingParty(e, d, { time, fee, due: due || undefined }));
+      const detail = [time && (d.kind === 'artist' ? `set time ${time}` : `load-in ${time}`), fee && `fee ${fee}`].filter(Boolean).join(', ');
+      sendMessage(d.id, `Hi ${d.name}! I’d like to book you for ${name} (${kind.toLowerCase()}) on ${fmtDate(date)} at ${venue}, ${city}.${detail ? ' Proposal: ' + detail + '.' : ''} Are you available?`);
+    });
+
+    const ids = t => e.parties.filter(p => t.includes(p.type)).map(p => p.id);
+    e.templates = [
+      { t:'Doors open 30 minutes later than planned', sel: e.parties.map(p => p.id) },
+      { t:'Set times are now final', sel: ids(['artist']) },
+      { t:'Load-in starts one hour earlier', sel: ids(['supplier','venue']) }
+    ];
+    EVENTS.push(e);
+    EVENTS.sort((a,b) => a.date.localeCompare(b.date));
+    go('event', e.id);
+    toast(`🎉 ${esc(name)} created${booked.length ? ` · booking request sent to ${booked.length} ${booked.length > 1 ? 'people' : 'person'}` : ''}.`, 'ok');
+  },
+
+  /* ---- network ---- */
+  network(){ S.id = null; go('network'); },
+  'net-filter'(f){ S.netF = f; render(); },
+  'net-date-clear'(){ S.netDate = null; if (S.netF === 'avail') S.netF = 'all'; render(); },
+  'net-add'(pid){
+    const d = profile(pid); d.inNetwork = true; render();
+    toast(`✓ ${esc(d.name)} added to your network.`, 'ok');
+  },
+  'event-invite'(pid){ openEventInvite(pid); },
+  'send-event-invite'(pid){
+    const d = profile(pid), sel = document.querySelector('input[name=inv-ev]:checked');
+    if (!sel){ toast('Pick an event first.', 'bad'); return; }
+    const e = findEvent(sel.value), note = $('#inv-msg').value.trim();
+    e.parties.push(bookingParty(e, d));
+    d.inNetwork = true;
+    sendMessage(d.id, `Hi ${d.name}! I’d like to book you for ${e.name} on ${fmtDate(e.date)} at ${e.venue}, ${e.city}. Are you available?` + (note ? ' ' + note : ''));
+    closeModal(); render();
+    toast(`📩 Booking request sent to ${esc(d.name)}. They’re now in ${esc(e.name)} as “Waiting”.`, 'ok');
+  },
+  'platform-invite'(pid){ openPlatformInvite(pid); },
+  'new-invite'(){ openPlatformInvite(null); },
+  'send-platform-invite'(pid){
+    let d = pid ? profile(pid) : null;
+    const contact = $('#inv-contact').value.trim();
+    if (!d){
+      const name = $('#inv-name').value.trim(), sub = $('#inv-sub').value.trim();
+      const kind = (document.querySelector('input[name=inv-kind]:checked') || {}).value || 'artist';
+      if (!name){ toast('Add their name first.', 'bad'); $('#inv-name').focus(); return; }
+      if (!contact){ toast('Add an email or phone number.', 'bad'); $('#inv-contact').focus(); return; }
+      d = { id:'new' + Date.now(), kind, name, sub: sub || (kind === 'artist' ? 'Artist' : 'Supplier'), city:'Belgium', price:'To agree', tags:['New'], inNetwork:false, onPlatform:false };
+      DIRECTORY.unshift(d);
+    } else if (!contact){ toast('Add an email or phone number.', 'bad'); return; }
+    d.invited = true;
+    closeModal(); S.netF = 'all'; S.netQ = ''; render();
+    toast(`✉ Invite sent to ${esc(d.name)}.`, 'ok');
+    // demo: they accept the invite a few seconds later
+    setTimeout(() => {
+      d.onPlatform = true; d.inNetwork = true; d.invited = false;
+      if (S.role === 'promoter' && S.screen === 'network') render();
+      toast(`🎉 ${esc(d.name)} joined we.TRUSS and is now in your network. You can message them.`, 'ok');
+    }, 4500);
+  },
+
+  /* ---- messages ---- */
+  messages(){ go('messages'); },
+  message(pid){
+    let c = CONVOS.find(x => x.with === pid);
+    if (!c){ c = { id:'c-' + pid, with:pid, msgs:[] }; CONVOS.unshift(c); }
+    go('messages', c.id);
+    setTimeout(() => $('#msg-text') && $('#msg-text').focus(), 50);
+  },
+  'open-convo'(id){ go('messages', id); },
+  'quick-msg'(text){ const t = $('#msg-text'); t.value = tr(text); t.focus(); },
+  'send-msg'(cid){
+    const text = $('#msg-text').value.trim();
+    if (!text){ toast('✎ Write a message first.', 'bad'); $('#msg-text').focus(); return; }
+    const c = CONVOS.find(x => x.id === cid);
+    if (S.role === 'promoter') sendMessage(c.with, text);
+    else { c.msgs.push({ from:'them', text, time:nowStr(), read:false }); }
+    S.id = c.id; render();
+  },
   'rate-star'(n){
     S.rateStars = +n;
     const words = ['', 'Poor', 'Below expectations', 'OK', 'Good', 'Excellent'];
     document.querySelectorAll('.stars-in button').forEach((b,i) => b.classList.toggle('on', i < S.rateStars));
-    $('#stars-lbl').textContent = `${S.rateStars}/5 · ${words[S.rateStars]}`;
+    $('#stars-lbl').textContent = `${S.rateStars}/5 · ${tr(words[S.rateStars])}`;
   },
   'submit-rate'(key){
     if (!S.rateStars){ toast('★ Pick 1 to 5 stars first.', 'bad'); return; }
@@ -1773,6 +3079,7 @@ document.addEventListener('click', ev => {
 });
 document.addEventListener('change', ev => {
   const t = ev.target;
+  if (t.dataset.change === 'lang'){ setLang(t.value); return; }
   if (t.dataset.change === 'status' && t.value){
     const { p } = findParty(t.dataset.id);
     p.status = t.value;
@@ -1782,8 +3089,37 @@ document.addEventListener('change', ev => {
     toast(`Status of ${esc(p.name)} set to ${STATUS[t.value].label}.`);
   }
 });
-document.addEventListener('keydown', ev => { if (ev.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', ev => {
+  if (ev.key === 'Escape') closeModal();
+  // Enter sends a chat message (Shift+Enter = new line)
+  if (ev.key === 'Enter' && !ev.shiftKey && ev.target.id === 'msg-text'){
+    ev.preventDefault();
+    const b = document.querySelector('[data-act=send-msg]'); if (b) b.click();
+  }
+});
+// live search on the Network page (filters the cards without re-rendering, so typing isn't interrupted)
+document.addEventListener('input', ev => {
+  // New event form: show who is free on the chosen date
+  if (ev.target.id === 'ne-date'){
+    const ds = ev.target.value;
+    document.querySelectorAll('[data-av]').forEach(el => el.innerHTML = ds ? availPill(el.dataset.av, ds) : '');
+    return;
+  }
+  // Network: availability for an event or a date
+  if (ev.target.id === 'net-date' || ev.target.id === 'net-date-ev'){
+    S.netDate = ev.target.value || null;
+    if (!S.netDate && S.netF === 'avail') S.netF = 'all';
+    render();
+    return;
+  }
+  if (ev.target.id !== 'net-q') return;
+  S.netQ = ev.target.value;
+  document.querySelectorAll('.net-card').forEach(el => el.classList.toggle('hide', !netMatches(profile(el.dataset.id))));
+  const empty = document.querySelector('.net-empty'); if (empty) empty.classList.toggle('hide', DIRECTORY.some(netMatches));
+});
 
+document.documentElement.lang = S.lang;
+document.title = tr('we.TRUSS — The backbone of every event');
 render();
 </script>
 </body>

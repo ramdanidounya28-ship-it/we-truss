@@ -609,6 +609,7 @@ svg,.ring,.truss-ic,.brand-big{filter:none !important}
 
 /* ---------- Stencil logo ---------- */
 .logo-img{height:30px;width:auto;display:block}
+.brand-link{display:inline-block;background:none;border:0;padding:0;cursor:pointer}
 .lp-foot .logo-img{height:34px}
 .brand-img{width:min(560px,86vw);height:auto;display:block;margin:0 auto}
 @media (max-width:420px){ .logo-img{height:20px} }
@@ -1923,7 +1924,7 @@ function header(){
     ? tab(['home','event','new-event'],'home','Events') + tab(['network'],'network','Network') + tab(['messages'],'messages','Messages', msgUnread('promoter')) + tab(['docs'],'docs','Documents', docsBadge('promoter'))
     : tab(['home','mine'],'home', S.role === 'artist' ? 'My gigs' : 'My jobs') + tab(['messages'],'messages','Messages', msgUnread(S.role)) + tab(['docs'],'docs','Documents', docsBadge(S.role));
   return `<header class="top"><div class="wrap top-in">
-    <button class="logo" data-act="home"><img class="logo-img" src="${LOGO}" alt="we.TRUSS"></button>
+    <button class="logo" data-act="to-landing" title="we.TRUSS home"><img class="logo-img" src="${LOGO}" alt="we.TRUSS"></button>
     <nav class="apptabs" aria-label="Sections">${tabs}</nav>
     <div class="top-right">
       ${langSelect()}
@@ -1945,7 +1946,7 @@ function loginView(){
     </button>`;
   };
   return `${siteNav()}<div class="login">
-    <img class="brand-img" src="${LOGO}" alt="we.TRUSS">
+    <button class="logo brand-link" data-act="to-landing" title="we.TRUSS home"><img class="brand-img" src="${LOGO}" alt="we.TRUSS"></button>
     <div class="slogan">The backbone of every event</div>
     <p class="tagline">One shared space per event. Promoter, artists and suppliers each see exactly what concerns them — no more scattered WhatsApps, mails and DMs.</p>
     <p class="muted" style="margin:0 0 26px;font-size:14px">Choose a role to log in (demo — no password needed)</p>
@@ -2125,7 +2126,7 @@ function landingView(){
     </div></section>
 
     <footer class="lp-foot"><div class="wrap lp-foot-in">
-      <div><div class="logo"><img class="logo-img" src="${LOGO}" alt="we.TRUSS"></div><div class="muted" style="margin-top:6px">The backbone of every event.</div></div>
+      <div><button class="logo" data-act="nav" data-id="home" title="we.TRUSS home"><img class="logo-img" src="${LOGO}" alt="we.TRUSS"></button><div class="muted" style="margin-top:6px">The backbone of every event.</div></div>
       <div class="lp-foot-links">${NAV.map(navBtn).join('')}<button data-act="to-login">Log in</button></div>
       <div class="muted" style="font-size:13px">© 2026 we.TRUSS · student prototype · all data fictional</div>
     </div></footer>

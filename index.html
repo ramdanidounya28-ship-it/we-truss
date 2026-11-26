@@ -563,13 +563,17 @@ svg,.ring,.truss-ic,.brand-big{filter:none !important}
 /* ---------- Landing ---------- */
 .lp-hero{
   min-height:calc(100vh - 64px);display:flex;align-items:center;padding:80px 0;
+  position:relative;overflow:hidden;background:var(--bg);
+}
+.lp-hero-bg{
+  position:absolute;inset:0;z-index:0;will-change:transform;
   background:
     linear-gradient(90deg,rgba(22,13,7,.95) 0%,rgba(22,13,7,.72) 45%,rgba(22,13,7,.2) 100%),
     url(https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=2000&q=75) center/cover,
     var(--bg);
 }
-.lp-hero-in{display:block;width:100%}
-.lp-hero-txt{max-width:700px}
+.lp-hero-in{display:block;width:100%;position:relative;z-index:1}
+.lp-hero-txt{max-width:700px;will-change:opacity,transform}
 .lp-hero h1{font-size:clamp(46px,7vw,92px);line-height:1}
 .lp-hero .lead{color:#e8dac6}
 .lp-genres span{background:rgba(26,18,12,.55);border-color:rgba(246,236,220,.22);color:#efe2cf;backdrop-filter:blur(4px)}
@@ -2213,7 +2217,7 @@ function landingView(){
   const feat = (ic, t, d) => `<div class="lp-feat reveal"><div class="ic">${ic}</div><h4>${t}</h4><p>${d}</p></div>`;
   return `${siteNav()}
   <main class="lp">
-    <section class="lp-hero" id="sec-home"><div class="wrap lp-hero-in">
+    <section class="lp-hero" id="sec-home"><div class="lp-hero-bg" aria-hidden="true"></div><div class="wrap lp-hero-in">
       <div class="lp-hero-txt">
         <div class="lp-eyebrow">Event coordination platform · Belgium</div>
         <h1>The <span class="grad">backbone</span> of every event.</h1>
@@ -2331,7 +2335,25 @@ function socialLinks(){
     : `<button data-act="social-soon" data-id="${s.label}" aria-label="we.TRUSS on ${s.label}" title="${s.label}">${SOCIAL_ICON[s.id]}</button>`).join('')}</div>`;
 }
 
+function heroScroll(){
+  const hero = document.getElementById('sec-home');
+  if (!hero) return;
+  const txt = hero.querySelector('.lp-hero-txt'), bg = hero.querySelector('.lp-hero-bg');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches){ txt.style.opacity = ''; txt.style.transform = ''; bg.style.transform = ''; return; }
+  const y = Math.max(0, window.scrollY), p = Math.min(1, y / (innerHeight * 0.45));
+  txt.style.opacity = String(1 - p);
+  txt.style.transform = `translateY(${(-24 * p).toFixed(1)}px)`;
+  if (y < hero.offsetHeight + 200) bg.style.transform = `translate3d(0,${(y * 0.28).toFixed(1)}px,0)`;
+}
+let heroTick = false;
+window.addEventListener('scroll', () => {
+  if (heroTick) return;
+  heroTick = true;
+  requestAnimationFrame(() => { heroTick = false; heroScroll(); });
+}, { passive:true });
+
 function initReveal(){
+  heroScroll();
   const els = document.querySelectorAll('.reveal');
   if (!('IntersectionObserver' in window)){ els.forEach(e => e.classList.add('in')); return; }
   const io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold:.12 });

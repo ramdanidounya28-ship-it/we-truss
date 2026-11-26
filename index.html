@@ -737,6 +737,16 @@ svg,.ring,.truss-ic,.brand-big{filter:none !important}
 .prow-detail .party{box-shadow:none !important;border-color:var(--line)}
 @media (max-width:760px){ .me-tx{display:none} .me{padding:3px} .evt{padding:8px 10px;font-size:13px} .dtile{padding:12px} }
 
+/* ---------- Calm dashboard ---------- */
+.ev-row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(280px,1fr);gap:16px;overflow-x:auto;padding:2px 2px 10px;scroll-snap-type:x mandatory}
+.ev-row .ev-card{scroll-snap-align:start}
+.dash-blocks{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px;align-items:start}
+.dash-blocks .rate-row{padding:10px 0}
+.rate-mini-hd{font-size:12.5px;color:var(--dim);margin:2px 0 4px}
+.more-note{font-size:13px;margin:10px 0 0}
+@media (max-width:900px){ .dash-blocks{grid-template-columns:1fr} }
+@media (max-width:560px){ .ev-row{grid-auto-columns:86%} }
+
 /* ---------- Availability ---------- */
 .pill.last{color:var(--accent);border-color:rgba(242,169,126,.45);background:var(--accent-soft) !important}
 .net-status{display:flex;flex-wrap:wrap;gap:6px}
@@ -1451,6 +1461,14 @@ const TR_ROWS = [
 ['Tap a tile to see the details.','Tik op een tegel om de details te zien.','Touchez une tuile pour voir les détails.','Tippe auf eine Kachel, um die Details zu sehen.'],
 ['Parties','Partijen','Parties','Parteien'],['Activity','Activiteit','Activité','Aktivität'],
 ['Tap someone to see what’s agreed with them.','Tik op iemand om te zien wat met hen is afgesproken.','Touchez une personne pour voir ce qui est convenu.','Tippe auf jemanden, um zu sehen, was vereinbart ist.'],
+['Description','Beschrijving','Description','Beschreibung'],['2 · Dates & times','2 · Data & uren','2 · Dates & horaires','2 · Daten & Zeiten'],
+['Start date *','Startdatum *','Date de début *','Startdatum *'],['End date','Einddatum','Date de fin','Enddatum'],
+['Only for events over several days','Alleen voor evenementen van meerdere dagen','Seulement pour les événements sur plusieurs jours','Nur für mehrtägige Veranstaltungen'],
+['+ Add event','+ Evenement toevoegen','+ Ajouter un événement','+ Veranstaltung hinzufügen'],
+['Pick the dates first — you’ll then see who’s available.','Kies eerst de data — dan zie je wie beschikbaar is.','Choisissez d’abord les dates — vous verrez ensuite qui est disponible.','Wähle zuerst die Daten — dann siehst du, wer verfügbar ist.'],
+['No one in your network is free on these dates.','Niemand in je netwerk is vrij op deze data.','Personne de votre réseau n’est libre à ces dates.','Niemand in deinem Netzwerk ist an diesen Tagen frei.'],
+['Only people who are free on your dates are shown. Tick who you want to book — they get a booking request and appear as','Alleen wie vrij is op je data wordt getoond. Vink aan wie je wilt boeken — ze krijgen een aanvraag en verschijnen als','Seules les personnes libres à vos dates sont affichées. Cochez qui réserver — ils reçoivent une demande et apparaissent comme','Nur wer an deinen Tagen frei ist, wird angezeigt. Hake an, wen du buchen willst — sie bekommen eine Anfrage und erscheinen als'],
+['The end date can’t be before the start date.','De einddatum kan niet voor de startdatum liggen.','La date de fin ne peut pas être avant la date de début.','Das Enddatum darf nicht vor dem Startdatum liegen.'],
 // the slogan "The backbone of every event" is the brand line and stays in English in every language
 ['Viewing as','Je bekijkt als','Vous êtes','Ansicht als'],['Switch to','Wissel naar','Passer à','Wechseln zu'],['Log out','Uitloggen','Se déconnecter','Abmelden'],
 ['Latest from parties','Laatste van partijen','Nouvelles des parties','Neues von Parteien'],['Rate artists & suppliers','Beoordeel artiesten & leveranciers','Évaluer artistes & prestataires','Künstler & Dienstleister bewerten'],
@@ -1764,6 +1782,8 @@ const PATTERNS = [
   [/^(\d+) new updates?$/, m => `${m[1]} ` + L(pl(m[1],'nieuwe update','nieuwe updates'), pl(m[1],'nouvelle mise à jour','nouvelles mises à jour'), pl(m[1],'neues Update','neue Updates'))],
   [/^(\d+) last-minute days?$/, m => `${m[1]} ` + L(pl(m[1],'last-minute dag','last-minute dagen'), pl(m[1],'jour dernière minute','jours dernière minute'), pl(m[1],'Last-Minute-Tag','Last-Minute-Tage'))],
   [/^👀 Now viewing as (.+) · (.+)$/, m => L('👀 Je bekijkt nu als ','👀 Vous êtes maintenant ','👀 Ansicht jetzt als ') + m[1] + ' · ' + tr(m[2])],
+  [/^(\d+) (?:people are|person is) busy on these dates, so they’re not shown\.$/, m => L(`${m[1]} ${pl(m[1],'persoon is','personen zijn')} bezet op deze data en worden niet getoond.`,`${m[1]} ${pl(m[1],'personne est occupée','personnes sont occupées')} à ces dates et ne sont pas affichées.`,`${m[1]} ${pl(m[1],'Person ist','Personen sind')} an diesen Tagen belegt und werden nicht angezeigt.`)],
+  [/^\+ (\d+) more inside your events$/, m => L(`+ ${m[1]} meer in je evenementen`,`+ ${m[1]} de plus dans vos événements`,`+ ${m[1]} weitere in deinen Veranstaltungen`)],
   [/^e\.g\. (.+)$/, m => L('bv. ','ex. ','z. B. ') + m[1]]
 ];
 // English dates inside data (activity times, reviews, chats) -> chosen language
@@ -1849,7 +1869,23 @@ function roleUnread(role){
   return myParties(role).reduce((n,x) => n + unreadUpdates(x.e, x.p).length, 0) + msgUnread(role) + docsBadge(role);
 }
 /* availability helpers */
-function bookingOn(pid, date){ const d = profile(pid); return EVENTS.find(e => e.date === date && e.parties.some(p => p.name === d.name)); }
+// events can run over several days: date = first day, endDate = last day (optional)
+function dayList(start, end){
+  const out = [], d = new Date(start + 'T12:00:00'), stop = new Date((end && end > start ? end : start) + 'T12:00:00');
+  while (d <= stop){ out.push(`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`); d.setDate(d.getDate() + 1); }
+  return out;
+}
+function eventDays(e){ return dayList(e.date, e.endDate); }
+function fmtWhen(e){ return e.endDate && e.endDate > e.date ? `${fmtShort(e.date)} – ${fmtDate(e.endDate)}` : fmtDate(e.date); }
+function bookingOn(pid, date){ const d = profile(pid); return EVENTS.find(e => eventDays(e).includes(date) && e.parties.some(p => p.name === d.name)); }
+// availability over a date range: booked or busy on any day = not available
+function availRange(pid, start, end){
+  const st = dayList(start, end).map(ds => availOn(pid, ds));
+  if (st.includes('unknown')) return 'unknown';
+  if (st.includes('booked')) return 'booked';
+  if (st.includes('busy')) return 'busy';
+  return st.includes('last') ? 'last' : 'free';
+}
 function availOn(pid, date){
   const d = profile(pid);
   if (!d || !d.onPlatform) return 'unknown';
@@ -1858,8 +1894,8 @@ function availOn(pid, date){
 }
 const AV_LABEL = { free:'Available', last:'Last-minute OK', busy:'Busy', booked:'Booked', unknown:'No calendar yet' };
 function isAvailable(s){ return s === 'free' || s === 'last'; }
-function availPill(pid, date){
-  const s = availOn(pid, date);
+function availPill(pid, date, end){
+  const s = availRange(pid, date, end);
   const cls = s === 'free' ? 'ok' : s === 'last' ? 'last' : s === 'unknown' ? 'off' : 'bad';
   return `<span class="pill ${cls}" title="${fmtDate(date)}">${s === 'last' ? '⚡ ' : ''}${AV_LABEL[s]}</span>`;
 }
@@ -2154,87 +2190,52 @@ function initReveal(){
 
 /* ---------------- views: promoter ---------------- */
 function promoterHome(){
-  const all = openItems(EVENTS);
-  const problems = EVENTS.reduce((n,e) => n + countStatus(e,'problem'), 0);
-  const avg = Math.round(EVENTS.reduce((n,e) => n + readiness(e), 0) / EVENTS.length);
-  const unread = roleUnread('promoter');
-  const acts = [];
-  EVENTS.forEach(e => e.activity.forEach(a => acts.push({ e, a })));
-  acts.sort((x,y) => (x.a.read === y.a.read ? 0 : x.a.read ? 1 : -1));
+  // calm, one-screen dashboard: events in a row (+ Add event), then two blocks side by side
+  const all = openItems(EVENTS), toRateN = toRate();
+  const evCards = EVENTS.map(e => {
+    const d = dparts(e.date), r = readiness(e), pr = countStatus(e,'problem'), wt = countStatus(e,'waiting');
+    return `<button class="ev-card" data-act="open-event" data-id="${e.id}">
+      <div class="ev-top">
+        <div class="dateblock"><div class="m">${d.dow}</div><div class="d">${d.day}</div><div class="m">${d.mon}</div></div>
+        <div><div class="tag">${esc(e.kind)}</div><div class="nm" style="margin-top:8px">${esc(e.name)}</div>
+          <div class="vn">${esc(e.venue)} · ${esc(e.city)}</div></div>
+      </div>
+      <div class="ev-mid">${ring(r)}
+        <div class="ringlbl"><b>Readiness</b>${e.parties.length - pr - wt} of ${e.parties.length} parties confirmed</div></div>
+      <div class="ev-chips">
+        ${pr ? `<span class="pill bad">${pr} problem${pr>1?'s':''}</span>` : ''}
+        ${wt ? `<span class="pill wait">${wt} waiting</span>` : ''}
+        ${!pr && !wt ? '<span class="pill ok">All confirmed</span>' : ''}
+      </div>
+      <div class="ev-foot"><span class="mono">${fmtWhen(e)} · ${daysToGo(e)}</span><span style="color:var(--cyan);font-weight:700">Open →</span></div>
+    </button>`;
+  }).join('');
 
-  const toRateN = toRate(), actUnread = EVENTS.reduce((n,e) => n + e.activity.filter(a => !a.read).length, 0);
-  const tab = dashTab('promoter', 'events');
-  const tiles = dashTiles('promoter', tab, [
-    ['events',    '📅', 'Upcoming events',              `Avg. readiness ${avg}%`,                     EVENTS.length, ''],
-    ['attention', '⚠',  'Needs attention',              problems ? `${problems} problem${problems>1?'s':''}` : 'All on track', all.length, all.length ? 'bad' : 'ok'],
-    ['activity',  '💬', 'Latest from parties',          actUnread ? `${actUnread} new` : 'Nothing new', acts.length, actUnread ? 'new' : ''],
-    ['rate',      '★',  'Rate artists & suppliers',     toRateN ? `${toRateN} to rate` : 'All rated', toRateN, toRateN ? 'new' : 'ok']
-  ]);
+  const rateRows = PAST_EVENTS.map(pe => `<div class="rate-mini-hd">${esc(pe.name)} · ${fmtShort(pe.date)}</div>
+    ${pe.artists.map((a,i) => `<div class="rate-row">
+      <div class="rate-who"><b>${esc(a.name)}</b><small>${a.kind === 'supplier' ? 'Supplier' : 'Artist'}</small></div>
+      ${a.rating ? `<div class="done">${starsHtml(a.rating.stars)}</div>` : `<button class="btn solid sm" data-act="rate" data-id="${pe.id}:${i}">★ Rate</button>`}
+    </div>`).join('')}`).join('');
 
-  let section = '';
-  if (tab === 'events') section = `
-    <div class="sec-row"><h2 class="sec">Upcoming events</h2><button class="btn solid sm" data-act="new-event">+ New event</button></div>
-    <div class="ev-cards">
-      ${EVENTS.map(e => {
-        const d = dparts(e.date), r = readiness(e), pr = countStatus(e,'problem'), wt = countStatus(e,'waiting');
-        const nNew = e.activity.filter(a => !a.read).length;
-        return `<button class="ev-card" data-act="open-event" data-id="${e.id}">
-          ${nNew?`<span class="badge" title="${nNew} new">${nNew}</span>`:''}
-          <div class="ev-top">
-            <div class="dateblock"><div class="m">${d.dow}</div><div class="d">${d.day}</div><div class="m">${d.mon}</div></div>
-            <div><div class="tag">${esc(e.kind)}</div><div class="nm" style="margin-top:8px">${esc(e.name)}</div>
-              <div class="vn">${esc(e.venue)} · ${esc(e.city)}</div></div>
-          </div>
-          <div class="ev-mid">${ring(r)}
-            <div class="ringlbl"><b>Readiness</b>${e.parties.length - pr - wt} of ${e.parties.length} parties confirmed</div></div>
-          <div class="ev-chips">
-            ${pr?`<span class="pill bad">${pr} problem${pr>1?'s':''}</span>`:''}
-            ${wt?`<span class="pill wait">${wt} waiting</span>`:''}
-            ${!pr && !wt ? '<span class="pill ok">All confirmed</span>' : ''}
-          </div>
-          <div class="ev-foot"><span class="mono">${fmtDate(e.date)} · ${daysToGo(e)}</span><span style="color:var(--cyan);font-weight:700">Open →</span></div>
-        </button>`;
-      }).join('')}
-    </div>`;
-
-  if (tab === 'rate') section = `
-    ${PAST_EVENTS.map(pe => {
-      const left = pe.artists.filter(a => !a.rating).length;
-      return `<h2 class="sec">Rate your artists & suppliers ${left ? `<span class="badge">${left}</span>` : ''}</h2>
-      <div class="card rate-card">
-        <div class="rate-hd">
-          <div><div class="tag">Past event · ${esc(pe.kind)}</div>
-            <div class="nm">${esc(pe.name)}</div>
-            <div class="vn">${fmtDate(pe.date)} · ${esc(pe.venue)}, ${esc(pe.city)}</div></div>
-          <p class="muted">How did it go? Your rating helps other promoters book reliable artists, and gives the artist feedback.</p>
-        </div>
-        <div class="rate-list">${pe.artists.map((a,i) => `<div class="rate-row">
-          <div class="rate-who"><span class="ptype">${a.kind === 'supplier' ? 'Supplier' : 'Artist'}</span><b>${esc(a.name)}</b><small>${esc(a.sub)} · <span class="mono">${esc(a.set)}</span></small>${scoreChip(a.name)}</div>
-          ${a.rating
-            ? `<div class="done">${starsHtml(a.rating.stars)}<small>You rated · ${esc(a.rating.date)}</small></div>`
-            : `<button class="btn solid sm" data-act="rate" data-id="${pe.id}:${i}">★ Rate</button>`}
-        </div>`).join('')}</div>
-      </div>`;
-    }).join('')}`;
-
-  if (tab === 'attention') section = `
-    <h2 class="sec">Needs attention</h2>
-    <div class="card">
-      <h3>Open items across all events <span class="count pill ${all.length?'bad':'ok'}">${all.length} open</span></h3>
-      ${openList(all, true)}
-    </div>`;
-
-  if (tab === 'activity') section = `
-    <h2 class="sec">Latest from your parties</h2>
-    <div class="card">
-      ${acts.length ? acts.map(({e,a}) => activityRow(e,a,true)).join('') : '<div class="empty">No activity yet.</div>'}
-    </div>`;
-
+  const SHOW = 4;
   return `<main class="wrap">
     <section class="hello"><h1>Hi ${USERS.promoter.first}, here’s your season.</h1>
       <p>Nachtwerk Collective · ${EVENTS.length} upcoming event${EVENTS.length === 1 ? '' : 's'}</p></section>
-    ${tiles}
-    ${section ? `<div class="dash-section">${section}</div>` : dashHint()}
+
+    <div class="sec-row"><h2 class="sec">Upcoming events</h2><button class="btn solid sm" data-act="new-event">+ Add event</button></div>
+    <div class="ev-row">${evCards}</div>
+
+    <div class="dash-blocks">
+      <div class="card">
+        <h3>Needs attention <span class="count pill ${all.length?'bad':'ok'}">${all.length} open</span></h3>
+        ${openList(all.slice(0, SHOW), true)}
+        ${all.length > SHOW ? `<p class="muted more-note">+ ${all.length - SHOW} more inside your events</p>` : ''}
+      </div>
+      <div class="card">
+        <h3>Rate artists & suppliers ${toRateN ? `<span class="count pill wait">${toRateN} to rate</span>` : ''}</h3>
+        ${rateRows}
+      </div>
+    </div>
     <div class="spacer"></div>
   </main>`;
 }
@@ -2333,7 +2334,7 @@ function promoterEvent(e){
         <h1>${esc(e.name)}</h1>
         ${e.desc ? `<p class="ev-desc">${esc(e.desc)}</p>` : ''}
         <div class="meta">
-          <span>${I.cal}<span><b class="mono">${fmtDate(e.date)}</b> · ${daysToGo(e)}</span></span>
+          <span>${I.cal}<span><b class="mono">${fmtWhen(e)}</b> · ${daysToGo(e)}</span></span>
           <span>${I.clock}<b class="mono">${esc(e.hours)}</b></span>
           <span>${I.pin}<span><b>${esc(e.venue)}</b>, ${esc(e.city)}</span></span>
           <span>${I.users}<span><b class="mono">${e.capacity}</b> cap</span></span>
@@ -2356,7 +2357,7 @@ function promoterEvent(e){
       const tb = (id, label, n, cls) => `<button class="evt ${t === id ? 'on' : ''}" data-act="ev-tab" data-id="${id}">${label}${n ? `<span class="evt-n ${cls || ''}">${n}</span>` : ''}</button>`;
       const tabsRow = `<div class="evtabs" role="tablist">
         ${tb('parties', 'Parties', e.parties.length)}${tb('open', 'Open items', items.length, items.some(x => x.p.status === 'problem') ? 'bad' : '')}
-        ${tb('post', 'Post an update', 0)}${tb('activity', 'Activity', unreadAct, 'new')}${tb('log', 'Change log', e.updates.length)}</div>`;
+        ${tb('post', 'Post an update', 0)}${tb('log', 'Change log', e.updates.length)}</div>`;
       let body = '';
       if (t === 'parties') body = `<p class="muted ev-tip">Tap someone to see what’s agreed with them.</p>
         <div class="plist">${e.parties.map(p => partyRow(e,p)).join('')}</div>`;
@@ -2392,17 +2393,28 @@ function promoterEvent(e){
 
 /* ---------------- views: new event (promoter) ---------------- */
 const EVENT_KINDS = ['Club night','Concert','Festival','Open-air event','Theatre / comedy','Showcase','Private event','Other'];
-function newEventView(){
+// line-up list for the New event form: only the network contacts who are free on ALL chosen days
+function nePool(start, end){
+  if (!start) return `<div class="empty">Pick the dates first — you’ll then see who’s available.</div>`;
   const people = DIRECTORY.filter(d => d.inNetwork && d.onPlatform);
+  const free = people.filter(d => isAvailable(availRange(d.id, start, end)))
+    .sort((a,b) => (availRange(b.id, start, end) === 'last') - (availRange(a.id, start, end) === 'last') || artistScore(b.name).avg - artistScore(a.name).avg);
+  const hidden = people.length - free.length;
   const pick = d => `<div class="pick">
       <label class="pick-hd"><input type="checkbox" name="ne-book" value="${d.id}">
         <span class="av">${esc(initials(d.name))}</span>
-        <span class="pick-id"><b>${esc(d.name)}</b><small>${esc(d.sub)} · ${esc(d.price)}</small></span><span class="ne-av" data-av="${d.id}"></span>${scoreChip(d.name)}</label>
+        <span class="pick-id"><b>${esc(d.name)}</b><small>${esc(d.sub)} · ${esc(d.price)}</small></span>${availRange(d.id, start, end) === 'last' ? availPill(d.id, start, end) : ''}${scoreChip(d.name)}</label>
       <div class="pick-fields">
         <input class="field" data-ne-time="${d.id}" placeholder="${d.kind === 'artist' ? 'Set time — e.g. 22:00 – 23:30' : 'Load-in — e.g. 14:00 – 17:00'}">
         <input class="field" data-ne-fee="${d.id}" placeholder="Agreed fee — e.g. € 900">
       </div>
     </div>`;
+  const grp = (kind, label) => { const l = free.filter(d => d.kind === kind); return l.length ? `<div class="pick-grp"><div class="lblrow"><span>${label}</span></div>${l.map(pick).join('')}</div>` : ''; };
+  return `${grp('artist', 'Artists')}${grp('supplier', 'Suppliers')}
+    ${free.length ? '' : '<div class="empty">No one in your network is free on these dates.</div>'}
+    ${hidden ? `<p class="muted" style="font-size:13px;margin:8px 0 0">${hidden} ${hidden > 1 ? 'people are' : 'person is'} busy on these dates, so they’re not shown.</p>` : ''}`;
+}
+function newEventView(){
   const f = (id, label, input, hint) => `<div class="ne-f"><label for="${id}">${label}</label>${input}${hint ? `<small>${hint}</small>` : ''}</div>`;
   return `<main class="wrap ne">
     <button class="back" data-act="home">${I.back} All events</button>
@@ -2417,12 +2429,15 @@ function newEventView(){
             ${f('ne-kind', 'Type of event', `<select class="field" id="ne-kind">${EVENT_KINDS.map(k => `<option>${k}</option>`).join('')}</select>`)}
             ${f('ne-cap', 'Capacity *', '<input class="field" id="ne-cap" type="number" min="10" step="10" placeholder="e.g. 450">', 'Expected visitors')}
           </div>
-          ${f('ne-desc', 'Short description', '<textarea class="field" id="ne-desc" rows="3" placeholder="e.g. An intimate night with a live jazz trio and a late DJ set."></textarea>', 'Shown to everyone you book')}
+          ${f('ne-desc', 'Description', '<textarea class="field" id="ne-desc" rows="3" placeholder="e.g. An intimate night with a live jazz trio and a late DJ set."></textarea>', 'Shown to everyone you book')}
         </div>
 
-        <div class="card"><h3>2 · Date & times</h3>
-          <div class="ne-row three">
-            ${f('ne-date', 'Date *', `<input class="field" id="ne-date" type="date" min="2026-11-25">`)}
+        <div class="card"><h3>2 · Dates & times</h3>
+          <div class="ne-row">
+            ${f('ne-date', 'Start date *', `<input class="field" id="ne-date" type="date" min="2026-11-25">`)}
+            ${f('ne-date-end', 'End date', `<input class="field" id="ne-date-end" type="date" min="2026-11-25">`, 'Only for events over several days')}
+          </div>
+          <div class="ne-row">
             ${f('ne-doors', 'Doors open *', '<input class="field" id="ne-doors" type="time" value="20:00">')}
             ${f('ne-end', 'Ends at', '<input class="field" id="ne-end" type="time" value="02:00">')}
           </div>
@@ -2443,9 +2458,8 @@ function newEventView(){
         </div>
 
         <div class="card"><h3>4 · Line-up & suppliers <span class="count muted" style="font-size:12px">optional — you can add more later</span></h3>
-          <p class="muted" style="margin:0 0 12px;font-size:14px">Tick who you want to book. They get a booking request in their messages and appear in the event as <b>Waiting</b> until they confirm.</p>
-          <div class="pick-grp"><div class="lblrow"><span>Artists</span></div>${people.filter(d => d.kind === 'artist').map(pick).join('')}</div>
-          <div class="pick-grp"><div class="lblrow"><span>Suppliers</span></div>${people.filter(d => d.kind === 'supplier').map(pick).join('')}</div>
+          <p class="muted" style="margin:0 0 12px;font-size:14px">Only people who are free on your dates are shown. Tick who you want to book — they get a booking request and appear as <b>Waiting</b> until they confirm.</p>
+          <div id="ne-pool">${nePool(null)}</div>
           <p class="muted" style="font-size:13px;margin:10px 0 0">Not in the list? Add them from your <button class="linkbtn" data-act="network">Network</button> first.</p>
         </div>
       </div>
@@ -2488,7 +2502,7 @@ function netCard(d){
     <div class="net-meta"><span>${I.pin} ${esc(d.city)}</span><span class="mono">${esc(d.price)}</span></div>
     ${scoreChip(d.name)}
     <div class="net-tags">${d.tags.map(t => `<span>${esc(t)}</span>`).join('')}</div>
-    <div class="net-status">${status}${S.netDate ? availPill(d.id, S.netDate) : ''}</div>
+    <div class="net-status">${status}</div>
     <div class="net-actions">${actions}</div>
   </div>`;
 }
@@ -2501,18 +2515,8 @@ function networkView(){
       <p>Find artists and suppliers, add them to your network, message them or book them for an event. ${count} contacts in your network.</p></section>
     <div class="net-tools">
       <input id="net-q" type="search" placeholder="Search by name, genre, service or city…" value="${esc(S.netQ||'')}" autocomplete="off">
-      <div class="fchips">${chip('all','All')}${chip('artist','Artists')}${chip('supplier','Suppliers')}${chip('mine','In my network')}${S.netDate ? chip('avail','✓ Available on that date') : ''}</div>
+      <div class="fchips">${chip('all','All')}${chip('artist','Artists')}${chip('supplier','Suppliers')}${chip('mine','In my network')}</div>
       <button class="btn solid" data-act="new-invite">✉ Invite someone new</button>
-    </div>
-    <div class="net-avail">
-      <span class="lbl">Check availability for</span>
-      <select class="field" id="net-date-ev">
-        <option value="">— pick one of your events —</option>
-        ${EVENTS.map(e => `<option value="${e.date}" ${S.netDate === e.date ? 'selected' : ''}>${esc(e.name)} · ${fmtShort(e.date)}</option>`).join('')}
-      </select>
-      <span class="muted">or a date</span>
-      <input class="field" id="net-date" type="date" min="2026-11-25" value="${S.netDate || ''}">
-      ${S.netDate ? `<button class="linkbtn" data-act="net-date-clear">Clear</button>` : ''}
     </div>
     <div class="net-grid">${DIRECTORY.map(netCard).join('')}</div>
     <div class="empty net-empty ${DIRECTORY.some(netMatches)?'hide':''}">No one matches your search. Invite them to we.TRUSS with the button above.</div>
@@ -2615,7 +2619,7 @@ function contractHtml(d){
     <h5>1. Parties</h5>
     <dl>${row('Organiser', 'Nachtwerk Collective · Lotte Verbeke')}${row(who, p.name + (signer !== p.name ? ' · ' + signer : ''))}</dl>
     <h5>2. Event</h5>
-    <dl>${row('Event', e.name)}${row('Date', fmtDate(e.date))}${row('Venue', e.venue + ' · ' + e.address)}${row('Opening hours', e.hours)}</dl>
+    <dl>${row('Event', e.name)}${row('Date', fmtWhen(e))}${row('Venue', e.venue + ' · ' + e.address)}${row('Opening hours', e.hours)}</dl>
     ${details}
     <h5>4. Fee &amp; payment</h5>
     <dl>${row('Fee', p.fee || rental || '—')}</dl>
@@ -2863,7 +2867,7 @@ function artistGig(e,p){
     <section class="gig-hero">
       <span class="tag mag">${esc(e.kind)}</span>
       <h1>${esc(e.name)}</h1>
-      <div class="meta"><span>${I.cal}<b class="mono">${fmtDate(e.date)}</b></span><span>${I.pin}<span><b>${esc(e.venue)}</b>, ${esc(e.city)}</span></span></div>
+      <div class="meta"><span>${I.cal}<b class="mono">${fmtWhen(e)}</b></span><span>${I.pin}<span><b>${esc(e.venue)}</b>, ${esc(e.city)}</span></span></div>
       <div class="bigtime"><small>Your set</small><span class="t">${esc(p.setTime)}</span><small>${esc(p.stage)}</small></div>
       ${statusBar(p,true)}
       <div class="actions">
@@ -2902,7 +2906,7 @@ function supplierJob(e,p){
     <section class="gig-hero sup">
       <span class="tag acid">${esc(p.sub)}</span>
       <h1>${esc(e.name)}</h1>
-      <div class="meta"><span>${I.cal}<b class="mono">${fmtDate(e.date)}</b></span><span>${I.pin}<span><b>${esc(e.venue)}</b>, ${esc(e.city)}</span></span></div>
+      <div class="meta"><span>${I.cal}<b class="mono">${fmtWhen(e)}</b></span><span>${I.pin}<span><b>${esc(e.venue)}</b>, ${esc(e.city)}</span></span></div>
       <div class="bigtime"><small>Load-in</small><span class="t">${esc(p.loadIn)}</span></div>
       ${statusBar(p,false)}
       <div class="actions">
@@ -3060,13 +3064,13 @@ function openEventInvite(pid){
       <p class="sub">${esc(d.sub)} · ${esc(d.price)}. They get the request in their messages and appear in your event as <b>Waiting</b>.</p>
       <div class="ev-pick">${(() => {
         // can't book: already in that event, or busy / booked elsewhere on that date
-        const blocked = e => e.parties.some(p => p.name === d.name) || !isAvailable(availOn(d.id, e.date)) && availOn(d.id, e.date) !== 'unknown';
+        const blocked = e => e.parties.some(p => p.name === d.name) || !isAvailable(availRange(d.id, e.date, e.endDate)) && availRange(d.id, e.date, e.endDate) !== 'unknown';
         const first = EVENTS.find(e => !blocked(e));
         return EVENTS.map(e => {
           const inEv = e.parties.some(p => p.name === d.name), no = blocked(e);
           return `<label class="ev-opt ${no?'dis':''}"><input type="radio" name="inv-ev" value="${e.id}" ${no?'disabled':''} ${first && first.id === e.id ? 'checked' : ''}>
-            <span><b>${esc(e.name)}</b><small>${fmtDate(e.date)} · ${esc(e.venue)}, ${esc(e.city)}${inEv?' · already in this event':''}</small></span>
-            ${inEv ? '' : availPill(d.id, e.date)}</label>`;
+            <span><b>${esc(e.name)}</b><small>${fmtWhen(e)} · ${esc(e.venue)}, ${esc(e.city)}${inEv?' · already in this event':''}</small></span>
+            ${inEv ? '' : availPill(d.id, e.date, e.endDate)}</label>`;
         }).join('');
       })()}</div>
       <textarea id="inv-msg" placeholder="Add a personal note (optional) — e.g. We’d love a 90-minute set around midnight."></textarea>
@@ -3082,8 +3086,8 @@ function openEventInvite(pid){
 function replacementCandidates(e, p){
   const kind = p.type === 'artist' ? 'artist' : 'supplier';
   const pool = DIRECTORY.filter(d => d.kind === kind && d.onPlatform && !e.parties.some(x => x.name === d.name));
-  const ok = pool.filter(d => isAvailable(availOn(d.id, e.date)))
-    .sort((a,b) => (availOn(b.id, e.date) === 'last') - (availOn(a.id, e.date) === 'last') || artistScore(b.name).avg - artistScore(a.name).avg);
+  const ok = pool.filter(d => isAvailable(availRange(d.id, e.date, e.endDate)))
+    .sort((a,b) => (availRange(b.id, e.date, e.endDate) === 'last') - (availRange(a.id, e.date, e.endDate) === 'last') || artistScore(b.name).avg - artistScore(a.name).avg);
   return { ok, hidden: pool.length - ok.length };
 }
 function openReplace(partyId){
@@ -3092,12 +3096,12 @@ function openReplace(partyId){
   $('#modal').innerHTML = `<div class="modal-bg" data-act="close-modal">
     <div class="modal rate-modal replace-modal" role="dialog" aria-modal="true">
       <h3>⚡ Replace ${esc(p.name)}</h3>
-      <p class="sub">${esc(e.name)} · ${fmtDate(e.date)} · ${p.type === 'artist' ? 'set' : 'load-in'} <span class="mono">${esc(slot || 'to agree')}</span>.
+      <p class="sub">${esc(e.name)} · ${fmtWhen(e)} · ${p.type === 'artist' ? 'set' : 'load-in'} <span class="mono">${esc(slot || 'to agree')}</span>.
         Showing ${p.type === 'artist' ? 'artists' : 'suppliers'} who are available that day, last-minute first.</p>
       <div class="rep-list">${ok.length ? ok.map(d => `<div class="rep-row">
           <span class="av">${esc(initials(d.name))}</span>
           <div class="rep-id"><b>${esc(d.name)}</b><small>${esc(d.sub)} · ${esc(d.price)}</small>
-            <span class="rep-meta">${availPill(d.id, e.date)}${scoreChip(d.name)}</span></div>
+            <span class="rep-meta">${availPill(d.id, e.date, e.endDate)}${scoreChip(d.name)}</span></div>
           <button class="btn sm solid" data-act="replace-book" data-id="${p.id}|${d.id}">Book</button>
         </div>`).join('') : '<div class="empty">No one is available that day. Try inviting someone new from your Network.</div>'}</div>
       ${hidden ? `<p class="muted" style="font-size:13px;margin:10px 0 0">${hidden} other ${hidden > 1 ? 'contacts are' : 'contact is'} busy or booked that day, so they’re hidden.</p>` : ''}
@@ -3257,9 +3261,11 @@ const ACTIONS = {
     const miss = need.find(([, val]) => !val);
     if (miss){ toast(`Add ${miss[2]} first.`, 'bad'); $('#' + miss[0]).focus(); return; }
     if (date < '2026-11-25'){ toast('Pick a date in the future.', 'bad'); $('#ne-date').focus(); return; }
+    const endDate = v('ne-date-end');
+    if (endDate && endDate < date){ toast('The end date can’t be before the start date.', 'bad'); $('#ne-date-end').focus(); return; }
     if (!(+cap > 0)){ toast('Capacity should be a number, e.g. 450.', 'bad'); $('#ne-cap').focus(); return; }
 
-    const e = { id:'e' + Date.now(), name, kind, date, doors, hours:`${doors} – ${end || 'late'}`, venue, city,
+    const e = { id:'e' + Date.now(), name, kind, date, endDate: endDate > date ? endDate : undefined, doors, hours:`${doors} – ${end || 'late'}`, venue, city,
                 address: addr || city, capacity:+cap, ticket, desc, parties:[], updates:[], activity:[] };
     e.parties.push({ id:e.id + '-venue', type:'venue', name:venue, sub:`Venue · ${cap} capacity`,
       status: venueOk ? 'confirmed' : 'waiting', due: due || date, issue: venueOk ? null : 'Venue booking not confirmed yet.',
@@ -3271,7 +3277,7 @@ const ACTIONS = {
       const fee  = (document.querySelector(`[data-ne-fee="${d.id}"]`).value || '').trim();
       e.parties.push(bookingParty(e, d, { time, fee, due: due || undefined }));
       const detail = [time && (d.kind === 'artist' ? `set time ${time}` : `load-in ${time}`), fee && `fee ${fee}`].filter(Boolean).join(', ');
-      sendMessage(d.id, `Hi ${d.name}! I’d like to book you for ${name} (${kind.toLowerCase()}) on ${fmtDate(date)} at ${venue}, ${city}.${detail ? ' Proposal: ' + detail + '.' : ''} Are you available?`);
+      sendMessage(d.id, `Hi ${d.name}! I’d like to book you for ${name} (${kind.toLowerCase()}) on ${fmtWhen(e)} at ${venue}, ${city}.${detail ? ' Proposal: ' + detail + '.' : ''} Are you available?`);
     });
 
     const ids = t => e.parties.filter(p => t.includes(p.type)).map(p => p.id);
@@ -3473,9 +3479,19 @@ document.addEventListener('keydown', ev => {
 // live search on the Network page (filters the cards without re-rendering, so typing isn't interrupted)
 document.addEventListener('input', ev => {
   // New event form: show who is free on the chosen date
-  if (ev.target.id === 'ne-date'){
-    const ds = ev.target.value;
-    document.querySelectorAll('[data-av]').forEach(el => el.innerHTML = ds ? availPill(el.dataset.av, ds) : '');
+  // New event form: dates changed -> show only who's free, keep what was already ticked/typed
+  if (ev.target.id === 'ne-date' || ev.target.id === 'ne-date-end'){
+    const start = $('#ne-date').value, end = $('#ne-date-end').value;
+    if (ev.target.id === 'ne-date' && start) $('#ne-date-end').min = start;
+    const keep = {};
+    document.querySelectorAll('input[name=ne-book]').forEach(cb => {
+      keep[cb.value] = { on: cb.checked, time: document.querySelector(`[data-ne-time="${cb.value}"]`).value, fee: document.querySelector(`[data-ne-fee="${cb.value}"]`).value };
+    });
+    $('#ne-pool').innerHTML = nePool(start, end && end >= start ? end : '');
+    Object.entries(keep).forEach(([id, k]) => {
+      const cb = document.querySelector(`input[name=ne-book][value="${id}"]`); if (!cb) return;
+      cb.checked = k.on; document.querySelector(`[data-ne-time="${id}"]`).value = k.time; document.querySelector(`[data-ne-fee="${id}"]`).value = k.fee;
+    });
     return;
   }
   // Network: availability for an event or a date

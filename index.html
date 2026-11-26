@@ -160,8 +160,8 @@ h2.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(
 .plan{background:var(--panel);border:1px solid var(--line2);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px}
 .plan.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 20px 50px rgba(0,0,0,.35)}
 .plan.soon{opacity:.6}
-.plan-hd{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.plan-hd h3{font-size:22px;font-weight:800;margin:0}
+.plan-hd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 10px}
+.plan-hd h3{font-size:22px;font-weight:800;margin:0;white-space:nowrap}
 .plan-price{display:flex;align-items:baseline;gap:8px;min-height:42px}
 .plan-price b{font-size:34px;font-weight:800}
 .plan-price small{color:var(--muted)}
@@ -179,6 +179,8 @@ h2.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(
 .plan-feats li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:800}
 .plan.soon .plan-feats li::before{color:var(--dim)}
 .plans-who{margin-top:18px;color:var(--muted);font-size:14px}
+.plans-pay{margin:22px 0 0;font-weight:600}
+.plan-tag{align-self:flex-start;margin-top:-6px;font:700 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent);padding:4px 8px;border-radius:6px}
 @media (max-width:760px){ .plan-grid.cols-2,.plan-grid.cols-3{grid-template-columns:1fr} .login.plans{padding-top:28px} }
 
 /* ---------- Dashboard ---------- */
@@ -1704,6 +1706,21 @@ const TR_ROWS = [
 ['It starts as soon as you set up your first event.','Die start zodra je je eerste evenement aanmaakt.','Il commence dès que vous créez votre premier événement.','Er startet, sobald du deine erste Veranstaltung anlegst.'],
 ['Free month active','Gratis maand actief','Mois gratuit en cours','Gratismonat läuft'],['Until','Tot','Jusqu’au','Bis'],['days left','dagen over','jours restants','Tage übrig'],
 ['🎁 Your free month has started — enjoy we.TRUSS!','🎁 Je gratis maand is gestart — veel plezier met we.TRUSS!','🎁 Votre mois gratuit a commencé — profitez de we.TRUSS !','🎁 Dein Gratismonat hat begonnen — viel Spaß mit we.TRUSS!'],
+['Event Pass','Event Pass','Event Pass','Event Pass'],['Pro monthly','Pro maandelijks','Pro mensuel','Pro monatlich'],['Pro yearly','Pro jaarlijks','Pro annuel','Pro jährlich'],
+['per event','per evenement','par événement','pro Veranstaltung'],['per month','per maand','par mois','pro Monat'],['per year','per jaar','par an','pro Jahr'],
+['Most popular','Meest gekozen','Le plus choisi','Am beliebtesten'],['2 months free','2 maanden gratis','2 mois offerts','2 Monate gratis'],
+['Occasional promoters (a few events per year)','Occasionele organisatoren (enkele evenementen per jaar)','Organisateurs occasionnels (quelques événements par an)','Gelegentliche Veranstalter (ein paar Events pro Jahr)'],
+['Regular promoters (2+ events per month)','Vaste organisatoren (2+ evenementen per maand)','Organisateurs réguliers (2+ événements par mois)','Regelmäßige Veranstalter (2+ Events pro Monat)'],
+['Promoters with a full season','Organisatoren met een vol seizoen','Organisateurs avec une saison complète','Veranstalter mit voller Saison'],
+['All features for one event','Alle functies voor één evenement','Toutes les fonctions pour un événement','Alle Funktionen für eine Veranstaltung'],['Unlimited parties','Onbeperkt partijen','Parties illimitées','Unbegrenzt Beteiligte'],
+['“Seen by” receipts','“Gezien door”-bevestigingen','Accusés « vu par »','„Gesehen von“-Bestätigungen'],['Readiness score','Readiness-score','Score de préparation','Readiness-Score'],
+['Event templates','Evenementsjablonen','Modèles d’événement','Event-Vorlagen'],['3 team members','3 teamleden','3 membres d’équipe','3 Teammitglieder'],
+['Everything in Pro monthly','Alles uit Pro maandelijks','Tout ce qu’offre Pro mensuel','Alles aus Pro monatlich'],
+['Start free month','Gratis maand starten','Commencer le mois gratuit','Gratismonat starten'],
+['💳 No payment now — you only pay after your free month.','💳 Nu niets betalen — je betaalt pas na je gratis maand.','💳 Rien à payer maintenant — vous payez seulement après votre mois gratuit.','💳 Jetzt keine Zahlung — du zahlst erst nach deinem Gratismonat.'],
+['then','daarna','puis','danach'],['Payment method added','Betaalmethode toegevoegd','Moyen de paiement ajouté','Zahlungsmethode hinzugefügt'],
+['first payment on','eerste betaling op','premier paiement le','erste Zahlung am'],['💳 Add payment method','💳 Betaalmethode toevoegen','💳 Ajouter un moyen de paiement','💳 Zahlungsmethode hinzufügen'],
+['✓ Payment method saved (demo) — nothing is charged until your free month ends.','✓ Betaalmethode opgeslagen (demo) — er wordt niets aangerekend tot je gratis maand afloopt.','✓ Moyen de paiement enregistré (démo) — rien n’est prélevé avant la fin de votre mois gratuit.','✓ Zahlungsmethode gespeichert (Demo) — bis zum Ende deines Gratismonats wird nichts abgebucht.'],
 ['Documents','Documenten','Documents','Dokumente'],['Contracts','Contracten','Contrats','Verträge'],['Other files','Andere bestanden','Autres fichiers','Andere Dateien'],
 ['Not signed yet','Nog niet ondertekend','Pas encore signé','Noch nicht unterschrieben'],['To sign','Te ondertekenen','À signer','Zu unterschreiben'],
 ['⬆ Upload document','⬆ Document uploaden','⬆ Importer un document','⬆ Dokument hochladen'],
@@ -2051,13 +2068,14 @@ function loginView(){
 /* ---------------- views: plans (after picking a role on the login page) ----------------
    Only the Free plans can be chosen for now; the others are shown greyed out as "Coming soon". */
 const PLANS = {
+  // promoters: 3 paid plans — the first month is free on every plan (it starts with the first event), no payment at sign-up
   promoter:[
-    { name:'Starter', trial:true, desc:'Everything you need to run your events.',
-      feats:['Up to 3 active events','Unlimited artists & suppliers per event','Targeted updates with seen receipts','Contracts & documents','Network & messages'] },
-    { name:'Pro', soon:true, desc:'For promoters with a full calendar.',
-      feats:['Unlimited events','Contract templates with your logo','Export to PDF & Excel','Priority support'] },
-    { name:'Collective', soon:true, desc:'For teams that organise together.',
-      feats:['Several promoters in one account','Shared network & calendar','Roles & permissions for your team'] }
+    { id:'pass', name:'Event Pass', price:'€ 19', per:'per event', desc:'Occasional promoters (a few events per year)',
+      feats:['All features for one event','Unlimited parties','“Seen by” receipts','Readiness score'] },
+    { id:'monthly', name:'Pro monthly', price:'€ 39', per:'per month', tag:'Most popular', desc:'Regular promoters (2+ events per month)',
+      feats:['Unlimited events','Event templates','3 team members','Priority support'] },
+    { id:'yearly', name:'Pro yearly', price:'€ 390', per:'per year', tag:'2 months free', desc:'Promoters with a full season',
+      feats:['Everything in Pro monthly','Unlimited events','Event templates','3 team members','Priority support'] }
   ],
   artist:[
     { name:'Free', desc:'Your gigs, riders and contracts in one place.',
@@ -2075,19 +2093,22 @@ const PLANS = {
 function plansView(){
   const r = S.planRole, u = USERS[r], list = PLANS[r];
   const title = { promoter:'Plans for promoters', artist:'Plans for artists', supplier:'Plans for suppliers' }[r];
+  const paid = pl => !!pl.price;
   const card = pl => `<div class="plan ${pl.soon ? 'soon' : 'on'}">
-      <div class="plan-hd"><h3 data-notr>${pl.name}</h3>${pl.soon ? '<span class="pill off">Coming soon</span>' : pl.trial ? '<span class="pill ok">First month free</span>' : '<span class="pill ok">Available now</span>'}</div>
-      <div class="plan-price">${pl.soon ? '<span class="tba">Price to be announced</span>' : pl.trial ? '<b data-notr>€ 0</b><small>for your first month</small>' : '<b data-notr>€ 0</b><small>forever</small>'}</div>
+      <div class="plan-hd"><h3>${pl.name}</h3>${pl.soon ? '<span class="pill off">Coming soon</span>' : paid(pl) ? '<span class="pill ok">First month free</span>' : '<span class="pill ok">Available now</span>'}</div>
+      <div class="plan-price">${pl.soon ? '<span class="tba">Price to be announced</span>' : paid(pl) ? `<b data-notr>${pl.price}</b><small>${pl.per}</small>` : '<b data-notr>€ 0</b><small>forever</small>'}</div>
+      ${pl.tag ? `<span class="plan-tag">${pl.tag}</span>` : ''}
       <p class="plan-desc">${pl.desc}</p>
-      ${pl.trial ? '<p class="plan-note">🎁 Your free month starts when you set up your first event. After that: price to be announced.</p>' : ''}
       <ul class="plan-feats">${pl.feats.map(f => `<li>${f}</li>`).join('')}</ul>
-      ${pl.soon ? '<button class="btn full" disabled>Coming soon</button>' : `<button class="btn solid full lp-big" data-act="plan-pick" data-id="${r}">${pl.trial ? 'Start your free month' : 'Start for free'}</button>`}
+      ${pl.soon ? '<button class="btn full" disabled>Coming soon</button>'
+        : `<button class="btn solid full lp-big" data-act="plan-pick" data-id="${r}:${pl.id || 'free'}">${paid(pl) ? 'Start free month' : 'Start for free'}</button>`}
     </div>`;
   return `${siteNav()}<div class="login plans">
     <button class="linkbtn" data-act="to-login">← All roles</button>
     <h1 class="plans-h">${title}</h1>
     <p class="tagline">${r === 'promoter' ? 'Your first month is free — it starts as soon as you set up your first event.' : 'Start for free — no credit card needed. More plans are on the way.'}</p>
     <div class="plan-grid cols-${list.length}">${list.map(card).join('')}</div>
+    ${r === 'promoter' ? '<p class="plans-pay">💳 No payment now — you only pay after your free month.</p>' : ''}
     <p class="plans-who">Demo: you’ll continue as <b data-notr>${esc(u.name)} · ${esc(u.org)}</b></p>
     <div class="foot">Prototype — no real account is created and nothing is charged.</div>
   </div>`;
@@ -2278,11 +2299,18 @@ function addDays(ds, n){ const d = new Date(ds + 'T12:00:00'); d.setDate(d.getDa
 function trialBanner(){
   const t = S.trial;
   if (!t) return '';
-  if (!t.start) return `<div class="trial"><span>🎁</span><div><b>Your first month is free</b><small>It starts as soon as you set up your first event.</small></div>
+  const pl = PLANS.promoter.find(x => x.id === t.plan) || PLANS.promoter[1];
+  const planTx = `<span>${pl.name}</span>`, then = `<span>then</span> <span data-notr>${pl.price}</span> <span>${pl.per}</span>`;
+  if (!t.start) return `<div class="trial"><span>🎁</span><div><b>Your first month is free</b>
+      <small>${planTx} · <span>It starts as soon as you set up your first event.</span></small></div>
     <button class="btn sm solid" data-act="new-event">+ New event</button></div>`;
   const end = addDays(t.start, 30), left = Math.max(0, daysUntil(end));
+  if (t.paid) return `<div class="trial on"><span>✓</span><div><b>${pl.name}</b>
+      <small><span>Payment method added</span> · <span>first payment on</span> <span data-notr>${fmtDate(end)}</span></small></div></div>`;
+  const soon = left <= 7;   // a week before the end: ask for a payment method
   return `<div class="trial on"><span>🎁</span><div><b>Free month active</b>
-    <small><span>Until</span> <span data-notr>${fmtDate(end)}</span> · <span data-notr>${left}</span> <span>days left</span></small></div></div>`;
+      <small>${planTx} · <span>Until</span> <span data-notr>${fmtDate(end)}</span> · <span data-notr>${left}</span> <span>days left</span> · ${then}</small></div>
+    ${soon ? '<button class="btn sm solid" data-act="add-payment">💳 Add payment method</button>' : '<button class="btn sm" data-act="add-payment">💳 Add payment method</button>'}</div>`;
 }
 function promoterHome(){
   const all = openItems(EVENTS);
@@ -3280,10 +3308,12 @@ function openRateModal(key){
 
 /* ---------------- actions ---------------- */
 const ACTIONS = {
+  'add-payment'(){ S.trial.paid = true; render(); toast('✓ Payment method saved (demo) — nothing is charged until your free month ends.', 'ok'); },
   plans(r){ S.planRole = r; S.page = 'plans'; render(); window.scrollTo({ top:0 }); },
-  'plan-pick'(r){
-    S.plan = Object.assign({}, S.plan, { [r]: r === 'promoter' ? 'starter' : 'free' });
-    if (r === 'promoter') S.trial = { start:null };   // the free month starts with the first event
+  'plan-pick'(key){
+    const [r, plan] = key.split(':');
+    S.plan = Object.assign({}, S.plan, { [r]:plan });
+    if (r === 'promoter') S.trial = { start:null, plan };   // the free month starts with the first event; no payment yet
     ACTIONS.login(r);
     toast(r === 'promoter' ? '🎉 Welcome! Your free month starts with your first event.' : '🎉 Welcome to we.TRUSS — you’re on the Free plan.', 'ok');
   },

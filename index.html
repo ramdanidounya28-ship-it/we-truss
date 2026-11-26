@@ -785,6 +785,7 @@ svg,.ring,.truss-ic,.brand-big{filter:none !important}
 @media (max-width:560px){ .ev-row{grid-auto-columns:86%} }
 
 /* ---------- New event block, doc blocks ---------- */
+.add-event-btn{margin-top:18px;padding:14px 28px;font-size:16px;border-radius:14px}
 .new-ev-cta{margin-top:16px}
 .new-ev-cta > span{font-size:22px}
 .new-ev-cta .btn{margin-left:auto;padding:12px 20px;font-size:15px}
@@ -1522,7 +1523,7 @@ const TR_ROWS = [
 ['Plan a new event','Plan een nieuw evenement','Planifiez un nouvel événement','Plane eine neue Veranstaltung'],
 ['Pick the dates and the venue — you’ll see right away which artists and suppliers are free.','Kies de data en de zaal — je ziet meteen welke artiesten en leveranciers vrij zijn.','Choisissez les dates et la salle — vous verrez tout de suite quels artistes et prestataires sont libres.','Wähle Daten und Location — du siehst sofort, welche Künstler und Dienstleister frei sind.'],
 ['🔒 Private files — not linked to an event','🔒 Privébestanden — niet gekoppeld aan een evenement','🔒 Fichiers privés — non liés à un événement','🔒 Private Dateien — keiner Veranstaltung zugeordnet'],
-['Choose this plan','Kies dit abonnement','Choisir cette formule','Dieses Abo wählen'],['🎉 Welcome to we.TRUSS!','🎉 Welkom bij we.TRUSS!','🎉 Bienvenue sur we.TRUSS !','🎉 Willkommen bei we.TRUSS!'],
+['Choose this plan','Kies dit abonnement','Choisir cette formule','Dieses Abo wählen'],['Welcome to we.TRUSS!','Welkom bij we.TRUSS!','Bienvenue sur we.TRUSS !','Willkommen bei we.TRUSS!'],['Add event','Evenement toevoegen','Ajouter un événement','Veranstaltung hinzufügen'],
 ['No documents for this event yet.','Nog geen documenten voor dit evenement.','Pas encore de documents pour cet événement.','Noch keine Dokumente für diese Veranstaltung.'],
 // the slogan "The backbone of every event" is the brand line and stays in English in every language
 ['Viewing as','Je bekijkt als','Vous êtes','Ansicht als'],['Switch to','Wissel naar','Passer à','Wechseln zu'],['Log out','Uitloggen','Se déconnecter','Abmelden'],
@@ -2429,9 +2430,7 @@ function promoterHome(){
   return `<main class="wrap">
     <section class="hello"><h1>Hi ${USERS.promoter.first}, here’s your season.</h1>
       <p>Nachtwerk Collective · ${EVENTS.length} upcoming event${EVENTS.length === 1 ? '' : 's'}</p>
-      <div class="trial new-ev-cta"><span>🎉</span><div><b>Plan a new event</b>
-        <small>Pick the dates and the venue — you’ll see right away which artists and suppliers are free.</small></div>
-        <button class="btn solid" data-act="new-event">+ New event</button></div></section>
+      <button class="btn solid add-event-btn" data-act="new-event">Add event</button></section>
 
     <h2 class="sec">Upcoming events</h2>
     <div class="ev-row">${evCards}</div>
@@ -3371,7 +3370,7 @@ const ACTIONS = {
     S.plan = Object.assign({}, S.plan, { [r]:plan });
     if (r === 'promoter') S.trial = { start:null, plan };   // the free month starts with the first event; no payment yet
     ACTIONS.login(r);
-    toast(r === 'promoter' ? '🎉 Welcome to we.TRUSS!' : '🎉 Welcome to we.TRUSS — you’re on the Free plan.', 'ok');
+    toast(r === 'promoter' ? 'Welcome to we.TRUSS!' : 'Welcome to we.TRUSS — you’re on the Free plan.', 'ok');
   },
   login(id){
     const was = S.role;

@@ -785,9 +785,19 @@ svg,.ring,.truss-ic,.brand-big{filter:none !important}
 @media (max-width:560px){ .ev-row{grid-auto-columns:86%} }
 
 /* ---------- New event block, doc blocks ---------- */
-.lp-closing{text-align:center;padding:110px 0 120px;border-top:1px solid var(--line);background:radial-gradient(600px 260px at 50% 40%,var(--accent-soft),transparent 70%)}
+/* landing finale: concert photo fading in from the page, big glowing logo, spaced slogan */
+.lp-closing{position:relative;text-align:center;padding:170px 0 180px;overflow:hidden;
+  background:
+    linear-gradient(180deg,var(--bg) 0%,rgba(26,18,12,.8) 28%,rgba(26,18,12,.8) 72%,var(--bg) 100%),
+    radial-gradient(700px 320px at 50% 50%,rgba(242,169,126,.22),transparent 70%),
+    url(https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=2000&q=70) center 40%/cover,
+    var(--bg)}
+.lp-closing .wrap{display:flex;flex-direction:column;align-items:center;gap:22px}
+.lp-closing .brand-img{width:min(720px,88vw);filter:drop-shadow(0 0 40px rgba(242,169,126,.35)) !important}
+.lp-closing .slogan{margin:0 !important;font:600 clamp(13px,1.6vw,17px)/1.4 var(--sans);letter-spacing:.42em;text-transform:uppercase;color:var(--text);opacity:.9}
+.lp-closing-line{display:block;width:1px;height:70px;background:linear-gradient(180deg,transparent,var(--accent),transparent)}
+.lp-closing .reveal{transition-duration:1.1s}
 .lp-closing .brand-img{margin:0 auto}
-.lp-closing .slogan{margin-top:16px}
 .add-event-btn{margin-top:18px;padding:14px 28px;font-size:16px;border-radius:14px}
 .new-ev-cta{margin-top:16px}
 .new-ev-cta > span{font-size:22px}
@@ -2333,13 +2343,14 @@ function landingView(){
       </div>
     </div></section>
 
-    <section class="lp-closing"><div class="wrap">
+    <section class="lp-closing"><div class="wrap reveal">
+      <span class="lp-closing-line"></span>
       <img class="brand-img" src="${LOGO}" alt="we.TRUSS">
       <div class="slogan">The backbone of every event</div>
+      <span class="lp-closing-line"></span>
     </div></section>
 
     <footer class="lp-foot"><div class="wrap lp-foot-in">
-      <div><button class="logo" data-act="nav" data-id="home" title="we.TRUSS home"><img class="logo-img" src="${LOGO}" alt="we.TRUSS"></button><div class="muted" style="margin-top:6px">The backbone of every event.</div></div>
       <div class="lp-foot-row">${socialLinks()}
         <div class="lp-foot-contact" data-notr><a href="mailto:${CONTACT.email}">${CONTACT.email}</a><a href="tel:${CONTACT.phone.replace(/\s/g, '')}">${CONTACT.phone}</a></div>
       </div>

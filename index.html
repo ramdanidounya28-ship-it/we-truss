@@ -1522,6 +1522,8 @@ const TR_ROWS = [
 ['Plan a new event','Plan een nieuw evenement','Planifiez un nouvel événement','Plane eine neue Veranstaltung'],
 ['Pick the dates and the venue — you’ll see right away which artists and suppliers are free.','Kies de data en de zaal — je ziet meteen welke artiesten en leveranciers vrij zijn.','Choisissez les dates et la salle — vous verrez tout de suite quels artistes et prestataires sont libres.','Wähle Daten und Location — du siehst sofort, welche Künstler und Dienstleister frei sind.'],
 ['🔒 Private files — not linked to an event','🔒 Privébestanden — niet gekoppeld aan een evenement','🔒 Fichiers privés — non liés à un événement','🔒 Private Dateien — keiner Veranstaltung zugeordnet'],
+['Choose this plan','Kies dit abonnement','Choisir cette formule','Dieses Abo wählen'],['🎉 Welcome to we.TRUSS!','🎉 Welkom bij we.TRUSS!','🎉 Bienvenue sur we.TRUSS !','🎉 Willkommen bei we.TRUSS!'],
+['No documents for this event yet.','Nog geen documenten voor dit evenement.','Pas encore de documents pour cet événement.','Noch keine Dokumente für diese Veranstaltung.'],
 // the slogan "The backbone of every event" is the brand line and stays in English in every language
 ['Viewing as','Je bekijkt als','Vous êtes','Ansicht als'],['Switch to','Wissel naar','Passer à','Wechseln zu'],['Log out','Uitloggen','Se déconnecter','Abmelden'],
 ['Latest from parties','Laatste van partijen','Nouvelles des parties','Neues von Parteien'],['Rate artists & suppliers','Beoordeel artiesten & leveranciers','Évaluer artistes & prestataires','Künstler & Dienstleister bewerten'],
@@ -2164,15 +2166,15 @@ function plansView(){
       <p class="plan-desc">${pl.desc}</p>
       <ul class="plan-feats">${pl.feats.map(f => `<li>${f}</li>`).join('')}</ul>
       ${pl.soon ? '<button class="btn full" disabled>Coming soon</button>'
-        : `<button class="btn solid full lp-big" data-act="plan-pick" data-id="${r}:${pl.id || 'free'}">${paid(pl) ? 'Start free month' : 'Start for free'}</button>`}
+        : `<button class="btn solid full lp-big" data-act="plan-pick" data-id="${r}:${pl.id || 'free'}">${paid(pl) ? 'Choose this plan' : 'Start for free'}</button>`}
     </div>`;
   return `${siteNav()}<div class="login plans">
     <button class="linkbtn" data-act="to-login">← All roles</button>
     <h1 class="plans-h">${title}</h1>
-    <p class="tagline">${r === 'promoter' ? 'Your first month is free — it starts as soon as you set up your first event.' : 'Start for free — no credit card needed. More plans are on the way.'}</p>
+    <p class="tagline">${r === 'promoter' ? 'Everything you need to run your events.' : 'Start for free — no credit card needed. More plans are on the way.'}</p>
     <div class="plan-grid cols-${list.length}">${list.map(card).join('')}</div>
     ${r === 'promoter' ? `<p class="plans-all"><b>Every plan includes:</b> <span>unlimited artists & suppliers per event.</span></p>
-    <p class="plans-pay">💳 No payment now — you only pay after your free month.</p>` : ''}
+    ` : ''}
     <p class="plans-who">Demo: you’ll continue as <b data-notr>${esc(u.name)} · ${esc(u.org)}</b></p>
     <div class="foot">Prototype — no real account is created and nothing is charged.</div>
   </div>`;
@@ -2558,13 +2560,15 @@ function promoterEvent(e){
     ${(() => {
       // one section at a time: pick it in the tab row
       const t = S.evTab || 'parties', unreadAct = e.activity.filter(a => !a.read).length;
+      const evDocs = docsFor('promoter').filter(d => d.eid === e.id);   // this event's contracts and files
       const tb = (id, label, n, cls) => `<button class="evt ${t === id ? 'on' : ''}" data-act="ev-tab" data-id="${id}">${label}${n ? `<span class="evt-n ${cls || ''}">${n}</span>` : ''}</button>`;
       const tabsRow = `<div class="evtabs" role="tablist">
         ${tb('parties', 'Parties', e.parties.length)}${tb('open', 'Open items', items.length, items.some(x => x.p.status === 'problem') ? 'bad' : '')}
-        ${tb('post', 'Post an update', 0)}${tb('log', 'Change log', e.updates.length)}</div>`;
+        ${tb('post', 'Post an update', 0)}${tb('docs', 'Documents', evDocs.length)}${tb('log', 'Change log', e.updates.length)}</div>`;
       let body = '';
       if (t === 'parties') body = `<p class="muted ev-tip">Tap someone to see what’s agreed with them.</p>
         <div class="plist">${e.parties.map(p => partyRow(e,p)).join('')}</div>`;
+      if (t === 'docs') body = evDocs.length ? `<div class="card doc-block"><div class="doc-list">${evDocs.map(d => docRow(d, 'promoter')).join('')}</div></div>` : '<div class="empty">No documents for this event yet.</div>';
       if (t === 'open') body = `<div class="card">${openList(items, false)}</div>`;
       if (t === 'post') body = `<div class="card post">
           <h3>${I.send} Post an update</h3>
@@ -3367,7 +3371,7 @@ const ACTIONS = {
     S.plan = Object.assign({}, S.plan, { [r]:plan });
     if (r === 'promoter') S.trial = { start:null, plan };   // the free month starts with the first event; no payment yet
     ACTIONS.login(r);
-    toast(r === 'promoter' ? '🎉 Welcome! Your free month starts with your first event.' : '🎉 Welcome to we.TRUSS — you’re on the Free plan.', 'ok');
+    toast(r === 'promoter' ? '🎉 Welcome to we.TRUSS!' : '🎉 Welcome to we.TRUSS — you’re on the Free plan.', 'ok');
   },
   login(id){
     const was = S.role;
@@ -3507,7 +3511,6 @@ const ACTIONS = {
     const trialStarts = S.trial && !S.trial.start;
     if (trialStarts) S.trial.start = '2026-11-25';
     go('event', e.id);
-    if (trialStarts) setTimeout(() => toast('🎁 Your free month has started — enjoy we.TRUSS!', 'ok'), 600);
     toast(`🎉 ${esc(name)} created${booked.length ? ` · booking request sent to ${booked.length} ${booked.length > 1 ? 'people' : 'person'}` : ''}.`, 'ok');
   },
 

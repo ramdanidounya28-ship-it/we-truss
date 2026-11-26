@@ -809,6 +809,7 @@ svg,.ring,.truss-ic,.brand-big{filter:none !important}
 .shop-side,.shop-main{pointer-events:none;user-select:none}
 .shop-soon{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;gap:6px}
 .shop-soon .lp-eyebrow{justify-content:center}
+.shop-back{margin-top:22px;cursor:pointer}
 @media (min-width:761px){.shop-soon{left:230px}}
 .shop-soon h1{font:800 clamp(48px,9vw,120px)/1 var(--head);letter-spacing:-.03em;margin:0;color:var(--text)}
 .shop-soon p{color:var(--muted);font-size:clamp(16px,1.6vw,19px);max-width:520px;margin:12px 0 0}
@@ -2250,6 +2251,7 @@ function shopView(){
       <div class="lp-eyebrow">we.TRUSS shop</div>
       <h1>Coming soon</h1>
       <p>Clothing, bottles, stickers and bags for the people who make events happen.</p>
+      <button class="linkbtn shop-back" data-act="to-landing">← Back to the website</button>
     </div>
   </main>`;
 }

@@ -796,6 +796,7 @@ svg,.ring,.truss-ic,.brand-big{filter:none !important}
 .lp-closing .reveal{transition-duration:1.1s}
 @media (max-width:760px){.lp-closing{background-size:auto,auto,cover,auto;background-position:0 0,0 0,66% 30%,0 0}}
 .lp-closing .brand-img{margin:0 auto}
+.shop-page{min-height:calc(100vh - 65px)}
 .add-event-btn{margin-top:18px;padding:14px 28px;font-size:16px;border-radius:14px}
 .new-ev-cta{margin-top:16px}
 .new-ev-cta > span{font-size:22px}
@@ -2189,10 +2190,11 @@ function plansView(){
 }
 
 /* ---------------- views: public website (landing) ---------------- */
-const NAV = [ ['home','Home'], ['stages','For every stage'], ['how','How it works'], ['features','Features'], ['about','About'] ];
+const NAV = [ ['home','Home'], ['stages','For every stage'], ['how','How it works'], ['features','Features'], ['about','About'], ['shop','Shop'] ];
 
 // "Profiles" in the menu opens the page where you pick a profile (the same page you see after logging out)
 function navBtn([id, l]){
+  if (id === 'shop') return `<button class="${S.page === 'shop' ? 'on' : ''}" data-act="to-shop">${l}</button>`;
   return id === 'profiles'
     ? `<button class="${S.page === 'login' ? 'on' : ''}" data-act="to-login">${l}</button>`
     : `<button data-act="nav" data-id="${id}">${l}</button>`;
@@ -2209,6 +2211,11 @@ function siteNav(){
   <div class="lp-mobile">${NAV.map(navBtn).join('')}
     <button class="btn solid full" data-act="to-login" style="margin-top:8px">Log in to the demo</button></div>
   </nav>`;
+}
+
+// Shop: own page, still empty (content follows later)
+function shopView(){
+  return `${siteNav()}<main class="shop-page" id="sec-shop"></main>`;
 }
 
 function appPreview(){
@@ -3159,7 +3166,7 @@ function supplierJob(e,p){
 function render(){
   const app = $('#app');
   if (!S.role){
-    app.innerHTML = S.page === 'login' ? loginView() : S.page === 'plans' ? plansView() : landingView();
+    app.innerHTML = S.page === 'login' ? loginView() : S.page === 'plans' ? plansView() : S.page === 'shop' ? shopView() : landingView();
     initReveal();
     return;
   }
@@ -3390,6 +3397,7 @@ const ACTIONS = {
   switch(){ S.role = null; S.page = 'login'; S.screen = 'home'; render(); window.scrollTo({ top:0 }); },
   'to-login'(){ S.role = null; S.page = 'login'; render(); window.scrollTo({ top:0 }); },
   'to-landing'(){ S.role = null; S.page = 'landing'; render(); window.scrollTo({ top:0 }); },
+  'to-shop'(){ S.role = null; S.page = 'shop'; render(); window.scrollTo({ top:0 }); },
   menu(){ document.querySelector('.lp-nav').classList.toggle('open'); },
   nav(id){
     if (S.page !== 'landing'){ S.page = 'landing'; render(); }

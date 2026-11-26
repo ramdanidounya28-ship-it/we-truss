@@ -2095,7 +2095,7 @@ function plansView(){
   const title = { promoter:'Plans for promoters', artist:'Plans for artists', supplier:'Plans for suppliers' }[r];
   const paid = pl => !!pl.price;
   const card = pl => `<div class="plan ${pl.soon ? 'soon' : 'on'}">
-      <div class="plan-hd"><h3>${pl.name}</h3>${pl.soon ? '<span class="pill off">Coming soon</span>' : paid(pl) ? '<span class="pill ok">First month free</span>' : '<span class="pill ok">Available now</span>'}</div>
+      <div class="plan-hd"><h3>${pl.name}</h3>${pl.soon ? '<span class="pill off">Coming soon</span>' : paid(pl) ? '' : '<span class="pill ok">Available now</span>'}</div>
       <div class="plan-price">${pl.soon ? '<span class="tba">Price to be announced</span>' : paid(pl) ? `<b data-notr>${pl.price}</b><small>${pl.per}</small>` : '<b data-notr>€ 0</b><small>forever</small>'}</div>
       ${pl.tag ? `<span class="plan-tag">${pl.tag}</span>` : ''}
       <p class="plan-desc">${pl.desc}</p>

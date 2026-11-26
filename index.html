@@ -411,20 +411,14 @@ h2.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(
 .lp-quote .mono{font-size:15px;letter-spacing:.2em;color:var(--mag);font-weight:700}
 .lp-quote .q{font-size:clamp(28px,3.6vw,42px);font-weight:800;line-height:1.1;margin:12px 0 18px;letter-spacing:-.02em}
 .lp-quote p{margin:0;color:var(--muted)}
-.lp-contact{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.lp-form{background:var(--panel);border:1px solid var(--line2);border-radius:22px;padding:26px;display:flex;flex-direction:column;gap:8px}
-.lp-form label{font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.lp-form input{background:var(--inset);border:1px solid var(--line2);border-radius:12px;padding:13px 14px;color:var(--text);font:15px var(--sans);margin-bottom:8px;outline:none}
-.lp-form input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(167,139,250,.15)}
-.lp-form small{color:var(--dim);text-align:center;margin-top:4px}
 .lp-foot{border-top:1px solid var(--line);padding:36px 0 44px}
 .lp-foot-in{display:flex;flex-direction:column;gap:22px}
 .lp-foot .logo{font:800 18px/1 var(--sans);letter-spacing:.18em;color:var(--text)}
 .lp-foot-row{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
-.lp-contact{display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:15px}
-.lp-contact a{color:var(--text);text-decoration:none;transition:color .15s}
-.lp-contact a:hover{color:var(--accent)}
-@media (max-width:560px){ .lp-contact{align-items:flex-start} }
+.lp-foot-contact{display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:15px}
+.lp-foot-contact a{color:var(--text);text-decoration:none;transition:color .15s}
+.lp-foot-contact a:hover{color:var(--accent)}
+@media (max-width:560px){ .lp-foot-contact{align-items:flex-start} }
 .lp-social{display:flex;gap:10px}
 .lp-social a,.lp-social button{width:40px;height:40px;padding:0;border-radius:12px;border:1px solid var(--line2);background:var(--panel);color:var(--text);display:grid;place-items:center;cursor:pointer;transition:all .15s}
 .lp-social a:hover,.lp-social button:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
@@ -438,7 +432,7 @@ h2.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(
 
 @media (max-width:1060px){ .lp-links{display:none} .lp-burger{display:flex} .lp-nav-r{margin-left:auto} }
 @media (max-width:900px){
-  .lp-hero-in,.lp-about,.lp-contact{grid-template-columns:1fr}
+  .lp-hero-in,.lp-about{grid-template-columns:1fr}
   .lp-hero{padding-top:36px}
   .lp-grid3,.lp-steps{grid-template-columns:1fr}
   .lp-strip-in{grid-template-columns:1fr 1fr}
@@ -495,7 +489,7 @@ svg,.ring,.truss-ic,.brand-big{filter:none !important}
 .rolebar button.on.promoter,.rolebar button.on.artist,.rolebar button.on.supplier{background:var(--accent);color:var(--accent-ink)}
 
 /* cards */
-.card,.party,.ev-card,.gig-card,.role-card,.stat,.tile,.lp-card,.lp-feat,.lp-step,.lp-prof,.lp-form,.ev-hero,.gig-hero{box-shadow:var(--shadow) !important}
+.card,.party,.ev-card,.gig-card,.role-card,.stat,.tile,.lp-card,.lp-feat,.lp-step,.lp-prof,.ev-hero,.gig-hero{box-shadow:var(--shadow) !important}
 .role-card,.role-card.artist,.role-card.supplier,.lp-prof,.lp-prof.artist,.lp-prof.supplier{--c:var(--accent)}
 .role-card .rname,.lp-prof-hd h3{color:var(--text)}
 .role-card:hover,.ev-card:hover,.gig-card:hover,.lp-card:hover,.lp-feat:hover,.lp-step:hover,.lp-prof:hover{border-color:var(--accent);transform:translateY(-2px)}
@@ -1979,7 +1973,7 @@ function loginView(){
 }
 
 /* ---------------- views: public website (landing) ---------------- */
-const NAV = [ ['home','Home'], ['stages','For every stage'], ['how','How it works'], ['features','Features'], ['about','About'], ['contact','Contact'] ];
+const NAV = [ ['home','Home'], ['stages','For every stage'], ['how','How it works'], ['features','Features'], ['about','About'] ];
 
 // "Profiles" in the menu opens the page where you pick a profile (the same page you see after logging out)
 function navBtn([id, l]){
@@ -2130,24 +2124,10 @@ function landingView(){
       </div>
     </div></section>
 
-    <section class="lp-sec alt" id="sec-contact"><div class="wrap lp-contact">
-      <div>
-        <div class="lp-eyebrow">Contact</div>
-        <h2 class="lp-h2">Run your next<br>show on we.TRUSS.</h2>
-        <p class="lp-intro">We’re looking for Belgian promoters to test we.TRUSS on a real event.</p>
-      </div>
-      <div class="lp-form reveal">
-        <label for="wl-name">Your name</label><input id="wl-name" placeholder="e.g. Lotte">
-        <label for="wl-org">Collective / event</label><input id="wl-org" placeholder="e.g. Nachtwerk Collective">
-        <button class="btn solid full lp-big" data-act="waitlist">Join the pilot</button>
-        <small>Prototype — nothing is sent or stored.</small>
-      </div>
-    </div></section>
-
     <footer class="lp-foot"><div class="wrap lp-foot-in">
       <div><button class="logo" data-act="nav" data-id="home" title="we.TRUSS home"><img class="logo-img" src="${LOGO}" alt="we.TRUSS"></button><div class="muted" style="margin-top:6px">The backbone of every event.</div></div>
       <div class="lp-foot-row">${socialLinks()}
-        <div class="lp-contact" data-notr><a href="mailto:${CONTACT.email}">${CONTACT.email}</a><a href="tel:${CONTACT.phone.replace(/\s/g, '')}">${CONTACT.phone}</a></div>
+        <div class="lp-foot-contact" data-notr><a href="mailto:${CONTACT.email}">${CONTACT.email}</a><a href="tel:${CONTACT.phone.replace(/\s/g, '')}">${CONTACT.phone}</a></div>
       </div>
       <div class="muted" style="font-size:13px">© 2026 we.TRUSS · all data fictional</div>
     </div></footer>
@@ -3187,11 +3167,6 @@ const ACTIONS = {
     const el = document.getElementById('sec-' + id);
     if (!el || id === 'home') { window.scrollTo({ top:0, behavior:'smooth' }); return; }
     window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 64, behavior:'smooth' });
-  },
-  waitlist(){
-    const n = $('#wl-name').value.trim();
-    toast(`🙌 Thanks${n ? ' ' + esc(n) : ''}! (Prototype — nothing was sent.) Try the demo via “Log in”.`, 'ok');
-    $('#wl-name').value = ''; $('#wl-org').value = '';
   },
   reset(){ location.reload(); },
   home(){ go('home'); },

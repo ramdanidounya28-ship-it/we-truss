@@ -179,7 +179,9 @@ h2.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(
 .plan-feats li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:800}
 .plan.soon .plan-feats li::before{color:var(--dim)}
 .plans-who{margin-top:18px;color:var(--muted);font-size:14px}
-.plans-pay{margin:22px 0 0;font-weight:600}
+.plans-all{max-width:720px;margin:22px auto 0;color:var(--muted);font-size:14px}
+.plans-all b{color:var(--text)}
+.plans-pay{margin:14px 0 0;font-weight:600}
 .plan-tag{align-self:flex-start;margin-top:-6px;font:700 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink);background:var(--accent);padding:4px 8px;border-radius:6px}
 @media (max-width:760px){ .plan-grid.cols-2,.plan-grid.cols-3{grid-template-columns:1fr} .login.plans{padding-top:28px} }
 
@@ -1721,6 +1723,11 @@ const TR_ROWS = [
 ['then','daarna','puis','danach'],['Payment method added','Betaalmethode toegevoegd','Moyen de paiement ajouté','Zahlungsmethode hinzugefügt'],
 ['first payment on','eerste betaling op','premier paiement le','erste Zahlung am'],['💳 Add payment method','💳 Betaalmethode toevoegen','💳 Ajouter un moyen de paiement','💳 Zahlungsmethode hinzufügen'],
 ['✓ Payment method saved (demo) — nothing is charged until your free month ends.','✓ Betaalmethode opgeslagen (demo) — er wordt niets aangerekend tot je gratis maand afloopt.','✓ Moyen de paiement enregistré (démo) — rien n’est prélevé avant la fin de votre mois gratuit.','✓ Zahlungsmethode gespeichert (Demo) — bis zum Ende deines Gratismonats wird nichts abgebucht.'],
+['All features included','Alle functies inbegrepen','Toutes les fonctions incluses','Alle Funktionen inklusive'],['For one event','Voor één evenement','Pour un événement','Für eine Veranstaltung'],
+['Unlimited events, billed monthly','Onbeperkt evenementen, maandelijks gefactureerd','Événements illimités, facturés au mois','Unbegrenzt Veranstaltungen, monatlich abgerechnet'],
+['Unlimited events, billed yearly','Onbeperkt evenementen, jaarlijks gefactureerd','Événements illimités, facturés à l’année','Unbegrenzt Veranstaltungen, jährlich abgerechnet'],
+['Every plan includes:','Elk abonnement bevat:','Chaque formule comprend :','Jedes Abo enthält:'],
+['unlimited artists & suppliers per event.','onbeperkt artiesten & leveranciers per evenement.','artistes & prestataires illimités par événement.','unbegrenzt Künstler & Dienstleister pro Veranstaltung.'],
 ['Documents','Documenten','Documents','Dokumente'],['Contracts','Contracten','Contrats','Verträge'],['Other files','Andere bestanden','Autres fichiers','Andere Dateien'],
 ['Not signed yet','Nog niet ondertekend','Pas encore signé','Noch nicht unterschrieben'],['To sign','Te ondertekenen','À signer','Zu unterschreiben'],
 ['⬆ Upload document','⬆ Document uploaden','⬆ Importer un document','⬆ Dokument hochladen'],
@@ -2071,11 +2078,11 @@ const PLANS = {
   // promoters: 3 paid plans — the first month is free on every plan (it starts with the first event), no payment at sign-up
   promoter:[
     { id:'pass', name:'Event Pass', price:'€ 19', per:'per event', desc:'Occasional promoters (a few events per year)',
-      feats:['All features for one event','Unlimited parties','“Seen by” receipts','Readiness score'] },
+      feats:['All features included','For one event'] },
     { id:'monthly', name:'Pro monthly', price:'€ 39', per:'per month', tag:'Most popular', desc:'Regular promoters (2+ events per month)',
-      feats:['Unlimited events','Event templates','3 team members','Priority support'] },
-    { id:'yearly', name:'Pro yearly', price:'€ 390', per:'per year', tag:'2 months free', desc:'Promoters with a full season',
-      feats:['Everything in Pro monthly','Unlimited events','Event templates','3 team members','Priority support'] }
+      feats:['All features included','Unlimited events, billed monthly'] },
+    { id:'yearly', name:'Pro yearly', price:'€ 390', per:'per year', desc:'Promoters with a full season',
+      feats:['All features included','Unlimited events, billed yearly'] }
   ],
   artist:[
     { name:'Free', desc:'Your gigs, riders and contracts in one place.',
@@ -2108,7 +2115,8 @@ function plansView(){
     <h1 class="plans-h">${title}</h1>
     <p class="tagline">${r === 'promoter' ? 'Your first month is free — it starts as soon as you set up your first event.' : 'Start for free — no credit card needed. More plans are on the way.'}</p>
     <div class="plan-grid cols-${list.length}">${list.map(card).join('')}</div>
-    ${r === 'promoter' ? '<p class="plans-pay">💳 No payment now — you only pay after your free month.</p>' : ''}
+    ${r === 'promoter' ? `<p class="plans-all"><b>Every plan includes:</b> <span>unlimited artists & suppliers per event.</span></p>
+    <p class="plans-pay">💳 No payment now — you only pay after your free month.</p>` : ''}
     <p class="plans-who">Demo: you’ll continue as <b data-notr>${esc(u.name)} · ${esc(u.org)}</b></p>
     <div class="foot">Prototype — no real account is created and nothing is charged.</div>
   </div>`;

@@ -784,6 +784,19 @@ svg,.ring,.truss-ic,.brand-big{filter:none !important}
 @media (max-width:900px){ .dash-blocks{grid-template-columns:1fr} }
 @media (max-width:560px){ .ev-row{grid-auto-columns:86%} }
 
+/* ---------- New event block, doc blocks ---------- */
+.new-ev-cta{margin-top:16px}
+.new-ev-cta > span{font-size:22px}
+.new-ev-cta .btn{margin-left:auto;padding:12px 20px;font-size:15px}
+.dash-blocks.one{grid-template-columns:minmax(0,560px)}
+.doc-blocks{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px;align-items:start;margin-top:8px}
+.doc-block{padding:14px}
+.doc-block-hd{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.doc-block-hd b{flex:1;display:flex;flex-direction:column;font-size:15px;line-height:1.25}
+.doc-block-hd small{color:var(--muted);font-weight:500;font-size:12.5px}
+.doc-block .doc-row{flex-wrap:wrap}
+@media (max-width:560px){ .doc-blocks{grid-template-columns:1fr} .new-ev-cta{flex-wrap:wrap} .new-ev-cta .btn{margin-left:0;width:100%} }
+
 /* ---------- Availability ---------- */
 .pill.last{color:var(--accent);border-color:rgba(242,169,126,.45);background:var(--accent-soft) !important}
 .net-status{display:flex;flex-wrap:wrap;gap:6px}
@@ -1506,6 +1519,11 @@ const TR_ROWS = [
 ['No one in your network is free on these dates.','Niemand in je netwerk is vrij op deze data.','Personne de votre réseau n’est libre à ces dates.','Niemand in deinem Netzwerk ist an diesen Tagen frei.'],
 ['Only people who are free on your dates are shown. Tick who you want to book — they get a booking request and appear as','Alleen wie vrij is op je data wordt getoond. Vink aan wie je wilt boeken — ze krijgen een aanvraag en verschijnen als','Seules les personnes libres à vos dates sont affichées. Cochez qui réserver — ils reçoivent une demande et apparaissent comme','Nur wer an deinen Tagen frei ist, wird angezeigt. Hake an, wen du buchen willst — sie bekommen eine Anfrage und erscheinen als'],
 ['The end date can’t be before the start date.','De einddatum kan niet voor de startdatum liggen.','La date de fin ne peut pas être avant la date de début.','Das Enddatum darf nicht vor dem Startdatum liegen.'],
+['Plan a new event','Plan een nieuw evenement','Planifiez un nouvel événement','Plane eine neue Veranstaltung'],
+['Pick the dates and the venue — you’ll see right away which artists and suppliers are free.','Kies de data en de zaal — je ziet meteen welke artiesten en leveranciers vrij zijn.','Choisissez les dates et la salle — vous verrez tout de suite quels artistes et prestataires sont libres.','Wähle Daten und Location — du siehst sofort, welche Künstler und Dienstleister frei sind.'],
+['🔒 Private files — not linked to an event','🔒 Privébestanden — niet gekoppeld aan een evenement','🔒 Fichiers privés — non liés à un événement','🔒 Private Dateien — keiner Veranstaltung zugeordnet'],
+['Choose this plan','Kies dit abonnement','Choisir cette formule','Dieses Abo wählen'],['🎉 Welcome to we.TRUSS!','🎉 Welkom bij we.TRUSS!','🎉 Bienvenue sur we.TRUSS !','🎉 Willkommen bei we.TRUSS!'],
+['No documents for this event yet.','Nog geen documenten voor dit evenement.','Pas encore de documents pour cet événement.','Noch keine Dokumente für diese Veranstaltung.'],
 // the slogan "The backbone of every event" is the brand line and stays in English in every language
 ['Viewing as','Je bekijkt als','Vous êtes','Ansicht als'],['Switch to','Wissel naar','Passer à','Wechseln zu'],['Log out','Uitloggen','Se déconnecter','Abmelden'],
 ['Latest from parties','Laatste van partijen','Nouvelles des parties','Neues von Parteien'],['Rate artists & suppliers','Beoordeel artiesten & leveranciers','Évaluer artistes & prestataires','Künstler & Dienstleister bewerten'],
@@ -2148,15 +2166,15 @@ function plansView(){
       <p class="plan-desc">${pl.desc}</p>
       <ul class="plan-feats">${pl.feats.map(f => `<li>${f}</li>`).join('')}</ul>
       ${pl.soon ? '<button class="btn full" disabled>Coming soon</button>'
-        : `<button class="btn solid full lp-big" data-act="plan-pick" data-id="${r}:${pl.id || 'free'}">${paid(pl) ? 'Start free month' : 'Start for free'}</button>`}
+        : `<button class="btn solid full lp-big" data-act="plan-pick" data-id="${r}:${pl.id || 'free'}">${paid(pl) ? 'Choose this plan' : 'Start for free'}</button>`}
     </div>`;
   return `${siteNav()}<div class="login plans">
     <button class="linkbtn" data-act="to-login">← All roles</button>
     <h1 class="plans-h">${title}</h1>
-    <p class="tagline">${r === 'promoter' ? 'Your first month is free — it starts as soon as you set up your first event.' : 'Start for free — no credit card needed. More plans are on the way.'}</p>
+    <p class="tagline">${r === 'promoter' ? 'Everything you need to run your events.' : 'Start for free — no credit card needed. More plans are on the way.'}</p>
     <div class="plan-grid cols-${list.length}">${list.map(card).join('')}</div>
     ${r === 'promoter' ? `<p class="plans-all"><b>Every plan includes:</b> <span>unlimited artists & suppliers per event.</span></p>
-    <p class="plans-pay">💳 No payment now — you only pay after your free month.</p>` : ''}
+    ` : ''}
     <p class="plans-who">Demo: you’ll continue as <b data-notr>${esc(u.name)} · ${esc(u.org)}</b></p>
     <div class="foot">Prototype — no real account is created and nothing is charged.</div>
   </div>`;
@@ -2379,8 +2397,9 @@ function trialBanner(){
     ${soon ? '<button class="btn sm solid" data-act="add-payment">💳 Add payment method</button>' : '<button class="btn sm" data-act="add-payment">💳 Add payment method</button>'}</div>`;
 }
 function promoterHome(){
-  // calm, one-screen dashboard: events in a row (+ Add event), then two blocks side by side
-  const all = openItems(EVENTS), toRateN = toRate();
+  // calm, one-screen dashboard: one clear "New event" block, events in a row, then ratings
+  // (problems live inside each event, so there's no separate "needs attention" list here)
+  const toRateN = toRate();
   const evCards = EVENTS.map(e => {
     const d = dparts(e.date), r = readiness(e), pr = countStatus(e,'problem'), wt = countStatus(e,'waiting');
     return `<button class="ev-card" data-act="open-event" data-id="${e.id}">
@@ -2409,17 +2428,15 @@ function promoterHome(){
   const SHOW = 4;
   return `<main class="wrap">
     <section class="hello"><h1>Hi ${USERS.promoter.first}, here’s your season.</h1>
-      <p>Nachtwerk Collective · ${EVENTS.length} upcoming event${EVENTS.length === 1 ? '' : 's'}</p>${trialBanner()}</section>
+      <p>Nachtwerk Collective · ${EVENTS.length} upcoming event${EVENTS.length === 1 ? '' : 's'}</p>
+      <div class="trial new-ev-cta"><span>🎉</span><div><b>Plan a new event</b>
+        <small>Pick the dates and the venue — you’ll see right away which artists and suppliers are free.</small></div>
+        <button class="btn solid" data-act="new-event">+ New event</button></div></section>
 
-    <div class="sec-row"><h2 class="sec">Upcoming events</h2><button class="btn solid sm" data-act="new-event">+ Add event</button></div>
+    <h2 class="sec">Upcoming events</h2>
     <div class="ev-row">${evCards}</div>
 
-    <div class="dash-blocks">
-      <div class="card">
-        <h3>Needs attention <span class="count pill ${all.length?'bad':'ok'}">${all.length} open</span></h3>
-        ${openList(all.slice(0, SHOW), true)}
-        ${all.length > SHOW ? `<p class="muted more-note">+ ${all.length - SHOW} more inside your events</p>` : ''}
-      </div>
+    <div class="dash-blocks one">
       <div class="card">
         <h3>Rate artists & suppliers ${toRateN ? `<span class="count pill wait">${toRateN} to rate</span>` : ''}</h3>
         ${rateRows}
@@ -2543,13 +2560,15 @@ function promoterEvent(e){
     ${(() => {
       // one section at a time: pick it in the tab row
       const t = S.evTab || 'parties', unreadAct = e.activity.filter(a => !a.read).length;
+      const evDocs = docsFor('promoter').filter(d => d.eid === e.id);   // this event's contracts and files
       const tb = (id, label, n, cls) => `<button class="evt ${t === id ? 'on' : ''}" data-act="ev-tab" data-id="${id}">${label}${n ? `<span class="evt-n ${cls || ''}">${n}</span>` : ''}</button>`;
       const tabsRow = `<div class="evtabs" role="tablist">
         ${tb('parties', 'Parties', e.parties.length)}${tb('open', 'Open items', items.length, items.some(x => x.p.status === 'problem') ? 'bad' : '')}
-        ${tb('post', 'Post an update', 0)}${tb('log', 'Change log', e.updates.length)}</div>`;
+        ${tb('post', 'Post an update', 0)}${tb('docs', 'Documents', evDocs.length)}${tb('log', 'Change log', e.updates.length)}</div>`;
       let body = '';
       if (t === 'parties') body = `<p class="muted ev-tip">Tap someone to see what’s agreed with them.</p>
         <div class="plist">${e.parties.map(p => partyRow(e,p)).join('')}</div>`;
+      if (t === 'docs') body = evDocs.length ? `<div class="card doc-block"><div class="doc-list">${evDocs.map(d => docRow(d, 'promoter')).join('')}</div></div>` : '<div class="empty">No documents for this event yet.</div>';
       if (t === 'open') body = `<div class="card">${openList(items, false)}</div>`;
       if (t === 'post') body = `<div class="card post">
           <h3>${I.send} Post an update</h3>
@@ -2671,6 +2690,7 @@ function netMatches(d){
   const f = S.netF || 'all', q = (S.netQ || '').toLowerCase().trim();
   if (f === 'artist' && d.kind !== 'artist') return false;
   if (f === 'supplier' && d.kind !== 'supplier') return false;
+  if (!d.onPlatform) return false;   // the network only lists people who are on we.TRUSS
   if (f === 'mine' && !d.inNetwork) return false;
   if (f === 'avail' && !(S.netDate && isAvailable(availOn(d.id, S.netDate)))) return false;
   return !q || [d.name, d.sub, d.city, ...d.tags].join(' ').toLowerCase().includes(q);
@@ -2707,7 +2727,7 @@ function networkView(){
       <div class="fchips">${chip('all','All')}${chip('artist','Artists')}${chip('supplier','Suppliers')}${chip('mine','In my network')}</div>
       <button class="btn solid" data-act="new-invite">✉ Invite someone new</button>
     </div>
-    <div class="net-grid">${DIRECTORY.map(netCard).join('')}</div>
+    <div class="net-grid">${DIRECTORY.filter(d => d.onPlatform).map(netCard).join('')}</div>
     <div class="empty net-empty ${DIRECTORY.some(netMatches)?'hide':''}">No one matches your search. Invite them to we.TRUSS with the button above.</div>
     <div class="spacer"></div>
   </main>`;
@@ -2852,14 +2872,16 @@ function docsView(){
   const chip = (id, label, n) => `<button class="fchip ${f===id?'on':''}" data-act="doc-filter" data-id="${id}">${label}${n ? `<span class="mono"> ${n}</span>` : ''}</button>`;
   const order = (a, b) => a.kind === b.kind ? b.date.localeCompare(a.date) : a.kind === 'contract' ? -1 : 1;
   const list = (items) => `<div class="doc-list">${items.sort(order).map(d => docRow(d, role)).join('')}</div>`;
-  // one group per event ("name · date"), then the private files that aren't linked to an event
+  // one block per event, side by side; private files that aren't linked to an event get their own block
+  const block = (title, items) => `<div class="card doc-block">
+      <div class="doc-block-hd"><b>${title}</b><span class="evt-n">${items.length}</span></div>${list(items)}</div>`;
   const groups = EVENTS.slice().sort((a, b) => a.date.localeCompare(b.date)).map(e => {
     const items = all.filter(d => match(d) && d.eid === e.id);
-    return items.length ? `<h2 class="sec" data-notr>${esc(e.name)} · ${fmtShort(e.date)}</h2>${list(items)}` : '';
+    return items.length ? block(`<span data-notr>${esc(e.name)}</span><small data-notr>${fmtWhen(e)}</small>`, items) : '';
   }).join('');
   const loose = all.filter(d => match(d) && !d.eid);
-  const general = loose.length ? `<h2 class="sec">🔒 Private files — not linked to an event</h2>${list(loose)}` : '';
-  return `<main class="wrap" style="max-width:860px">
+  const general = loose.length ? block('<span>🔒 Private files — not linked to an event</span>', loose) : '';
+  return `<main class="wrap">
     <section class="hello"><h1>Documents</h1><p>${role === 'promoter'
       ? 'Contracts and files for all your events. Artists and suppliers only see what’s shared with them — private files only you.'
       : 'Your contracts and files. Shared files are visible to you and Lotte, private ones only to you.'}</p></section>
@@ -2868,7 +2890,7 @@ function docsView(){
       <div class="doc-r">${role === 'promoter' ? '<button class="btn" data-act="new-contract">＋ New contracts</button>' : ''}
         <button class="btn solid" data-act="doc-upload">⬆ Upload document</button></div>
     </div>
-    ${groups + general || '<div class="empty">No documents here yet.</div>'}
+    ${groups + general ? `<div class="doc-blocks">${groups + general}</div>` : '<div class="empty">No documents here yet.</div>'}
     <p class="muted" style="font-size:13px;margin-top:22px">Prototype — uploaded files stay in your browser and are gone after a reload.</p>
     <div class="spacer"></div>
   </main>`;
@@ -3349,7 +3371,7 @@ const ACTIONS = {
     S.plan = Object.assign({}, S.plan, { [r]:plan });
     if (r === 'promoter') S.trial = { start:null, plan };   // the free month starts with the first event; no payment yet
     ACTIONS.login(r);
-    toast(r === 'promoter' ? '🎉 Welcome! Your free month starts with your first event.' : '🎉 Welcome to we.TRUSS — you’re on the Free plan.', 'ok');
+    toast(r === 'promoter' ? '🎉 Welcome to we.TRUSS!' : '🎉 Welcome to we.TRUSS — you’re on the Free plan.', 'ok');
   },
   login(id){
     const was = S.role;
@@ -3489,7 +3511,6 @@ const ACTIONS = {
     const trialStarts = S.trial && !S.trial.start;
     if (trialStarts) S.trial.start = '2026-11-25';
     go('event', e.id);
-    if (trialStarts) setTimeout(() => toast('🎁 Your free month has started — enjoy we.TRUSS!', 'ok'), 600);
     toast(`🎉 ${esc(name)} created${booked.length ? ` · booking request sent to ${booked.length} ${booked.length > 1 ? 'people' : 'person'}` : ''}.`, 'ok');
   },
 

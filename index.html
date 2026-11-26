@@ -418,10 +418,13 @@ h2.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(
 .lp-form input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(167,139,250,.15)}
 .lp-form small{color:var(--dim);text-align:center;margin-top:4px}
 .lp-foot{border-top:1px solid var(--line);padding:36px 0 44px}
-.lp-foot-in{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+.lp-foot-in{display:flex;flex-direction:column;gap:22px}
 .lp-foot .logo{font:800 18px/1 var(--sans);letter-spacing:.18em;color:var(--text)}
-.lp-foot-links{display:flex;flex-wrap:wrap;gap:2px}
-.lp-foot-r{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.lp-foot-row{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:center}
+.lp-contact{display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:15px}
+.lp-contact a{color:var(--text);text-decoration:none;transition:color .15s}
+.lp-contact a:hover{color:var(--accent)}
+@media (max-width:560px){ .lp-contact{align-items:flex-start} }
 .lp-social{display:flex;gap:10px}
 .lp-social a,.lp-social button{width:40px;height:40px;padding:0;border-radius:12px;border:1px solid var(--line2);background:var(--panel);color:var(--text);display:grid;place-items:center;cursor:pointer;transition:all .15s}
 .lp-social a:hover,.lp-social button:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
@@ -998,6 +1001,7 @@ const DEMO_TODAY = new Date('2026-11-25T12:00:00'); // fixed "today" so the demo
 /* SOCIAL MEDIA (footer of the landing page)
    Paste the link to your profile between the quotes, e.g. url:'https://www.instagram.com/we.truss'
    While a link is empty, the icon is still shown and a click says the account is coming soon. */
+const CONTACT = { email:'info@wetruss.com', phone:'+32 2 808 12 34' };   // footer contact (phone number is fictional)
 const SOCIAL = [
   { id:'instagram', label:'Instagram', url:'' },
   { id:'tiktok',    label:'TikTok',    url:'' },
@@ -1465,7 +1469,7 @@ const TR_ROWS = [
 ['We’re looking for Belgian promoters to test we.TRUSS on a real event.','We zoeken Belgische organisatoren om we.TRUSS te testen op een echt evenement.','Nous cherchons des organisateurs belges pour tester we.TRUSS sur un vrai événement.','Wir suchen belgische Veranstalter, die we.TRUSS bei einer echten Veranstaltung testen.'],
 ['Your name','Je naam','Votre nom','Dein Name'],['Collective / event','Collectief / evenement','Collectif / événement','Kollektiv / Veranstaltung'],['Join the pilot','Doe mee aan de pilot','Rejoindre le pilote','Am Pilot teilnehmen'],
 ['Prototype — nothing is sent or stored.','Prototype — er wordt niets verzonden of opgeslagen.','Prototype — rien n’est envoyé ni enregistré.','Prototyp — nichts wird gesendet oder gespeichert.'],
-['© 2026 we.TRUSS · student prototype · all data fictional','© 2026 we.TRUSS · studentenprototype · alle gegevens fictief','© 2026 we.TRUSS · prototype étudiant · données fictives','© 2026 we.TRUSS · Studentenprototyp · alle Daten fiktiv'],
+['© 2026 we.TRUSS · all data fictional','© 2026 we.TRUSS · alle gegevens fictief','© 2026 we.TRUSS · données fictives','© 2026 we.TRUSS · alle Daten fiktiv'],
 ['Preview of the we.TRUSS app','Voorbeeld van de we.TRUSS-app','Aperçu de l’app we.TRUSS','Vorschau der we.TRUSS-App'],['Readiness: % of parties confirmed','Gereedheid: % bevestigde partijen','Préparation : % de parties confirmées','Bereitschaft: % bestätigte Parteien'],
 // login
 ['One shared space per event. Promoter, artists and suppliers each see exactly what concerns them — no more scattered WhatsApps, mails and DMs.','Eén gedeelde ruimte per evenement. Organisator, artiesten en leveranciers zien elk precies wat hen aangaat — geen verspreide WhatsApps, mails en DM’s meer.','Un espace partagé par événement. Organisateur, artistes et prestataires voient chacun ce qui les concerne — fini les WhatsApp, mails et DM éparpillés.','Ein gemeinsamer Raum pro Veranstaltung. Veranstalter, Künstler und Dienstleister sehen genau, was sie betrifft — Schluss mit verstreuten WhatsApps, Mails und DMs.'],
@@ -2142,8 +2146,10 @@ function landingView(){
 
     <footer class="lp-foot"><div class="wrap lp-foot-in">
       <div><button class="logo" data-act="nav" data-id="home" title="we.TRUSS home"><img class="logo-img" src="${LOGO}" alt="we.TRUSS"></button><div class="muted" style="margin-top:6px">The backbone of every event.</div></div>
-      <div class="lp-foot-links">${NAV.map(navBtn).join('')}<button data-act="to-login">Log in</button></div>
-      <div class="lp-foot-r">${socialLinks()}<div class="muted" style="font-size:13px">© 2026 we.TRUSS · student prototype · all data fictional</div></div>
+      <div class="lp-foot-row">${socialLinks()}
+        <div class="lp-contact" data-notr><a href="mailto:${CONTACT.email}">${CONTACT.email}</a><a href="tel:${CONTACT.phone.replace(/\s/g, '')}">${CONTACT.phone}</a></div>
+      </div>
+      <div class="muted" style="font-size:13px">© 2026 we.TRUSS · all data fictional</div>
     </div></footer>
   </main>`;
 }

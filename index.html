@@ -151,6 +151,35 @@ h2.sec::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(
 .role-card .go{margin-top:auto;font:700 13px var(--sans);color:var(--c);letter-spacing:.1em}
 .role-card .badge{position:absolute;top:-9px;right:-9px;height:24px;min-width:24px;font-size:12px}
 .login .foot{margin-top:28px;color:var(--dim);font-size:13px}
+/* plan overview (after picking a role) */
+.login.plans{justify-content:flex-start;padding-top:48px}
+.plans-h{font-size:clamp(28px,5vw,44px);font-weight:800;margin:10px 0 0}
+.plan-grid{display:grid;gap:16px;width:100%;margin-top:24px;text-align:left}
+.plan-grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr));max-width:720px}
+.plan-grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr));max-width:980px}
+.plan{background:var(--panel);border:1px solid var(--line2);border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.plan.on{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 20px 50px rgba(0,0,0,.35)}
+.plan.soon{opacity:.6}
+.plan-hd{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.plan-hd h3{font-size:22px;font-weight:800;margin:0}
+.plan-price{display:flex;align-items:baseline;gap:8px;min-height:42px}
+.plan-price b{font-size:34px;font-weight:800}
+.plan-price small{color:var(--muted)}
+.plan-price .tba{font-size:16px;font-weight:600;color:var(--muted)}
+.plan-desc{margin:0;color:var(--muted);font-size:14px}
+.plan-note{margin:0;padding:10px 12px;border-radius:12px;background:var(--accent-soft);color:var(--text);font-size:13px}
+.trial{display:flex;align-items:center;gap:14px;margin:16px 0 4px;padding:14px 16px;border:1px dashed var(--accent);border-radius:16px;background:var(--accent-soft)}
+.trial > span{font-size:24px}
+.trial > div{flex:1;min-width:0}
+.trial b{display:block}
+.trial small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.trial.on{border-style:solid}
+.plan-feats{list-style:none;margin:4px 0 8px;padding:0;display:flex;flex-direction:column;gap:8px;font-size:14px;flex:1}
+.plan-feats li{position:relative;padding-left:24px}
+.plan-feats li::before{content:"✓";position:absolute;left:0;color:var(--accent);font-weight:800}
+.plan.soon .plan-feats li::before{color:var(--dim)}
+.plans-who{margin-top:18px;color:var(--muted);font-size:14px}
+@media (max-width:760px){ .plan-grid.cols-2,.plan-grid.cols-3{grid-template-columns:1fr} .login.plans{padding-top:28px} }
 
 /* ---------- Dashboard ---------- */
 .hello{padding:26px 0 4px}
@@ -1468,7 +1497,7 @@ const TR_ROWS = [
 ['Preview of the we.TRUSS app','Voorbeeld van de we.TRUSS-app','Aperçu de l’app we.TRUSS','Vorschau der we.TRUSS-App'],['Readiness: % of parties confirmed','Gereedheid: % bevestigde partijen','Préparation : % de parties confirmées','Bereitschaft: % bestätigte Parteien'],
 // login
 ['One shared space per event. Promoter, artists and suppliers each see exactly what concerns them — no more scattered WhatsApps, mails and DMs.','Eén gedeelde ruimte per evenement. Organisator, artiesten en leveranciers zien elk precies wat hen aangaat — geen verspreide WhatsApps, mails en DM’s meer.','Un espace partagé par événement. Organisateur, artistes et prestataires voient chacun ce qui les concerne — fini les WhatsApp, mails et DM éparpillés.','Ein gemeinsamer Raum pro Veranstaltung. Veranstalter, Künstler und Dienstleister sehen genau, was sie betrifft — Schluss mit verstreuten WhatsApps, Mails und DMs.'],
-['Choose a role to log in (demo — no password needed)','Kies een rol om in te loggen (demo — geen wachtwoord nodig)','Choisissez un rôle pour vous connecter (démo — sans mot de passe)','Wähle eine Rolle zum Anmelden (Demo — kein Passwort nötig)'],
+['Choose your role — then pick your plan (demo, no password needed)','Kies je rol — daarna je abonnement (demo, geen wachtwoord nodig)','Choisissez votre rôle, puis votre formule (démo, sans mot de passe)','Wähle deine Rolle — danach dein Abo (Demo, kein Passwort nötig)'],
 ['Plan your events, see who confirmed, and push changes to exactly the right people.','Plan je evenementen, zie wie bevestigd heeft en stuur wijzigingen naar precies de juiste mensen.','Planifiez vos événements, voyez qui a confirmé et envoyez les changements aux bonnes personnes.','Plane deine Veranstaltungen, sieh, wer bestätigt hat, und schicke Änderungen genau an die Richtigen.'],
 ['ENTER AS PROMOTER →','GA VERDER ALS ORGANISATOR →','ENTRER COMME ORGANISATEUR →','ALS VERANSTALTER EINTRETEN →'],
 ['For bands, singers, DJs and performers: your gigs, stage times, rider status and the latest changes — on your phone.','Voor bands, zangers, dj’s en performers: je optredens, speeltijden, riderstatus en de laatste wijzigingen — op je gsm.','Pour groupes, chanteurs, DJ et performers : vos dates, horaires, statut du rider et derniers changements — sur votre téléphone.','Für Bands, Sänger, DJs und Performer: deine Gigs, Auftrittszeiten, Rider-Status und die neuesten Änderungen — auf dem Handy.'],
@@ -1629,6 +1658,52 @@ const TR_ROWS = [
 ['shared a document.','heeft een document gedeeld.','a partagé un document.','hat ein Dokument geteilt.'],
 ['🔒 Saved privately — only you can see it.','🔒 Privé opgeslagen — alleen jij kunt het zien.','🔒 Enregistré en privé — vous seul pouvez le voir.','🔒 Privat gespeichert — nur du kannst es sehen.'],
 ['✓ Shared with Lotte — she gets a notification.','✓ Gedeeld met Lotte — zij krijgt een melding.','✓ Partagé avec Lotte — elle reçoit une notification.','✓ Mit Lotte geteilt — sie bekommt eine Benachrichtigung.'],
+['← All roles','← Alle rollen','← Tous les rôles','← Alle Rollen'],
+['Plans for promoters','Abonnementen voor organisatoren','Formules pour organisateurs','Abos für Veranstalter'],['Plans for artists','Abonnementen voor artiesten','Formules pour artistes','Abos für Künstler'],
+['Plans for suppliers','Abonnementen voor leveranciers','Formules pour prestataires','Abos für Dienstleister'],
+['Start for free — no credit card needed. More plans are on the way.','Start gratis — geen creditcard nodig. Meer abonnementen volgen.','Commencez gratuitement — sans carte bancaire. D’autres formules arrivent.','Starte kostenlos — keine Kreditkarte nötig. Weitere Abos folgen.'],
+['Available now','Nu beschikbaar','Disponible','Jetzt verfügbar'],['Coming soon','Binnenkort','Bientôt','Demnächst'],['forever','voor altijd','pour toujours','für immer'],
+['Price to be announced','Prijs volgt','Prix à venir','Preis folgt'],['Start for free','Gratis starten','Commencer gratuitement','Kostenlos starten'],
+['Demo: you’ll continue as','Demo: je gaat verder als','Démo : vous continuez en tant que','Demo: du machst weiter als'],
+['Prototype — no real account is created and nothing is charged.','Prototype — er wordt geen echt account aangemaakt en niets aangerekend.','Prototype — aucun vrai compte n’est créé et rien n’est facturé.','Prototyp — es wird kein echtes Konto erstellt und nichts berechnet.'],
+['🎉 Welcome to we.TRUSS — you’re on the Free plan.','🎉 Welkom bij we.TRUSS — je zit op het gratis abonnement.','🎉 Bienvenue sur we.TRUSS — vous êtes sur la formule Free.','🎉 Willkommen bei we.TRUSS — du nutzt das Free-Abo.'],
+['Everything you need to run your first events.','Alles wat je nodig hebt voor je eerste evenementen.','Tout ce qu’il faut pour vos premiers événements.','Alles, was du für deine ersten Veranstaltungen brauchst.'],
+['Up to 3 active events','Tot 3 actieve evenementen','Jusqu’à 3 événements actifs','Bis zu 3 aktive Veranstaltungen'],
+['Unlimited artists & suppliers per event','Onbeperkt artiesten & leveranciers per evenement','Artistes & prestataires illimités par événement','Unbegrenzt Künstler & Dienstleister pro Veranstaltung'],
+['Targeted updates with seen receipts','Gerichte updates met leesbevestiging','Mises à jour ciblées avec accusés de lecture','Gezielte Updates mit Lesebestätigung'],
+['Contracts & documents','Contracten & documenten','Contrats & documents','Verträge & Dokumente'],['Network & messages','Netwerk & berichten','Réseau & messages','Netzwerk & Nachrichten'],
+['For promoters with a full calendar.','Voor organisatoren met een volle agenda.','Pour les organisateurs à l’agenda bien rempli.','Für Veranstalter mit vollem Kalender.'],
+['Unlimited events','Onbeperkt evenementen','Événements illimités','Unbegrenzt Veranstaltungen'],['Contract templates with your logo','Contractsjablonen met je logo','Modèles de contrat avec votre logo','Vertragsvorlagen mit deinem Logo'],
+['Export to PDF & Excel','Export naar pdf & Excel','Export PDF & Excel','Export als PDF & Excel'],['Priority support','Voorrang bij support','Support prioritaire','Bevorzugter Support'],
+['For teams that organise together.','Voor teams die samen organiseren.','Pour les équipes qui organisent ensemble.','Für Teams, die gemeinsam organisieren.'],
+['Several promoters in one account','Meerdere organisatoren in één account','Plusieurs organisateurs dans un compte','Mehrere Veranstalter in einem Konto'],
+['Shared network & calendar','Gedeeld netwerk & agenda','Réseau & agenda partagés','Gemeinsames Netzwerk & Kalender'],
+['Roles & permissions for your team','Rollen & rechten voor je team','Rôles & droits pour votre équipe','Rollen & Rechte für dein Team'],
+['Your gigs, riders and contracts in one place.','Je optredens, riders en contracten op één plek.','Vos concerts, riders et contrats au même endroit.','Deine Gigs, Rider und Verträge an einem Ort.'],
+['All your gigs in one place','Al je optredens op één plek','Tous vos concerts au même endroit','Alle deine Gigs an einem Ort'],
+['Set times, riders & updates','Speeltijden, riders & updates','Horaires, riders & mises à jour','Set-Zeiten, Rider & Updates'],
+['Sign contracts & share files','Contracten ondertekenen & bestanden delen','Signer des contrats & partager des fichiers','Verträge unterschreiben & Dateien teilen'],
+['Availability calendar','Beschikbaarheidskalender','Calendrier de disponibilités','Verfügbarkeitskalender'],
+['Ratings from promoters','Beoordelingen van organisatoren','Avis des organisateurs','Bewertungen von Veranstaltern'],
+['Get booked more often.','Word vaker geboekt.','Soyez booké plus souvent.','Werde öfter gebucht.'],
+['Public profile page','Openbare profielpagina','Page de profil publique','Öffentliche Profilseite'],['Get found by promoters','Gevonden worden door organisatoren','Soyez trouvé par les organisateurs','Von Veranstaltern gefunden werden'],
+['Booking requests','Boekingsaanvragen','Demandes de booking','Buchungsanfragen'],['Invoice templates','Factuursjablonen','Modèles de facture','Rechnungsvorlagen'],
+['Your jobs, equipment lists and contracts in one place.','Je opdrachten, materiaallijsten en contracten op één plek.','Vos missions, listes de matériel et contrats au même endroit.','Deine Jobs, Equipment-Listen und Verträge an einem Ort.'],
+['All your jobs in one place','Al je opdrachten op één plek','Toutes vos missions au même endroit','Alle deine Jobs an einem Ort'],
+['Equipment lists & load-in times','Materiaallijsten & laadtijden','Listes de matériel & horaires de montage','Equipment-Listen & Load-in-Zeiten'],
+['For companies with a crew and stock.','Voor bedrijven met een crew en materiaal.','Pour les entreprises avec équipe et stock.','Für Firmen mit Crew und Lager.'],
+['Several crew members','Meerdere crewleden','Plusieurs membres d’équipe','Mehrere Crew-Mitglieder'],['Stock & inventory check','Voorraad- & inventariscontrole','Contrôle du stock & de l’inventaire','Lager- & Inventarprüfung'],
+['Quotes & invoices','Offertes & facturen','Devis & factures','Angebote & Rechnungen'],
+['First month free','Eerste maand gratis','Premier mois offert','Erster Monat gratis'],['for your first month','voor je eerste maand','pour votre premier mois','im ersten Monat'],
+['🎁 Your free month starts when you set up your first event. After that: price to be announced.','🎁 Je gratis maand start zodra je je eerste evenement aanmaakt. Daarna: prijs volgt.','🎁 Votre mois gratuit commence dès que vous créez votre premier événement. Ensuite : prix à venir.','🎁 Dein Gratismonat startet, sobald du deine erste Veranstaltung anlegst. Danach: Preis folgt.'],
+['Start your free month','Start je gratis maand','Commencer le mois gratuit','Gratismonat starten'],
+['Your first month is free — it starts as soon as you set up your first event.','Je eerste maand is gratis — die start zodra je je eerste evenement aanmaakt.','Votre premier mois est gratuit — il commence dès votre premier événement.','Dein erster Monat ist gratis — er startet, sobald du deine erste Veranstaltung anlegst.'],
+['Everything you need to run your events.','Alles wat je nodig hebt voor je evenementen.','Tout ce qu’il faut pour vos événements.','Alles, was du für deine Veranstaltungen brauchst.'],
+['🎉 Welcome! Your free month starts with your first event.','🎉 Welkom! Je gratis maand start met je eerste evenement.','🎉 Bienvenue ! Votre mois gratuit commence avec votre premier événement.','🎉 Willkommen! Dein Gratismonat startet mit deiner ersten Veranstaltung.'],
+['Your first month is free','Je eerste maand is gratis','Votre premier mois est gratuit','Dein erster Monat ist gratis'],
+['It starts as soon as you set up your first event.','Die start zodra je je eerste evenement aanmaakt.','Il commence dès que vous créez votre premier événement.','Er startet, sobald du deine erste Veranstaltung anlegst.'],
+['Free month active','Gratis maand actief','Mois gratuit en cours','Gratismonat läuft'],['Until','Tot','Jusqu’au','Bis'],['days left','dagen over','jours restants','Tage übrig'],
+['🎁 Your free month has started — enjoy we.TRUSS!','🎁 Je gratis maand is gestart — veel plezier met we.TRUSS!','🎁 Votre mois gratuit a commencé — profitez de we.TRUSS !','🎁 Dein Gratismonat hat begonnen — viel Spaß mit we.TRUSS!'],
 ['Documents','Documenten','Documents','Dokumente'],['Contracts','Contracten','Contrats','Verträge'],['Other files','Andere bestanden','Autres fichiers','Andere Dateien'],
 ['Not signed yet','Nog niet ondertekend','Pas encore signé','Noch nicht unterschrieben'],['To sign','Te ondertekenen','À signer','Zu unterschreiben'],
 ['⬆ Upload document','⬆ Document uploaden','⬆ Importer un document','⬆ Dokument hochladen'],
@@ -1951,7 +2026,7 @@ function header(){
 function loginView(){
   const card = (r, desc) => {
     const u = USERS[r], n = roleUnread(r);
-    return `<button class="role-card ${r}" data-act="login" data-id="${r}">
+    return `<button class="role-card ${r}" data-act="plans" data-id="${r}">
       ${n?`<span class="badge" title="${n} unread">${n}</span>`:''}
       <div class="rname">${u.label}</div>
       <div class="ruser"><span class="av ${r}">${u.initials}</span><div><b>${esc(u.name)}</b><small>${esc(u.org)}</small></div></div>
@@ -1963,13 +2038,58 @@ function loginView(){
     <button class="logo brand-link" data-act="to-landing" title="we.TRUSS home"><img class="brand-img" src="${LOGO}" alt="we.TRUSS"></button>
     <div class="slogan">The backbone of every event</div>
     <p class="tagline">One shared space per event. Promoter, artists and suppliers each see exactly what concerns them — no more scattered WhatsApps, mails and DMs.</p>
-    <p class="muted" style="margin:0 0 26px;font-size:14px">Choose a role to log in (demo — no password needed)</p>
+    <p class="muted" style="margin:0 0 26px;font-size:14px">Choose your role — then pick your plan (demo, no password needed)</p>
     <div class="role-grid">
       ${card('promoter','Plan your events, see who confirmed, and push changes to exactly the right people.')}
       ${card('artist','For bands, singers, DJs and performers: your gigs, stage times, rider status and the latest changes — on your phone.')}
       ${card('supplier','Your jobs, equipment lists, load-in times and site access in one place.')}
     </div>
     <div class="foot"><button class="linkbtn" data-act="to-landing">← Back to the website</button> · Prototype · all names, venues and data are fictional · <button class="linkbtn" data-act="reset">Reset demo data</button></div>
+  </div>`;
+}
+
+/* ---------------- views: plans (after picking a role on the login page) ----------------
+   Only the Free plans can be chosen for now; the others are shown greyed out as "Coming soon". */
+const PLANS = {
+  promoter:[
+    { name:'Starter', trial:true, desc:'Everything you need to run your events.',
+      feats:['Up to 3 active events','Unlimited artists & suppliers per event','Targeted updates with seen receipts','Contracts & documents','Network & messages'] },
+    { name:'Pro', soon:true, desc:'For promoters with a full calendar.',
+      feats:['Unlimited events','Contract templates with your logo','Export to PDF & Excel','Priority support'] },
+    { name:'Collective', soon:true, desc:'For teams that organise together.',
+      feats:['Several promoters in one account','Shared network & calendar','Roles & permissions for your team'] }
+  ],
+  artist:[
+    { name:'Free', desc:'Your gigs, riders and contracts in one place.',
+      feats:['All your gigs in one place','Set times, riders & updates','Sign contracts & share files','Availability calendar','Ratings from promoters'] },
+    { name:'Pro', soon:true, desc:'Get booked more often.',
+      feats:['Public profile page','Get found by promoters','Booking requests','Invoice templates'] }
+  ],
+  supplier:[
+    { name:'Free', desc:'Your jobs, equipment lists and contracts in one place.',
+      feats:['All your jobs in one place','Equipment lists & load-in times','Sign contracts & share files','Availability calendar'] },
+    { name:'Business', soon:true, desc:'For companies with a crew and stock.',
+      feats:['Several crew members','Stock & inventory check','Quotes & invoices','Get found by promoters'] }
+  ]
+};
+function plansView(){
+  const r = S.planRole, u = USERS[r], list = PLANS[r];
+  const title = { promoter:'Plans for promoters', artist:'Plans for artists', supplier:'Plans for suppliers' }[r];
+  const card = pl => `<div class="plan ${pl.soon ? 'soon' : 'on'}">
+      <div class="plan-hd"><h3 data-notr>${pl.name}</h3>${pl.soon ? '<span class="pill off">Coming soon</span>' : pl.trial ? '<span class="pill ok">First month free</span>' : '<span class="pill ok">Available now</span>'}</div>
+      <div class="plan-price">${pl.soon ? '<span class="tba">Price to be announced</span>' : pl.trial ? '<b data-notr>€ 0</b><small>for your first month</small>' : '<b data-notr>€ 0</b><small>forever</small>'}</div>
+      <p class="plan-desc">${pl.desc}</p>
+      ${pl.trial ? '<p class="plan-note">🎁 Your free month starts when you set up your first event. After that: price to be announced.</p>' : ''}
+      <ul class="plan-feats">${pl.feats.map(f => `<li>${f}</li>`).join('')}</ul>
+      ${pl.soon ? '<button class="btn full" disabled>Coming soon</button>' : `<button class="btn solid full lp-big" data-act="plan-pick" data-id="${r}">${pl.trial ? 'Start your free month' : 'Start for free'}</button>`}
+    </div>`;
+  return `${siteNav()}<div class="login plans">
+    <button class="linkbtn" data-act="to-login">← All roles</button>
+    <h1 class="plans-h">${title}</h1>
+    <p class="tagline">${r === 'promoter' ? 'Your first month is free — it starts as soon as you set up your first event.' : 'Start for free — no credit card needed. More plans are on the way.'}</p>
+    <div class="plan-grid cols-${list.length}">${list.map(card).join('')}</div>
+    <p class="plans-who">Demo: you’ll continue as <b data-notr>${esc(u.name)} · ${esc(u.org)}</b></p>
+    <div class="foot">Prototype — no real account is created and nothing is charged.</div>
   </div>`;
 }
 
@@ -2154,6 +2274,16 @@ function initReveal(){
 }
 
 /* ---------------- views: promoter ---------------- */
+function addDays(ds, n){ const d = new Date(ds + 'T12:00:00'); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); }
+function trialBanner(){
+  const t = S.trial;
+  if (!t) return '';
+  if (!t.start) return `<div class="trial"><span>🎁</span><div><b>Your first month is free</b><small>It starts as soon as you set up your first event.</small></div>
+    <button class="btn sm solid" data-act="new-event">+ New event</button></div>`;
+  const end = addDays(t.start, 30), left = Math.max(0, daysUntil(end));
+  return `<div class="trial on"><span>🎁</span><div><b>Free month active</b>
+    <small><span>Until</span> <span data-notr>${fmtDate(end)}</span> · <span data-notr>${left}</span> <span>days left</span></small></div></div>`;
+}
 function promoterHome(){
   const all = openItems(EVENTS);
   const problems = EVENTS.reduce((n,e) => n + countStatus(e,'problem'), 0);
@@ -2233,7 +2363,7 @@ function promoterHome(){
 
   return `<main class="wrap">
     <section class="hello"><h1>Hi ${USERS.promoter.first}, here’s your season.</h1>
-      <p>Nachtwerk Collective · ${EVENTS.length} upcoming event${EVENTS.length === 1 ? '' : 's'}</p></section>
+      <p>Nachtwerk Collective · ${EVENTS.length} upcoming event${EVENTS.length === 1 ? '' : 's'}</p>${trialBanner()}</section>
     ${tiles}
     ${section ? `<div class="dash-section">${section}</div>` : dashHint()}
     <div class="spacer"></div>
@@ -2939,7 +3069,7 @@ function supplierJob(e,p){
 function render(){
   const app = $('#app');
   if (!S.role){
-    app.innerHTML = S.page === 'login' ? loginView() : landingView();
+    app.innerHTML = S.page === 'login' ? loginView() : S.page === 'plans' ? plansView() : landingView();
     initReveal();
     return;
   }
@@ -3150,6 +3280,13 @@ function openRateModal(key){
 
 /* ---------------- actions ---------------- */
 const ACTIONS = {
+  plans(r){ S.planRole = r; S.page = 'plans'; render(); window.scrollTo({ top:0 }); },
+  'plan-pick'(r){
+    S.plan = Object.assign({}, S.plan, { [r]: r === 'promoter' ? 'starter' : 'free' });
+    if (r === 'promoter') S.trial = { start:null };   // the free month starts with the first event
+    ACTIONS.login(r);
+    toast(r === 'promoter' ? '🎉 Welcome! Your free month starts with your first event.' : '🎉 Welcome to we.TRUSS — you’re on the Free plan.', 'ok');
+  },
   login(id){
     const was = S.role;
     S.role = id; S.dash = {}; S.evTab = null; S.openParty = null; go('home');
@@ -3283,7 +3420,10 @@ const ACTIONS = {
     ];
     EVENTS.push(e);
     EVENTS.sort((a,b) => a.date.localeCompare(b.date));
+    const trialStarts = S.trial && !S.trial.start;
+    if (trialStarts) S.trial.start = '2026-11-25';
     go('event', e.id);
+    if (trialStarts) setTimeout(() => toast('🎁 Your free month has started — enjoy we.TRUSS!', 'ok'), 600);
     toast(`🎉 ${esc(name)} created${booked.length ? ` · booking request sent to ${booked.length} ${booked.length > 1 ? 'people' : 'person'}` : ''}.`, 'ok');
   },
 

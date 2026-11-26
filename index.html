@@ -1550,7 +1550,7 @@ const TR_ROWS = [
 ['Preview of the we.TRUSS app','Voorbeeld van de we.TRUSS-app','Aperçu de l’app we.TRUSS','Vorschau der we.TRUSS-App'],['Readiness: % of parties confirmed','Gereedheid: % bevestigde partijen','Préparation : % de parties confirmées','Bereitschaft: % bestätigte Parteien'],
 // login
 ['One shared space per event. Promoter, artists and suppliers each see exactly what concerns them — no more scattered WhatsApps, mails and DMs.','Eén gedeelde ruimte per evenement. Organisator, artiesten en leveranciers zien elk precies wat hen aangaat — geen verspreide WhatsApps, mails en DM’s meer.','Un espace partagé par événement. Organisateur, artistes et prestataires voient chacun ce qui les concerne — fini les WhatsApp, mails et DM éparpillés.','Ein gemeinsamer Raum pro Veranstaltung. Veranstalter, Künstler und Dienstleister sehen genau, was sie betrifft — Schluss mit verstreuten WhatsApps, Mails und DMs.'],
-['Choose your role — then pick your plan (demo, no password needed)','Kies je rol — daarna je abonnement (demo, geen wachtwoord nodig)','Choisissez votre rôle, puis votre formule (démo, sans mot de passe)','Wähle deine Rolle — danach dein Abo (Demo, kein Passwort nötig)'],
+['Choose your role & pick your plan','Kies je rol & je abonnement','Choisissez votre rôle & votre formule','Wähle deine Rolle & dein Abo'],
 ['Plan your events, see who confirmed, and push changes to exactly the right people.','Plan je evenementen, zie wie bevestigd heeft en stuur wijzigingen naar precies de juiste mensen.','Planifiez vos événements, voyez qui a confirmé et envoyez les changements aux bonnes personnes.','Plane deine Veranstaltungen, sieh, wer bestätigt hat, und schicke Änderungen genau an die Richtigen.'],
 ['ENTER AS PROMOTER →','GA VERDER ALS ORGANISATOR →','ENTRER COMME ORGANISATEUR →','ALS VERANSTALTER EINTRETEN →'],
 ['For bands, singers, DJs and performers: your gigs, stage times, rider status and the latest changes — on your phone.','Voor bands, zangers, dj’s en performers: je optredens, speeltijden, riderstatus en de laatste wijzigingen — op je gsm.','Pour groupes, chanteurs, DJ et performers : vos dates, horaires, statut du rider et derniers changements — sur votre téléphone.','Für Bands, Sänger, DJs und Performer: deine Gigs, Auftrittszeiten, Rider-Status und die neuesten Änderungen — auf dem Handy.'],
@@ -2128,8 +2128,7 @@ function loginView(){
   return `${siteNav()}<div class="login">
     <button class="logo brand-link" data-act="to-landing" title="we.TRUSS home"><img class="brand-img" src="${LOGO}" alt="we.TRUSS"></button>
     <div class="slogan">The backbone of every event</div>
-    <p class="tagline">One shared space per event. Promoter, artists and suppliers each see exactly what concerns them — no more scattered WhatsApps, mails and DMs.</p>
-    <p class="muted" style="margin:0 0 26px;font-size:14px">Choose your role — then pick your plan (demo, no password needed)</p>
+    <p class="muted" style="margin:14px 0 26px;font-size:14px">Choose your role &amp; pick your plan</p>
     <div class="role-grid">
       ${card('promoter','Plan your events, see who confirmed, and push changes to exactly the right people.')}
       ${card('artist','For bands, singers, DJs and performers: your gigs, stage times, rider status and the latest changes — on your phone.')}

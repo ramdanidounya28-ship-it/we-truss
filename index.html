@@ -1099,7 +1099,7 @@ const SOCIAL = [
 ];
 
 const USERS = {
-  promoter: { name:'Lotte Verbeke', first:'Lotte', org:'Nachtwerk Collective', initials:'LV', label:'Promoter' },
+  promoter: { name:'Jonas Verbeke', first:'Jonas', org:'Nachtwerk Collective', initials:'JV', label:'Promoter' },
   artist:   { name:'NØRA', first:'Noor', org:'Noor Vandamme · DJ / live act', initials:'NØ', label:'Artist' },
   supplier: { name:'Pieter Claes', first:'Pieter', org:'LumenSound BV · sound & light', initials:'PC', label:'Supplier' }
 };
@@ -1110,7 +1110,7 @@ const STATUS = {
   waiting:  { label:'Waiting',   cls:'wait' },
   problem:  { label:'Problem',   cls:'bad' }
 };
-const PROMOTER_CONTACT = { name:'Lotte Verbeke', role:'Promoter · Nachtwerk', phone:'+32 470 11 22 33' };
+const PROMOTER_CONTACT = { name:'Jonas Verbeke', role:'Promoter · Nachtwerk', phone:'+32 470 11 22 33' };
 
 const EVENTS = [
   {
@@ -1126,7 +1126,7 @@ const EVENTS = [
       { id:'e1-nora', type:'artist', user:'artist', name:'NØRA', sub:'Peak-time techno · hybrid live set',
         status:'waiting', due:'2026-11-27', issue:'Waiting for NØRA to confirm attendance.',
         setTime:'01:00 – 03:00', stage:'Main room', fee:'€ 1.200 excl. VAT', arrival:'00:15', arrivalNote:'Artist entrance, back of the building',
-        parking:'1 reserved spot in the back yard · gate code 4471', contact:{ name:'Lotte Verbeke', role:'Promoter · on site from 20:00', phone:'+32 470 11 22 33' },
+        parking:'1 reserved spot in the back yard · gate code 4471', contact:{ name:'Jonas Verbeke', role:'Promoter · on site from 20:00', phone:'+32 470 11 22 33' },
         rider:[ ['2× Pioneer CDJ-3000 + DJM-V10','yes'], ['Booth monitors at ear height','yes'], ['Guest list +2 & 4 drink tickets','yes'], ['Hotel night (Hotel Scheldezicht)','pending'], ['Hot vegan dinner before set','no'] ] },
       { id:'e1-kobe', type:'artist', name:'KOBE b2b YASMINE', sub:'Hard groove · warm-up b2b',
         status:'confirmed', due:'2026-11-20',
@@ -1395,15 +1395,15 @@ const AVAIL = {
   kolibri:    { '2027-01-22':'last' }
 };
 
-// messages: from 'me' = the promoter (Lotte), from 'them' = the contact. read = seen by the person it was sent to.
+// messages: from 'me' = the promoter (Jonas), from 'them' = the contact. read = seen by the person it was sent to.
 const CONVOS = [
   { id:'c-brikke', with:'brikke', msgs:[
-    { from:'them', text:'Hi Lotte, my flight lands at 01:40 on the 12th. Could you arrange a taxi from Zaventem?', time:'Mon 23 Nov · 21:20', read:false } ] },
+    { from:'them', text:'Hi Jonas, my flight lands at 01:40 on the 12th. Could you arrange a taxi from Zaventem?', time:'Mon 23 Nov · 21:20', read:false } ] },
   { id:'c-lumen', with:'lumen', msgs:[
     { from:'me',   text:'Hi Pieter, can you double-check the 4 CDJ-3000s for 12 December?', time:'Mon 23 Nov · 11:15', read:true },
     { from:'them', text:'Checking our stock tomorrow morning, I’ll come back to you.',       time:'Mon 23 Nov · 16:48', read:false } ] },
   { id:'c-nora', with:'nora', msgs:[
-    { from:'them', text:'Hi Lotte! Is a hotel night included for PULSE//NACHT 07?', time:'Tue 24 Nov · 19:02', read:true },
+    { from:'them', text:'Hi Jonas! Is a hotel night included for PULSE//NACHT 07?', time:'Tue 24 Nov · 19:02', read:true },
     { from:'me',   text:'Hi Noor! Still checking with Hotel Scheldezicht, I’ll confirm by Friday.', time:'Tue 24 Nov · 19:40', read:false } ] }
 ];
 
@@ -1414,7 +1414,7 @@ const CONVOS = [
 const CONTRACT_STATE = {   // party id: [status, date sent, date signed]
   'e1-nora':['sent','2026-11-18'], 'e1-kobe':['signed','2026-11-10','2026-11-12'], 'e1-brikke':['sent','2026-11-16'],
   'e1-venue':['signed','2026-10-28','2026-10-30'], 'e1-lumen':['sent','2026-11-19'],
-  // Mira Solis — Live (e2) has no contracts yet: Lotte sets them up with "+ New contracts"
+  // Mira Solis — Live (e2) has no contracts yet: Jonas sets them up with "+ New contracts"
   'e3-nora':['draft','2026-11-24'], 'e3-bram':['sent','2026-11-21'], 'e3-ines':['draft','2026-11-22'],
   'e3-venue':['sent','2026-11-12'], 'e3-lumen':['draft','2026-11-23']
 };
@@ -1586,7 +1586,7 @@ const TR_ROWS = [
 ['Events','Evenementen','Événements','Veranstaltungen'],['Network','Netwerk','Réseau','Netzwerk'],['Messages','Berichten','Messages','Nachrichten'],['Switch','Wissel','Changer','Wechsel'],['role','van rol','de rôle','der Rolle'],
 ['Sections','Secties','Sections','Bereiche'],['Quick role switch','Snel van rol wisselen','Changer de rôle rapidement','Schneller Rollenwechsel'],['Language','Taal','Langue','Sprache'],
 // promoter dashboard + event
-['Hi Lotte, here’s your season.','Hoi Lotte, dit is je seizoen.','Salut Lotte, voici ta saison.','Hi Lotte, hier ist deine Saison.'],['Upcoming events','Komende evenementen','Événements à venir','Anstehende Veranstaltungen'],
+['Hi Jonas, here’s your season.','Hoi Jonas, dit is je seizoen.','Salut Jonas, voici ta saison.','Hi Jonas, hier ist deine Saison.'],['Upcoming events','Komende evenementen','Événements à venir','Anstehende Veranstaltungen'],
 ['Avg. readiness','Gem. gereedheid','Préparation moy.','Ø Bereitschaft'],['Problems','Problemen','Problèmes','Probleme'],['New from parties','Nieuw van partijen','Nouveautés des parties','Neu von Parteien'],
 ['+ New event','+ Nieuw evenement','+ Nouvel événement','+ Neue Veranstaltung'],['Readiness','Gereedheid','Préparation','Bereitschaft'],['All confirmed','Alles bevestigd','Tout confirmé','Alles bestätigt'],['Open →','Openen →','Ouvrir →','Öffnen →'],
 ['Techno club night','Techno-clubavond','Soirée club techno','Techno-Clubnacht'],['Indoor concert','Indoorconcert','Concert en salle','Indoor-Konzert'],['Open-air summer festival','Openlucht zomerfestival','Festival d’été en plein air','Open-Air-Sommerfestival'],
@@ -1686,7 +1686,7 @@ const TR_ROWS = [
 ['✓ Confirm this job','✓ Bevestig deze opdracht','✓ Confirmer cette mission','✓ Diesen Auftrag bestätigen'],['✓ Job confirmed','✓ Opdracht bevestigd','✓ Mission confirmée','✓ Auftrag bestätigt'],
 ['Agreed equipment list','Afgesproken materiaallijst','Liste du matériel convenue','Vereinbarte Equipment-Liste'],['Agreed','Afgesproken','Convenu','Vereinbart'],['Unavailable','Niet beschikbaar','Indisponible','Nicht verfügbar'],
 ['Times & access','Uren & toegang','Horaires & accès','Zeiten & Zufahrt'],['Site access','Toegang tot de locatie','Accès au site','Zufahrt'],['Agreed fee','Afgesproken prijs','Tarif convenu','Vereinbarter Preis'],
-['Lotte (promoter) sees this immediately in her event overview.','Lotte (organisator) ziet dit meteen in het evenementoverzicht.','Lotte (organisation) le voit immédiatement dans l’aperçu de l’événement.','Lotte (Veranstaltung) sieht das sofort in der Veranstaltungsübersicht.'],
+['Jonas (promoter) sees this immediately in his event overview.','Jonas (organisator) ziet dit meteen in het evenementoverzicht.','Jonas (organisation) le voit immédiatement dans l’aperçu de l’événement.','Jonas (Veranstaltung) sieht das sofort in der Veranstaltungsübersicht.'],
 ['I can’t make it','Ik kan niet komen','Je ne peux pas venir','Ich kann nicht kommen'],['Travel delay','Reisvertraging','Retard de voyage','Reiseverspätung'],['Set time conflict','Conflict met settijd','Conflit d’horaire','Konflikt mit Set-Zeit'],['Rider issue','Riderprobleem','Problème de rider','Rider-Problem'],
 ['Item unavailable','Item niet beschikbaar','Matériel indisponible','Artikel nicht verfügbar'],['Load-in time not possible','Load-in-uur niet mogelijk','Heure de montage impossible','Aufbauzeit nicht möglich'],['Crew / vehicle issue','Probleem met crew / voertuig','Problème d’équipe / véhicule','Problem mit Crew / Fahrzeug'],['Price change','Prijswijziging','Changement de prix','Preisänderung'],
 ['Which item? (optional)','Welk item? (optioneel)','Quel matériel ? (facultatif)','Welcher Artikel? (optional)'],['Send to promoter','Naar organisator sturen','Envoyer à l’organisateur','An Veranstalter senden'],
@@ -1708,8 +1708,8 @@ const TR_ROWS = [
 ['. Showing suppliers who are available that day, last-minute first.','. Leveranciers die die dag beschikbaar zijn, last-minute eerst.','. Prestataires disponibles ce jour-là, dernière minute en premier.','. Dienstleister, die an dem Tag verfügbar sind, Last-Minute zuerst.'],
 ['No one is available that day. Try inviting someone new from your Network.','Niemand is die dag beschikbaar. Nodig iemand nieuw uit vanuit je Netwerk.','Personne n’est disponible ce jour-là. Invitez quelqu’un depuis votre Réseau.','An dem Tag ist niemand verfügbar. Lade jemand Neues über dein Netzwerk ein.'],
 // toasts
-['✓ Confirmed! Lotte (promoter) sees this right away.','✓ Bevestigd! Lotte (organisator) ziet dit meteen.','✓ Confirmé ! Lotte (organisation) le voit tout de suite.','✓ Bestätigt! Lotte (Veranstaltung) sieht es sofort.'],
-['⚠ Sent to Lotte. The promoter’s view is updated.','⚠ Verstuurd naar Lotte. De weergave van de organisator is bijgewerkt.','⚠ Envoyé à Lotte. La vue de l’organisateur est mise à jour.','⚠ An Lotte gesendet. Die Veranstalter-Ansicht ist aktualisiert.'],
+['✓ Confirmed! Jonas (promoter) sees this right away.','✓ Bevestigd! Jonas (organisator) ziet dit meteen.','✓ Confirmé ! Jonas (organisation) le voit tout de suite.','✓ Bestätigt! Jonas (Veranstaltung) sieht es sofort.'],
+['⚠ Sent to Jonas. The promoter’s view is updated.','⚠ Verstuurd naar Jonas. De weergave van de organisator is bijgewerkt.','⚠ Envoyé à Jonas. La vue de l’organisateur est mise à jour.','⚠ An Jonas gesendet. Die Veranstalter-Ansicht ist aktualisiert.'],
 ['✎ Write the change first (or tap a suggestion).','✎ Schrijf eerst de wijziging (of tik op een suggestie).','✎ Écrivez d’abord le changement (ou touchez une suggestion).','✎ Schreib zuerst die Änderung (oder tippe auf einen Vorschlag).'],
 ['☐ Select at least one party this affects.','☐ Selecteer minstens één betrokken partij.','☐ Sélectionnez au moins une partie concernée.','☐ Wähle mindestens eine betroffene Partei.'],['★ Pick 1 to 5 stars first.','★ Kies eerst 1 tot 5 sterren.','★ Choisissez d’abord 1 à 5 étoiles.','★ Wähle zuerst 1 bis 5 Sterne.'],
 ['✎ Write a message first.','✎ Schrijf eerst een bericht.','✎ Écrivez d’abord un message.','✎ Schreib zuerst eine Nachricht.'],['Pick an event first.','Kies eerst een evenement.','Choisissez d’abord un événement.','Wähle zuerst eine Veranstaltung.'],
@@ -1721,7 +1721,7 @@ const TR_ROWS = [
 ['🔒 Private','🔒 Privé','🔒 Privé','🔒 Privat'],['Only you','Alleen jij','Vous seul','Nur du'],
 ['🔒 Private files — not linked to an event','🔒 Privébestanden — niet gekoppeld aan een evenement','🔒 Fichiers privés — sans événement','🔒 Private Dateien — ohne Veranstaltung'],
 ['General — no event','Algemeen — geen evenement','Général — sans événement','Allgemein — ohne Veranstaltung'],['🔒 Only me (private)','🔒 Alleen ik (privé)','🔒 Moi seul (privé)','🔒 Nur ich (privat)'],
-['Share with','Delen met','Partager avec','Teilen mit'],['Share with Lotte (promoter)','Delen met Lotte (organisator)','Partager avec Lotte (organisatrice)','Mit Lotte teilen (Veranstalterin)'],
+['Share with','Delen met','Partager avec','Teilen mit'],['Share with Jonas (promoter)','Delen met Jonas (organisator)','Partager avec Jonas (organisateur)','Mit Jonas teilen (Veranstalter)'],
 ['Choose who can see it: only you, or one person for a specific event.','Kies wie het kan zien: alleen jij, of één persoon voor een bepaald evenement.','Choisissez qui peut le voir : vous seul, ou une personne pour un événement précis.','Wähle, wer es sehen kann: nur du oder eine Person für eine bestimmte Veranstaltung.'],
 ['Who can see it?','Wie kan het zien?','Qui peut le voir ?','Wer kann es sehen?'],['＋ New contracts','＋ Nieuwe contracten','＋ Nouveaux contrats','＋ Neue Verträge'],
 ['Pick the event and who gets a contract. It’s filled in from the booking (fee, times, rider or equipment) — they get a notification and find it under Documents.','Kies het evenement en wie een contract krijgt. Het wordt ingevuld met de boekingsgegevens (vergoeding, uren, rider of materiaal) — zij krijgen een melding en vinden het onder Documenten.','Choisissez l’événement et qui reçoit un contrat. Il est rempli à partir de la réservation (cachet, horaires, rider ou matériel) — chacun reçoit une notification et le retrouve dans Documents.','Wähle die Veranstaltung und wer einen Vertrag bekommt. Er wird aus der Buchung befüllt (Gage, Zeiten, Rider oder Equipment) — alle bekommen eine Benachrichtigung und finden ihn unter Dokumente.'],
@@ -1730,11 +1730,11 @@ const TR_ROWS = [
 ['☐ Select at least one person.','☐ Kies minstens één persoon.','☐ Sélectionnez au moins une personne.','☐ Wähle mindestens eine Person.'],
 ['📄 Contracts sent — they get a notification and find them under Documents.','📄 Contracten verstuurd — zij krijgen een melding en vinden ze onder Documenten.','📄 Contrats envoyés — chacun reçoit une notification et les retrouve dans Documents.','📄 Verträge gesendet — alle bekommen eine Benachrichtigung und finden sie unter Dokumente.'],
 ['✓ Drafts saved — only you can see them until you send them.','✓ Concepten opgeslagen — alleen jij ziet ze tot je ze verstuurt.','✓ Brouillons enregistrés — vous seul les voyez jusqu’à l’envoi.','✓ Entwürfe gespeichert — nur du siehst sie, bis du sie sendest.'],
-['New contract from Lotte — please check and sign it under Documents.','Nieuw contract van Lotte — bekijk en onderteken het onder Documenten.','Nouveau contrat de Lotte — vérifiez-le et signez-le dans Documents.','Neuer Vertrag von Lotte — bitte prüfen und unter Dokumente unterschreiben.'],
-['New document from Lotte — you’ll find it under Documents.','Nieuw document van Lotte — je vindt het onder Documenten.','Nouveau document de Lotte — vous le trouverez dans Documents.','Neues Dokument von Lotte — du findest es unter Dokumente.'],
+['New contract from Jonas — please check and sign it under Documents.','Nieuw contract van Jonas — bekijk en onderteken het onder Documenten.','Nouveau contrat de Jonas — vérifiez-le et signez-le dans Documents.','Neuer Vertrag von Jonas — bitte prüfen und unter Dokumente unterschreiben.'],
+['New document from Jonas — you’ll find it under Documents.','Nieuw document van Jonas — je vindt het onder Documenten.','Nouveau document de Jonas — vous le trouverez dans Documents.','Neues Dokument von Jonas — du findest es unter Dokumente.'],
 ['shared a document.','heeft een document gedeeld.','a partagé un document.','hat ein Dokument geteilt.'],
 ['🔒 Saved privately — only you can see it.','🔒 Privé opgeslagen — alleen jij kunt het zien.','🔒 Enregistré en privé — vous seul pouvez le voir.','🔒 Privat gespeichert — nur du kannst es sehen.'],
-['✓ Shared with Lotte — she gets a notification.','✓ Gedeeld met Lotte — zij krijgt een melding.','✓ Partagé avec Lotte — elle reçoit une notification.','✓ Mit Lotte geteilt — sie bekommt eine Benachrichtigung.'],
+['✓ Shared with Jonas — he gets a notification.','✓ Gedeeld met Jonas — hij krijgt een melding.','✓ Partagé avec Jonas — il reçoit une notification.','✓ Mit Jonas geteilt — er bekommt eine Benachrichtigung.'],
 ['← All roles','← Alle rollen','← Tous les rôles','← Alle Rollen'],
 ['Plans for promoters','Abonnementen voor organisatoren','Formules pour organisateurs','Abos für Veranstalter'],['Plans for artists','Abonnementen voor artiesten','Formules pour artistes','Abos für Künstler'],
 ['Plans for suppliers','Abonnementen voor leveranciers','Formules pour prestataires','Abos für Dienstleister'],
@@ -1806,7 +1806,7 @@ const TR_ROWS = [
 ['Not signed yet','Nog niet ondertekend','Pas encore signé','Noch nicht unterschrieben'],['To sign','Te ondertekenen','À signer','Zu unterschreiben'],
 ['⬆ Upload document','⬆ Document uploaden','⬆ Importer un document','⬆ Dokument hochladen'],
 ['Contracts and files for all your events. Artists and suppliers only see what’s shared with them — private files only you.','Contracten en bestanden voor al je evenementen. Artiesten en leveranciers zien alleen wat met hen gedeeld is — privébestanden alleen jij.','Contrats et fichiers pour tous vos événements. Artistes et prestataires ne voient que ce qui est partagé avec eux — les fichiers privés, vous seul.','Verträge und Dateien für alle deine Veranstaltungen. Künstler und Dienstleister sehen nur, was mit ihnen geteilt ist — private Dateien nur du.'],
-['Your contracts and files. Shared files are visible to you and Lotte, private ones only to you.','Je contracten en bestanden. Gedeelde bestanden zien jij en Lotte, privébestanden alleen jij.','Vos contrats et fichiers. Les fichiers partagés sont visibles par vous et Lotte, les fichiers privés par vous seul.','Deine Verträge und Dateien. Geteilte Dateien sehen du und Lotte, private nur du.'],
+['Your contracts and files. Shared files are visible to you and Jonas, private ones only to you.','Je contracten en bestanden. Gedeelde bestanden zien jij en Jonas, privébestanden alleen jij.','Vos contrats et fichiers. Les fichiers partagés sont visibles par vous et Jonas, les fichiers privés par vous seul.','Deine Verträge und Dateien. Geteilte Dateien sehen du und Jonas, private nur du.'],
 ['No documents here yet.','Hier zijn nog geen documenten.','Aucun document pour l’instant.','Hier gibt es noch keine Dokumente.'],
 ['Prototype — uploaded files stay in your browser and are gone after a reload.','Prototype — geüploade bestanden blijven in je browser en verdwijnen na herladen.','Prototype — les fichiers importés restent dans votre navigateur et disparaissent au rechargement.','Prototyp — hochgeladene Dateien bleiben in deinem Browser und sind nach dem Neuladen weg.'],
 ['Signed','Ondertekend','Signé','Unterschrieben'],['Draft','Concept','Brouillon','Entwurf'],['Awaiting signature','Wacht op handtekening','En attente de signature','Wartet auf Unterschrift'],
@@ -1838,7 +1838,7 @@ const TR_ROWS = [
 
 ['File','Bestand','Fichier','Datei'],['Upload','Uploaden','Importer','Hochladen'],
 ['signed the contract.','heeft het contract ondertekend.','a signé le contrat.','hat den Vertrag unterschrieben.'],
-['✓ Contract signed — Lotte sees it right away.','✓ Contract ondertekend — Lotte ziet het meteen.','✓ Contrat signé — Lotte le voit immédiatement.','✓ Vertrag unterschrieben — Lotte sieht es sofort.'],
+['✓ Contract signed — Jonas sees it right away.','✓ Contract ondertekend — Jonas ziet het meteen.','✓ Contrat signé — Jonas le voit immédiatement.','✓ Vertrag unterschrieben — Jonas sieht es sofort.'],
 ['✓ Contract sent for signature.','✓ Contract ter ondertekening verstuurd.','✓ Contrat envoyé pour signature.','✓ Vertrag zur Unterschrift gesendet.'],
 ['Demo file — there’s no real document behind it.','Demobestand — er zit geen echt document achter.','Fichier de démo — aucun vrai document derrière.','Demo-Datei — dahinter steckt kein echtes Dokument.'],
 ['Choose a file first.','Kies eerst een bestand.','Choisissez d’abord un fichier.','Wähle zuerst eine Datei.'],
@@ -1873,7 +1873,7 @@ const PATTERNS = [
   [/^updates seen (\d+)\/(\d+)$/, m => L('updates gezien ','mises à jour vues ','Updates gesehen ') + `${m[1]}/${m[2]}`],
   [/^(\d+)\/(\d+) seen$/, m => `${m[1]}/${m[2]} ` + L('gezien','vus','gesehen')],
   [/^(\d+) updates?$/, m => `${m[1]} ` + L(pl(m[1],'update','updates'), pl(m[1],'mise à jour','mises à jour'), pl(m[1],'Update','Updates'))],
-  [/^(.*) · by Lotte$/, m => m[1] + ' · ' + L('door Lotte','par Lotte','von Lotte')],
+  [/^(.*) · by Jonas$/, m => m[1] + ' · ' + L('door Jonas','par Jonas','von Jonas')],
   [/^(· )?(\d+) reviews?$/, m => (m[1] || '') + `${m[2]} ` + L(pl(m[2],'beoordeling','beoordelingen'),'avis', pl(m[2],'Bewertung','Bewertungen'))],
   [/^You rated · (.+)$/, m => L('Jouw beoordeling','Votre note','Deine Bewertung') + ' · ' + m[1]],
   [/^Past event · (.+)$/, m => L('Voorbij evenement','Événement passé','Vergangene Veranstaltung') + ' · ' + tr(m[1])],
@@ -1897,7 +1897,7 @@ const PATTERNS = [
   [/^● (\d+) new updates?$/, m => `● ${m[1]} ` + L(pl(m[1],'nieuwe update','nieuwe updates'), pl(m[1],'nouvelle mise à jour','nouvelles mises à jour'), pl(m[1],'neues Update','neue Updates'))],
   [/^The promoter is waiting for your confirmation \(by (.+)\)\.$/, m => L(`De organisator wacht op je bevestiging (tegen ${m[1]}).`,`L’organisateur attend ta confirmation (avant le ${m[1]}).`,`Der Veranstalter wartet auf deine Bestätigung (bis ${m[1]}).`)],
   [/^Problem reported: (.+)$/, m => L('Probleem gemeld: ','Problème signalé : ','Problem gemeldet: ') + m[1]],
-  [/^(.*) · from Lotte \(promoter\)$/, m => m[1] + ' · ' + L('van Lotte (organisator)','de Lotte (organisation)','von Lotte (Veranstaltung)')],
+  [/^(.*) · from Jonas \(promoter\)$/, m => m[1] + ' · ' + L('van Jonas (organisator)','de Jonas (organisation)','von Jonas (Veranstaltung)')],
   [/^(.*) · (Sent|Seen)$/, m => m[1] + ' · ' + (m[2] === 'Sent' ? L('Verzonden','Envoyé','Gesendet') : L('Gezien','Vu','Gesehen'))],
   [/^You: (.+)$/, m => L('Jij: ','Vous : ','Du: ') + m[1]],
   [/^Rate (.+)$/, m => L('Beoordeel ','Évaluer ','Bewerte ') + m[1]],
@@ -1905,10 +1905,10 @@ const PATTERNS = [
   [/^(.*)\. They get the request in their messages and appear in your event as$/, m => m[1] + '. ' + L('Ze krijgen de aanvraag in hun berichten en verschijnen in je evenement als','La demande arrive dans leurs messages et ils apparaissent dans votre événement comme','Sie bekommen die Anfrage in ihren Nachrichten und erscheinen in deiner Veranstaltung als')],
   [/^(.*) · already in this event$/, m => m[1] + ' · ' + L('al in dit evenement','déjà dans cet événement','bereits in dieser Veranstaltung')],
   [/^✉ Invite (.+) to we\.TRUSS$/, m => L(`✉ Nodig ${m[1]} uit voor we.TRUSS`,`✉ Inviter ${m[1]} sur we.TRUSS`,`✉ ${m[1]} zu we.TRUSS einladen`)],
-  [/^Hi( .+)?! I’m organising my next events on we\.TRUSS: one place for set times, riders and updates\. Join for free so we can work together\. — Lotte, Nachtwerk Collective$/, m => L(
-    `Hoi${m[1] || ''}! Ik organiseer mijn volgende evenementen op we.TRUSS: één plek voor settijden, riders en updates. Word gratis lid zodat we kunnen samenwerken. — Lotte, Nachtwerk Collective`,
-    `Salut${m[1] || ''} ! J’organise mes prochains événements sur we.TRUSS : un seul endroit pour les horaires, riders et mises à jour. Inscris-toi gratuitement pour qu’on travaille ensemble. — Lotte, Nachtwerk Collective`,
-    `Hi${m[1] || ''}! Ich organisiere meine nächsten Veranstaltungen auf we.TRUSS: ein Ort für Set-Zeiten, Rider und Updates. Tritt kostenlos bei, damit wir zusammenarbeiten können. — Lotte, Nachtwerk Collective`)],
+  [/^Hi( .+)?! I’m organising my next events on we\.TRUSS: one place for set times, riders and updates\. Join for free so we can work together\. — Jonas, Nachtwerk Collective$/, m => L(
+    `Hoi${m[1] || ''}! Ik organiseer mijn volgende evenementen op we.TRUSS: één plek voor settijden, riders en updates. Word gratis lid zodat we kunnen samenwerken. — Jonas, Nachtwerk Collective`,
+    `Salut${m[1] || ''} ! J’organise mes prochains événements sur we.TRUSS : un seul endroit pour les horaires, riders et mises à jour. Inscris-toi gratuitement pour qu’on travaille ensemble. — Jonas, Nachtwerk Collective`,
+    `Hi${m[1] || ''}! Ich organisiere meine nächsten Veranstaltungen auf we.TRUSS: ein Ort für Set-Zeiten, Rider und Updates. Tritt kostenlos bei, damit wir zusammenarbeiten können. — Jonas, Nachtwerk Collective`)],
   [/^⚡ Replace (.+)$/, m => L('⚡ Vervang ','⚡ Remplacer ','⚡ Ersetze ') + m[1]],
   [/^(.*) · (set|load-in)$/, m => m[1] + ' · ' + (m[2] === 'set' ? L('set','set','Set') : L('load-in','montage','Aufbau'))],
   [/^(\d+) other contacts? (?:are|is) busy or booked that day, so they’re hidden\.$/, m => L(`${m[1]} andere contact(en) zijn die dag bezet of geboekt en worden verborgen.`,`${m[1]} autre(s) contact(s) occupé(s) ou réservé(s) ce jour-là sont masqués.`,`${m[1]} weitere Kontakt(e) sind an dem Tag belegt oder gebucht und ausgeblendet.`)],
@@ -2636,7 +2636,7 @@ function promoterEvent(e){
           ${e.updates.length ? e.updates.map(u => {
             const n = u.affects.filter(id => u.seenBy[id]).length;
             return `<div class="log">
-              <div class="log-hd"><span class="mono">${esc(u.time)} · by Lotte</span><span class="seen-count">${n}/${u.affects.length} seen</span></div>
+              <div class="log-hd"><span class="mono">${esc(u.time)} · by Jonas</span><span class="seen-count">${n}/${u.affects.length} seen</span></div>
               <p>${esc(u.text)}</p>
               <div class="seen">${u.affects.map(id => u.seenBy[id]
                 ? `<span class="y" title="Seen ${esc(u.seenBy[id])}">✓ ${esc(partyName(e,id))} · ${esc(u.seenBy[id].split('· ')[1]||'')}</span>`
@@ -2785,7 +2785,7 @@ function networkView(){
 }
 
 /* ---------------- views: messages (all roles) ---------------- */
-function convoName(c, role){ return role === 'promoter' ? profile(c.with).name : 'Lotte Verbeke'; }
+function convoName(c, role){ return role === 'promoter' ? profile(c.with).name : 'Jonas Verbeke'; }
 function convoSub(c, role){ const d = profile(c.with); return role === 'promoter' ? (d.kind === 'artist' ? 'Artist' : 'Supplier') + ' · ' + d.sub : 'Promoter · Nachtwerk Collective'; }
 function messagesView(){
   const role = S.role, list = convosFor(role).slice().sort((a,b) => convoUnread(role,b) - convoUnread(role,a));
@@ -2849,7 +2849,7 @@ function sendContract(d){
   d.status = 'sent'; d.date = '2026-11-25';
   if (!p.user) return false;
   notifyDoc(d, p.user);
-  e.updates.unshift({ id:'u' + Date.now() + p.id, text:'New contract from Lotte — please check and sign it under Documents.', time:nowStr(), affects:[p.id], seenBy:{} });
+  e.updates.unshift({ id:'u' + Date.now() + p.id, text:'New contract from Jonas — please check and sign it under Documents.', time:nowStr(), affects:[p.id], seenBy:{} });
   return true;
 }
 function contractTitle(p){ return p.type === 'artist' ? 'Artist performance agreement' : p.type === 'supplier' ? 'Supplier service agreement' : 'Venue rental agreement'; }
@@ -2877,7 +2877,7 @@ function contractHtml(d){
     <h4>${contractTitle(p)}</h4>
     <div class="c-ref"><span>Contract no.</span> <span data-notr>WT-${esc(p.id.toUpperCase())}</span> · <span>Created in we.TRUSS</span></div>
     <h5>1. Parties</h5>
-    <dl>${row('Organiser', 'Nachtwerk Collective · Lotte Verbeke')}${row(who, p.name + (signer !== p.name ? ' · ' + signer : ''))}</dl>
+    <dl>${row('Organiser', 'Nachtwerk Collective · Jonas Verbeke')}${row(who, p.name + (signer !== p.name ? ' · ' + signer : ''))}</dl>
     <h5>2. Event</h5>
     <dl>${row('Event', e.name)}${row('Date', fmtWhen(e))}${row('Venue', e.venue + ' · ' + e.address)}${row('Opening hours', e.hours)}</dl>
     ${details}
@@ -2891,7 +2891,7 @@ function contractHtml(d){
     <p>Nobody is liable if the event can’t take place for reasons beyond their control (extreme weather, government measures, …). Deposits are refunded.</p>
     <h5>7. Changes &amp; law</h5>
     <ul><li>Changes are only valid once both parties confirm them in we.TRUSS.</li><li>Belgian law applies.</li></ul>
-    <div class="c-sign">${sig('Organiser', 'Lotte Verbeke', d.status !== 'draft' ? d.date : null)}${sig(who, signer, d.status === 'signed' ? d.signed : null)}</div>
+    <div class="c-sign">${sig('Organiser', 'Jonas Verbeke', d.status !== 'draft' ? d.date : null)}${sig(who, signer, d.status === 'signed' ? d.signed : null)}</div>
   </article>`;
 }
 function docRow(d, role){
@@ -2935,7 +2935,7 @@ function docsView(){
   return `<main class="wrap">
     <section class="hello"><h1>Documents</h1><p>${role === 'promoter'
       ? 'Contracts and files for all your events. Artists and suppliers only see what’s shared with them — private files only you.'
-      : 'Your contracts and files. Shared files are visible to you and Lotte, private ones only to you.'}</p></section>
+      : 'Your contracts and files. Shared files are visible to you and Jonas, private ones only to you.'}</p></section>
     <div class="doc-tools">
       <div class="fchips">${chip('all', 'All')}${chip('contracts', 'Contracts')}${chip('open', role === 'promoter' ? 'Not signed yet' : 'To sign', nOpen)}${chip('files', 'Other files')}${chip('private', '🔒 Private')}</div>
       <div class="doc-r">${role === 'promoter' ? '<button class="btn" data-act="new-contract">＋ New contracts</button>' : ''}
@@ -2968,7 +2968,7 @@ function openUploadModal(){
   if (role === 'promoter') evs.forEach(e => groups.push(grp(`${e.name} · ${fmtShort(e.date)}`,
     [[`${e.id}||1`, me[1]], ...e.parties.map(p => [`${e.id}|${p.id}|0`, `${tr('Share with')} ${p.name}`])])));
   else myParties(role).forEach(({ e, p }) => groups.push(grp(`${e.name} · ${fmtShort(e.date)}`,
-    [[`${e.id}||1`, me[1]], [`${e.id}|${p.id}|0`, tr('Share with Lotte (promoter)')]])));
+    [[`${e.id}||1`, me[1]], [`${e.id}|${p.id}|0`, tr('Share with Jonas (promoter)')]])));
   $('#modal').innerHTML = `<div class="modal-bg" data-act="close-modal">
     <div class="modal" role="dialog" aria-modal="true">
       <h3>⬆ Upload document</h3>
@@ -3106,7 +3106,7 @@ function updatesBlock(e,p){
   const mine = e.updates.filter(u => u.affects.includes(p.id));
   if (!mine.length) return '<div class="empty">No updates yet. Changes from the promoter will appear here.</div>';
   return mine.map(u => `<div class="upd ${u.seenBy[p.id]?'':'new'}">
-    <div class="h">${u.seenBy[p.id]?'':'<span class="newtag">NEW</span>'}<span>${esc(u.time)} · from Lotte (promoter)</span></div>
+    <div class="h">${u.seenBy[p.id]?'':'<span class="newtag">NEW</span>'}<span>${esc(u.time)} · from Jonas (promoter)</span></div>
     <p>${esc(u.text)}</p></div>`).join('');
 }
 
@@ -3264,7 +3264,7 @@ function openProblemModal(pid){
   $('#modal').innerHTML = `<div class="modal-bg" data-act="close-modal">
     <div class="modal" role="dialog" aria-modal="true">
       <h3>⚠ ${isSup?'Flag a problem':'Report a problem'}</h3>
-      <p class="sub">Lotte (promoter) sees this immediately in her event overview.</p>
+      <p class="sub">Jonas (promoter) sees this immediately in his event overview.</p>
       <div class="opts">${opts.map((o,i) => `<label class="opt"><input type="radio" name="ptype" value="${esc(o)}" ${i===0?'checked':''}><span>${esc(o)}</span></label>`).join('')}</div>
       ${isSup ? `<select id="prob-item"><option value="">Which item? (optional)</option>${p.equipment.map((q,i)=>`<option value="${i}">${q.qty}× ${esc(q.item)}</option>`).join('')}</select>` : ''}
       <textarea id="prob-text" placeholder="${isSup?'e.g. Only 3 CDJ-3000s available that weekend — can offer a CDJ-2000NXS2 as 4th.':'e.g. My train is cancelled, I’ll arrive around 01:00.'}"></textarea>
@@ -3290,8 +3290,8 @@ function sendMessage(pid, text){
     c.typing = false;
     c.msgs.forEach(m => { if (m.from === 'me') m.read = true; });
     const reply = /book you|available/i.test(text)
-      ? (d.kind === 'artist' ? `Thanks Lotte! Yes, I’m available on that date. Fee as on my profile (${d.price}). I’ll send my rider.` : `Hi Lotte, thanks! We’re free on that date. I’ll send you a quote today.`)
-      : (d.kind === 'artist' ? 'Hi Lotte, thanks for your message! Happy to talk, what do you have in mind?' : 'Hi Lotte, thanks for reaching out. Send me the date and venue and I’ll make you a quote.');
+      ? (d.kind === 'artist' ? `Thanks Jonas! Yes, I’m available on that date. Fee as on my profile (${d.price}). I’ll send my rider.` : `Hi Jonas, thanks! We’re free on that date. I’ll send you a quote today.`)
+      : (d.kind === 'artist' ? 'Hi Jonas, thanks for your message! Happy to talk, what do you have in mind?' : 'Hi Jonas, thanks for reaching out. Send me the date and venue and I’ll make you a quote.');
     c.msgs.push({ from:'them', text:reply, time:nowStr(), read:false });
     // demo: saying yes to a booking or last-minute request confirms them in the event
     let confirmedIn = null;
@@ -3383,7 +3383,7 @@ function openPlatformInvite(pid){
         <input class="field" id="inv-name" placeholder="Name — e.g. The Velvet Owls">
         <input class="field" id="inv-sub" placeholder="What they do — e.g. Funk band, 6 musicians">`}
       <input class="field" id="inv-contact" placeholder="Email or phone number" ${d ? `value="${d.id}@example.com"` : ''}>
-      <textarea id="inv-note" placeholder="Personal message (optional)">Hi${d ? ' ' + esc(d.name) : ''}! I’m organising my next events on we.TRUSS: one place for set times, riders and updates. Join for free so we can work together. — Lotte, Nachtwerk Collective</textarea>
+      <textarea id="inv-note" placeholder="Personal message (optional)">Hi${d ? ' ' + esc(d.name) : ''}! I’m organising my next events on we.TRUSS: one place for set times, riders and updates. Join for free so we can work together. — Jonas, Nachtwerk Collective</textarea>
       <div class="row">
         <button class="btn ghost" data-act="close-modal">Cancel</button>
         <button class="btn solid" data-act="send-platform-invite" data-id="${pid || ''}">Send invite</button>
@@ -3620,7 +3620,7 @@ const ACTIONS = {
     d.status = 'signed'; d.signed = '2026-11-25';
     notifyDoc(d, 'promoter');
     e.activity.unshift({ partyId:p.id, kind:'confirm', text:'signed the contract.', time:nowStr(), read:false });
-    closeModal(); render(); toast('✓ Contract signed — Lotte sees it right away.', 'ok');
+    closeModal(); render(); toast('✓ Contract signed — Jonas sees it right away.', 'ok');
   },
   'doc-send'(id){
     const d = DOCS.find(x => x.id === id), p = docParty(d);
@@ -3644,14 +3644,14 @@ const ACTIONS = {
     if (role === 'promoter'){
       if (p.user){
         notifyDoc(d, p.user);
-        e.updates.unshift({ id:'u' + Date.now(), text:'New document from Lotte — you’ll find it under Documents.', time:nowStr(), affects:[p.id], seenBy:{} });
+        e.updates.unshift({ id:'u' + Date.now(), text:'New document from Jonas — you’ll find it under Documents.', time:nowStr(), affects:[p.id], seenBy:{} });
       }
       render();
       toast(p.user ? `✓ Shared with ${esc(p.name)} — they get a notification.` : `✉ ${esc(p.name)} isn’t on we.TRUSS yet — it goes out by email.`, 'ok');
     } else {
       notifyDoc(d, 'promoter');
       e.activity.unshift({ partyId:p.id, kind:'confirm', text:'shared a document.', time:nowStr(), read:false });
-      render(); toast('✓ Shared with Lotte — she gets a notification.', 'ok');
+      render(); toast('✓ Shared with Jonas — he gets a notification.', 'ok');
     }
   },
   'new-contract'(){ openNewContract(); },
